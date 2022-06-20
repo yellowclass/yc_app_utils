@@ -23,7 +23,7 @@ class CardBackground {
   SectionGradientDirections? gradientDirection;
   bool shouldLeaveBorder;
 
-  factory CardBackground.fromJson(Map<String, dynamic> json) => CardBackground(
+  factory CardBackground.fromMap(Map<String, dynamic> json) => CardBackground(
         backgroundType: CommonHelpers.enumFromString(
               SectionBgType.values,
               json["backgroundType"],
@@ -39,7 +39,7 @@ class CardBackground {
         shouldLeaveBorder: json["shouldLeaveBorder"] ?? false,
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "backgroundType": backgroundType?.name,
         "backgroundColor": backgroundColor,
         "backgroundImageUrl": backgroundImageUrl,

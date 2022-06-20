@@ -259,7 +259,7 @@ class CommonHelpers {
               : null,
         );
       default:
-        return BoxDecoration();
+        return const BoxDecoration();
     }
   }
 
