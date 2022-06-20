@@ -1,0 +1,7 @@
+enum SectionBgType {
+  TRANSPARENT,
+  FLAT_COLOR,
+  GRADIENT,
+  IMAGE,
+  RADIAL_GRADIENT,
+}
