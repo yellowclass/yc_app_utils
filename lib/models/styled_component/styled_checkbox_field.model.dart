@@ -8,7 +8,7 @@ class StyledCheckboxField {
   V2StyledText? label;
   String name;
   Validation? validate;
-  String? defaultValue;
+  List<Option>? defaultValue;
   bool isDisabled;
   List<Option> options;
   SelectType selectType;
@@ -27,7 +27,7 @@ class StyledCheckboxField {
     V2StyledText? label,
     String? name,
     Validation? validate,
-    String? defaultValue,
+    List<Option>? defaultValue,
     bool? isDisabled,
     List<Option>? options,
     SelectType? selectType,
@@ -61,7 +61,10 @@ class StyledCheckboxField {
       name: map['name'] ?? '',
       validate:
           map['validate'] != null ? Validation.fromMap(map['validate']) : null,
-      defaultValue: map['defaultValue'],
+      defaultValue: map['defaultValue'] != null
+          ? List<Option>.from(
+              map['defaultValue']?.map((x) => Option.fromMap(x)))
+          : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<Option>.from(map['options']?.map((x) => Option.fromMap(x))),
       selectType: CommonHelpers.enumFromString(
