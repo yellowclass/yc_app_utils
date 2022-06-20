@@ -1,33 +1,10 @@
-class BooleanValidation {
-  bool value;
-  String msg;
+import 'package:yc_app_utils/models/validation/base_validation.model.dart';
 
+class BooleanValidation extends BaseValidation<bool> {
   BooleanValidation({
-    required this.value,
-    required this.msg,
-  });
+    required bool value,
+    required String msg,
+  }) : super(value: value, msg: msg);
 
-  BooleanValidation copyWith({
-    bool? value,
-    String? msg,
-  }) {
-    return BooleanValidation(
-      value: value ?? this.value,
-      msg: msg ?? this.msg,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'value': value,
-      'msg': msg,
-    };
-  }
-
-  factory BooleanValidation.fromMap(Map<String, dynamic> map) {
-    return BooleanValidation(
-      value: map['value'] ?? false,
-      msg: map['msg'] ?? '',
-    );
-  }
+  BooleanValidation.fromMap(Map<String, dynamic> map) : super.fromMap(map);
 }

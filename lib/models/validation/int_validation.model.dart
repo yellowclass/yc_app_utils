@@ -1,33 +1,10 @@
-class IntValidation {
-  int value;
-  String msg;
+import 'package:yc_app_utils/models/validation/base_validation.model.dart';
 
+class IntValidation extends BaseValidation<int> {
   IntValidation({
-    required this.value,
-    required this.msg,
-  });
+    required int value,
+    required String msg,
+  }) : super(value: value, msg: msg);
 
-  IntValidation copyWith({
-    int? value,
-    String? msg,
-  }) {
-    return IntValidation(
-      value: value ?? this.value,
-      msg: msg ?? this.msg,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'value': value,
-      'msg': msg,
-    };
-  }
-
-  factory IntValidation.fromMap(Map<String, dynamic> map) {
-    return IntValidation(
-      value: map['value']?.toInt() ?? 0,
-      msg: map['msg'] ?? '',
-    );
-  }
+  IntValidation.fromMap(Map<String, dynamic> map) : super.fromMap(map);
 }

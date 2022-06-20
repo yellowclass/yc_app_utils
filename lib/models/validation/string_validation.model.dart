@@ -1,33 +1,10 @@
-class StringValidation {
-  String value;
-  String msg;
+import 'package:yc_app_utils/models/validation/base_validation.model.dart';
 
+class StringValidation extends BaseValidation<String> {
   StringValidation({
-    required this.value,
-    required this.msg,
-  });
+    required String value,
+    required String msg,
+  }) : super(value: value, msg: msg);
 
-  StringValidation copyWith({
-    String? value,
-    String? msg,
-  }) {
-    return StringValidation(
-      value: value ?? this.value,
-      msg: msg ?? this.msg,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'value': value,
-      'msg': msg,
-    };
-  }
-
-  factory StringValidation.fromMap(Map<String, dynamic> map) {
-    return StringValidation(
-      value: map['value'] ?? '',
-      msg: map['msg'] ?? '',
-    );
-  }
+  StringValidation.fromMap(Map<String, dynamic> map) : super.fromMap(map);
 }
