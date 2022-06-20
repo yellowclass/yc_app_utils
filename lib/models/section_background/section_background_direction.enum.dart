@@ -1,0 +1,8 @@
+enum SectionGradientDirections {
+  TOP_TO_BOTTOM,
+  BOTTOM_TO_TOP,
+  LEFT_TO_RIGHT,
+  RIGHT_TO_LEFT,
+  TOP_LEFT_TO_BOTTOM_RIGHT,
+  BOTTOM_LEFT_TO_TOP_RIGHT,
+}
