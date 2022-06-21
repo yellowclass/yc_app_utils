@@ -1,6 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
+import 'package:yc_app_utils/models/card_background/card_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
 import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
@@ -204,6 +205,58 @@ class CommonHelpers {
               ),
             ),
           ),
+        );
+      default:
+        return const BoxDecoration();
+    }
+  }
+
+  static BoxDecoration getBoxDecorationWithCardBackground({
+    required CardBackground? cardBackground,
+    double borderRadius = AppSpacing.s,
+  }) {
+    if (cardBackground == null) {
+      return const BoxDecoration();
+    }
+    switch (cardBackground.backgroundType) {
+      case SectionBgType.TRANSPARENT:
+        return const BoxDecoration();
+      case SectionBgType.FLAT_COLOR:
+        return BoxDecoration(
+          borderRadius: showSectionBorder(
+              shouldLeaveBorder: cardBackground.shouldLeaveBorder,
+              borderRadius: borderRadius),
+          color: CommonHelpers.v2ColorFromHex(
+            cardBackground.backgroundColor,
+          ),
+        );
+      case SectionBgType.GRADIENT:
+        return BoxDecoration(
+          borderRadius: showSectionBorder(),
+          gradient: LinearGradient(
+            begin: getBeginDirection(cardBackground.gradientDirection),
+            end: getBottomDirection(cardBackground.gradientDirection),
+            colors: <Color>[
+              CommonHelpers.v2ColorFromHex(
+                cardBackground.gradientColor1,
+              ),
+              CommonHelpers.v2ColorFromHex(
+                cardBackground.gradientColor2,
+              )
+            ],
+          ),
+        );
+      case SectionBgType.IMAGE:
+        return BoxDecoration(
+          image: cardBackground.backgroundImageUrl != null
+              ? DecorationImage(
+                  // Only supports Non-vector image formats
+                  image: CachedNetworkImageProvider(
+                    cardBackground.backgroundImageUrl!,
+                  ),
+                  fit: BoxFit.cover,
+                )
+              : null,
         );
       default:
         return const BoxDecoration();
