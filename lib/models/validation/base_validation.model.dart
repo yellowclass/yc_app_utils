@@ -1,21 +1,6 @@
-class BaseValidation<T> {
+abstract class BaseValidation<T> {
   late T value;
   late String msg;
-
-  BaseValidation({
-    required this.value,
-    required this.msg,
-  });
-
-  BaseValidation<T> copyWith({
-    T? value,
-    String? msg,
-  }) {
-    return BaseValidation<T>(
-      value: value ?? this.value,
-      msg: msg ?? this.msg,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
