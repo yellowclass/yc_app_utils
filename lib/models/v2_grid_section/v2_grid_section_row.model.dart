@@ -7,26 +7,22 @@ class V2GridSectionRow {
   List<V2GridSectionColumn>? columns;
   MainAxisAlignment? flexAlignment;
   List<int>? padding;
-  int? flexFactor;
 
   V2GridSectionRow({
     this.columns,
     this.flexAlignment,
     this.padding,
-    this.flexFactor,
   });
 
   V2GridSectionRow copyWith({
     List<V2GridSectionColumn>? columns,
     MainAxisAlignment? flexAlignment,
     List<int>? padding,
-    int? flexFactor,
   }) {
     return V2GridSectionRow(
       columns: columns ?? this.columns,
       flexAlignment: flexAlignment ?? this.flexAlignment,
       padding: padding ?? this.padding,
-      flexFactor: flexFactor ?? this.flexFactor,
     );
   }
 
@@ -35,7 +31,6 @@ class V2GridSectionRow {
       'columns': columns?.map((x) => x.toMap()).toList(),
       'flexAlignment': flexAlignment?.name,
       'padding': padding,
-      'flexFactor': flexFactor,
     };
   }
 
@@ -52,7 +47,6 @@ class V2GridSectionRow {
           MainAxisAlignment.start,
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
-      flexFactor: map['flexFactor']?.toInt(),
     );
   }
 }
