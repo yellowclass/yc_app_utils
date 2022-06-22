@@ -2,15 +2,15 @@ import 'package:yc_app_utils/models/styled_component/option.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledRadioField {
-  V2StyledText? label;
+class StyledRadioFieldModel {
+  V2StyledTextModel? label;
   String name;
   Validation? validate;
   String? defaultValue;
   bool isDisabled;
-  List<Option> options;
+  List<OptionModel> options;
 
-  StyledRadioField({
+  StyledRadioFieldModel({
     this.label,
     required this.name,
     this.validate,
@@ -19,15 +19,15 @@ class StyledRadioField {
     required this.options,
   });
 
-  StyledRadioField copyWith({
-    V2StyledText? label,
+  StyledRadioFieldModel copyWith({
+    V2StyledTextModel? label,
     String? name,
     Validation? validate,
     String? defaultValue,
     bool? isDisabled,
-    List<Option>? options,
+    List<OptionModel>? options,
   }) {
-    return StyledRadioField(
+    return StyledRadioFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
       validate: validate ?? this.validate,
@@ -48,15 +48,17 @@ class StyledRadioField {
     };
   }
 
-  factory StyledRadioField.fromMap(Map<String, dynamic> map) {
-    return StyledRadioField(
-      label: map['label'] != null ? V2StyledText.fromMap(map['label']) : null,
+  factory StyledRadioFieldModel.fromMap(Map<String, dynamic> map) {
+    return StyledRadioFieldModel(
+      label:
+          map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
       validate:
           map['validate'] != null ? Validation.fromMap(map['validate']) : null,
       defaultValue: map['defaultValue'],
       isDisabled: map['isDisabled'] ?? false,
-      options: List<Option>.from(map['options']?.map((x) => Option.fromMap(x))),
+      options: List<OptionModel>.from(
+          map['options']?.map((x) => OptionModel.fromMap(x))),
     );
   }
 }

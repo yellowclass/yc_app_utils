@@ -4,17 +4,17 @@ import 'package:yc_app_utils/models/styled_component/select_type.enum.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledSelectField {
-  V2StyledText? label;
+class StyledSelectFieldModel {
+  V2StyledTextModel? label;
   String name;
   Validation? validate;
-  List<Option>? defaultValue;
+  List<OptionModel>? defaultValue;
   bool isDisabled;
-  List<Option> options;
+  List<OptionModel> options;
   SelectType selectType;
   bool isSearchable;
 
-  StyledSelectField({
+  StyledSelectFieldModel({
     this.label,
     required this.name,
     this.validate,
@@ -25,17 +25,17 @@ class StyledSelectField {
     this.isSearchable = false,
   });
 
-  StyledSelectField copyWith({
-    V2StyledText? label,
+  StyledSelectFieldModel copyWith({
+    V2StyledTextModel? label,
     String? name,
     Validation? validate,
-    List<Option>? defaultValue,
+    List<OptionModel>? defaultValue,
     bool? isDisabled,
-    List<Option>? options,
+    List<OptionModel>? options,
     SelectType? selectType,
     bool? isSearchable,
   }) {
-    return StyledSelectField(
+    return StyledSelectFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
       validate: validate ?? this.validate,
@@ -60,18 +60,20 @@ class StyledSelectField {
     };
   }
 
-  factory StyledSelectField.fromMap(Map<String, dynamic> map) {
-    return StyledSelectField(
-      label: map['label'] != null ? V2StyledText.fromMap(map['label']) : null,
+  factory StyledSelectFieldModel.fromMap(Map<String, dynamic> map) {
+    return StyledSelectFieldModel(
+      label:
+          map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
       validate:
           map['validate'] != null ? Validation.fromMap(map['validate']) : null,
       defaultValue: map['defaultValue'] != null
-          ? List<Option>.from(
-              map['defaultValue']?.map((x) => Option.fromMap(x)))
+          ? List<OptionModel>.from(
+              map['defaultValue']?.map((x) => OptionModel.fromMap(x)))
           : null,
       isDisabled: map['isDisabled'] ?? false,
-      options: List<Option>.from(map['options']?.map((x) => Option.fromMap(x))),
+      options: List<OptionModel>.from(
+          map['options']?.map((x) => OptionModel.fromMap(x))),
       selectType: CommonHelpers.enumFromString(
             SelectType.values,
             map['selectType'],

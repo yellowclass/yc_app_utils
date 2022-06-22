@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
-class V2StyledText {
+class V2StyledTextModel {
   String? text;
   String? textColor;
   TStyle? tStyle;
@@ -12,7 +12,7 @@ class V2StyledText {
   TextAlign? textAlign;
   String? borderColor;
 
-  V2StyledText({
+  V2StyledTextModel({
     this.text,
     this.textColor,
     this.tStyle,
@@ -22,7 +22,7 @@ class V2StyledText {
     this.borderColor,
   });
 
-  V2StyledText copyWith({
+  V2StyledTextModel copyWith({
     String? text,
     String? textColor,
     TStyle? tStyle,
@@ -31,7 +31,7 @@ class V2StyledText {
     TextAlign? textAlign,
     String? borderColor,
   }) {
-    return V2StyledText(
+    return V2StyledTextModel(
       text: text ?? this.text,
       textColor: textColor ?? this.textColor,
       tStyle: tStyle ?? this.tStyle,
@@ -54,8 +54,8 @@ class V2StyledText {
     };
   }
 
-  factory V2StyledText.fromMap(Map<String, dynamic> map) {
-    return V2StyledText(
+  factory V2StyledTextModel.fromMap(Map<String, dynamic> map) {
+    return V2StyledTextModel(
       text: map['text'],
       textColor: map['textColor'],
       tStyle: map['tStyle'] != null

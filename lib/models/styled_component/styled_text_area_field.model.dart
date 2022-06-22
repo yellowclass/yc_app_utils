@@ -1,15 +1,15 @@
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledTextAreaField {
-  V2StyledText? label;
+class StyledTextAreaFieldModel {
+  V2StyledTextModel? label;
   String name;
   String? placeholder;
   Validation? validate;
   String? defaultValue;
   bool isDisabled;
 
-  StyledTextAreaField({
+  StyledTextAreaFieldModel({
     this.label,
     required this.name,
     this.placeholder,
@@ -18,15 +18,15 @@ class StyledTextAreaField {
     this.isDisabled = false,
   });
 
-  StyledTextAreaField copyWith({
-    V2StyledText? label,
+  StyledTextAreaFieldModel copyWith({
+    V2StyledTextModel? label,
     String? name,
     String? placeholder,
     Validation? validate,
     String? defaultValue,
     bool? isDisabled,
   }) {
-    return StyledTextAreaField(
+    return StyledTextAreaFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
       placeholder: placeholder ?? this.placeholder,
@@ -47,9 +47,10 @@ class StyledTextAreaField {
     };
   }
 
-  factory StyledTextAreaField.fromMap(Map<String, dynamic> map) {
-    return StyledTextAreaField(
-      label: map['label'] != null ? V2StyledText.fromMap(map['label']) : null,
+  factory StyledTextAreaFieldModel.fromMap(Map<String, dynamic> map) {
+    return StyledTextAreaFieldModel(
+      label:
+          map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
       placeholder: map['placeholder'],
       validate:
