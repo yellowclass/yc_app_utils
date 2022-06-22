@@ -11,23 +11,23 @@ import 'package:yc_app_utils/models/styled_component/styled_text_area_field.mode
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 
-class StyledComponent {
+class StyledComponentModel {
   StyledComponentEnum type;
-  StyledInputField? inputField;
-  StyledTextAreaField? textAreaField;
-  StyledRadioField? radioField;
-  StyledCheckboxField? checkboxField;
-  StyledSelectField? selectField;
-  V2StyledText? textDetails;
-  StyledImage? imageDetails;
-  StyledVideo? videoDetails;
+  StyledInputFieldModel? inputField;
+  StyledTextAreaFieldModel? textAreaField;
+  StyledRadioFieldModel? radioField;
+  StyledCheckboxFieldModel? checkboxField;
+  StyledSelectFieldModel? selectField;
+  V2StyledTextModel? textDetails;
+  StyledImageModel? imageDetails;
+  StyledVideoModel? videoDetails;
   GenericButtonV3Model? buttonDetails;
   SectionBackground? background;
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
 
-  StyledComponent({
+  StyledComponentModel({
     required this.type,
     this.inputField,
     this.textAreaField,
@@ -44,23 +44,23 @@ class StyledComponent {
     this.padding,
   });
 
-  StyledComponent copyWith({
+  StyledComponentModel copyWith({
     StyledComponentEnum? type,
-    StyledInputField? inputField,
-    StyledTextAreaField? textAreaField,
-    StyledRadioField? radioField,
-    StyledCheckboxField? checkboxField,
-    StyledSelectField? selectField,
-    V2StyledText? textDetails,
-    StyledImage? imageDetails,
-    StyledVideo? videoDetails,
+    StyledInputFieldModel? inputField,
+    StyledTextAreaFieldModel? textAreaField,
+    StyledRadioFieldModel? radioField,
+    StyledCheckboxFieldModel? checkboxField,
+    StyledSelectFieldModel? selectField,
+    V2StyledTextModel? textDetails,
+    StyledImageModel? imageDetails,
+    StyledVideoModel? videoDetails,
     GenericButtonV3Model? buttonDetails,
     SectionBackground? background,
     String? borderColor,
     List<int>? borderRadius,
     List<int>? padding,
   }) {
-    return StyledComponent(
+    return StyledComponentModel(
       type: type ?? this.type,
       inputField: inputField ?? this.inputField,
       textAreaField: textAreaField ?? this.textAreaField,
@@ -97,35 +97,35 @@ class StyledComponent {
     };
   }
 
-  factory StyledComponent.fromMap(Map<String, dynamic> map) {
-    return StyledComponent(
+  factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
+    return StyledComponentModel(
       type: CommonHelpers.enumFromString(
         StyledComponentEnum.values,
         map['type'],
       )!,
       inputField: map['inputField'] != null
-          ? StyledInputField.fromMap(map['inputField'])
+          ? StyledInputFieldModel.fromMap(map['inputField'])
           : null,
       textAreaField: map['textAreaField'] != null
-          ? StyledTextAreaField.fromMap(map['textAreaField'])
+          ? StyledTextAreaFieldModel.fromMap(map['textAreaField'])
           : null,
       radioField: map['radioField'] != null
-          ? StyledRadioField.fromMap(map['radioField'])
+          ? StyledRadioFieldModel.fromMap(map['radioField'])
           : null,
       checkboxField: map['checkboxField'] != null
-          ? StyledCheckboxField.fromMap(map['checkboxField'])
+          ? StyledCheckboxFieldModel.fromMap(map['checkboxField'])
           : null,
       selectField: map['selectField'] != null
-          ? StyledSelectField.fromMap(map['selectField'])
+          ? StyledSelectFieldModel.fromMap(map['selectField'])
           : null,
       textDetails: map['textDetails'] != null
-          ? V2StyledText.fromMap(map['textDetails'])
+          ? V2StyledTextModel.fromMap(map['textDetails'])
           : null,
       imageDetails: map['imageDetails'] != null
-          ? StyledImage.fromMap(map['imageDetails'])
+          ? StyledImageModel.fromMap(map['imageDetails'])
           : null,
       videoDetails: map['videoDetails'] != null
-          ? StyledVideo.fromMap(map['videoDetails'])
+          ? StyledVideoModel.fromMap(map['videoDetails'])
           : null,
       buttonDetails: map['buttonDetails'] != null
           ? GenericButtonV3Model.fromMap(map['buttonDetails'])

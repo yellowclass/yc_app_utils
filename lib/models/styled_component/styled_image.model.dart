@@ -1,14 +1,14 @@
-class StyledImage {
+class StyledImageModel {
   String url;
 
-  StyledImage({
+  StyledImageModel({
     required this.url,
   });
 
-  StyledImage copyWith({
+  StyledImageModel copyWith({
     String? url,
   }) {
-    return StyledImage(
+    return StyledImageModel(
       url: url ?? this.url,
     );
   }
@@ -19,8 +19,8 @@ class StyledImage {
     };
   }
 
-  factory StyledImage.fromMap(Map<String, dynamic> map) {
-    return StyledImage(
+  factory StyledImageModel.fromMap(Map<String, dynamic> map) {
+    return StyledImageModel(
       url: map['url'] ?? '',
     );
   }

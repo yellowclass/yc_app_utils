@@ -5,15 +5,15 @@ import 'package:yc_app_utils/models/click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
 
-class V2GridSectionColumn {
+class V2GridSectionColumnModel {
   String? key;
-  V2GridSection? gridSection;
-  StyledComponent? data;
+  V2GridSectionModel? gridSection;
+  StyledComponentModel? data;
   ClickAction? clickAction;
   int? flexFactor;
   MainAxisAlignment flexAlignment;
 
-  V2GridSectionColumn({
+  V2GridSectionColumnModel({
     this.key,
     this.gridSection,
     this.data,
@@ -22,15 +22,15 @@ class V2GridSectionColumn {
     this.flexAlignment = MainAxisAlignment.start,
   });
 
-  V2GridSectionColumn copyWith({
+  V2GridSectionColumnModel copyWith({
     String? key,
-    V2GridSection? gridSection,
-    StyledComponent? data,
+    V2GridSectionModel? gridSection,
+    StyledComponentModel? data,
     ClickAction? clickAction,
     int? flexFactor,
     MainAxisAlignment? flexAlignment,
   }) {
-    return V2GridSectionColumn(
+    return V2GridSectionColumnModel(
       key: key ?? this.key,
       gridSection: gridSection ?? this.gridSection,
       data: data ?? this.data,
@@ -51,13 +51,15 @@ class V2GridSectionColumn {
     };
   }
 
-  factory V2GridSectionColumn.fromMap(Map<String, dynamic> map) {
-    return V2GridSectionColumn(
+  factory V2GridSectionColumnModel.fromMap(Map<String, dynamic> map) {
+    return V2GridSectionColumnModel(
       key: map['key'],
       gridSection: map['gridSection'] != null
-          ? V2GridSection.fromMap(map['gridSection'])
+          ? V2GridSectionModel.fromMap(map['gridSection'])
           : null,
-      data: map['data'] != null ? StyledComponent.fromMap(map['data']) : null,
+      data: map['data'] != null
+          ? StyledComponentModel.fromMap(map['data'])
+          : null,
       clickAction: map['clickAction'] != null
           ? ClickAction.fromMap(map['clickAction'])
           : null,

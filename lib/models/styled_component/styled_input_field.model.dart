@@ -2,8 +2,8 @@ import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledInputField {
-  V2StyledText? label;
+class StyledInputFieldModel {
+  V2StyledTextModel? label;
   String name;
   InputFieldEnum? type;
   String? placeholder;
@@ -11,7 +11,7 @@ class StyledInputField {
   String? defaultValue;
   bool isDisabled;
 
-  StyledInputField({
+  StyledInputFieldModel({
     this.label,
     required this.name,
     this.type,
@@ -21,8 +21,8 @@ class StyledInputField {
     this.isDisabled = false,
   });
 
-  StyledInputField copyWith({
-    V2StyledText? label,
+  StyledInputFieldModel copyWith({
+    V2StyledTextModel? label,
     String? name,
     InputFieldEnum? type,
     String? placeholder,
@@ -30,7 +30,7 @@ class StyledInputField {
     String? defaultValue,
     bool? isDisabled,
   }) {
-    return StyledInputField(
+    return StyledInputFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
       type: type ?? this.type,
@@ -53,9 +53,10 @@ class StyledInputField {
     };
   }
 
-  factory StyledInputField.fromMap(Map<String, dynamic> map) {
-    return StyledInputField(
-      label: map['label'] != null ? V2StyledText.fromMap(map['label']) : null,
+  factory StyledInputFieldModel.fromMap(Map<String, dynamic> map) {
+    return StyledInputFieldModel(
+      label:
+          map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
       type: map['type'] != null
           ? CommonHelpers.enumFromString(

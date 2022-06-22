@@ -1,16 +1,16 @@
 import 'package:yc_app_utils/models/click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
 
-class V2GridSection {
+class V2GridSectionModel {
   String? key;
-  List<V2GridSectionLayer>? layers;
+  List<V2GridSectionLayerModel>? layers;
   ClickAction? clickAction;
   String? backgroundColor;
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
 
-  V2GridSection({
+  V2GridSectionModel({
     this.key,
     this.layers,
     this.clickAction,
@@ -20,16 +20,16 @@ class V2GridSection {
     this.padding,
   });
 
-  V2GridSection copyWith({
+  V2GridSectionModel copyWith({
     String? key,
-    List<V2GridSectionLayer>? layers,
+    List<V2GridSectionLayerModel>? layers,
     ClickAction? clickAction,
     String? backgroundColor,
     String? borderColor,
     List<int>? borderRadius,
     List<int>? padding,
   }) {
-    return V2GridSection(
+    return V2GridSectionModel(
       key: key ?? this.key,
       layers: layers ?? this.layers,
       clickAction: clickAction ?? this.clickAction,
@@ -52,12 +52,12 @@ class V2GridSection {
     };
   }
 
-  factory V2GridSection.fromMap(Map<String, dynamic> map) {
-    return V2GridSection(
+  factory V2GridSectionModel.fromMap(Map<String, dynamic> map) {
+    return V2GridSectionModel(
       key: map['key'],
       layers: map['layers'] != null
-          ? List<V2GridSectionLayer>.from(
-              map['layers']?.map((x) => V2GridSectionLayer.fromMap(x)))
+          ? List<V2GridSectionLayerModel>.from(
+              map['layers']?.map((x) => V2GridSectionLayerModel.fromMap(x)))
           : null,
       clickAction: map['clickAction'] != null
           ? ClickAction.fromMap(map['clickAction'])

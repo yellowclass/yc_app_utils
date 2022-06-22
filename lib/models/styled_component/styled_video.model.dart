@@ -1,17 +1,17 @@
-class StyledVideo {
+class StyledVideoModel {
   String url;
   String thumbnail;
 
-  StyledVideo({
+  StyledVideoModel({
     required this.url,
     required this.thumbnail,
   });
 
-  StyledVideo copyWith({
+  StyledVideoModel copyWith({
     String? url,
     String? thumbnail,
   }) {
-    return StyledVideo(
+    return StyledVideoModel(
       url: url ?? this.url,
       thumbnail: thumbnail ?? this.thumbnail,
     );
@@ -24,8 +24,8 @@ class StyledVideo {
     };
   }
 
-  factory StyledVideo.fromMap(Map<String, dynamic> map) {
-    return StyledVideo(
+  factory StyledVideoModel.fromMap(Map<String, dynamic> map) {
+    return StyledVideoModel(
       url: map['url'] ?? '',
       thumbnail: map['thumbnail'] ?? '',
     );
