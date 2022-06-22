@@ -88,11 +88,11 @@ class CommonHelpers {
 
   static EdgeInsetsGeometry getPaddingFromList(List<int>? paddingItems) {
     if (paddingItems == null) {
-      return const EdgeInsets.all(0);
+      return EdgeInsets.zero;
     }
     switch (paddingItems.length) {
       case 0:
-        return const EdgeInsets.all(0);
+        return EdgeInsets.zero;
       case 1:
         return EdgeInsets.all(paddingItems.first.toDouble());
       case 2:
