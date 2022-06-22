@@ -5,12 +5,12 @@ import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model
 
 class V2GridSectionRowModel {
   List<V2GridSectionColumnModel>? columns;
-  MainAxisAlignment? flexAlignment;
+  MainAxisAlignment flexAlignment;
   List<int>? padding;
 
   V2GridSectionRowModel({
     this.columns,
-    this.flexAlignment,
+    this.flexAlignment = MainAxisAlignment.start,
     this.padding,
   });
 
@@ -29,7 +29,7 @@ class V2GridSectionRowModel {
   Map<String, dynamic> toMap() {
     return {
       'columns': columns?.map((x) => x.toMap()).toList(),
-      'flexAlignment': flexAlignment?.name,
+      'flexAlignment': flexAlignment.name,
       'padding': padding,
     };
   }
