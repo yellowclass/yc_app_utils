@@ -86,10 +86,13 @@ class CommonHelpers {
     }
   }
 
-  static EdgeInsetsGeometry getPaddingFromList(List<int> paddingItems) {
+  static EdgeInsetsGeometry getPaddingFromList(List<int>? paddingItems) {
+    if (paddingItems == null) {
+      return EdgeInsets.zero;
+    }
     switch (paddingItems.length) {
       case 0:
-        return const EdgeInsets.all(0);
+        return EdgeInsets.zero;
       case 1:
         return EdgeInsets.all(paddingItems.first.toDouble());
       case 2:
@@ -110,6 +113,50 @@ class CommonHelpers {
           paddingItems[0].toDouble(),
           paddingItems[1].toDouble(),
           paddingItems[2].toDouble(),
+        );
+    }
+  }
+
+  static BorderRadius getBorderRadiusFromList(List<int>? borderRadiusItems) {
+    if (borderRadiusItems == null) {
+      return const BorderRadius.all(
+        Radius.zero,
+      );
+    }
+    switch (borderRadiusItems.length) {
+      case 0:
+        return const BorderRadius.all(
+          Radius.zero,
+        );
+      case 1:
+        return BorderRadius.all(
+          Radius.circular(
+            borderRadiusItems.first.toDouble(),
+          ),
+        );
+      case 2:
+        return BorderRadius.vertical(
+          top: Radius.circular(
+            borderRadiusItems.first.toDouble(),
+          ),
+          bottom: Radius.circular(
+            borderRadiusItems.last.toDouble(),
+          ),
+        );
+      default:
+        return BorderRadius.only(
+          topLeft: Radius.circular(
+            borderRadiusItems[3].toDouble(),
+          ),
+          topRight: Radius.circular(
+            borderRadiusItems[0].toDouble(),
+          ),
+          bottomRight: Radius.circular(
+            borderRadiusItems[1].toDouble(),
+          ),
+          bottomLeft: Radius.circular(
+            borderRadiusItems[2].toDouble(),
+          ),
         );
     }
   }
