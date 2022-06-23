@@ -5,6 +5,7 @@ import 'package:yc_app_utils/models/card_background/card_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
 import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
+import 'package:yc_app_utils/models/styled_component/option.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
@@ -370,7 +371,7 @@ class CommonHelpers {
     }
   }
 
-  static String? validateFormField({
+  static String? validateTextField({
     required String value,
     required Validation? validations,
   }) {
@@ -420,6 +421,37 @@ class CommonHelpers {
         return validations.pattern!.msg;
       }
     }
+    return null;
+  }
+
+  static String? validateSelectField({
+    required List<OptionModel> values,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && values.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for minLength
+    if (validations.minLength != null) {
+      if (values.length < validations.minLength!.value) {
+        return validations.minLength!.msg;
+      }
+    }
+
+    // check for maxLength
+    if (validations.maxLength != null) {
+      if (values.length > validations.maxLength!.value) {
+        return validations.maxLength!.msg;
+      }
+    }
+
     return null;
   }
 }

@@ -30,7 +30,6 @@ class V2GridSectionRowWidget extends StatelessWidget {
                     (gridColumn) => V2GridSectionColumnWidget(
                       columnDetails: gridColumn,
                       innerClickAction: innerClickAction,
-                      formData: formData,
                     ),
                   )
                   .toList(),
