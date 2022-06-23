@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yc_app_utils/helpers/helpers.dart';
 
+import 'package:yc_app_utils/helpers/helpers.dart';
+import 'package:yc_app_utils/models/click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
+import 'package:yc_app_utils/ui/components/generic_button/generic_button_v3.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_checkbox_field.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_radio_field.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_select_field.widget.dart';
@@ -11,10 +13,12 @@ import 'package:yc_app_utils/ui/components/styled_components/styled_text_field.w
 class StyledComponentWidget extends StatelessWidget {
   const StyledComponentWidget({
     required this.styledComponentDetails,
+    this.innerClickAction,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
+  final void Function(ClickAction)? innerClickAction;
 
   Widget buildComponent() {
     switch (styledComponentDetails.type) {
@@ -39,7 +43,16 @@ class StyledComponentWidget extends StatelessWidget {
           selectFieldData: styledComponentDetails.selectField!,
         );
       case StyledComponentEnum.BUTTON:
-        return Container();
+        return GenericButtonV3Widget(
+          buttonDetails: styledComponentDetails.buttonDetails!,
+          onPressed:
+              (styledComponentDetails.buttonDetails!.clickAction != null &&
+                      innerClickAction != null)
+                  ? () => innerClickAction!.call(
+                        styledComponentDetails.buttonDetails!.clickAction!,
+                      )
+                  : null,
+        );
       default:
         return const SizedBox.shrink();
     }
