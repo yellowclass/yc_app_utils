@@ -49,15 +49,16 @@ class StyledTextFormField extends StatelessWidget {
             hintText: formFieldData.placeholder,
             hintStyle: const TextStyle(
               color: AppColors.cBODY_TEXT_75,
-              fontSize: 14,
+              fontSize: 16,
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.s,
+              vertical: AppSpacing.xs,
             ),
           ),
           style: const TextStyle(
             color: AppColors.cBODY_TEXT,
-            fontSize: 14,
+            fontSize: 16,
           ),
           validator: (value) => CommonHelpers.validateFormField(
             value: value!,
