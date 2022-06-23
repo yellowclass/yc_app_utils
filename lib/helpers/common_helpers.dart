@@ -5,6 +5,7 @@ import 'package:yc_app_utils/models/card_background/card_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
 import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
+import 'package:yc_app_utils/models/validation/validation.model.dart';
 import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
 import 'package:yc_app_utils/ui/styleguide/spacing.dart';
@@ -367,5 +368,58 @@ class CommonHelpers {
     } else {
       return Alignment.topCenter;
     }
+  }
+
+  static String? validateFormField({
+    required String value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for minLength
+    if (validations.minLength != null) {
+      if (value.length < validations.minLength!.value) {
+        return validations.minLength!.msg;
+      }
+    }
+
+    // check for maxLength
+    if (validations.maxLength != null) {
+      if (value.length > validations.maxLength!.value) {
+        return validations.maxLength!.msg;
+      }
+    }
+
+    // check for min (for number field)
+    if (validations.min != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue < validations.min!.value) {
+        return validations.min!.msg;
+      }
+    }
+
+    // check for max (for number field)
+    if (validations.max != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue > validations.max!.value) {
+        return validations.max!.msg;
+      }
+    }
+
+    // check for regex match
+    if (validations.pattern != null) {
+      if (!RegExp(validations.pattern!.value).hasMatch(value)) {
+        return validations.pattern!.msg;
+      }
+    }
+    return null;
   }
 }

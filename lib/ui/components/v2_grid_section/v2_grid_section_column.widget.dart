@@ -9,16 +9,19 @@ class V2GridSectionColumnWidget extends StatelessWidget {
   const V2GridSectionColumnWidget({
     required this.columnDetails,
     this.innerClickAction,
+    this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionColumnModel columnDetails;
   final void Function(ClickAction)? innerClickAction;
+  final Map<String, dynamic>? formData;
 
   Widget buildChild() {
     if (columnDetails.gridSection != null) {
       return V2GridSectionWidget(
         gridDetails: columnDetails.gridSection!,
+        formData: formData,
         onPressed:
             (columnDetails.clickAction != null && innerClickAction != null)
                 ? () => innerClickAction!.call(
@@ -35,6 +38,7 @@ class V2GridSectionColumnWidget extends StatelessWidget {
             : null,
         child: StyledComponentWidget(
           styledComponentDetails: columnDetails.data!,
+          formData: formData,
         ),
       );
     } else {

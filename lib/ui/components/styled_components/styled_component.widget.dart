@@ -6,10 +6,12 @@ import 'package:yc_app_utils/ui/components/styled_components/styled_text_form_fi
 class StyledComponentWidget extends StatelessWidget {
   const StyledComponentWidget({
     required this.styledComponentDetails,
+    this.formData,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
+  final Map<String, dynamic>? formData;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class StyledComponentWidget extends StatelessWidget {
       case StyledComponentEnum.FORM_INPUT:
         return StyledTextFormField(
           formFieldData: styledComponentDetails.inputField!,
+          formData: formData,
         );
       default:
         return const SizedBox.shrink();

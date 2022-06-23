@@ -9,11 +9,13 @@ class V2GridSectionRowWidget extends StatelessWidget {
   const V2GridSectionRowWidget({
     required this.rowDetails,
     this.innerClickAction,
+    this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionRowModel rowDetails;
   final void Function(ClickAction)? innerClickAction;
+  final Map<String, dynamic>? formData;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class V2GridSectionRowWidget extends StatelessWidget {
                     (gridColumn) => V2GridSectionColumnWidget(
                       columnDetails: gridColumn,
                       innerClickAction: innerClickAction,
+                      formData: formData,
                     ),
                   )
                   .toList(),
