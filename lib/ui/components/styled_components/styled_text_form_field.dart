@@ -47,6 +47,17 @@ class StyledTextFormField extends StatelessWidget {
           obscureText: formFieldData.type == InputFieldEnum.PASSWORD,
           decoration: InputDecoration(
             hintText: formFieldData.placeholder,
+            hintStyle: const TextStyle(
+              color: AppColors.cBODY_TEXT_75,
+              fontSize: 14,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.s,
+            ),
+          ),
+          style: const TextStyle(
+            color: AppColors.cBODY_TEXT,
+            fontSize: 14,
           ),
           validator: (value) => CommonHelpers.validateFormField(
             value: value!,
