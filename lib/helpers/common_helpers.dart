@@ -175,21 +175,23 @@ class CommonHelpers {
   }
 
   static TextStyle? getTextStyle(
-    TStyle style, {
+    TStyle? style, {
     TextStyle? customStyle,
   }) {
     Map<TStyle, TextStyle> textStyleMap = YCMediaQuery.getIsTablet()
         ? TextStyles.tabTextStyle
         : TextStyles.mobTextStyle;
-    return customStyle != null
-        ? textStyleMap[style]!.merge(customStyle)
-        : textStyleMap[style];
+    TextStyle tStyle = textStyleMap[style] ?? const TextStyle();
+    return customStyle != null ? tStyle.merge(customStyle) : tStyle;
   }
 
   static BoxDecoration getBoxDecorationWithSectionBackground({
-    required SectionBackground sectionBackground,
+    required SectionBackground? sectionBackground,
     double borderRadius = AppSpacing.s,
   }) {
+    if (sectionBackground == null) {
+      return const BoxDecoration();
+    }
     switch (sectionBackground.backgroundType) {
       case SectionBgType.TRANSPARENT:
         return const BoxDecoration();

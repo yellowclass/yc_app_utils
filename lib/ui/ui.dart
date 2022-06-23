@@ -3,6 +3,8 @@ export 'package:yc_app_utils/ui/components/read_more_text.dart';
 export 'package:yc_app_utils/ui/components/styled_text/styled_text_widget.dart';
 export 'package:yc_app_utils/ui/components/generic_network_image.dart';
 export 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widget.dart';
+export 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
+export 'package:yc_app_utils/ui/components/styled_components/styled_text_form_field.dart';
 
 // media_query
 export 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
