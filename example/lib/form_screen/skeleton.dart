@@ -238,7 +238,7 @@ final Map<String, dynamic> formSkeleton = {
                   'buttonRows': [
                     {
                       'flexAlignment': 'CENTER',
-                      'buttonColumndata': [
+                      'buttonColumnData': [
                         {
                           'text': 'Submit',
                           'textColor': '#FFFFFF',
@@ -247,7 +247,7 @@ final Map<String, dynamic> formSkeleton = {
                     },
                   ],
                   'clickAction': {
-                    'clickActiontype': 'APP_CUSTOM',
+                    'clickActionType': 'APP_CUSTOM',
                     'functiontype': 'SUBMIT_FORM',
                   },
                   'backgroundColor': '#00BD90',

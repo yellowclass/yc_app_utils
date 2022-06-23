@@ -38,8 +38,8 @@ class _FormScreenState extends State<FormScreen> {
               V2GridSectionWidget(
                 gridDetails: _data,
                 onPressed: null,
-                formData: (formDarta) {
-                  //
+                innerClickAction: (cta) {
+                  print(cta);
                 },
               ),
               MaterialButton(

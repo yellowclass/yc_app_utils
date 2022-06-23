@@ -35,6 +35,7 @@ class V2GridSectionColumnWidget extends StatelessWidget {
             : null,
         child: StyledComponentWidget(
           styledComponentDetails: columnDetails.data!,
+          innerClickAction: innerClickAction,
         ),
       );
     } else {

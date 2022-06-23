@@ -10,14 +10,12 @@ class V2GridSectionWidget extends StatelessWidget {
     required this.gridDetails,
     required this.onPressed,
     this.innerClickAction,
-    this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionModel gridDetails;
   final VoidCallback? onPressed;
   final void Function(ClickAction)? innerClickAction;
-  final Function(Map<String, dynamic>)? formData;
 
   @override
   Widget build(BuildContext context) {
