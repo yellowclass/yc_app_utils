@@ -87,6 +87,7 @@ class AppColors {
   static const Color cGREEN_25 = Color(0xFFC2F2E5);
   static const Color cGREEN_15 = Color(0xFFDEF7F2);
   static const Color cGREEN_06 = Color(0xFFF0FBF9);
+  static const Color cGREEN_NEON = Color(0xFF0ACE2A);
 
   static const Color cGREY = Color(0xff81848b);
   static const Color cGREY_25 = Color(0xffDDDEE2);
