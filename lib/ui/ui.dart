@@ -8,12 +8,14 @@ export 'package:yc_app_utils/ui/components/generic_network_image.dart';
 export 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widget.dart';
 
 export 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
-export 'package:yc_app_utils/ui/components/styled_components/styled_text_field.widget.dart';
-export 'package:yc_app_utils/ui/components/styled_components/styled_text_area_field.widget.dart';
-export 'package:yc_app_utils/ui/components/styled_components/styled_radio_field.widget.dart';
-export 'package:yc_app_utils/ui/components/styled_components/styled_checkbox_field.widget.dart';
-export 'package:yc_app_utils/ui/components/styled_components/styled_select_field.widget.dart';
 export 'package:yc_app_utils/ui/components/styled_components/v2_styled_text.widget.dart';
+export 'package:yc_app_utils/ui/components/styled_components/styled_image.widget.dart';
+
+export 'package:yc_app_utils/ui/components/form_components/styled_text_area_field.widget.dart';
+export 'package:yc_app_utils/ui/components/form_components/styled_text_field.widget.dart';
+export 'package:yc_app_utils/ui/components/form_components/styled_radio_field.widget.dart';
+export 'package:yc_app_utils/ui/components/form_components/styled_checkbox_field.widget.dart';
+export 'package:yc_app_utils/ui/components/form_components/styled_select_field.widget.dart';
 
 export 'package:yc_app_utils/ui/components/generic_button/generic_button_v3.widget.dart';
 

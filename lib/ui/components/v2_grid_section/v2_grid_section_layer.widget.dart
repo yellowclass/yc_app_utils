@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/models/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_row.widget.dart';
 
