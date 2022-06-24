@@ -18,6 +18,7 @@ export 'package:yc_app_utils/ui/components/form_components/styled_checkbox_field
 export 'package:yc_app_utils/ui/components/form_components/styled_select_field.widget.dart';
 
 export 'package:yc_app_utils/ui/components/generic_button/generic_button_v3.widget.dart';
+export 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 
 export 'package:yc_app_utils/ui/components/loaders/bouncing_loader.dart';
 

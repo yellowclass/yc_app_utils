@@ -11,7 +11,6 @@ class V2GridSectionColumnModel {
   V2GridSectionModel? gridSection;
   StyledComponentModel? styledComponent;
   FormComponentModel? formComponent;
-  V2ClickAction? clickAction;
   int? flexFactor;
   MainAxisAlignment mainAxisAlignment;
   CrossAxisAlignment crossAxisAlignment;
@@ -21,7 +20,6 @@ class V2GridSectionColumnModel {
     this.gridSection,
     this.styledComponent,
     this.formComponent,
-    this.clickAction,
     this.flexFactor,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
@@ -42,7 +40,6 @@ class V2GridSectionColumnModel {
       gridSection: gridSection ?? this.gridSection,
       styledComponent: styledComponent ?? this.styledComponent,
       formComponent: formComponent ?? this.formComponent,
-      clickAction: clickAction ?? this.clickAction,
       flexFactor: flexFactor ?? this.flexFactor,
       mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
@@ -54,7 +51,6 @@ class V2GridSectionColumnModel {
       'key': key,
       'gridSection': gridSection?.toMap(),
       'data': styledComponent?.toMap() ?? formComponent?.toMap(),
-      'clickAction': clickAction?.toMap(),
       'flexFactor': flexFactor,
       'mainAxisAlignment': mainAxisAlignment.name,
       'crossAxisAlignment': crossAxisAlignment.name,
@@ -70,11 +66,8 @@ class V2GridSectionColumnModel {
       styledComponent: map['data'] != null
           ? StyledComponentModel.fromMap(map['data'])
           : null,
-      formComponent:
-          map['data'] != null ? FormComponentModel.fromMap(map['data']) : null,
-      clickAction: map['clickAction'] != null
-          ? V2ClickAction.fromMap(map['clickAction'])
-          : null,
+      // formComponent:
+      //     map['data'] != null ? FormComponentModel.fromMap(map['data']) : null,
       flexFactor: map['flexFactor']?.toInt(),
       mainAxisAlignment: CommonHelpers.getMainAxisAlignmentFromString(
         map['mainAxisAlignment'],

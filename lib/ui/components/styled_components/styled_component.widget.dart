@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
+import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 import 'package:yc_app_utils/ui/ui.dart';
 
 class StyledComponentWidget extends StatelessWidget {
@@ -63,23 +64,33 @@ class StyledComponentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: CommonHelpers.getPaddingFromList(
-        styledComponentDetails.padding,
-      ),
-      decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
-        sectionBackground: styledComponentDetails.background,
-      ).copyWith(
-        borderRadius: CommonHelpers.getBorderRadiusFromList(
-          styledComponentDetails.borderRadius,
+    return YCClicker(
+      onPressed: (styledComponentDetails.clickAction != null &&
+              innerClickAction != null)
+          ? () => innerClickAction!.call(
+                styledComponentDetails.clickAction!,
+              )
+          : null,
+      showRippleEffect:
+          styledComponentDetails.clickAction?.showRippleEffect ?? false,
+      child: Container(
+        padding: CommonHelpers.getPaddingFromList(
+          styledComponentDetails.padding,
         ),
-        border: Border.all(
-          color: CommonHelpers.v2ColorFromHex(
-            styledComponentDetails.borderColor,
+        decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
+          sectionBackground: styledComponentDetails.background,
+        ).copyWith(
+          borderRadius: CommonHelpers.getBorderRadiusFromList(
+            styledComponentDetails.borderRadius,
+          ),
+          border: Border.all(
+            color: CommonHelpers.v2ColorFromHex(
+              styledComponentDetails.borderColor,
+            ),
           ),
         ),
+        child: buildComponent(),
       ),
-      child: buildComponent(),
     );
   }
 }

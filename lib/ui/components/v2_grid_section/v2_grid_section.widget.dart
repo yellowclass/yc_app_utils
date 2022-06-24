@@ -4,6 +4,7 @@ import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
 import 'package:yc_app_utils/ui/components/form_components/form_component.widget.dart';
+import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_column.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_layer.widget.dart';
@@ -13,12 +14,14 @@ class V2GridSectionWidget extends StatelessWidget {
   const V2GridSectionWidget({
     required this.gridDetails,
     required this.onPressed,
+    this.showRippleEffect = false,
     this.innerClickAction,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionModel gridDetails;
   final VoidCallback? onPressed;
+  final bool showRippleEffect;
   final void Function(V2ClickAction)? innerClickAction;
 
   Widget buildChild() {
@@ -60,13 +63,15 @@ class V2GridSectionWidget extends StatelessWidget {
             .toList(),
       );
     } else if (gridDetails.styledComponent != null) {
-      return GestureDetector(
-        onTap: (gridDetails.styledComponent!.clickAction != null &&
+      return YCClicker(
+        onPressed: (gridDetails.styledComponent!.clickAction != null &&
                 innerClickAction != null)
             ? () => innerClickAction!.call(
                   gridDetails.styledComponent!.clickAction!,
                 )
             : null,
+        showRippleEffect:
+            gridDetails.styledComponent?.clickAction?.showRippleEffect ?? false,
         child: StyledComponentWidget(
           styledComponentDetails: gridDetails.styledComponent!,
           innerClickAction: innerClickAction,
@@ -83,8 +88,9 @@ class V2GridSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
+    return YCClicker(
+      onPressed: onPressed,
+      showRippleEffect: showRippleEffect,
       child: Container(
         padding: CommonHelpers.getPaddingFromList(
           gridDetails.padding,
