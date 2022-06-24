@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/helpers/helpers.dart';
-import 'package:yc_app_utils/models/click_action/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
-// import 'package:yc_app_utils/ui/components/generic_button/generic_button_v3.widget.dart';
-// import 'package:yc_app_utils/ui/components/styled_components/styled_checkbox_field.widget.dart';
-// import 'package:yc_app_utils/ui/components/styled_components/styled_image.widget.dart';
-// import 'package:yc_app_utils/ui/components/styled_components/styled_radio_field.widget.dart';
-// import 'package:yc_app_utils/ui/components/styled_components/styled_select_field.widget.dart';
-// import 'package:yc_app_utils/ui/components/styled_components/styled_text_area_field.widget.dart';
-// import 'package:yc_app_utils/ui/components/styled_components/styled_text_field.widget.dart';
 import 'package:yc_app_utils/ui/ui.dart';
 
 class StyledComponentWidget extends StatelessWidget {
@@ -20,7 +13,7 @@ class StyledComponentWidget extends StatelessWidget {
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
-  final void Function(ClickAction)? innerClickAction;
+  final void Function(V2ClickAction)? innerClickAction;
 
   Widget buildComponent() {
     switch (styledComponentDetails.type) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/models/click_action/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
+import 'package:yc_app_utils/ui/components/form_components/form_component.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widget.dart';
 
@@ -13,7 +14,7 @@ class V2GridSectionColumnWidget extends StatelessWidget {
   }) : super(key: key);
 
   final V2GridSectionColumnModel columnDetails;
-  final void Function(ClickAction)? innerClickAction;
+  final void Function(V2ClickAction)? innerClickAction;
 
   Widget buildChild() {
     if (columnDetails.gridSection != null) {
@@ -26,7 +27,7 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                     )
                 : null,
       );
-    } else if (columnDetails.data != null) {
+    } else if (columnDetails.styledComponent != null) {
       return GestureDetector(
         onTap: (columnDetails.clickAction != null && innerClickAction != null)
             ? () => innerClickAction!.call(
@@ -34,9 +35,13 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                 )
             : null,
         child: StyledComponentWidget(
-          styledComponentDetails: columnDetails.data!,
+          styledComponentDetails: columnDetails.styledComponent!,
           innerClickAction: innerClickAction,
         ),
+      );
+    } else if (columnDetails.formComponent != null) {
+      return FormComponentWidget(
+        formDetails: columnDetails.formComponent!,
       );
     } else {
       return const SizedBox.shrink();
