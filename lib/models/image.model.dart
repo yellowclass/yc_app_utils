@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class ImageModel {
   String? id;
   String? url;
@@ -63,44 +61,17 @@ class ImageModel {
 
   factory ImageModel.fromMap(Map<String, dynamic> map) {
     return ImageModel(
-      id: map['id'] != null ? map['id'] : null,
-      url: map['url'] != null ? map['url'] : null,
-      entityType: map['entityType'] != null ? map['entityType'] : null,
-      entityId: map['entityId'] != null ? map['entityId'] : null,
-      badge: map['badge'] != null ? map['badge'] : null,
-      badgePosition: map['badgePosition'] != null ? map['badgePosition'] : null,
-      fillColor: map['fillColor'] != null ? map['fillColor'] : null,
-      height: map['height'] != null ? map['height'].toDouble() : null,
-      width: map['width'] != null ? map['width'].toDouble() : null,
-      cropType: map['cropType'] != null ? map['cropType'] : null,
+      id: map['id'],
+      url: map['url'],
+      entityType: map['entityType'],
+      entityId: map['entityId'],
+      badge: map['badge'],
+      badgePosition: map['badgePosition'],
+      fillColor: map['fillColor'],
+      height: map['height'],
+      width: map['width'],
+      cropType: map['cropType'],
     );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ImageModel.fromJson(String source) =>
-      ImageModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'ImageModel(id: $id, url: $url, entityType: $entityType, entityId: $entityId, badge: $badge, badgePosition: $badgePosition)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-
-    return other is ImageModel &&
-        other.id == id &&
-        other.url == url &&
-        other.entityType == entityType &&
-        other.entityId == entityId &&
-        other.badge == badge &&
-        other.badgePosition == badgePosition &&
-        other.height == height &&
-        other.width == width;
   }
 }
 
@@ -142,33 +113,10 @@ class ImageInputModel {
 
   factory ImageInputModel.fromMap(Map<String, dynamic> map) {
     return ImageInputModel(
-      id: map['id'] != null ? map['id'] : null,
-      url: map['url'] != null ? map['url'] : null,
-      entityType: map['entityType'] != null ? map['entityType'] : null,
-      entityId: map['entityId'] != null ? map['entityId'] : null,
+      id: map['id'],
+      url: map['url'],
+      entityType: map['entityType'],
+      entityId: map['entityId'],
     );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ImageInputModel.fromJson(String source) =>
-      ImageInputModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'ImageModel(id: $id, url: $url, entityType: $entityType, entityId: $entityId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-
-    return other is ImageInputModel &&
-        other.id == id &&
-        other.url == url &&
-        other.entityType == entityType &&
-        other.entityId == entityId;
   }
 }

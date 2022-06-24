@@ -6,7 +6,7 @@ class StyledRadioFieldModel {
   V2StyledTextModel? label;
   String name;
   Validation? validate;
-  String? defaultValue;
+  OptionModel? defaultValue;
   bool isDisabled;
   List<OptionModel> options;
 
@@ -23,7 +23,7 @@ class StyledRadioFieldModel {
     V2StyledTextModel? label,
     String? name,
     Validation? validate,
-    String? defaultValue,
+    OptionModel? defaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
   }) {
@@ -55,7 +55,9 @@ class StyledRadioFieldModel {
       name: map['name'] ?? '',
       validate:
           map['validate'] != null ? Validation.fromMap(map['validate']) : null,
-      defaultValue: map['defaultValue'],
+      defaultValue: map['defaultValue'] != null
+          ? OptionModel.fromMap(map['defaultValue'])
+          : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(
           map['options']?.map((x) => OptionModel.fromMap(x))),

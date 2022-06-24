@@ -5,6 +5,8 @@ import 'package:yc_app_utils/models/card_background/card_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
 import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
+import 'package:yc_app_utils/models/styled_component/option.model.dart';
+import 'package:yc_app_utils/models/validation/validation.model.dart';
 import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
 import 'package:yc_app_utils/ui/styleguide/spacing.dart';
@@ -175,21 +177,23 @@ class CommonHelpers {
   }
 
   static TextStyle? getTextStyle(
-    TStyle style, {
+    TStyle? style, {
     TextStyle? customStyle,
   }) {
     Map<TStyle, TextStyle> textStyleMap = YCMediaQuery.getIsTablet()
         ? TextStyles.tabTextStyle
         : TextStyles.mobTextStyle;
-    return customStyle != null
-        ? textStyleMap[style]!.merge(customStyle)
-        : textStyleMap[style];
+    TextStyle tStyle = textStyleMap[style] ?? const TextStyle();
+    return customStyle != null ? tStyle.merge(customStyle) : tStyle;
   }
 
   static BoxDecoration getBoxDecorationWithSectionBackground({
-    required SectionBackground sectionBackground,
+    required SectionBackground? sectionBackground,
     double borderRadius = AppSpacing.s,
   }) {
+    if (sectionBackground == null) {
+      return const BoxDecoration();
+    }
     switch (sectionBackground.backgroundType) {
       case SectionBgType.TRANSPARENT:
         return const BoxDecoration();
@@ -365,5 +369,89 @@ class CommonHelpers {
     } else {
       return Alignment.topCenter;
     }
+  }
+
+  static String? validateTextField({
+    required String value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for minLength
+    if (validations.minLength != null) {
+      if (value.length < validations.minLength!.value) {
+        return validations.minLength!.msg;
+      }
+    }
+
+    // check for maxLength
+    if (validations.maxLength != null) {
+      if (value.length > validations.maxLength!.value) {
+        return validations.maxLength!.msg;
+      }
+    }
+
+    // check for min (for number field)
+    if (validations.min != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue < validations.min!.value) {
+        return validations.min!.msg;
+      }
+    }
+
+    // check for max (for number field)
+    if (validations.max != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue > validations.max!.value) {
+        return validations.max!.msg;
+      }
+    }
+
+    // check for regex match
+    if (validations.pattern != null) {
+      if (!RegExp(validations.pattern!.value).hasMatch(value)) {
+        return validations.pattern!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateSelectField({
+    required List<OptionModel> values,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && values.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for minLength
+    if (validations.minLength != null) {
+      if (values.length < validations.minLength!.value) {
+        return validations.minLength!.msg;
+      }
+    }
+
+    // check for maxLength
+    if (validations.maxLength != null) {
+      if (values.length > validations.maxLength!.value) {
+        return validations.maxLength!.msg;
+      }
+    }
+
+    return null;
   }
 }
