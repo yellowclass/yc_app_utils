@@ -75,6 +75,42 @@ class CommonHelpers {
     }
   }
 
+  static MainAxisAlignment getMainAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return MainAxisAlignment.start;
+      case 'CENTER':
+        return MainAxisAlignment.center;
+      case 'END':
+        return MainAxisAlignment.end;
+      case 'SPACE_BETWEEN':
+        return MainAxisAlignment.spaceBetween;
+      case 'SPACE_AROUND':
+        return MainAxisAlignment.spaceAround;
+      case 'SPACE_EVENLY':
+        return MainAxisAlignment.spaceEvenly;
+      default:
+        return MainAxisAlignment.center;
+    }
+  }
+
+  static CrossAxisAlignment getCrossAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return CrossAxisAlignment.start;
+      case 'CENTER':
+        return CrossAxisAlignment.center;
+      case 'END':
+        return CrossAxisAlignment.end;
+      case 'STRETCH':
+        return CrossAxisAlignment.stretch;
+      case 'BASELINE':
+        return CrossAxisAlignment.baseline;
+      default:
+        return CrossAxisAlignment.center;
+    }
+  }
+
   static TextAlign getTextAlignmentFromString(String? alignment) {
     switch (alignment) {
       case 'LEFT':

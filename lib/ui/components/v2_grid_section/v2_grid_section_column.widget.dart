@@ -48,10 +48,22 @@ class V2GridSectionColumnWidget extends StatelessWidget {
     if (columnDetails.flexFactor != null) {
       return Expanded(
         flex: columnDetails.flexFactor!,
-        child: buildChild(),
+        child: Column(
+          mainAxisAlignment: columnDetails.mainAxisAlignment,
+          crossAxisAlignment: columnDetails.crossAxisAlignment,
+          children: [
+            buildChild(),
+          ],
+        ),
       );
     } else {
-      return buildChild();
+      return Column(
+        mainAxisAlignment: columnDetails.mainAxisAlignment,
+        crossAxisAlignment: columnDetails.crossAxisAlignment,
+        children: [
+          buildChild(),
+        ],
+      );
     }
   }
 }

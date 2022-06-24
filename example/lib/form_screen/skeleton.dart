@@ -5,6 +5,67 @@ final Map<String, dynamic> formSkeleton = {
     {
       'rows': [
         {
+          'mainAxisAlignment': 'SPACE_BETWEEN',
+          'crossAxisAlignment': 'START',
+          'padding': [0, 0, 16, 0],
+          'columns': [
+            {
+              'flexFactor': 1,
+              'gridSection': {
+                'layers': [
+                  {
+                    'rows': [
+                      {
+                        'mainAxisAlignment': 'START',
+                        'columns': [
+                          {
+                            'crossAxisAlignment': 'START',
+                            'data': {
+                              'type': 'TEXT',
+                              'textDetails': {
+                                'text': 'Welcome',
+                                'textColor': '#000000',
+                                'tStyle': 'H3_700',
+                              },
+                            },
+                          },
+                        ]
+                      },
+                      {
+                        'mainAxisAlignment': 'START',
+                        'columns': [
+                          {
+                            'crossAxisAlignment': 'START',
+                            'data': {
+                              'type': 'TEXT',
+                              'textDetails': {
+                                'text': 'Back',
+                                'textColor': '#000000',
+                                'tStyle': 'H3_700',
+                                'textAlign': 'RIGHT',
+                              },
+                            },
+                          },
+                        ]
+                      }
+                    ]
+                  }
+                ],
+              },
+            },
+            {
+              'data': {
+                'type': 'TEXT',
+                'textDetails': {
+                  'text': 'Sign Up',
+                  'textColor': '#000000',
+                  'tStyle': 'H3_700',
+                },
+              },
+            },
+          ],
+        },
+        {
           'padding': [0, 0, 16, 0],
           'columns': [
             {
@@ -65,6 +126,7 @@ final Map<String, dynamic> formSkeleton = {
           'columns': [
             {
               'flexFactor': 1,
+              'crossAxisAlignment': 'START',
               'data': {
                 'type': 'FORM_RADIO',
                 'radioField': {
@@ -96,6 +158,7 @@ final Map<String, dynamic> formSkeleton = {
           'padding': [0, 0, 16, 0],
           'columns': [
             {
+              'crossAxisAlignment': 'START',
               'flexFactor': 1,
               'data': {
                 'type': 'FORM_CHECKBOX',
@@ -237,7 +300,7 @@ final Map<String, dynamic> formSkeleton = {
                   'key': 'submit_form',
                   'buttonRows': [
                     {
-                      'flexAlignment': 'CENTER',
+                      'mainAxisAlignment': 'CENTER',
                       'buttonColumnData': [
                         {
                           'text': 'Submit',

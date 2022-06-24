@@ -23,8 +23,8 @@ class V2GridSectionRowWidget extends StatelessWidget {
         ? Container(
             padding: CommonHelpers.getPaddingFromList(rowDetails.padding),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: rowDetails.flexAlignment,
+              mainAxisAlignment: rowDetails.mainAxisAlignment,
+              crossAxisAlignment: rowDetails.crossAxisAlignment,
               children: rowDetails.columns!
                   .map(
                     (gridColumn) => V2GridSectionColumnWidget(

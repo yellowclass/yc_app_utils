@@ -11,7 +11,8 @@ class V2GridSectionColumnModel {
   StyledComponentModel? data;
   ClickAction? clickAction;
   int? flexFactor;
-  MainAxisAlignment flexAlignment;
+  MainAxisAlignment mainAxisAlignment;
+  CrossAxisAlignment crossAxisAlignment;
 
   V2GridSectionColumnModel({
     this.key,
@@ -19,7 +20,8 @@ class V2GridSectionColumnModel {
     this.data,
     this.clickAction,
     this.flexFactor,
-    this.flexAlignment = MainAxisAlignment.start,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   });
 
   V2GridSectionColumnModel copyWith({
@@ -28,7 +30,8 @@ class V2GridSectionColumnModel {
     StyledComponentModel? data,
     ClickAction? clickAction,
     int? flexFactor,
-    MainAxisAlignment? flexAlignment,
+    MainAxisAlignment? mainAxisAlignment,
+    CrossAxisAlignment? crossAxisAlignment,
   }) {
     return V2GridSectionColumnModel(
       key: key ?? this.key,
@@ -36,7 +39,8 @@ class V2GridSectionColumnModel {
       data: data ?? this.data,
       clickAction: clickAction ?? this.clickAction,
       flexFactor: flexFactor ?? this.flexFactor,
-      flexAlignment: flexAlignment ?? this.flexAlignment,
+      mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
     );
   }
 
@@ -47,7 +51,8 @@ class V2GridSectionColumnModel {
       'data': data?.toMap(),
       'clickAction': clickAction?.toMap(),
       'flexFactor': flexFactor,
-      'flexAlignment': flexAlignment.name,
+      'mainAxisAlignment': mainAxisAlignment.name,
+      'crossAxisAlignment': crossAxisAlignment.name,
     };
   }
 
@@ -64,11 +69,12 @@ class V2GridSectionColumnModel {
           ? ClickAction.fromMap(map['clickAction'])
           : null,
       flexFactor: map['flexFactor']?.toInt(),
-      flexAlignment: CommonHelpers.enumFromString(
-            MainAxisAlignment.values,
-            map['flexAlignment'],
-          ) ??
-          MainAxisAlignment.start,
+      mainAxisAlignment: CommonHelpers.getMainAxisAlignmentFromString(
+        map['mainAxisAlignment'],
+      ),
+      crossAxisAlignment: CommonHelpers.getCrossAxisAlignmentFromString(
+        map['crossAxisAlignment'],
+      ),
     );
   }
 }
