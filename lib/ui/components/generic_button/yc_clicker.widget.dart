@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class YCClicker extends StatefulWidget {
-  const YCClicker({
+class YCClicker extends StatelessWidget {
+  YCClicker({
     required this.child,
     required this.onPressed,
     this.showRippleEffect = false,
@@ -12,48 +12,43 @@ class YCClicker extends StatefulWidget {
   final VoidCallback? onPressed;
   final bool showRippleEffect;
 
-  @override
-  State<YCClicker> createState() => _YCClickerState();
-}
+  final ValueNotifier<double> _elevationNotifier = ValueNotifier<double>(0);
 
-class _YCClickerState extends State<YCClicker> {
-  double _elevation = 0;
-
-  bool get isOnPressedAvailable => widget.onPressed != null;
+  bool get isOnPressedAvailable => onPressed != null;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapUp: isOnPressedAvailable
           ? (_) {
-              setState(() {
-                _elevation = 0;
-              });
-              widget.onPressed?.call();
+              _elevationNotifier.value = 0;
+              onPressed?.call();
             }
           : null,
       onTapDown: isOnPressedAvailable
           ? (_) {
-              setState(() {
-                _elevation = 4;
-              });
+              _elevationNotifier.value = 4;
             }
           : null,
       onTapCancel: isOnPressedAvailable
           ? () {
-              setState(() {
-                _elevation = 0;
-              });
+              _elevationNotifier.value = 0;
             }
           : null,
-      child: AnimatedContainer(
-        duration: const Duration(
-          milliseconds: 100,
-        ),
-        child: Material(
-          elevation: widget.showRippleEffect ? _elevation : 0,
-          child: widget.child,
-        ),
+      child: ValueListenableBuilder<double>(
+        valueListenable: _elevationNotifier,
+        builder: (context, elevation, child) {
+          return AnimatedContainer(
+            duration: const Duration(
+              milliseconds: 100,
+            ),
+            child: Material(
+              elevation: showRippleEffect ? elevation : 0,
+              child: child,
+            ),
+          );
+        },
+        child: child,
       ),
     );
   }
