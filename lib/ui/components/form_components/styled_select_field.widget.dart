@@ -55,7 +55,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
               validations: selectFieldData.validate,
             ),
             onSaved: (value) {
-              onSaved?.call(selectFieldData.name, value);
+              onSaved?.call(selectFieldData.name, value?.value);
             },
           )
         else
@@ -90,7 +90,14 @@ class StyledSelectFieldWidget extends StatelessWidget {
               validations: selectFieldData.validate,
             ),
             onSaved: (value) {
-              onSaved?.call(selectFieldData.name, value);
+              onSaved?.call(
+                selectFieldData.name,
+                value
+                    ?.map(
+                      (v) => v.value,
+                    )
+                    .toList(),
+              );
             },
           )
       ],
