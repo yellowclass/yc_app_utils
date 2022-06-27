@@ -5,6 +5,7 @@ import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 
 class OneClickAction {
   V2ClickActionTypesEnum type;
+  V2FunctionTypesEnum? functionType;
   String? url;
   EventData? eventData;
   ShareData? shareData;
@@ -13,6 +14,7 @@ class OneClickAction {
 
   OneClickAction({
     required this.type,
+    this.functionType,
     this.url,
     this.eventData,
     this.shareData,
@@ -22,6 +24,7 @@ class OneClickAction {
 
   OneClickAction copyWith({
     V2ClickActionTypesEnum? type,
+    V2FunctionTypesEnum? functionType,
     String? url,
     EventData? eventData,
     ShareData? shareData,
@@ -30,6 +33,7 @@ class OneClickAction {
   }) {
     return OneClickAction(
       type: type ?? this.type,
+      functionType: functionType ?? this.functionType,
       url: url ?? this.url,
       eventData: eventData ?? this.eventData,
       shareData: shareData ?? this.shareData,
@@ -41,6 +45,7 @@ class OneClickAction {
   Map<String, dynamic> toMap() {
     return {
       'type': type.name,
+      'functionType': functionType?.name,
       'url': url,
       'eventData': eventData?.toMap(),
       'shareData': shareData?.toMap(),
@@ -55,6 +60,10 @@ class OneClickAction {
         V2ClickActionTypesEnum.values,
         map['type'],
       )!,
+      functionType: CommonHelpers.enumFromString(
+        V2FunctionTypesEnum.values,
+        map['functionType'],
+      ),
       url: map['url'],
       eventData:
           map['eventData'] != null ? EventData.fromMap(map['eventData']) : null,
@@ -72,13 +81,11 @@ enum V2ClickActionTypesEnum {
   EXTERNAL_LINK,
   APP_LINK,
   SHARE,
-  PRODUCT_PAGE,
-  WEBVIEW,
   DEFAULT,
-  DISABLED,
-  CLOSE,
   APP_CUSTOM,
-  SHARE_ONELINK,
+}
+
+enum V2FunctionTypesEnum {
   OPEN_BOTTOM_SHEET,
   UPDATE_PROFILE_PICTURE,
   UPDATE_SCHOOL,

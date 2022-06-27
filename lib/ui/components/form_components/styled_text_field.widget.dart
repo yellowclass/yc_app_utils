@@ -5,10 +5,12 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class StyledTextFieldWidget extends StatelessWidget {
   const StyledTextFieldWidget({
     required this.textFieldData,
+    this.onSaved,
     Key? key,
   }) : super(key: key);
 
   final StyledInputFieldModel textFieldData;
+  final void Function(String, dynamic)? onSaved;
 
   TextInputType? getKeyboardType(InputFieldEnum? fieldType) {
     switch (fieldType) {
@@ -61,7 +63,9 @@ class StyledTextFieldWidget extends StatelessWidget {
             value: value!,
             validations: textFieldData.validate,
           ),
-          onSaved: (value) {},
+          onSaved: (value) {
+            onSaved?.call(textFieldData.name, value);
+          },
         ),
       ],
     );

@@ -3,40 +3,29 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledRadioFieldWidget extends StatefulWidget {
+class StyledRadioFieldWidget extends StatelessWidget {
   const StyledRadioFieldWidget({
     required this.radioFieldData,
+    this.onSaved,
     Key? key,
   }) : super(key: key);
 
   final StyledRadioFieldModel radioFieldData;
-
-  @override
-  State<StyledRadioFieldWidget> createState() => _StyledRadioFieldWidgetState();
-}
-
-class _StyledRadioFieldWidgetState extends State<StyledRadioFieldWidget> {
-  String? radioValue;
-
-  @override
-  void initState() {
-    radioValue = widget.radioFieldData.defaultValue?.value;
-    super.initState();
-  }
+  final void Function(String, dynamic)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.radioFieldData.label != null)
+        if (radioFieldData.label != null)
           V2StyledTextWidget(
-            styledText: widget.radioFieldData.label!,
+            styledText: radioFieldData.label!,
           ),
         FormBuilderRadioGroup(
-          name: widget.radioFieldData.name,
-          initialValue: radioValue,
-          options: widget.radioFieldData.options
+          name: radioFieldData.name,
+          initialValue: radioFieldData.defaultValue?.value,
+          options: radioFieldData.options
               .map(
                 (option) => FormBuilderFieldOption(
                   value: option.value,
@@ -53,9 +42,11 @@ class _StyledRadioFieldWidgetState extends State<StyledRadioFieldWidget> {
                     value: value,
                   )
                 : null,
-            validations: widget.radioFieldData.validate,
+            validations: radioFieldData.validate,
           ),
-          onSaved: (value) {},
+          onSaved: (value) {
+            onSaved?.call(radioFieldData.name, value);
+          },
         ),
       ],
     );

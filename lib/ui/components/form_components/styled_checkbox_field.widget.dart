@@ -3,44 +3,33 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledCheckboxFieldWidget extends StatefulWidget {
+class StyledCheckboxFieldWidget extends StatelessWidget {
   const StyledCheckboxFieldWidget({
     required this.checkboxFieldData,
+    this.onSaved,
     Key? key,
   }) : super(key: key);
 
   final StyledCheckboxFieldModel checkboxFieldData;
+  final void Function(String, dynamic)? onSaved;
 
-  @override
-  State<StyledCheckboxFieldWidget> createState() =>
-      _StyledCheckboxFieldWidgetState();
-}
-
-class _StyledCheckboxFieldWidgetState extends State<StyledCheckboxFieldWidget> {
-  List<String> initialValues = [];
-
-  @override
-  void initState() {
-    initialValues = widget.checkboxFieldData.defaultValue
-            ?.map((option) => option.value)
-            .toList() ??
-        [];
-    super.initState();
-  }
+  List<String> get initialValues =>
+      checkboxFieldData.defaultValue?.map((option) => option.value).toList() ??
+      [];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.checkboxFieldData.label != null)
+        if (checkboxFieldData.label != null)
           V2StyledTextWidget(
-            styledText: widget.checkboxFieldData.label!,
+            styledText: checkboxFieldData.label!,
           ),
         FormBuilderCheckboxGroup(
-          name: widget.checkboxFieldData.name,
+          name: checkboxFieldData.name,
           initialValue: initialValues,
-          options: widget.checkboxFieldData.options
+          options: checkboxFieldData.options
               .map(
                 (option) => FormBuilderFieldOption(
                   value: option.value,
@@ -61,9 +50,11 @@ class _StyledCheckboxFieldWidgetState extends State<StyledCheckboxFieldWidget> {
                     )
                     .toList()
                 : [],
-            validations: widget.checkboxFieldData.validate,
+            validations: checkboxFieldData.validate,
           ),
-          onSaved: (value) {},
+          onSaved: (value) {
+            onSaved?.call(checkboxFieldData.name, value);
+          },
         ),
       ],
     );

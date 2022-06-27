@@ -8,11 +8,13 @@ class V2GridSectionLayerWidget extends StatelessWidget {
   const V2GridSectionLayerWidget({
     required this.layerDetails,
     this.innerClickAction,
+    this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionLayerModel layerDetails;
   final void Function(V2ClickAction)? innerClickAction;
+  final Map<String, dynamic>? formData;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class V2GridSectionLayerWidget extends StatelessWidget {
                       ? V2GridSectionRowWidget(
                           rowDetails: gridRow,
                           innerClickAction: innerClickAction,
+                          formData: formData,
                         )
                       : const SizedBox.shrink(),
                 )

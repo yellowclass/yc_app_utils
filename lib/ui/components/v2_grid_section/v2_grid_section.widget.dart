@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
-import 'package:yc_app_utils/ui/components/form_components/form_component.widget.dart';
 import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_column.widget.dart';
@@ -34,8 +33,10 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
 
   @override
   void initState() {
-    _formData = {};
-    _formKey = GlobalKey<FormState>();
+    if (widget.gridDetails.containsForm) {
+      _formData = {};
+      _formKey = GlobalKey<FormState>();
+    }
     super.initState();
   }
 
@@ -48,6 +49,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                   ? V2GridSectionLayerWidget(
                       layerDetails: gridLayer,
                       innerClickAction: widget.innerClickAction,
+                      formData: _formData,
                     )
                   : const SizedBox.shrink(),
             )
@@ -61,6 +63,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                   ? V2GridSectionRowWidget(
                       rowDetails: gridRow,
                       innerClickAction: widget.innerClickAction,
+                      formData: _formData,
                     )
                   : const SizedBox.shrink(),
             )
@@ -73,6 +76,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
               (gridColumn) => V2GridSectionColumnWidget(
                 columnDetails: gridColumn,
                 innerClickAction: widget.innerClickAction,
+                formData: _formData,
               ),
             )
             .toList(),
