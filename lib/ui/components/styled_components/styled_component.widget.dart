@@ -46,6 +46,8 @@ class StyledComponentWidget extends StatelessWidget {
                   if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
                     if (formKey!.currentState!.validate()) {
                       formKey!.currentState!.save();
+                    } else {
+                      formData!.clear();
                     }
                   }
                   break;

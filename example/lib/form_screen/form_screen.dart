@@ -36,7 +36,6 @@ class _FormScreenState extends State<FormScreen> {
               innerClickAction: (cta, fd) {
                 print(cta);
                 print(fd);
-                // cta.actions
               },
             ),
           ],

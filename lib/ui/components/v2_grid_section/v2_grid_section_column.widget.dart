@@ -38,6 +38,8 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                         V2FunctionTypesEnum.SUBMIT_FORM) {
                       if (formKey!.currentState!.validate()) {
                         formKey!.currentState!.save();
+                      } else {
+                        formData!.clear();
                       }
                     }
                     break;
