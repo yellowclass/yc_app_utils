@@ -15,9 +15,6 @@ class FormScreen extends StatefulWidget {
 class _FormScreenState extends State<FormScreen> {
   late V2GridSectionModel _data;
 
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  final Map<String, dynamic> _formData = {};
-
   @override
   void initState() {
     _data = V2GridSectionModel.fromMap(formSkeleton);
@@ -31,28 +28,16 @@ class _FormScreenState extends State<FormScreen> {
         title: const Text('Form Test Screen'),
       ),
       body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              V2GridSectionWidget(
-                gridDetails: _data,
-                onPressed: null,
-                innerClickAction: (cta) {},
-              ),
-              MaterialButton(
-                onPressed: () {
-                  // if (!_formKey.currentState!.validate()) {
-                  //   return;
-                  // }
-                  _formKey.currentState!.validate();
-                  _formKey.currentState!.save();
-                  print('data >>>>> ${_formData}');
-                },
-                child: const Text('Submit'),
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            V2GridSectionWidget(
+              gridDetails: _data,
+              onPressed: null,
+              innerClickAction: (cta) {
+                print(cta);
+              },
+            ),
+          ],
         ),
       ),
     );

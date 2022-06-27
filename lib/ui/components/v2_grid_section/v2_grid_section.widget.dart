@@ -10,7 +10,7 @@ import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_colum
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_layer.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_row.widget.dart';
 
-class V2GridSectionWidget extends StatelessWidget {
+class V2GridSectionWidget extends StatefulWidget {
   const V2GridSectionWidget({
     required this.gridDetails,
     required this.onPressed,
@@ -24,62 +24,74 @@ class V2GridSectionWidget extends StatelessWidget {
   final bool showRippleEffect;
   final void Function(V2ClickAction)? innerClickAction;
 
+  @override
+  State<V2GridSectionWidget> createState() => _V2GridSectionWidgetState();
+}
+
+class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
+  GlobalKey<FormState>? _formKey;
+  Map<String, dynamic>? _formData;
+
+  @override
+  void initState() {
+    _formData = {};
+    _formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+
   Widget buildChild() {
-    if (gridDetails.layers != null) {
+    if (widget.gridDetails.layers != null) {
       return Stack(
-        children: gridDetails.layers!
+        children: widget.gridDetails.layers!
             .map(
               (gridLayer) => gridLayer.rows != null
                   ? V2GridSectionLayerWidget(
                       layerDetails: gridLayer,
-                      innerClickAction: innerClickAction,
+                      innerClickAction: widget.innerClickAction,
                     )
                   : const SizedBox.shrink(),
             )
             .toList(),
       );
-    } else if (gridDetails.rows != null) {
+    } else if (widget.gridDetails.rows != null) {
       return Column(
-        children: gridDetails.rows!
+        children: widget.gridDetails.rows!
             .map(
               (gridRow) => gridRow.columns != null
                   ? V2GridSectionRowWidget(
                       rowDetails: gridRow,
-                      innerClickAction: innerClickAction,
+                      innerClickAction: widget.innerClickAction,
                     )
                   : const SizedBox.shrink(),
             )
             .toList(),
       );
-    } else if (gridDetails.columns != null) {
+    } else if (widget.gridDetails.columns != null) {
       return Row(
-        children: gridDetails.columns!
+        children: widget.gridDetails.columns!
             .map(
               (gridColumn) => V2GridSectionColumnWidget(
                 columnDetails: gridColumn,
-                innerClickAction: innerClickAction,
+                innerClickAction: widget.innerClickAction,
               ),
             )
             .toList(),
       );
-    } else if (gridDetails.styledComponent != null) {
+    } else if (widget.gridDetails.styledComponent != null) {
       return YCClicker(
-        onPressed: (gridDetails.styledComponent!.clickAction != null &&
-                innerClickAction != null)
-            ? () => innerClickAction!.call(
-                  gridDetails.styledComponent!.clickAction!,
+        onPressed: (widget.gridDetails.styledComponent!.clickAction != null &&
+                widget.innerClickAction != null)
+            ? () => widget.innerClickAction!.call(
+                  widget.gridDetails.styledComponent!.clickAction!,
                 )
             : null,
         showRippleEffect:
-            gridDetails.styledComponent?.clickAction?.showRippleEffect ?? false,
+            widget.gridDetails.styledComponent?.clickAction?.showRippleEffect ??
+                false,
         child: StyledComponentWidget(
-          styledComponentDetails: gridDetails.styledComponent!,
-          innerClickAction: innerClickAction,
+          styledComponentDetails: widget.gridDetails.styledComponent!,
+          innerClickAction: widget.innerClickAction,
         ),
-      );
-    } else if (gridDetails.formComponent != null) {
-      return FormComponentWidget(
-        formDetails: gridDetails.formComponent!,
       );
     } else {
       return const SizedBox.shrink();
@@ -89,26 +101,31 @@ class V2GridSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YCClicker(
-      onPressed: onPressed,
-      showRippleEffect: showRippleEffect,
+      onPressed: widget.onPressed,
+      showRippleEffect: widget.showRippleEffect,
       child: Container(
         padding: CommonHelpers.getPaddingFromList(
-          gridDetails.padding,
+          widget.gridDetails.padding,
         ),
         decoration: BoxDecoration(
           color: CommonHelpers.v2ColorFromHex(
-            gridDetails.backgroundColor,
+            widget.gridDetails.backgroundColor,
           ),
           borderRadius: CommonHelpers.getBorderRadiusFromList(
-            gridDetails.borderRadius,
+            widget.gridDetails.borderRadius,
           ),
           border: Border.all(
             color: CommonHelpers.v2ColorFromHex(
-              gridDetails.borderColor,
+              widget.gridDetails.borderColor,
             ),
           ),
         ),
-        child: buildChild(),
+        child: widget.gridDetails.containsForm
+            ? Form(
+                key: _formKey,
+                child: buildChild(),
+              )
+            : buildChild(),
       ),
     );
   }

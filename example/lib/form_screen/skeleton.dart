@@ -22,40 +22,65 @@ final Map<String, dynamic> formSkeleton = {
         //     },
         //   ],
         // },
+        // {
+        //   'columns': [
+        //     {
+        //       'flexFactor': 1,
+        //       'crossAxisAlignment': 'START',
+        //       'data': {
+        //         // 'type': 'FORM_RADIO',
+        //         'type': 'FORM_CHECKBOX',
+        //         'checkboxField': {
+        //           'label': {
+        //             'text': 'Gender',
+        //             'textColor': '#000',
+        //           },
+        //           'name': 'gender',
+        //           'validate': {
+        //             'min': {
+        //               'value': 2,
+        //               'msg': 'Minimum 2',
+        //             },
+        //           },
+        //           // 'defaultValue': {
+        //           //   'label': 'Male',
+        //           //   'value': 'male',
+        //           // },
+        //           'options': [
+        //             {
+        //               'label': 'Male',
+        //               'value': 'male',
+        //             },
+        //             {
+        //               'label': 'Female',
+        //               'value': 'female',
+        //             },
+        //           ],
+        //         },
+        //       },
+        //     },
+        //   ],
+        // },
         {
           'columns': [
             {
               'flexFactor': 1,
-              'crossAxisAlignment': 'START',
               'data': {
                 // 'type': 'FORM_RADIO',
-                'type': 'FORM_CHECKBOX',
-                'checkboxField': {
-                  'label': {
-                    'text': 'Gender',
-                    'textColor': '#000',
-                  },
-                  'name': 'gender',
-                  'validate': {
-                    'min': {
-                      'value': 2,
-                      'msg': 'Minimum 2',
-                    },
-                  },
-                  // 'defaultValue': {
-                  //   'label': 'Male',
-                  //   'value': 'male',
-                  // },
-                  'options': [
+                'type': 'TEXT',
+                'textDetails': {
+                  'text': 'SUBMIT',
+                  'textColor': '#000',
+                },
+                'clickAction': {
+                  'sequenceType': 'SEQUENTIAL',
+                  'actions': [
                     {
-                      'label': 'Male',
-                      'value': 'male',
-                    },
-                    {
-                      'label': 'Female',
-                      'value': 'female',
+                      'type': 'APP_CUSTOM',
+                      'functionType': 'SUBMIT_FORM',
                     },
                   ],
+                  'showRippleEffect': true,
                 },
               },
             },
