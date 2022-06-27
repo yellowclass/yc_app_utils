@@ -1,49 +1,37 @@
-import 'package:yc_app_utils/helpers/common_helpers.dart';
-import 'package:yc_app_utils/models/styled_component/option.model.dart';
-import 'package:yc_app_utils/models/styled_component/select_type.enum.dart';
-import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
-import 'package:yc_app_utils/models/validation/validation.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledSelectFieldModel {
+class StyledRadioFieldModel {
   V2StyledTextModel? label;
   String name;
   Validation? validate;
-  List<OptionModel>? defaultValue;
+  OptionModel? defaultValue;
   bool isDisabled;
   List<OptionModel> options;
-  SelectType selectType;
-  bool isSearchable;
 
-  StyledSelectFieldModel({
+  StyledRadioFieldModel({
     this.label,
     required this.name,
     this.validate,
     this.defaultValue,
     this.isDisabled = false,
     required this.options,
-    this.selectType = SelectType.SINGLE,
-    this.isSearchable = false,
   });
 
-  StyledSelectFieldModel copyWith({
+  StyledRadioFieldModel copyWith({
     V2StyledTextModel? label,
     String? name,
     Validation? validate,
-    List<OptionModel>? defaultValue,
+    OptionModel? defaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
-    SelectType? selectType,
-    bool? isSearchable,
   }) {
-    return StyledSelectFieldModel(
+    return StyledRadioFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
       validate: validate ?? this.validate,
       defaultValue: defaultValue ?? this.defaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
-      selectType: selectType ?? this.selectType,
-      isSearchable: isSearchable ?? this.isSearchable,
     );
   }
 
@@ -55,31 +43,22 @@ class StyledSelectFieldModel {
       'defaultValue': defaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
-      'selectType': selectType.name,
-      'isSearchable': isSearchable,
     };
   }
 
-  factory StyledSelectFieldModel.fromMap(Map<String, dynamic> map) {
-    return StyledSelectFieldModel(
+  factory StyledRadioFieldModel.fromMap(Map<String, dynamic> map) {
+    return StyledRadioFieldModel(
       label:
           map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
       validate:
           map['validate'] != null ? Validation.fromMap(map['validate']) : null,
       defaultValue: map['defaultValue'] != null
-          ? List<OptionModel>.from(
-              map['defaultValue']?.map((x) => OptionModel.fromMap(x)))
+          ? OptionModel.fromMap(map['defaultValue'])
           : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(
           map['options']?.map((x) => OptionModel.fromMap(x))),
-      selectType: CommonHelpers.enumFromString(
-            SelectType.values,
-            map['selectType'],
-          ) ??
-          SelectType.SINGLE,
-      isSearchable: map['isSearchable'] ?? false,
     );
   }
 }

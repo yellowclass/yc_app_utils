@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/models/styled_component/styled_checkbox_field.model.dart';
-import 'package:yc_app_utils/ui/components/styled_components/v2_styled_text.widget.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledCheckboxFieldWidget extends StatefulWidget {
   const StyledCheckboxFieldWidget({

@@ -4,18 +4,54 @@ final Map<String, dynamic> formSkeleton = {
   'layers': [
     {
       'rows': [
+        // {
+        //   'columns': [
+        //     {
+        //       'data': {
+        //         'type': 'TEXT',
+        //         'textDetails': {
+        //           'text': "Click Me",
+        //           'textColor': '#000',
+        //         },
+        //         'padding': [8, 36],
+        //         'clickAction': {
+        //           'sequenceType': 'SEQUENTIAL',
+        //           'showRippleEffect': true,
+        //         },
+        //       },
+        //     },
+        //   ],
+        // },
         {
           'columns': [
             {
+              'flexFactor': 1,
+              'crossAxisAlignment': 'START',
               'data': {
-                'type': 'TEXT',
-                'textDetails': {
-                  'text': "Click Me",
-                  'textColor': '#000',
-                },
-                'clickAction': {
-                  'sequenceType': 'SEQUENTIAL',
-                  // 'showRippleEffect': true,
+                // 'type': 'FORM_RADIO',
+                'type': 'FORM_CHECKBOX',
+                'checkboxField': {
+                  'label': {
+                    'text': 'Gender',
+                    'textColor': '#000',
+                  },
+                  'name': 'gender',
+                  'defaultValue': [
+                    {
+                      'label': 'Male',
+                      'value': 'male',
+                    },
+                  ],
+                  'options': [
+                    {
+                      'label': 'Male',
+                      'value': 'male',
+                    },
+                    {
+                      'label': 'Female',
+                      'value': 'female',
+                    },
+                  ],
                 },
               },
             },

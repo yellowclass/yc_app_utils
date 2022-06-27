@@ -1,11 +1,4 @@
-import 'package:yc_app_utils/helpers/helpers.dart';
-
-import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_checkbox_field.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_input_field.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_radio_field.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_select_field.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_text_area_field.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentModel {
   FormComponentEnum type;

@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:yc_app_utils/models/card_background/card_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
-import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
-import 'package:yc_app_utils/models/styled_component/option.model.dart';
-import 'package:yc_app_utils/models/validation/validation.model.dart';
-import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
-import 'package:yc_app_utils/ui/styleguide/spacing.dart';
-import 'package:yc_app_utils/ui/text_styles/text_styles.dart';
-import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CommonHelpers {
   CommonHelpers._();
@@ -460,7 +450,23 @@ class CommonHelpers {
     return null;
   }
 
-  static String? validateSelectField({
+  static String? validateRadioField({
+    required OptionModel? value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value == null) {
+        return validations.isRequired!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateSelectCheckField({
     required List<OptionModel> values,
     required Validation? validations,
   }) {

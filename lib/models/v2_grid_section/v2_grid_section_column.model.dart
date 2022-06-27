@@ -63,11 +63,11 @@ class V2GridSectionColumnModel {
       gridSection: map['gridSection'] != null
           ? V2GridSectionModel.fromMap(map['gridSection'])
           : null,
-      styledComponent: map['data'] != null
-          ? StyledComponentModel.fromMap(map['data'])
-          : null,
-      // formComponent:
-      //     map['data'] != null ? FormComponentModel.fromMap(map['data']) : null,
+      // styledComponent: map['data'] != null
+      //     ? StyledComponentModel.fromMap(map['data'])
+      //     : null,
+      formComponent:
+          map['data'] != null ? FormComponentModel.fromMap(map['data']) : null,
       flexFactor: map['flexFactor']?.toInt(),
       mainAxisAlignment: CommonHelpers.getMainAxisAlignmentFromString(
         map['mainAxisAlignment'],

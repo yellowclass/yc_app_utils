@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:yc_app_utils/ui/ui.dart';
+
 class YCClicker extends StatelessWidget {
   YCClicker({
     required this.child,
@@ -44,6 +46,9 @@ class YCClicker extends StatelessWidget {
             ),
             child: Material(
               elevation: showRippleEffect ? elevation : 0,
+              borderRadius: BorderRadius.circular(
+                AppRadius.s,
+              ),
               child: child,
             ),
           );

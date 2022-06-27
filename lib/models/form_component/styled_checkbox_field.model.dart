@@ -1,8 +1,4 @@
-import 'package:yc_app_utils/helpers/common_helpers.dart';
-import 'package:yc_app_utils/models/styled_component/option.model.dart';
-import 'package:yc_app_utils/models/styled_component/select_type.enum.dart';
-import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
-import 'package:yc_app_utils/models/validation/validation.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledCheckboxFieldModel {
   V2StyledTextModel? label;
