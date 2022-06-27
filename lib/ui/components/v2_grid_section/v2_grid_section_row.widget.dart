@@ -8,13 +8,17 @@ import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_colum
 class V2GridSectionRowWidget extends StatelessWidget {
   const V2GridSectionRowWidget({
     required this.rowDetails,
+    required this.containsForm,
     this.innerClickAction,
+    this.formKey,
     this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionRowModel rowDetails;
-  final void Function(V2ClickAction)? innerClickAction;
+  final bool containsForm;
+  final void Function(V2ClickAction, Map<String, dynamic>?)? innerClickAction;
+  final GlobalKey<FormState>? formKey;
   final Map<String, dynamic>? formData;
 
   @override
@@ -29,7 +33,9 @@ class V2GridSectionRowWidget extends StatelessWidget {
                   .map(
                     (gridColumn) => V2GridSectionColumnWidget(
                       columnDetails: gridColumn,
+                      containsForm: containsForm,
                       innerClickAction: innerClickAction,
+                      formKey: formKey,
                       formData: formData,
                     ),
                   )

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/helpers/helpers.dart';
-import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
-import 'package:yc_app_utils/ui/ui.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentWidget extends StatelessWidget {
   const StyledComponentWidget({
     required this.styledComponentDetails,
+    required this.containsForm,
     this.innerClickAction,
+    this.formKey,
+    this.formData,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
-  final void Function(V2ClickAction)? innerClickAction;
+  final bool containsForm;
+  final void Function(V2ClickAction, Map<String, dynamic>?)? innerClickAction;
+  final GlobalKey<FormState>? formKey;
+  final Map<String, dynamic>? formData;
 
   Widget buildComponent() {
     switch (styledComponentDetails.type) {
@@ -37,8 +40,20 @@ class StyledComponentWidget extends StatelessWidget {
               innerClickAction != null)
           ? () {
               // ADD BUTTON SUBMIT LOGIC
+              if (containsForm) {
+                for (var action
+                    in styledComponentDetails.clickAction!.actions) {
+                  if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
+                    if (formKey!.currentState!.validate()) {
+                      formKey!.currentState!.save();
+                    }
+                  }
+                  break;
+                }
+              }
               innerClickAction!.call(
                 styledComponentDetails.clickAction!,
+                formData,
               );
             }
           : null,

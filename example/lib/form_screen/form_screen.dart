@@ -33,8 +33,10 @@ class _FormScreenState extends State<FormScreen> {
             V2GridSectionWidget(
               gridDetails: _data,
               onPressed: null,
-              innerClickAction: (cta) {
+              innerClickAction: (cta, fd) {
                 print(cta);
+                print(fd);
+                // cta.actions
               },
             ),
           ],

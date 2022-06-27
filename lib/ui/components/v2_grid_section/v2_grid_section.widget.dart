@@ -21,7 +21,9 @@ class V2GridSectionWidget extends StatefulWidget {
   final V2GridSectionModel gridDetails;
   final VoidCallback? onPressed;
   final bool showRippleEffect;
-  final void Function(V2ClickAction)? innerClickAction;
+  final void Function(
+          V2ClickAction clickAction, Map<String, dynamic>? formData)?
+      innerClickAction;
 
   @override
   State<V2GridSectionWidget> createState() => _V2GridSectionWidgetState();
@@ -48,7 +50,9 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
               (gridLayer) => gridLayer.rows != null
                   ? V2GridSectionLayerWidget(
                       layerDetails: gridLayer,
+                      containsForm: widget.gridDetails.containsForm,
                       innerClickAction: widget.innerClickAction,
+                      formKey: _formKey,
                       formData: _formData,
                     )
                   : const SizedBox.shrink(),
@@ -62,7 +66,9 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
               (gridRow) => gridRow.columns != null
                   ? V2GridSectionRowWidget(
                       rowDetails: gridRow,
+                      containsForm: widget.gridDetails.containsForm,
                       innerClickAction: widget.innerClickAction,
+                      formKey: _formKey,
                       formData: _formData,
                     )
                   : const SizedBox.shrink(),
@@ -75,7 +81,9 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
             .map(
               (gridColumn) => V2GridSectionColumnWidget(
                 columnDetails: gridColumn,
+                containsForm: widget.gridDetails.containsForm,
                 innerClickAction: widget.innerClickAction,
+                formKey: _formKey,
                 formData: _formData,
               ),
             )
@@ -87,6 +95,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                 widget.innerClickAction != null)
             ? () => widget.innerClickAction!.call(
                   widget.gridDetails.styledComponent!.clickAction!,
+                  null,
                 )
             : null,
         showRippleEffect:
@@ -94,7 +103,10 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                 false,
         child: StyledComponentWidget(
           styledComponentDetails: widget.gridDetails.styledComponent!,
+          containsForm: widget.gridDetails.containsForm,
           innerClickAction: widget.innerClickAction,
+          formKey: _formKey,
+          formData: _formData,
         ),
       );
     } else {

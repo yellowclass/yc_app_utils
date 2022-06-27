@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
 
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
@@ -9,13 +10,17 @@ import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widge
 class V2GridSectionColumnWidget extends StatelessWidget {
   const V2GridSectionColumnWidget({
     required this.columnDetails,
+    required this.containsForm,
     this.innerClickAction,
+    this.formKey,
     this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionColumnModel columnDetails;
-  final void Function(V2ClickAction)? innerClickAction;
+  final bool containsForm;
+  final void Function(V2ClickAction, Map<String, dynamic>?)? innerClickAction;
+  final GlobalKey<FormState>? formKey;
   final Map<String, dynamic>? formData;
 
   Widget buildChild() {
@@ -26,8 +31,21 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                 innerClickAction != null)
             ? () {
                 // BUTTON SUBMIT LOGIC
+                if (containsForm) {
+                  for (var action
+                      in columnDetails.gridSection!.clickAction!.actions) {
+                    if (action.functionType ==
+                        V2FunctionTypesEnum.SUBMIT_FORM) {
+                      if (formKey!.currentState!.validate()) {
+                        formKey!.currentState!.save();
+                      }
+                    }
+                    break;
+                  }
+                }
                 innerClickAction!.call(
                   columnDetails.gridSection!.clickAction!,
+                  formData,
                 );
               }
             : null,
@@ -35,7 +53,10 @@ class V2GridSectionColumnWidget extends StatelessWidget {
     } else if (columnDetails.styledComponent != null) {
       return StyledComponentWidget(
         styledComponentDetails: columnDetails.styledComponent!,
+        containsForm: containsForm,
         innerClickAction: innerClickAction,
+        formKey: formKey,
+        formData: formData,
       );
     } else if (columnDetails.formComponent != null) {
       return FormComponentWidget(

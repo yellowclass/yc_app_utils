@@ -1,6 +1,7 @@
 final Map<String, dynamic> formSkeleton = {
   'key': 'claim_gift_address_form',
   'padding': [24, 16],
+  'containsForm': true,
   'layers': [
     {
       'rows': [
