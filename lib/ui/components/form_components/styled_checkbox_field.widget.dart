@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -16,11 +17,11 @@ class StyledCheckboxFieldWidget extends StatefulWidget {
 }
 
 class _StyledCheckboxFieldWidgetState extends State<StyledCheckboxFieldWidget> {
-  List<String> selectedValues = [];
+  List<String> initialValues = [];
 
   @override
   void initState() {
-    selectedValues = widget.checkboxFieldData.defaultValue
+    initialValues = widget.checkboxFieldData.defaultValue
             ?.map((option) => option.value)
             .toList() ??
         [];
@@ -36,39 +37,35 @@ class _StyledCheckboxFieldWidgetState extends State<StyledCheckboxFieldWidget> {
           V2StyledTextWidget(
             styledText: widget.checkboxFieldData.label!,
           ),
-        for (var i = 0; i < widget.checkboxFieldData.options.length; i++)
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Checkbox(
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: selectedValues
-                    .contains(widget.checkboxFieldData.options[i].value),
-                onChanged: (bool? value) {
-                  setState(() {
-                    if (value == true) {
-                      selectedValues
-                          .add(widget.checkboxFieldData.options[i].value);
-                    } else {
-                      selectedValues
-                          .remove(widget.checkboxFieldData.options[i].value);
-                    }
-                  });
-                },
-              ),
-              Text(
-                widget.checkboxFieldData.options[i].label,
-              ),
-            ],
+        FormBuilderCheckboxGroup(
+          name: widget.checkboxFieldData.name,
+          initialValue: initialValues,
+          options: widget.checkboxFieldData.options
+              .map(
+                (option) => FormBuilderFieldOption(
+                  value: option.value,
+                ),
+              )
+              .toList(),
+          decoration: const InputDecoration(
+            border: InputBorder.none,
           ),
+          validator: (values) => CommonHelpers.validateSelectCheckField(
+            values: (values != null && values.isNotEmpty)
+                ? values
+                    .map(
+                      (option) => OptionModel(
+                        label: option as String,
+                        value: option,
+                      ),
+                    )
+                    .toList()
+                : [],
+            validations: widget.checkboxFieldData.validate,
+          ),
+          onSaved: (value) {},
+        ),
       ],
     );
   }
 }
-
-// class _RadioGrp extends FormField<String?> {
-//   _RadioGrp({
-//     required super.builder,
-//     required super.validator,
-//   });
-// }

@@ -36,12 +36,16 @@ final Map<String, dynamic> formSkeleton = {
                     'textColor': '#000',
                   },
                   'name': 'gender',
-                  'defaultValue': [
-                    {
-                      'label': 'Male',
-                      'value': 'male',
+                  'validate': {
+                    'min': {
+                      'value': 2,
+                      'msg': 'Minimum 2',
                     },
-                  ],
+                  },
+                  // 'defaultValue': {
+                  //   'label': 'Male',
+                  //   'value': 'male',
+                  // },
                   'options': [
                     {
                       'label': 'Male',

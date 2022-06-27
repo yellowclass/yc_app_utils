@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -32,33 +33,31 @@ class _StyledRadioFieldWidgetState extends State<StyledRadioFieldWidget> {
           V2StyledTextWidget(
             styledText: widget.radioFieldData.label!,
           ),
-        for (var i = 0; i < widget.radioFieldData.options.length; i++)
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Radio(
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: widget.radioFieldData.options[i].value,
-                groupValue: radioValue,
-                onChanged: (String? value) {
-                  setState(() {
-                    radioValue = value;
-                  });
-                },
-              ),
-              Text(
-                widget.radioFieldData.options[i].label,
-              ),
-            ],
+        FormBuilderRadioGroup(
+          name: widget.radioFieldData.name,
+          initialValue: radioValue,
+          options: widget.radioFieldData.options
+              .map(
+                (option) => FormBuilderFieldOption(
+                  value: option.value,
+                ),
+              )
+              .toList(),
+          decoration: const InputDecoration(
+            border: InputBorder.none,
           ),
+          validator: (value) => CommonHelpers.validateRadioField(
+            value: value != null
+                ? OptionModel(
+                    label: value as String,
+                    value: value,
+                  )
+                : null,
+            validations: widget.radioFieldData.validate,
+          ),
+          onSaved: (value) {},
+        ),
       ],
     );
   }
 }
-
-// class _RadioGrp extends FormField<String?> {
-//   _RadioGrp({
-//     required super.builder,
-//     required super.validator,
-//   });
-// }

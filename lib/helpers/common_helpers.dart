@@ -473,6 +473,7 @@ class CommonHelpers {
     if (validations == null) {
       return null;
     }
+
     // check for required
     if (validations.isRequired != null) {
       if (validations.isRequired!.value && values.isEmpty) {
@@ -480,17 +481,17 @@ class CommonHelpers {
       }
     }
 
-    // check for minLength
-    if (validations.minLength != null) {
-      if (values.length < validations.minLength!.value) {
-        return validations.minLength!.msg;
+    // check for min
+    if (validations.min != null) {
+      if (values.length < validations.min!.value) {
+        return validations.min!.msg;
       }
     }
 
-    // check for maxLength
-    if (validations.maxLength != null) {
-      if (values.length > validations.maxLength!.value) {
-        return validations.maxLength!.msg;
+    // check for max
+    if (validations.max != null) {
+      if (values.length > validations.max!.value) {
+        return validations.max!.msg;
       }
     }
 
