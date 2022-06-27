@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/models/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
+import 'package:yc_app_utils/ui/components/form_components/form_component.widget.dart';
+import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widget.dart';
 
@@ -13,30 +15,27 @@ class V2GridSectionColumnWidget extends StatelessWidget {
   }) : super(key: key);
 
   final V2GridSectionColumnModel columnDetails;
-  final void Function(ClickAction)? innerClickAction;
+  final void Function(V2ClickAction)? innerClickAction;
 
   Widget buildChild() {
     if (columnDetails.gridSection != null) {
       return V2GridSectionWidget(
         gridDetails: columnDetails.gridSection!,
-        onPressed:
-            (columnDetails.clickAction != null && innerClickAction != null)
-                ? () => innerClickAction!.call(
-                      columnDetails.clickAction!,
-                    )
-                : null,
-      );
-    } else if (columnDetails.data != null) {
-      return GestureDetector(
-        onTap: (columnDetails.clickAction != null && innerClickAction != null)
+        onPressed: (columnDetails.gridSection!.clickAction != null &&
+                innerClickAction != null)
             ? () => innerClickAction!.call(
-                  columnDetails.clickAction!,
+                  columnDetails.gridSection!.clickAction!,
                 )
             : null,
-        child: StyledComponentWidget(
-          styledComponentDetails: columnDetails.data!,
-          innerClickAction: innerClickAction,
-        ),
+      );
+    } else if (columnDetails.styledComponent != null) {
+      return StyledComponentWidget(
+        styledComponentDetails: columnDetails.styledComponent!,
+        innerClickAction: innerClickAction,
+      );
+    } else if (columnDetails.formComponent != null) {
+      return FormComponentWidget(
+        formDetails: columnDetails.formComponent!,
       );
     } else {
       return const SizedBox.shrink();
@@ -48,10 +47,22 @@ class V2GridSectionColumnWidget extends StatelessWidget {
     if (columnDetails.flexFactor != null) {
       return Expanded(
         flex: columnDetails.flexFactor!,
-        child: buildChild(),
+        child: Column(
+          mainAxisAlignment: columnDetails.mainAxisAlignment,
+          crossAxisAlignment: columnDetails.crossAxisAlignment,
+          children: [
+            buildChild(),
+          ],
+        ),
       );
     } else {
-      return buildChild();
+      return Column(
+        mainAxisAlignment: columnDetails.mainAxisAlignment,
+        crossAxisAlignment: columnDetails.crossAxisAlignment,
+        children: [
+          buildChild(),
+        ],
+      );
     }
   }
 }

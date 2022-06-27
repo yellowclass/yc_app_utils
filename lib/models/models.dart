@@ -1,5 +1,6 @@
 // shared
-export 'package:yc_app_utils/models/click_action.model.dart';
+export 'package:yc_app_utils/models/click_action/click_action.model.dart';
+export 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 export 'package:yc_app_utils/models/image.model.dart';
 export 'package:yc_app_utils/models/symmetric_padding.model.dart';
 
@@ -13,19 +14,10 @@ export 'package:yc_app_utils/models/section_background/section_background_direct
 export 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
 
 // styled component
-export 'package:yc_app_utils/models/styled_component/generic_button_v3.model.dart';
-export 'package:yc_app_utils/models/styled_component/option.model.dart';
-export 'package:yc_app_utils/models/styled_component/select_type.enum.dart';
-export 'package:yc_app_utils/models/styled_component/styled_checkbox_field.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_image.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_input_field.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_radio_field.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_select_field.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_text_area_field.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_text.model.dart';
-export 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
-export 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
+export 'package:yc_app_utils/models/styled_component/styled_components.dart';
+
+// form component
+export 'package:yc_app_utils/models/form_component/form_components.dart';
 
 // v2 grid section
 export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';

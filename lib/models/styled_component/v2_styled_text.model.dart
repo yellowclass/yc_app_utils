@@ -5,7 +5,7 @@ import 'package:yc_app_utils/models/section_background/section_background.model.
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
 class V2StyledTextModel {
-  String? text;
+  String text;
   String? textColor;
   TStyle? tStyle;
   bool? italic;
@@ -19,7 +19,7 @@ class V2StyledTextModel {
   List<int>? padding;
 
   V2StyledTextModel({
-    this.text,
+    required this.text,
     this.textColor,
     this.tStyle,
     this.italic,
@@ -52,7 +52,7 @@ class V2StyledTextModel {
 
   factory V2StyledTextModel.fromMap(Map<String, dynamic> map) {
     return V2StyledTextModel(
-      text: map['text'],
+      text: map['text'] ?? '',
       textColor: map['textColor'],
       tStyle: map['tStyle'] != null
           ? CommonHelpers.enumFromString(

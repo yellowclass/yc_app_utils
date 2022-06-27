@@ -1,13 +1,6 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:yc_app_utils/helpers/helpers.dart';
-import 'package:yc_app_utils/models/models.dart';
-import 'package:yc_app_utils/models/styled_component/option.model.dart';
-
-import 'package:yc_app_utils/models/styled_component/styled_select_field.model.dart';
-import 'package:yc_app_utils/ui/components/styled_components/v2_styled_text.widget.dart';
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
-import 'package:yc_app_utils/ui/styleguide/spacing.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledSelectFieldWidget extends StatefulWidget {
   const StyledSelectFieldWidget({
@@ -73,7 +66,7 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                 // profileInput.classStandard = item!.value;
               });
             },
-            validator: (value) => CommonHelpers.validateSelectField(
+            validator: (value) => CommonHelpers.validateSelectCheckField(
               values: value != null ? [value] : [],
               validations: widget.selectFieldData.validate,
             ),
@@ -111,7 +104,7 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                 // profileInput.classStandard = item!.value;
               });
             },
-            validator: (values) => CommonHelpers.validateSelectField(
+            validator: (values) => CommonHelpers.validateSelectCheckField(
               values: values!,
               validations: widget.selectFieldData.validate,
             ),

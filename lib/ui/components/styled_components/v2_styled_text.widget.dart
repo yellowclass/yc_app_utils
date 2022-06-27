@@ -29,28 +29,25 @@ class V2StyledTextWidget extends StatelessWidget {
           ),
         ),
       ),
-      child: styledText.text != null
-          ? Text(
-              styledText.text!,
-              textAlign: styledText.textAlign,
-              overflow: styledText.textOverflow,
-              style: CommonHelpers.getTextStyle(
-                styledText.tStyle,
-                customStyle: TextStyle(
-                  letterSpacing: styledText.letterSpacing,
-                  fontStyle: styledText.italic == true
-                      ? FontStyle.italic
-                      : FontStyle.normal,
-                  color: CommonHelpers.v2ColorFromHex(
-                    styledText.textColor,
-                  ),
-                  decoration: styledText.strikeThrough == true
-                      ? TextDecoration.lineThrough
-                      : null,
-                ),
-              ),
-            )
-          : null,
+      child: Text(
+        styledText.text,
+        textAlign: styledText.textAlign,
+        overflow: styledText.textOverflow,
+        style: CommonHelpers.getTextStyle(
+          styledText.tStyle,
+          customStyle: TextStyle(
+            letterSpacing: styledText.letterSpacing,
+            fontStyle:
+                styledText.italic == true ? FontStyle.italic : FontStyle.normal,
+            color: CommonHelpers.v2ColorFromHex(
+              styledText.textColor,
+            ),
+            decoration: styledText.strikeThrough == true
+                ? TextDecoration.lineThrough
+                : null,
+          ),
+        ),
+      ),
     );
   }
 }

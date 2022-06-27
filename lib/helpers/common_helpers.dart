@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:yc_app_utils/models/card_background/card_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
-import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
-import 'package:yc_app_utils/models/styled_component/option.model.dart';
-import 'package:yc_app_utils/models/validation/validation.model.dart';
-import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
-import 'package:yc_app_utils/ui/styleguide/spacing.dart';
-import 'package:yc_app_utils/ui/text_styles/text_styles.dart';
-import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CommonHelpers {
   CommonHelpers._();
@@ -72,6 +62,42 @@ class CommonHelpers {
         return MainAxisAlignment.spaceEvenly;
       default:
         return MainAxisAlignment.center;
+    }
+  }
+
+  static MainAxisAlignment getMainAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return MainAxisAlignment.start;
+      case 'CENTER':
+        return MainAxisAlignment.center;
+      case 'END':
+        return MainAxisAlignment.end;
+      case 'SPACE_BETWEEN':
+        return MainAxisAlignment.spaceBetween;
+      case 'SPACE_AROUND':
+        return MainAxisAlignment.spaceAround;
+      case 'SPACE_EVENLY':
+        return MainAxisAlignment.spaceEvenly;
+      default:
+        return MainAxisAlignment.center;
+    }
+  }
+
+  static CrossAxisAlignment getCrossAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return CrossAxisAlignment.start;
+      case 'CENTER':
+        return CrossAxisAlignment.center;
+      case 'END':
+        return CrossAxisAlignment.end;
+      case 'STRETCH':
+        return CrossAxisAlignment.stretch;
+      case 'BASELINE':
+        return CrossAxisAlignment.baseline;
+      default:
+        return CrossAxisAlignment.center;
     }
   }
 
@@ -424,8 +450,8 @@ class CommonHelpers {
     return null;
   }
 
-  static String? validateSelectField({
-    required List<OptionModel> values,
+  static String? validateRadioField({
+    required OptionModel? value,
     required Validation? validations,
   }) {
     if (validations == null) {
@@ -433,22 +459,39 @@ class CommonHelpers {
     }
     // check for required
     if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value == null) {
+        return validations.isRequired!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateSelectCheckField({
+    required List<OptionModel> values,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+
+    // check for required
+    if (validations.isRequired != null) {
       if (validations.isRequired!.value && values.isEmpty) {
         return validations.isRequired!.msg;
       }
     }
 
-    // check for minLength
-    if (validations.minLength != null) {
-      if (values.length < validations.minLength!.value) {
-        return validations.minLength!.msg;
+    // check for min
+    if (validations.min != null) {
+      if (values.length < validations.min!.value) {
+        return validations.min!.msg;
       }
     }
 
-    // check for maxLength
-    if (validations.maxLength != null) {
-      if (values.length > validations.maxLength!.value) {
-        return validations.maxLength!.msg;
+    // check for max
+    if (validations.max != null) {
+      if (values.length > validations.max!.value) {
+        return validations.max!.msg;
       }
     }
 

@@ -1,10 +1,13 @@
-import 'package:yc_app_utils/models/click_action.model.dart';
-import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class V2GridSectionModel {
   String? key;
   List<V2GridSectionLayerModel>? layers;
-  ClickAction? clickAction;
+  List<V2GridSectionRowModel>? rows;
+  List<V2GridSectionColumnModel>? columns;
+  StyledComponentModel? styledComponent;
+  V2ClickAction? clickAction;
+  bool containsForm;
   String? backgroundColor;
   String? borderColor;
   List<int>? borderRadius;
@@ -13,7 +16,11 @@ class V2GridSectionModel {
   V2GridSectionModel({
     this.key,
     this.layers,
+    this.rows,
+    this.columns,
+    this.styledComponent,
     this.clickAction,
+    this.containsForm = false,
     this.backgroundColor,
     this.borderColor,
     this.borderRadius,
@@ -23,7 +30,11 @@ class V2GridSectionModel {
   V2GridSectionModel copyWith({
     String? key,
     List<V2GridSectionLayerModel>? layers,
-    ClickAction? clickAction,
+    List<V2GridSectionRowModel>? rows,
+    List<V2GridSectionColumnModel>? columns,
+    StyledComponentModel? styledComponent,
+    V2ClickAction? clickAction,
+    bool? containsForm,
     String? backgroundColor,
     String? borderColor,
     List<int>? borderRadius,
@@ -32,7 +43,11 @@ class V2GridSectionModel {
     return V2GridSectionModel(
       key: key ?? this.key,
       layers: layers ?? this.layers,
+      rows: rows ?? this.rows,
+      columns: columns ?? this.columns,
+      styledComponent: styledComponent ?? this.styledComponent,
       clickAction: clickAction ?? this.clickAction,
+      containsForm: containsForm ?? this.containsForm,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
@@ -44,7 +59,11 @@ class V2GridSectionModel {
     return {
       'key': key,
       'layers': layers?.map((x) => x.toMap()).toList(),
+      'rows': rows?.map((x) => x.toMap()).toList(),
+      'columns': columns?.map((x) => x.toMap()).toList(),
+      'styledComponent': styledComponent?.toMap(),
       'clickAction': clickAction?.toMap(),
+      'containsForm': containsForm,
       'backgroundColor': backgroundColor,
       'borderColor': borderColor,
       'borderRadius': borderRadius,
@@ -57,11 +76,26 @@ class V2GridSectionModel {
       key: map['key'],
       layers: map['layers'] != null
           ? List<V2GridSectionLayerModel>.from(
-              map['layers']?.map((x) => V2GridSectionLayerModel.fromMap(x)))
+              map['layers']?.map((x) => V2GridSectionLayerModel.fromMap(x)),
+            )
+          : null,
+      rows: map['rows'] != null
+          ? List<V2GridSectionRowModel>.from(
+              map['rows']?.map((x) => V2GridSectionRowModel.fromMap(x)),
+            )
+          : null,
+      columns: map['columns'] != null
+          ? List<V2GridSectionColumnModel>.from(
+              map['columns']?.map((x) => V2GridSectionColumnModel.fromMap(x)),
+            )
+          : null,
+      styledComponent: map['styledComponent'] != null
+          ? StyledComponentModel.fromMap(map['styledComponent'])
           : null,
       clickAction: map['clickAction'] != null
-          ? ClickAction.fromMap(map['clickAction'])
+          ? V2ClickAction.fromMap(map['clickAction'])
           : null,
+      containsForm: map['containsForm'] ?? false,
       backgroundColor: map['backgroundColor'],
       borderColor: map['borderColor'],
       borderRadius: map['borderRadius'] == null

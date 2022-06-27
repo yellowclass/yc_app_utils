@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yc_app_utils/ui/components/styled_components/v2_styled_text.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledTextFieldWidget extends StatelessWidget {

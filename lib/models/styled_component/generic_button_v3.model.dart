@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 
-import 'package:yc_app_utils/models/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_text.model.dart';
 import 'package:yc_app_utils/models/symmetric_padding.model.dart';
 import 'package:yc_app_utils/ui/styleguide/app_radius.dart';
