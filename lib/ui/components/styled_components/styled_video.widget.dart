@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:yc_app_utils/models/styled_component/styled_image.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 
-class StyledImageWidget extends StatelessWidget {
-  const StyledImageWidget({
-    required this.styledImageData,
+class StyledVideoWidget extends StatelessWidget {
+  const StyledVideoWidget({
+    required this.styledVideoData,
     Key? key,
   }) : super(key: key);
 
-  final StyledImageModel styledImageData;
+  final StyledVideoModel styledVideoData;
 
   @override
   Widget build(BuildContext context) {
-    String url = styledImageData.url;
+    String url = styledVideoData.url;
     if (url.isEmpty) {
       return const SizedBox.shrink();
     }

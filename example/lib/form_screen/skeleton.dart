@@ -11,8 +11,7 @@ final Map<String, dynamic> formSkeleton = {
               'flexFactor': 1,
               'crossAxisAlignment': 'START',
               'data': {
-                // 'type': 'FORM_RADIO',
-                'type': 'FORM_INPUT',
+                'fcTtype': 'FORM_INPUT',
                 'inputField': {
                   'label': {
                     'text': 'Name',

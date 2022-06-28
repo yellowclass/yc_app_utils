@@ -3,7 +3,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class StyledSelectFieldModel {
   V2StyledTextModel? label;
   String name;
-  Validation? validate;
+  Validation? validation;
   List<OptionModel>? defaultValue;
   bool isDisabled;
   List<OptionModel> options;
@@ -13,7 +13,7 @@ class StyledSelectFieldModel {
   StyledSelectFieldModel({
     this.label,
     required this.name,
-    this.validate,
+    this.validation,
     this.defaultValue,
     this.isDisabled = false,
     required this.options,
@@ -24,7 +24,7 @@ class StyledSelectFieldModel {
   StyledSelectFieldModel copyWith({
     V2StyledTextModel? label,
     String? name,
-    Validation? validate,
+    Validation? validation,
     List<OptionModel>? defaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
@@ -34,7 +34,7 @@ class StyledSelectFieldModel {
     return StyledSelectFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
-      validate: validate ?? this.validate,
+      validation: validation ?? this.validation,
       defaultValue: defaultValue ?? this.defaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
@@ -47,7 +47,7 @@ class StyledSelectFieldModel {
     return {
       'label': label?.toMap(),
       'name': name,
-      'validate': validate?.toMap(),
+      'validation': validation?.toMap(),
       'defaultValue': defaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
@@ -61,8 +61,9 @@ class StyledSelectFieldModel {
       label:
           map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
-      validate:
-          map['validate'] != null ? Validation.fromMap(map['validate']) : null,
+      validation: map['validation'] != null
+          ? Validation.fromMap(map['validation'])
+          : null,
       defaultValue: map['defaultValue'] != null
           ? List<OptionModel>.from(
               map['defaultValue']?.map((x) => OptionModel.fromMap(x)))

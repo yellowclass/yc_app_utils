@@ -50,7 +50,7 @@ class StyledCheckboxFieldWidget extends StatelessWidget {
                     )
                     .toList()
                 : [],
-            validations: checkboxFieldData.validate,
+            validations: checkboxFieldData.validation,
           ),
           onSaved: (List<String>? value) {
             onSaved?.call(checkboxFieldData.name, value);

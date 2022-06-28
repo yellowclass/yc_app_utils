@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yc_app_utils/models/form_component/form_component.model.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -17,47 +18,46 @@ class V2GridSectionColumnWidget extends StatelessWidget {
   final Map<String, dynamic>? formData;
 
   Widget buildChild() {
-    if (columnDetails.gridSection != null) {
+    if (columnDetails.widget is V2GridSectionModel) {
+      V2GridSectionModel widget = columnDetails.widget as V2GridSectionModel;
       return V2GridSectionWidget(
-        gridDetails: columnDetails.gridSection!,
-        onPressed: (columnDetails.gridSection!.clickAction != null &&
-                innerClickAction != null)
+        gridDetails: widget,
+        onPressed: (widget.clickAction != null && innerClickAction != null)
             ? () {
                 // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
                 if (containsForm) {
                   // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
-                  for (var action
-                      in columnDetails.gridSection!.clickAction!.actions) {
+                  for (var action in widget.clickAction!.actions) {
                     if (action.functionType ==
                         V2FunctionTypesEnum.SUBMIT_FORM) {
-                      if (action.functionType ==
-                          V2FunctionTypesEnum.SUBMIT_FORM) {
-                        innerClickAction!.call(
-                          columnDetails.gridSection!.clickAction!,
-                          true,
-                        );
-                      }
+                      innerClickAction!.call(
+                        widget.clickAction!,
+                        true,
+                      );
                     }
                     break;
                   }
+                } else {
+                  innerClickAction!.call(
+                    widget.clickAction!,
+                    false,
+                  );
                 }
-                innerClickAction!.call(
-                  columnDetails.gridSection!.clickAction!,
-                  false,
-                );
               }
             : null,
       );
-    } else if (columnDetails.styledComponent != null) {
+    } else if (columnDetails.widget is StyledComponentModel) {
+      StyledComponentModel widget =
+          columnDetails.widget as StyledComponentModel;
       return StyledComponentWidget(
-          styledComponentDetails: columnDetails.styledComponent!,
-          containsForm: containsForm,
-          innerClickAction: (V2ClickAction clickAction, bool shouldSubmitForm) {
-            // print
-          });
-    } else if (columnDetails.formComponent != null) {
+        styledComponentDetails: widget,
+        containsForm: containsForm,
+        innerClickAction: innerClickAction,
+      );
+    } else if (columnDetails.widget is FormComponentModel) {
+      FormComponentModel widget = columnDetails.widget as FormComponentModel;
       return FormComponentWidget(
-        formDetails: columnDetails.formComponent!,
+        formDetails: widget,
         onSaved: (key, value) {
           formData?[key] = value;
         },

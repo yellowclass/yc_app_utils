@@ -19,21 +19,17 @@ class V2GridSectionLayerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return layerDetails.rows != null
-        ? Column(
-            children: layerDetails.rows!
-                .map(
-                  (gridRow) => gridRow.columns != null
-                      ? V2GridSectionRowWidget(
-                          rowDetails: gridRow,
-                          containsForm: containsForm,
-                          innerClickAction: innerClickAction,
-                          formData: formData,
-                        )
-                      : const SizedBox.shrink(),
-                )
-                .toList(),
+    return Column(
+      children: layerDetails.rows
+          .map(
+            (gridRow) => V2GridSectionRowWidget(
+              rowDetails: gridRow,
+              containsForm: containsForm,
+              innerClickAction: innerClickAction,
+              formData: formData,
+            ),
           )
-        : const SizedBox.shrink();
+          .toList(),
+    );
   }
 }

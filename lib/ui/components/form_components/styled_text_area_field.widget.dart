@@ -44,7 +44,7 @@ class StyledTextAreaFieldWidget extends StatelessWidget {
           ),
           validator: (value) => CommonHelpers.validateTextField(
             value: value!,
-            validations: textAreaFieldData.validate,
+            validations: textAreaFieldData.validation,
           ),
           onSaved: (value) {
             onSaved?.call(textAreaFieldData.name, value);

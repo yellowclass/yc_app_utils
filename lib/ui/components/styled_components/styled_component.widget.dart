@@ -15,7 +15,7 @@ class StyledComponentWidget extends StatelessWidget {
   final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
-    switch (styledComponentDetails.type) {
+    switch (styledComponentDetails.scType) {
       case StyledComponentEnum.TEXT:
         return V2StyledTextWidget(
           styledText: styledComponentDetails.textDetails!,
@@ -48,11 +48,12 @@ class StyledComponentWidget extends StatelessWidget {
                   }
                   break;
                 }
+              } else {
+                innerClickAction!.call(
+                  styledComponentDetails.clickAction!,
+                  false,
+                );
               }
-              innerClickAction!.call(
-                styledComponentDetails.clickAction!,
-                false,
-              );
             }
           : null,
       showRippleEffect:

@@ -18,7 +18,7 @@ class FormComponentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (formDetails.type) {
+    switch (formDetails.fcType) {
       case FormComponentEnum.FORM_INPUT:
         return StyledTextFieldWidget(
           textFieldData: formDetails.inputField!,

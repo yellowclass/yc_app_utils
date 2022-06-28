@@ -4,9 +4,12 @@ import 'package:yc_app_utils/models/section_background/section_background.model.
 import 'package:yc_app_utils/models/styled_component/styled_image.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
 
-class StyledComponentModel {
-  StyledComponentEnum type;
+class StyledComponentModel
+    with V2GridSectionWidgetModel, V2GSColumnDataWidgetModel {
+  StyledComponentEnum scType;
   V2StyledTextModel? textDetails;
   StyledImageModel? imageDetails;
   StyledVideoModel? videoDetails;
@@ -17,7 +20,7 @@ class StyledComponentModel {
   List<int>? padding;
 
   StyledComponentModel({
-    required this.type,
+    required this.scType,
     this.textDetails,
     this.imageDetails,
     this.videoDetails,
@@ -28,33 +31,9 @@ class StyledComponentModel {
     this.padding,
   });
 
-  StyledComponentModel copyWith({
-    StyledComponentEnum? type,
-    V2StyledTextModel? textDetails,
-    StyledImageModel? imageDetails,
-    StyledVideoModel? videoDetails,
-    V2ClickAction? clickAction,
-    SectionBackground? background,
-    String? borderColor,
-    List<int>? borderRadius,
-    List<int>? padding,
-  }) {
-    return StyledComponentModel(
-      type: type ?? this.type,
-      textDetails: textDetails ?? this.textDetails,
-      imageDetails: imageDetails ?? this.imageDetails,
-      videoDetails: videoDetails ?? this.videoDetails,
-      clickAction: clickAction ?? this.clickAction,
-      background: background ?? this.background,
-      borderColor: borderColor ?? this.borderColor,
-      borderRadius: borderRadius ?? this.borderRadius,
-      padding: padding ?? this.padding,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
-      'type': type.name,
+      'scType': scType.name,
       'textDetails': textDetails?.toMap(),
       'imageDetails': imageDetails?.toMap(),
       'videoDetails': videoDetails?.toMap(),
@@ -68,9 +47,9 @@ class StyledComponentModel {
 
   factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
     return StyledComponentModel(
-      type: CommonHelpers.enumFromString(
+      scType: CommonHelpers.enumFromString(
         StyledComponentEnum.values,
-        map['type'],
+        map['scType'],
       )!,
       textDetails: map['textDetails'] != null
           ? V2StyledTextModel.fromMap(map['textDetails'])

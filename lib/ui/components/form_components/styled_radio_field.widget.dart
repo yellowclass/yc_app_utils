@@ -42,7 +42,7 @@ class StyledRadioFieldWidget extends StatelessWidget {
                     value: value,
                   )
                 : null,
-            validations: radioFieldData.validate,
+            validations: radioFieldData.validation,
           ),
           onSaved: (String? value) {
             onSaved?.call(radioFieldData.name, value);
