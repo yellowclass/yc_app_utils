@@ -44,7 +44,7 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
     return FormComponentModel(
       fcType: CommonHelpers.enumFromString(
         FormComponentEnum.values,
-        map['type'],
+        map['fcType'],
       )!,
       inputField: map['inputField'] != null
           ? StyledInputFieldModel.fromMap(map['inputField'])

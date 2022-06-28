@@ -49,7 +49,7 @@ class StyledComponentModel
     return StyledComponentModel(
       scType: CommonHelpers.enumFromString(
         StyledComponentEnum.values,
-        map['type'],
+        map['scType'],
       )!,
       textDetails: map['textDetails'] != null
           ? V2StyledTextModel.fromMap(map['textDetails'])
