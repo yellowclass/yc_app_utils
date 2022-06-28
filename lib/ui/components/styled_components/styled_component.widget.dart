@@ -7,16 +7,12 @@ class StyledComponentWidget extends StatelessWidget {
     required this.styledComponentDetails,
     required this.containsForm,
     this.innerClickAction,
-    this.formKey,
-    this.formData,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
   final bool containsForm;
-  final void Function(V2ClickAction, Map<String, dynamic>?)? innerClickAction;
-  final GlobalKey<FormState>? formKey;
-  final Map<String, dynamic>? formData;
+  final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
     switch (styledComponentDetails.type) {
@@ -45,18 +41,17 @@ class StyledComponentWidget extends StatelessWidget {
                 for (var action
                     in styledComponentDetails.clickAction!.actions) {
                   if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
-                    if (formKey!.currentState!.validate()) {
-                      formKey!.currentState!.save();
-                    } else {
-                      formData!.clear();
-                    }
+                    innerClickAction!.call(
+                      styledComponentDetails.clickAction!,
+                      true,
+                    );
                   }
                   break;
                 }
               }
               innerClickAction!.call(
                 styledComponentDetails.clickAction!,
-                formData,
+                false,
               );
             }
           : null,

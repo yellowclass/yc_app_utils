@@ -42,6 +42,29 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
     super.initState();
   }
 
+  void collectDataFromForm() {
+    if (_formKey?.currentState?.validate() ?? false) {
+      _formKey?.currentState?.save();
+    } else {
+      _formData?.clear();
+    }
+  }
+
+  void innerClickActionHandler(V2ClickAction cta, bool shouldSubmitForm) {
+    if (shouldSubmitForm) {
+      collectDataFromForm();
+      widget.innerClickAction?.call(
+        cta,
+        _formData,
+      );
+      return;
+    }
+    widget.innerClickAction?.call(
+      cta,
+      null,
+    );
+  }
+
   Widget buildChild() {
     if (widget.gridDetails.layers != null) {
       return Stack(
@@ -51,8 +74,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                   ? V2GridSectionLayerWidget(
                       layerDetails: gridLayer,
                       containsForm: widget.gridDetails.containsForm,
-                      innerClickAction: widget.innerClickAction,
-                      formKey: _formKey,
+                      innerClickAction: innerClickActionHandler,
                       formData: _formData,
                     )
                   : const SizedBox.shrink(),
@@ -67,8 +89,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                   ? V2GridSectionRowWidget(
                       rowDetails: gridRow,
                       containsForm: widget.gridDetails.containsForm,
-                      innerClickAction: widget.innerClickAction,
-                      formKey: _formKey,
+                      innerClickAction: innerClickActionHandler,
                       formData: _formData,
                     )
                   : const SizedBox.shrink(),
@@ -82,8 +103,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
               (gridColumn) => V2GridSectionColumnWidget(
                 columnDetails: gridColumn,
                 containsForm: widget.gridDetails.containsForm,
-                innerClickAction: widget.innerClickAction,
-                formKey: _formKey,
+                innerClickAction: innerClickActionHandler,
                 formData: _formData,
               ),
             )
@@ -104,9 +124,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
         child: StyledComponentWidget(
           styledComponentDetails: widget.gridDetails.styledComponent!,
           containsForm: widget.gridDetails.containsForm,
-          innerClickAction: widget.innerClickAction,
-          formKey: _formKey,
-          formData: _formData,
+          innerClickAction: innerClickActionHandler,
         ),
       );
     } else {

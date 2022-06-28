@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
-import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_row.widget.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class V2GridSectionLayerWidget extends StatelessWidget {
   const V2GridSectionLayerWidget({
     required this.layerDetails,
     required this.containsForm,
     this.innerClickAction,
-    this.formKey,
     this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionLayerModel layerDetails;
   final bool containsForm;
-  final void Function(V2ClickAction, Map<String, dynamic>?)? innerClickAction;
-  final GlobalKey<FormState>? formKey;
+  final InnerClickAction? innerClickAction;
   final Map<String, dynamic>? formData;
 
   @override
@@ -31,7 +28,6 @@ class V2GridSectionLayerWidget extends StatelessWidget {
                           rowDetails: gridRow,
                           containsForm: containsForm,
                           innerClickAction: innerClickAction,
-                          formKey: formKey,
                           formData: formData,
                         )
                       : const SizedBox.shrink(),

@@ -5,68 +5,76 @@ final Map<String, dynamic> formSkeleton = {
   'layers': [
     {
       'rows': [
-        // {
-        //   'columns': [
-        //     {
-        //       'data': {
-        //         'type': 'TEXT',
-        //         'textDetails': {
-        //           'text': "Click Me",
-        //           'textColor': '#000',
-        //         },
-        //         'padding': [8, 36],
-        //         'clickAction': {
-        //           'sequenceType': 'SEQUENTIAL',
-        //           'showRippleEffect': true,
-        //         },
-        //       },
-        //     },
-        //   ],
-        // },
-        // {
-        //   'columns': [
-        //     {
-        //       'flexFactor': 1,
-        //       'crossAxisAlignment': 'START',
-        //       'data': {
-        //         // 'type': 'FORM_RADIO',
-        //         'type': 'FORM_CHECKBOX',
-        //         'checkboxField': {
-        //           'label': {
-        //             'text': 'Gender',
-        //             'textColor': '#000',
-        //           },
-        //           'name': 'gender',
-        //           'validate': {
-        //             'min': {
-        //               'value': 2,
-        //               'msg': 'Minimum 2',
-        //             },
-        //           },
-        //           // 'defaultValue': {
-        //           //   'label': 'Male',
-        //           //   'value': 'male',
-        //           // },
-        //           'options': [
-        //             {
-        //               'label': 'Male',
-        //               'value': 'male',
-        //             },
-        //             {
-        //               'label': 'Female',
-        //               'value': 'female',
-        //             },
-        //           ],
-        //         },
-        //       },
-        //     },
-        //   ],
-        // },
         {
           'columns': [
             {
               'flexFactor': 1,
+              'crossAxisAlignment': 'START',
               'data': {
+                // 'type': 'FORM_RADIO',
+                'type': 'FORM_INPUT',
+                'inputField': {
+                  'label': {
+                    'text': 'Name',
+                    'textColor': '#000',
+                  },
+                  'name': 'name',
+                  'validate': {
+                    'isRequired': {
+                      'value': true,
+                      'msg': 'This field is required',
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        },
+        {
+          'columns': [
+            {
+              'flexFactor': 1,
+              'crossAxisAlignment': 'START',
+              'data': {
+                // 'type': 'FORM_RADIO',
+                'type': 'FORM_SELECT',
+                'selectField': {
+                  'label': {
+                    'text': 'Gender',
+                    'textColor': '#000',
+                  },
+                  'name': 'gender',
+                  // 'validate': {
+                  //   'min': {
+                  //     'value': 2,
+                  //     'msg': 'Minimum 2',
+                  //   },
+                  // },
+                  'selectType': 'MULTIPLE',
+                  // 'defaultValue': {
+                  //   'label': 'Male',
+                  //   'value': 'male',
+                  // },
+                  'options': [
+                    {
+                      'label': 'Male',
+                      'value': 'male',
+                    },
+                    {
+                      'label': 'Female',
+                      'value': 'female',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+        {
+          'columns': [
+            {
+              'flexFactor': 1,
+              'widget': {
                 // 'type': 'FORM_RADIO',
                 'type': 'TEXT',
                 'textDetails': {

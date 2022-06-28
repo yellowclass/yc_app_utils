@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
 
-import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
-import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
-import 'package:yc_app_utils/ui/components/form_components/form_component.widget.dart';
-import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
-import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widget.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class V2GridSectionColumnWidget extends StatelessWidget {
   const V2GridSectionColumnWidget({
     required this.columnDetails,
     required this.containsForm,
     this.innerClickAction,
-    this.formKey,
     this.formData,
     Key? key,
   }) : super(key: key);
 
   final V2GridSectionColumnModel columnDetails;
   final bool containsForm;
-  final void Function(V2ClickAction, Map<String, dynamic>?)? innerClickAction;
-  final GlobalKey<FormState>? formKey;
+  final InnerClickAction? innerClickAction;
   final Map<String, dynamic>? formData;
 
   Widget buildChild() {
@@ -37,10 +30,12 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                       in columnDetails.gridSection!.clickAction!.actions) {
                     if (action.functionType ==
                         V2FunctionTypesEnum.SUBMIT_FORM) {
-                      if (formKey!.currentState!.validate()) {
-                        formKey!.currentState!.save();
-                      } else {
-                        formData!.clear();
+                      if (action.functionType ==
+                          V2FunctionTypesEnum.SUBMIT_FORM) {
+                        innerClickAction!.call(
+                          columnDetails.gridSection!.clickAction!,
+                          true,
+                        );
                       }
                     }
                     break;
@@ -48,19 +43,18 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                 }
                 innerClickAction!.call(
                   columnDetails.gridSection!.clickAction!,
-                  formData,
+                  false,
                 );
               }
             : null,
       );
     } else if (columnDetails.styledComponent != null) {
       return StyledComponentWidget(
-        styledComponentDetails: columnDetails.styledComponent!,
-        containsForm: containsForm,
-        innerClickAction: innerClickAction,
-        formKey: formKey,
-        formData: formData,
-      );
+          styledComponentDetails: columnDetails.styledComponent!,
+          containsForm: containsForm,
+          innerClickAction: (V2ClickAction clickAction, bool shouldSubmitForm) {
+            // print
+          });
     } else if (columnDetails.formComponent != null) {
       return FormComponentWidget(
         formDetails: columnDetails.formComponent!,
