@@ -11,7 +11,7 @@ class StyledCheckboxFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   final StyledCheckboxFieldModel checkboxFieldData;
-  final void Function(String, dynamic)? onSaved;
+  final void Function(String, List<String>?)? onSaved;
 
   List<String> get initialValues =>
       checkboxFieldData.defaultValue?.map((option) => option.value).toList() ??
@@ -52,7 +52,7 @@ class StyledCheckboxFieldWidget extends StatelessWidget {
                 : [],
             validations: checkboxFieldData.validate,
           ),
-          onSaved: (value) {
+          onSaved: (List<String>? value) {
             onSaved?.call(checkboxFieldData.name, value);
           },
         ),

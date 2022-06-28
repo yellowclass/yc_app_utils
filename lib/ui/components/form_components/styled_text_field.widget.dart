@@ -10,7 +10,7 @@ class StyledTextFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   final StyledInputFieldModel textFieldData;
-  final void Function(String, dynamic)? onSaved;
+  final void Function(String, String?)? onSaved;
 
   TextInputType? getKeyboardType(InputFieldEnum? fieldType) {
     switch (fieldType) {
@@ -64,7 +64,10 @@ class StyledTextFieldWidget extends StatelessWidget {
             validations: textFieldData.validate,
           ),
           onSaved: (value) {
-            onSaved?.call(textFieldData.name, value);
+            onSaved?.call(
+              textFieldData.name,
+              value,
+            );
           },
         ),
       ],

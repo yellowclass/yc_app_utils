@@ -11,7 +11,7 @@ class StyledRadioFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   final StyledRadioFieldModel radioFieldData;
-  final void Function(String, dynamic)? onSaved;
+  final void Function(String, String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class StyledRadioFieldWidget extends StatelessWidget {
                 : null,
             validations: radioFieldData.validate,
           ),
-          onSaved: (value) {
+          onSaved: (String? value) {
             onSaved?.call(radioFieldData.name, value);
           },
         ),

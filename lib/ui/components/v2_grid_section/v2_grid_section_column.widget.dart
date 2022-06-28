@@ -30,8 +30,9 @@ class V2GridSectionColumnWidget extends StatelessWidget {
         onPressed: (columnDetails.gridSection!.clickAction != null &&
                 innerClickAction != null)
             ? () {
-                // BUTTON SUBMIT LOGIC
+                // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
                 if (containsForm) {
+                  // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
                   for (var action
                       in columnDetails.gridSection!.clickAction!.actions) {
                     if (action.functionType ==

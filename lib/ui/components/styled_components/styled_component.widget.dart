@@ -39,8 +39,9 @@ class StyledComponentWidget extends StatelessWidget {
       onPressed: (styledComponentDetails.clickAction != null &&
               innerClickAction != null)
           ? () {
-              // ADD BUTTON SUBMIT LOGIC
+              // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
               if (containsForm) {
+                // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
                 for (var action
                     in styledComponentDetails.clickAction!.actions) {
                   if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {

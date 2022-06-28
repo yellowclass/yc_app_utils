@@ -10,7 +10,7 @@ class StyledTextAreaFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   final StyledTextAreaFieldModel textAreaFieldData;
-  final void Function(String, dynamic)? onSaved;
+  final void Function(String, String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
