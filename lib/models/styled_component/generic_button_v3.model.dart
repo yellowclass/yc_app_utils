@@ -53,7 +53,7 @@ class GenericButtonV3Model {
           : map['borderRadius'].toDouble(),
       padding: map['padding'] != null
           ? SymmetricPadding.fromMap(map['padding'])
-          : SymmetricPadding(
+          : const SymmetricPadding(
               horizontal: 0,
               vertical: 0,
             ),

@@ -1,6 +1,6 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class FormComponentModel {
+class FormComponentModel with V2GSColumnDataWidgetModel {
   FormComponentEnum type;
   StyledInputFieldModel? inputField;
   StyledTextAreaFieldModel? textAreaField;

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_row.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_stack.model.dart';
 import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_column.widget.dart';
@@ -66,39 +71,41 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
   }
 
   Widget buildChild() {
-    if (widget.gridDetails.layers != null) {
+    if (widget.gridDetails.data?.gsWidget is V2GridSectionStackModel) {
+      V2GridSectionStackModel gsWidget =
+          widget.gridDetails.data?.gsWidget as V2GridSectionStackModel;
       return Stack(
-        children: widget.gridDetails.layers!
+        children: gsWidget.layers
             .map(
-              (gridLayer) => gridLayer.rows != null
-                  ? V2GridSectionLayerWidget(
-                      layerDetails: gridLayer,
-                      containsForm: widget.gridDetails.containsForm,
-                      innerClickAction: innerClickActionHandler,
-                      formData: _formData,
-                    )
-                  : const SizedBox.shrink(),
+              (gridLayer) => V2GridSectionLayerWidget(
+                layerDetails: gridLayer,
+                containsForm: widget.gridDetails.containsForm,
+                innerClickAction: innerClickActionHandler,
+                formData: _formData,
+              ),
             )
             .toList(),
       );
-    } else if (widget.gridDetails.rows != null) {
+    } else if (widget.gridDetails.data?.gsWidget is V2GridSectionLayerModel) {
+      V2GridSectionLayerModel gsWidget =
+          widget.gridDetails.data?.gsWidget as V2GridSectionLayerModel;
       return Column(
-        children: widget.gridDetails.rows!
+        children: gsWidget.rows
             .map(
-              (gridRow) => gridRow.columns != null
-                  ? V2GridSectionRowWidget(
-                      rowDetails: gridRow,
-                      containsForm: widget.gridDetails.containsForm,
-                      innerClickAction: innerClickActionHandler,
-                      formData: _formData,
-                    )
-                  : const SizedBox.shrink(),
+              (gridRow) => V2GridSectionRowWidget(
+                rowDetails: gridRow,
+                containsForm: widget.gridDetails.containsForm,
+                innerClickAction: innerClickActionHandler,
+                formData: _formData,
+              ),
             )
             .toList(),
       );
-    } else if (widget.gridDetails.columns != null) {
+    } else if (widget.gridDetails.data?.gsWidget is V2GridSectionRowModel) {
+      V2GridSectionRowModel gsWidget =
+          widget.gridDetails.data?.gsWidget as V2GridSectionRowModel;
       return Row(
-        children: widget.gridDetails.columns!
+        children: gsWidget.columns
             .map(
               (gridColumn) => V2GridSectionColumnWidget(
                 columnDetails: gridColumn,
@@ -109,20 +116,29 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
             )
             .toList(),
       );
-    } else if (widget.gridDetails.styledComponent != null) {
+    } else if (widget.gridDetails.data?.gsWidget is V2GridSectionColumnModel) {
+      V2GridSectionColumnModel gsWidget =
+          widget.gridDetails.data?.gsWidget as V2GridSectionColumnModel;
+      return V2GridSectionColumnWidget(
+        columnDetails: gsWidget,
+        containsForm: widget.gridDetails.containsForm,
+        innerClickAction: innerClickActionHandler,
+        formData: _formData,
+      );
+    } else if (widget.gridDetails.data?.gsWidget is StyledComponentModel) {
+      StyledComponentModel gsWidget =
+          widget.gridDetails.data?.gsWidget as StyledComponentModel;
       return YCClicker(
-        onPressed: (widget.gridDetails.styledComponent!.clickAction != null &&
-                widget.innerClickAction != null)
-            ? () => widget.innerClickAction!.call(
-                  widget.gridDetails.styledComponent!.clickAction!,
-                  null,
-                )
-            : null,
-        showRippleEffect:
-            widget.gridDetails.styledComponent?.clickAction?.showRippleEffect ??
-                false,
+        onPressed:
+            (gsWidget.clickAction != null && widget.innerClickAction != null)
+                ? () => widget.innerClickAction!.call(
+                      gsWidget.clickAction!,
+                      null,
+                    )
+                : null,
+        showRippleEffect: gsWidget.clickAction?.showRippleEffect ?? false,
         child: StyledComponentWidget(
-          styledComponentDetails: widget.gridDetails.styledComponent!,
+          styledComponentDetails: gsWidget,
           containsForm: widget.gridDetails.containsForm,
           innerClickAction: innerClickActionHandler,
         ),

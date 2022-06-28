@@ -4,8 +4,11 @@ import 'package:yc_app_utils/models/section_background/section_background.model.
 import 'package:yc_app_utils/models/styled_component/styled_image.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
 
-class StyledComponentModel {
+class StyledComponentModel
+    with V2GridSectionWidgetModel, V2GSColumnDataWidgetModel {
   StyledComponentEnum type;
   V2StyledTextModel? textDetails;
   StyledImageModel? imageDetails;

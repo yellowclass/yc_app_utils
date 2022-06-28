@@ -19,24 +19,22 @@ class V2GridSectionRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return rowDetails.columns != null
-        ? Container(
-            padding: CommonHelpers.getPaddingFromList(rowDetails.padding),
-            child: Row(
-              mainAxisAlignment: rowDetails.mainAxisAlignment,
-              crossAxisAlignment: rowDetails.crossAxisAlignment,
-              children: rowDetails.columns!
-                  .map(
-                    (gridColumn) => V2GridSectionColumnWidget(
-                      columnDetails: gridColumn,
-                      containsForm: containsForm,
-                      innerClickAction: innerClickAction,
-                      formData: formData,
-                    ),
-                  )
-                  .toList(),
-            ),
-          )
-        : const SizedBox.shrink();
+    return Container(
+      padding: CommonHelpers.getPaddingFromList(rowDetails.padding),
+      child: Row(
+        mainAxisAlignment: rowDetails.mainAxisAlignment,
+        crossAxisAlignment: rowDetails.crossAxisAlignment,
+        children: rowDetails.columns
+            .map(
+              (gridColumn) => V2GridSectionColumnWidget(
+                columnDetails: gridColumn,
+                containsForm: containsForm,
+                innerClickAction: innerClickAction,
+                formData: formData,
+              ),
+            )
+            .toList(),
+      ),
+    );
   }
 }

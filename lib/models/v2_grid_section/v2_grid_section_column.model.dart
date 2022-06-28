@@ -1,56 +1,31 @@
 import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/helpers/common_helpers.dart';
-import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/form_component/form_component.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
 
-class V2GridSectionColumnModel {
+class V2GridSectionColumnModel with V2GridSectionWidgetModel {
   String? key;
-  V2GridSectionModel? gridSection;
-  StyledComponentModel? styledComponent;
-  FormComponentModel? formComponent;
+  V2GSColumnDataWidgetModel? widget;
   int? flexFactor;
   MainAxisAlignment mainAxisAlignment;
   CrossAxisAlignment crossAxisAlignment;
 
   V2GridSectionColumnModel({
     this.key,
-    this.gridSection,
-    this.styledComponent,
-    this.formComponent,
+    this.widget,
     this.flexFactor,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
   });
 
-  V2GridSectionColumnModel copyWith({
-    String? key,
-    V2GridSectionModel? gridSection,
-    StyledComponentModel? styledComponent,
-    FormComponentModel? formComponent,
-    V2ClickAction? clickAction,
-    int? flexFactor,
-    MainAxisAlignment? mainAxisAlignment,
-    CrossAxisAlignment? crossAxisAlignment,
-  }) {
-    return V2GridSectionColumnModel(
-      key: key ?? this.key,
-      gridSection: gridSection ?? this.gridSection,
-      styledComponent: styledComponent ?? this.styledComponent,
-      formComponent: formComponent ?? this.formComponent,
-      flexFactor: flexFactor ?? this.flexFactor,
-      mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
-      crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
       'key': key,
-      'gridSection': gridSection?.toMap(),
-      'data': styledComponent?.toMap() ?? formComponent?.toMap(),
+      // 'widget': widget?.toMap(),
       'flexFactor': flexFactor,
       'mainAxisAlignment': mainAxisAlignment.name,
       'crossAxisAlignment': crossAxisAlignment.name,
@@ -58,16 +33,23 @@ class V2GridSectionColumnModel {
   }
 
   factory V2GridSectionColumnModel.fromMap(Map<String, dynamic> map) {
+    late V2GSColumnDataWidgetModel? widget;
+    switch (map['__typeName']) {
+      case 'StyledComponent':
+        widget = StyledComponentModel.fromMap(map);
+        break;
+      case 'FormComponent':
+        widget = FormComponentModel.fromMap(map);
+        break;
+      case 'V2GridSection':
+        widget = V2GridSectionModel.fromMap(map);
+        break;
+      default:
+        widget = null;
+    }
     return V2GridSectionColumnModel(
       key: map['key'],
-      gridSection: map['gridSection'] != null
-          ? V2GridSectionModel.fromMap(map['gridSection'])
-          : null,
-      styledComponent: map['widget'] != null
-          ? StyledComponentModel.fromMap(map['widget'])
-          : null,
-      formComponent:
-          map['data'] != null ? FormComponentModel.fromMap(map['data']) : null,
+      widget: widget,
       flexFactor: map['flexFactor']?.toInt(),
       mainAxisAlignment: CommonHelpers.getMainAxisAlignmentFromString(
         map['mainAxisAlignment'],
