@@ -21,7 +21,7 @@ class GSWidgetModel {
   }
 
   factory GSWidgetModel.fromMap(Map<String, dynamic> map) {
-    switch (map['__typeName']) {
+    switch (map['gsWidget']['__typename']) {
       case 'V2GridSectionStack':
         return GSWidgetModel(
           gsWidget: V2GridSectionStackModel.fromMap(map['gsWidget']),

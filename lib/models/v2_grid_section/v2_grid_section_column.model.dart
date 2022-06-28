@@ -34,7 +34,7 @@ class V2GridSectionColumnModel with V2GridSectionWidgetModel {
 
   factory V2GridSectionColumnModel.fromMap(Map<String, dynamic> map) {
     late V2GSColumnDataWidgetModel? widget;
-    switch (map['__typeName']) {
+    switch (map['__typename']) {
       case 'StyledComponent':
         widget = StyledComponentModel.fromMap(map);
         break;
