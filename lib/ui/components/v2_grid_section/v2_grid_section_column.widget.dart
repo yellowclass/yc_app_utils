@@ -30,21 +30,19 @@ class V2GridSectionColumnWidget extends StatelessWidget {
                   for (var action in widget.clickAction!.actions) {
                     if (action.functionType ==
                         V2FunctionTypesEnum.SUBMIT_FORM) {
-                      if (action.functionType ==
-                          V2FunctionTypesEnum.SUBMIT_FORM) {
-                        innerClickAction!.call(
-                          widget.clickAction!,
-                          true,
-                        );
-                      }
+                      innerClickAction!.call(
+                        widget.clickAction!,
+                        true,
+                      );
                     }
                     break;
                   }
+                } else {
+                  innerClickAction!.call(
+                    widget.clickAction!,
+                    false,
+                  );
                 }
-                innerClickAction!.call(
-                  widget.clickAction!,
-                  false,
-                );
               }
             : null,
       );

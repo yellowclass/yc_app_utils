@@ -48,11 +48,12 @@ class StyledComponentWidget extends StatelessWidget {
                   }
                   break;
                 }
+              } else {
+                innerClickAction!.call(
+                  styledComponentDetails.clickAction!,
+                  false,
+                );
               }
-              innerClickAction!.call(
-                styledComponentDetails.clickAction!,
-                false,
-              );
             }
           : null,
       showRippleEffect:

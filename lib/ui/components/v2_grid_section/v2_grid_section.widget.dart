@@ -128,20 +128,10 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
     } else if (widget.gridDetails.data?.gsWidget is StyledComponentModel) {
       StyledComponentModel gsWidget =
           widget.gridDetails.data?.gsWidget as StyledComponentModel;
-      return YCClicker(
-        onPressed:
-            (gsWidget.clickAction != null && widget.innerClickAction != null)
-                ? () => widget.innerClickAction!.call(
-                      gsWidget.clickAction!,
-                      null,
-                    )
-                : null,
-        showRippleEffect: gsWidget.clickAction?.showRippleEffect ?? false,
-        child: StyledComponentWidget(
-          styledComponentDetails: gsWidget,
-          containsForm: widget.gridDetails.containsForm,
-          innerClickAction: innerClickActionHandler,
-        ),
+      return StyledComponentWidget(
+        styledComponentDetails: gsWidget,
+        containsForm: widget.gridDetails.containsForm,
+        innerClickAction: innerClickActionHandler,
       );
     } else {
       return const SizedBox.shrink();
