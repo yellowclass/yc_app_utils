@@ -34,15 +34,15 @@ class V2GridSectionColumnModel with V2GridSectionWidgetModel {
 
   factory V2GridSectionColumnModel.fromMap(Map<String, dynamic> map) {
     late V2GSColumnDataWidgetModel? widget;
-    switch (map['__typename']) {
+    switch (map['widget']['__typename']) {
       case 'StyledComponent':
-        widget = StyledComponentModel.fromMap(map);
+        widget = StyledComponentModel.fromMap(map['widget']);
         break;
       case 'FormComponent':
-        widget = FormComponentModel.fromMap(map);
+        widget = FormComponentModel.fromMap(map['widget']);
         break;
       case 'V2GridSection':
-        widget = V2GridSectionModel.fromMap(map);
+        widget = V2GridSectionModel.fromMap(map['widget']);
         break;
       default:
         widget = null;
