@@ -1,7 +1,7 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentModel with V2GSColumnDataWidgetModel {
-  FormComponentEnum type;
+  FormComponentEnum fcType;
   StyledInputFieldModel? inputField;
   StyledTextAreaFieldModel? textAreaField;
   StyledRadioFieldModel? radioField;
@@ -13,7 +13,7 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
   List<int>? padding;
 
   FormComponentModel({
-    required this.type,
+    required this.fcType,
     this.inputField,
     this.textAreaField,
     this.radioField,
@@ -25,35 +25,9 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
     this.padding,
   });
 
-  FormComponentModel copyWith({
-    FormComponentEnum? type,
-    StyledInputFieldModel? inputField,
-    StyledTextAreaFieldModel? textAreaField,
-    StyledRadioFieldModel? radioField,
-    StyledCheckboxFieldModel? checkboxField,
-    StyledSelectFieldModel? selectField,
-    SectionBackground? background,
-    String? borderColor,
-    List<int>? borderRadius,
-    List<int>? padding,
-  }) {
-    return FormComponentModel(
-      type: type ?? this.type,
-      inputField: inputField ?? this.inputField,
-      textAreaField: textAreaField ?? this.textAreaField,
-      radioField: radioField ?? this.radioField,
-      checkboxField: checkboxField ?? this.checkboxField,
-      selectField: selectField ?? this.selectField,
-      background: background ?? this.background,
-      borderColor: borderColor ?? this.borderColor,
-      borderRadius: borderRadius ?? this.borderRadius,
-      padding: padding ?? this.padding,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
-      'type': type.name,
+      'fcType': fcType.name,
       'inputField': inputField?.toMap(),
       'textAreaField': textAreaField?.toMap(),
       'radioField': radioField?.toMap(),
@@ -68,7 +42,7 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
 
   factory FormComponentModel.fromMap(Map<String, dynamic> map) {
     return FormComponentModel(
-      type: CommonHelpers.enumFromString(
+      fcType: CommonHelpers.enumFromString(
         FormComponentEnum.values,
         map['type'],
       )!,

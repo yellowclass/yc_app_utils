@@ -15,7 +15,7 @@ class StyledComponentWidget extends StatelessWidget {
   final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
-    switch (styledComponentDetails.type) {
+    switch (styledComponentDetails.scType) {
       case StyledComponentEnum.TEXT:
         return V2StyledTextWidget(
           styledText: styledComponentDetails.textDetails!,
