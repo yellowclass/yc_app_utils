@@ -3,12 +3,12 @@ import 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
 
 class V2ClickAction {
   SequenceTypeEnum sequenceType;
-  List<OneClickAction>? actions;
+  List<OneClickAction> actions;
   bool showRippleEffect;
 
   V2ClickAction({
     required this.sequenceType,
-    this.actions,
+    required this.actions,
     required this.showRippleEffect,
   });
 
@@ -27,7 +27,7 @@ class V2ClickAction {
   Map<String, dynamic> toMap() {
     return {
       'sequenceType': sequenceType.name,
-      'actions': actions?.map((x) => x.toMap()).toList(),
+      'actions': actions.map((x) => x.toMap()).toList(),
       'showRippleEffect': showRippleEffect,
     };
   }
@@ -38,10 +38,8 @@ class V2ClickAction {
         SequenceTypeEnum.values,
         map['sequenceType'],
       )!,
-      actions: map['actions'] != null
-          ? List<OneClickAction>.from(
-              map['actions']?.map((x) => OneClickAction.fromMap(x)))
-          : null,
+      actions: List<OneClickAction>.from(
+          map['actions']?.map((x) => OneClickAction.fromMap(x))),
       showRippleEffect: map['showRippleEffect'] ?? false,
     );
   }

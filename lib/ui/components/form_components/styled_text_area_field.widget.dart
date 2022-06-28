@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/ui/components/styled_components/v2_styled_text.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledTextAreaFieldWidget extends StatelessWidget {
   const StyledTextAreaFieldWidget({
     required this.textAreaFieldData,
+    this.onSaved,
     Key? key,
   }) : super(key: key);
 
   final StyledTextAreaFieldModel textAreaFieldData;
+  final void Function(String, String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class StyledTextAreaFieldWidget extends StatelessWidget {
             value: value!,
             validations: textAreaFieldData.validate,
           ),
-          onSaved: (value) {},
+          onSaved: (value) {
+            onSaved?.call(textAreaFieldData.name, value);
+          },
         ),
       ],
     );

@@ -2,45 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledSelectFieldWidget extends StatefulWidget {
+class StyledSelectFieldWidget extends StatelessWidget {
   const StyledSelectFieldWidget({
     required this.selectFieldData,
+    this.onSaved,
     Key? key,
   }) : super(key: key);
 
   final StyledSelectFieldModel selectFieldData;
+  final void Function(String, List<String>?)? onSaved;
 
-  @override
-  State<StyledSelectFieldWidget> createState() =>
-      _StyledSelectFieldWidgetState();
-}
-
-class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
-  List<OptionModel> selectedValues = [];
-
-  @override
-  void initState() {
-    selectedValues = widget.selectFieldData.defaultValue ?? [];
-    super.initState();
-  }
+  List<OptionModel> get selectedValues => selectFieldData.defaultValue ?? [];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.selectFieldData.label != null)
+        if (selectFieldData.label != null)
           V2StyledTextWidget(
-            styledText: widget.selectFieldData.label!,
+            styledText: selectFieldData.label!,
           ),
-        if (widget.selectFieldData.selectType == SelectType.SINGLE)
+        if (selectFieldData.selectType == SelectType.SINGLE)
           DropdownSearch<OptionModel>(
             mode: Mode.MENU,
             showSelectedItems: true,
-            showSearchBox: widget.selectFieldData.isSearchable,
+            showSearchBox: selectFieldData.isSearchable,
             dropDownButton: const SizedBox.shrink(),
-            items: widget.selectFieldData.options,
-            enabled: !widget.selectFieldData.isDisabled,
+            items: selectFieldData.options,
+            enabled: !selectFieldData.isDisabled,
             dropdownSearchDecoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 0,
@@ -60,25 +50,23 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
             itemAsString: (item) => item!.label,
             compareFn: (item, selectedItem) =>
                 item!.value == selectedItem!.value,
-            onChanged: (item) {
-              setState(() {
-                // isClassSelected = true;
-                // profileInput.classStandard = item!.value;
-              });
-            },
             validator: (value) => CommonHelpers.validateSelectCheckField(
               values: value != null ? [value] : [],
-              validations: widget.selectFieldData.validate,
+              validations: selectFieldData.validate,
             ),
+            onSaved: (value) {
+              List<String> data = value?.value != null ? [value!.value] : [];
+              onSaved?.call(selectFieldData.name, data);
+            },
           )
         else
           DropdownSearch<OptionModel>.multiSelection(
             mode: Mode.MENU,
             showSelectedItems: true,
-            showSearchBox: widget.selectFieldData.isSearchable,
+            showSearchBox: selectFieldData.isSearchable,
             dropDownButton: const SizedBox.shrink(),
-            items: widget.selectFieldData.options,
-            enabled: !widget.selectFieldData.isDisabled,
+            items: selectFieldData.options,
+            enabled: !selectFieldData.isDisabled,
             dropdownSearchDecoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 0,
@@ -98,25 +86,18 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
             itemAsString: (item) => item!.label,
             compareFn: (item, selectedItem) =>
                 item!.value == selectedItem!.value,
-            onChanged: (item) {
-              setState(() {
-                // isClassSelected = true;
-                // profileInput.classStandard = item!.value;
-              });
-            },
             validator: (values) => CommonHelpers.validateSelectCheckField(
               values: values!,
-              validations: widget.selectFieldData.validate,
+              validations: selectFieldData.validate,
             ),
+            onSaved: (value) {
+              onSaved?.call(
+                selectFieldData.name,
+                value?.map((v) => v.value).toList(),
+              );
+            },
           )
       ],
     );
   }
 }
-
-// class _RadioGrp extends FormField<String?> {
-//   _RadioGrp({
-//     required super.builder,
-//     required super.validator,
-//   });
-// }

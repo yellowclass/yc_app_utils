@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/helpers/helpers.dart';
-import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
-import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
-import 'package:yc_app_utils/ui/ui.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentWidget extends StatelessWidget {
   const StyledComponentWidget({
     required this.styledComponentDetails,
+    required this.containsForm,
     this.innerClickAction,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
-  final void Function(V2ClickAction)? innerClickAction;
+  final bool containsForm;
+  final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
     switch (styledComponentDetails.type) {
@@ -26,37 +24,6 @@ class StyledComponentWidget extends StatelessWidget {
         return StyledImageWidget(
           styledImageData: styledComponentDetails.imageDetails!,
         );
-      // case StyledComponentEnum.FORM_INPUT:
-      //   return StyledTextFieldWidget(
-      //     textFieldData: styledComponentDetails.inputField!,
-      //   );
-      // case StyledComponentEnum.FORM_TEXTAREA:
-      //   return StyledTextAreaFieldWidget(
-      //     textAreaFieldData: styledComponentDetails.textAreaField!,
-      //   );
-      // case StyledComponentEnum.FORM_RADIO:
-      //   return StyledRadioFieldWidget(
-      //     radioFieldData: styledComponentDetails.radioField!,
-      //   );
-      // case StyledComponentEnum.FORM_CHECKBOX:
-      //   return StyledCheckboxFieldWidget(
-      //     checkboxFieldData: styledComponentDetails.checkboxField!,
-      //   );
-      // case StyledComponentEnum.FORM_SELECT:
-      //   return StyledSelectFieldWidget(
-      //     selectFieldData: styledComponentDetails.selectField!,
-      //   );
-      // case StyledComponentEnum.BUTTON:
-      //   return GenericButtonV3Widget(
-      //     buttonDetails: styledComponentDetails.buttonDetails!,
-      //     onPressed:
-      //         (styledComponentDetails.buttonDetails!.clickAction != null &&
-      //                 innerClickAction != null)
-      //             ? () => innerClickAction!.call(
-      //                   styledComponentDetails.buttonDetails!.clickAction!,
-      //                 )
-      //             : null,
-      //   );
       default:
         return const SizedBox.shrink();
     }
@@ -67,9 +34,26 @@ class StyledComponentWidget extends StatelessWidget {
     return YCClicker(
       onPressed: (styledComponentDetails.clickAction != null &&
               innerClickAction != null)
-          ? () => innerClickAction!.call(
+          ? () {
+              // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
+              if (containsForm) {
+                // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
+                for (var action
+                    in styledComponentDetails.clickAction!.actions) {
+                  if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
+                    innerClickAction!.call(
+                      styledComponentDetails.clickAction!,
+                      true,
+                    );
+                  }
+                  break;
+                }
+              }
+              innerClickAction!.call(
                 styledComponentDetails.clickAction!,
-              )
+                false,
+              );
+            }
           : null,
       showRippleEffect:
           styledComponentDetails.clickAction?.showRippleEffect ?? false,

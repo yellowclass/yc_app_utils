@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
-import 'package:yc_app_utils/ui/components/form_components/form_component.widget.dart';
 import 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_component.widget.dart';
 import 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section_column.widget.dart';
@@ -22,7 +21,9 @@ class V2GridSectionWidget extends StatefulWidget {
   final V2GridSectionModel gridDetails;
   final VoidCallback? onPressed;
   final bool showRippleEffect;
-  final void Function(V2ClickAction)? innerClickAction;
+  final void Function(
+          V2ClickAction clickAction, Map<String, dynamic>? formData)?
+      innerClickAction;
 
   @override
   State<V2GridSectionWidget> createState() => _V2GridSectionWidgetState();
@@ -34,9 +35,34 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
 
   @override
   void initState() {
-    _formData = {};
-    _formKey = GlobalKey<FormState>();
+    if (widget.gridDetails.containsForm) {
+      _formData = {};
+      _formKey = GlobalKey<FormState>();
+    }
     super.initState();
+  }
+
+  void collectDataFromForm() {
+    if (_formKey?.currentState?.validate() ?? false) {
+      _formKey?.currentState?.save();
+    } else {
+      _formData?.clear();
+    }
+  }
+
+  void innerClickActionHandler(V2ClickAction cta, bool shouldSubmitForm) {
+    if (shouldSubmitForm) {
+      collectDataFromForm();
+      widget.innerClickAction?.call(
+        cta,
+        _formData,
+      );
+      return;
+    }
+    widget.innerClickAction?.call(
+      cta,
+      null,
+    );
   }
 
   Widget buildChild() {
@@ -47,7 +73,9 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
               (gridLayer) => gridLayer.rows != null
                   ? V2GridSectionLayerWidget(
                       layerDetails: gridLayer,
-                      innerClickAction: widget.innerClickAction,
+                      containsForm: widget.gridDetails.containsForm,
+                      innerClickAction: innerClickActionHandler,
+                      formData: _formData,
                     )
                   : const SizedBox.shrink(),
             )
@@ -60,7 +88,9 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
               (gridRow) => gridRow.columns != null
                   ? V2GridSectionRowWidget(
                       rowDetails: gridRow,
-                      innerClickAction: widget.innerClickAction,
+                      containsForm: widget.gridDetails.containsForm,
+                      innerClickAction: innerClickActionHandler,
+                      formData: _formData,
                     )
                   : const SizedBox.shrink(),
             )
@@ -72,7 +102,9 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
             .map(
               (gridColumn) => V2GridSectionColumnWidget(
                 columnDetails: gridColumn,
-                innerClickAction: widget.innerClickAction,
+                containsForm: widget.gridDetails.containsForm,
+                innerClickAction: innerClickActionHandler,
+                formData: _formData,
               ),
             )
             .toList(),
@@ -83,6 +115,7 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                 widget.innerClickAction != null)
             ? () => widget.innerClickAction!.call(
                   widget.gridDetails.styledComponent!.clickAction!,
+                  null,
                 )
             : null,
         showRippleEffect:
@@ -90,7 +123,8 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
                 false,
         child: StyledComponentWidget(
           styledComponentDetails: widget.gridDetails.styledComponent!,
-          innerClickAction: widget.innerClickAction,
+          containsForm: widget.gridDetails.containsForm,
+          innerClickAction: innerClickActionHandler,
         ),
       );
     } else {
