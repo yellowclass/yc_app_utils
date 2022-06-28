@@ -50,11 +50,10 @@ class V2GridSectionColumnWidget extends StatelessWidget {
       );
     } else if (columnDetails.styledComponent != null) {
       return StyledComponentWidget(
-          styledComponentDetails: columnDetails.styledComponent!,
-          containsForm: containsForm,
-          innerClickAction: (V2ClickAction clickAction, bool shouldSubmitForm) {
-            // print
-          });
+        styledComponentDetails: columnDetails.styledComponent!,
+        containsForm: containsForm,
+        innerClickAction: innerClickAction,
+      );
     } else if (columnDetails.formComponent != null) {
       return FormComponentWidget(
         formDetails: columnDetails.formComponent!,
