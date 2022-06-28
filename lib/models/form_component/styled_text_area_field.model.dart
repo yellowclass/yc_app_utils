@@ -5,7 +5,7 @@ class StyledTextAreaFieldModel {
   V2StyledTextModel? label;
   String name;
   String? placeholder;
-  Validation? validate;
+  Validation? validation;
   String? defaultValue;
   bool isDisabled;
 
@@ -13,7 +13,7 @@ class StyledTextAreaFieldModel {
     this.label,
     required this.name,
     this.placeholder,
-    this.validate,
+    this.validation,
     this.defaultValue,
     this.isDisabled = false,
   });
@@ -22,7 +22,7 @@ class StyledTextAreaFieldModel {
     V2StyledTextModel? label,
     String? name,
     String? placeholder,
-    Validation? validate,
+    Validation? validation,
     String? defaultValue,
     bool? isDisabled,
   }) {
@@ -30,7 +30,7 @@ class StyledTextAreaFieldModel {
       label: label ?? this.label,
       name: name ?? this.name,
       placeholder: placeholder ?? this.placeholder,
-      validate: validate ?? this.validate,
+      validation: validation ?? this.validation,
       defaultValue: defaultValue ?? this.defaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
     );
@@ -41,7 +41,7 @@ class StyledTextAreaFieldModel {
       'label': label?.toMap(),
       'name': name,
       'placeholder': placeholder,
-      'validate': validate?.toMap(),
+      'validation': validation?.toMap(),
       'defaultValue': defaultValue,
       'isDisabled': isDisabled,
     };
@@ -53,8 +53,9 @@ class StyledTextAreaFieldModel {
           map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
       placeholder: map['placeholder'],
-      validate:
-          map['validate'] != null ? Validation.fromMap(map['validate']) : null,
+      validation: map['validation'] != null
+          ? Validation.fromMap(map['validation'])
+          : null,
       defaultValue: map['defaultValue'],
       isDisabled: map['isDisabled'] ?? false,
     );

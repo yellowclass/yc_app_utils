@@ -7,7 +7,7 @@ class StyledInputFieldModel {
   String name;
   InputFieldEnum? type;
   String? placeholder;
-  Validation? validate;
+  Validation? validation;
   String? defaultValue;
   bool isDisabled;
 
@@ -16,7 +16,7 @@ class StyledInputFieldModel {
     required this.name,
     this.type,
     this.placeholder,
-    this.validate,
+    this.validation,
     this.defaultValue,
     this.isDisabled = false,
   });
@@ -26,7 +26,7 @@ class StyledInputFieldModel {
     String? name,
     InputFieldEnum? type,
     String? placeholder,
-    Validation? validate,
+    Validation? validation,
     String? defaultValue,
     bool? isDisabled,
   }) {
@@ -35,7 +35,7 @@ class StyledInputFieldModel {
       name: name ?? this.name,
       type: type ?? this.type,
       placeholder: placeholder ?? this.placeholder,
-      validate: validate ?? this.validate,
+      validation: validation ?? this.validation,
       defaultValue: defaultValue ?? this.defaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
     );
@@ -47,7 +47,7 @@ class StyledInputFieldModel {
       'name': name,
       'type': type?.name,
       'placeholder': placeholder,
-      'validate': validate?.toMap(),
+      'validation': validation?.toMap(),
       'defaultValue': defaultValue,
       'isDisabled': isDisabled,
     };
@@ -65,8 +65,9 @@ class StyledInputFieldModel {
             )
           : null,
       placeholder: map['placeholder'],
-      validate:
-          map['validate'] != null ? Validation.fromMap(map['validate']) : null,
+      validation: map['validation'] != null
+          ? Validation.fromMap(map['validation'])
+          : null,
       defaultValue: map['defaultValue'],
       isDisabled: map['isDisabled'] ?? false,
     );

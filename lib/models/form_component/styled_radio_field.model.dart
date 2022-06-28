@@ -3,7 +3,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class StyledRadioFieldModel {
   V2StyledTextModel? label;
   String name;
-  Validation? validate;
+  Validation? validation;
   OptionModel? defaultValue;
   bool isDisabled;
   List<OptionModel> options;
@@ -11,7 +11,7 @@ class StyledRadioFieldModel {
   StyledRadioFieldModel({
     this.label,
     required this.name,
-    this.validate,
+    this.validation,
     this.defaultValue,
     this.isDisabled = false,
     required this.options,
@@ -20,7 +20,7 @@ class StyledRadioFieldModel {
   StyledRadioFieldModel copyWith({
     V2StyledTextModel? label,
     String? name,
-    Validation? validate,
+    Validation? validation,
     OptionModel? defaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
@@ -28,7 +28,7 @@ class StyledRadioFieldModel {
     return StyledRadioFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
-      validate: validate ?? this.validate,
+      validation: validation ?? this.validation,
       defaultValue: defaultValue ?? this.defaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
@@ -39,7 +39,7 @@ class StyledRadioFieldModel {
     return {
       'label': label?.toMap(),
       'name': name,
-      'validate': validate?.toMap(),
+      'validation': validation?.toMap(),
       'defaultValue': defaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
@@ -51,8 +51,9 @@ class StyledRadioFieldModel {
       label:
           map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
-      validate:
-          map['validate'] != null ? Validation.fromMap(map['validate']) : null,
+      validation: map['validation'] != null
+          ? Validation.fromMap(map['validation'])
+          : null,
       defaultValue: map['defaultValue'] != null
           ? OptionModel.fromMap(map['defaultValue'])
           : null,
