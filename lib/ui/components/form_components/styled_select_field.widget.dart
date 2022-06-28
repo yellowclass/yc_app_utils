@@ -52,7 +52,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
                 item!.value == selectedItem!.value,
             validator: (value) => CommonHelpers.validateSelectCheckField(
               values: value != null ? [value] : [],
-              validations: selectFieldData.validate,
+              validations: selectFieldData.validation,
             ),
             onSaved: (value) {
               List<String> data = value?.value != null ? [value!.value] : [];
@@ -88,7 +88,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
                 item!.value == selectedItem!.value,
             validator: (values) => CommonHelpers.validateSelectCheckField(
               values: values!,
-              validations: selectFieldData.validate,
+              validations: selectFieldData.validation,
             ),
             onSaved: (value) {
               onSaved?.call(
