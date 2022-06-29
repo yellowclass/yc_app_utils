@@ -6,39 +6,43 @@ import 'package:yc_app_utils/models/validation/validation.model.dart';
 class StyledInputFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
-  InputFieldEnum? type;
+  InputFieldEnum? inputFieldType;
   String? placeholder;
   Validation? validation;
   String? defaultValue;
   bool isDisabled;
+  int maxLines;
 
   StyledInputFieldModel({
     this.label,
     required this.name,
-    this.type,
+    this.inputFieldType,
     this.placeholder,
     this.validation,
     this.defaultValue,
     this.isDisabled = false,
+    this.maxLines = 1,
   });
 
   StyledInputFieldModel copyWith({
     V2StyledTextModel? label,
     String? name,
-    InputFieldEnum? type,
+    InputFieldEnum? inputFieldType,
     String? placeholder,
     Validation? validation,
     String? defaultValue,
     bool? isDisabled,
+    int? maxLines,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
-      type: type ?? this.type,
+      inputFieldType: inputFieldType ?? this.inputFieldType,
       placeholder: placeholder ?? this.placeholder,
       validation: validation ?? this.validation,
       defaultValue: defaultValue ?? this.defaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
+      maxLines: maxLines ?? this.maxLines,
     );
   }
 
@@ -46,11 +50,12 @@ class StyledInputFieldModel with FormComponentUnion {
     return {
       'label': label?.toMap(),
       'name': name,
-      'type': type?.name,
+      'inputFieldType': inputFieldType?.name,
       'placeholder': placeholder,
       'validation': validation?.toMap(),
       'defaultValue': defaultValue,
       'isDisabled': isDisabled,
+      'maxLines': maxLines,
     };
   }
 
@@ -59,10 +64,10 @@ class StyledInputFieldModel with FormComponentUnion {
       label:
           map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
-      type: map['type'] != null
+      inputFieldType: map['inputFieldType'] != null
           ? CommonHelpers.enumFromString(
               InputFieldEnum.values,
-              map['type'],
+              map['inputFieldType'],
             )
           : null,
       placeholder: map['placeholder'],
@@ -71,6 +76,7 @@ class StyledInputFieldModel with FormComponentUnion {
           : null,
       defaultValue: map['defaultValue'],
       isDisabled: map['isDisabled'] ?? false,
+      maxLines: map['maxLines'] ?? 1,
     );
   }
 }
@@ -80,4 +86,5 @@ enum InputFieldEnum {
   EMAIL,
   NUMBER,
   PASSWORD,
+  MOBILE,
 }
