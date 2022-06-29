@@ -4,41 +4,40 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentWidget extends StatelessWidget {
   const FormComponentWidget({
-    required this.formDetails,
+    required this.formComponentDetails,
     this.onSaved,
     Key? key,
   }) : super(key: key);
 
-  final FormComponentModel formDetails;
+  final FormComponentModel formComponentDetails;
   final void Function(String, dynamic)? onSaved;
 
-  @override
-  Widget build(BuildContext context) {
-    switch (formDetails.fcData?.fcType) {
+  Widget buildComponent() {
+    switch (formComponentDetails.fcData?.fcType) {
       case FormComponentEnum.FORM_INPUT:
         StyledInputFieldModel inputFieldDetails =
-            formDetails.fcData?.data as StyledInputFieldModel;
+            formComponentDetails.fcData?.data as StyledInputFieldModel;
         return StyledTextFieldWidget(
           textFieldData: inputFieldDetails,
           onSaved: onSaved,
         );
       case FormComponentEnum.FORM_RADIO:
         StyledRadioFieldModel radioFieldDetails =
-            formDetails.fcData?.data as StyledRadioFieldModel;
+            formComponentDetails.fcData?.data as StyledRadioFieldModel;
         return StyledRadioFieldWidget(
           radioFieldData: radioFieldDetails,
           onSaved: onSaved,
         );
       case FormComponentEnum.FORM_CHECKBOX:
         StyledCheckboxFieldModel checkboxFieldDetails =
-            formDetails.fcData?.data as StyledCheckboxFieldModel;
+            formComponentDetails.fcData?.data as StyledCheckboxFieldModel;
         return StyledCheckboxFieldWidget(
           checkboxFieldData: checkboxFieldDetails,
           onSaved: onSaved,
         );
       case FormComponentEnum.FORM_SELECT:
         StyledSelectFieldModel selectFieldDetails =
-            formDetails.fcData?.data as StyledSelectFieldModel;
+            formComponentDetails.fcData?.data as StyledSelectFieldModel;
         return StyledSelectFieldWidget(
           selectFieldData: selectFieldDetails,
           onSaved: onSaved,
@@ -46,5 +45,27 @@ class FormComponentWidget extends StatelessWidget {
       default:
         return const SizedBox.shrink();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: CommonHelpers.getPaddingFromList(
+        formComponentDetails.padding,
+      ),
+      decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
+        sectionBackground: formComponentDetails.background,
+      ).copyWith(
+        borderRadius: CommonHelpers.getBorderRadiusFromList(
+          formComponentDetails.borderRadius,
+        ),
+        border: Border.all(
+          color: CommonHelpers.v2ColorFromHex(
+            formComponentDetails.borderColor,
+          ),
+        ),
+      ),
+      child: buildComponent(),
+    );
   }
 }

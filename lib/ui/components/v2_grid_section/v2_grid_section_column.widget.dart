@@ -56,7 +56,7 @@ class V2GridSectionColumnWidget extends StatelessWidget {
     } else if (columnDetails.widget is FormComponentModel) {
       FormComponentModel widget = columnDetails.widget as FormComponentModel;
       return FormComponentWidget(
-        formDetails: widget,
+        formComponentDetails: widget,
         onSaved: (key, value) {
           formData?[key] = value;
         },
