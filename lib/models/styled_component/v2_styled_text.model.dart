@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
-class V2StyledTextModel {
+class V2StyledTextModel with StyledComponentUnion {
   String text;
   String? textColor;
   TStyle? tStyle;

@@ -1,8 +1,9 @@
 import 'package:yc_app_utils/helpers/common_helpers.dart';
+import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledInputFieldModel {
+class StyledInputFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   InputFieldEnum? type;
