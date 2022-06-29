@@ -5,7 +5,7 @@ class StyledRadioFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;
-  OptionModel? defaultValue;
+  OptionModel? radioDefaultValue;
   bool isDisabled;
   List<OptionModel> options;
 
@@ -13,7 +13,7 @@ class StyledRadioFieldModel with FormComponentUnion {
     this.label,
     required this.name,
     this.validation,
-    this.defaultValue,
+    this.radioDefaultValue,
     this.isDisabled = false,
     required this.options,
   });
@@ -22,7 +22,7 @@ class StyledRadioFieldModel with FormComponentUnion {
     V2StyledTextModel? label,
     String? name,
     Validation? validation,
-    OptionModel? defaultValue,
+    OptionModel? radioDefaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
   }) {
@@ -30,7 +30,7 @@ class StyledRadioFieldModel with FormComponentUnion {
       label: label ?? this.label,
       name: name ?? this.name,
       validation: validation ?? this.validation,
-      defaultValue: defaultValue ?? this.defaultValue,
+      radioDefaultValue: radioDefaultValue ?? this.radioDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
     );
@@ -41,7 +41,7 @@ class StyledRadioFieldModel with FormComponentUnion {
       'label': label?.toMap(),
       'name': name,
       'validation': validation?.toMap(),
-      'defaultValue': defaultValue,
+      'radioDefaultValue': radioDefaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
     };
@@ -55,8 +55,8 @@ class StyledRadioFieldModel with FormComponentUnion {
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'])
           : null,
-      defaultValue: map['defaultValue'] != null
-          ? OptionModel.fromMap(map['defaultValue'])
+      radioDefaultValue: map['radioDefaultValue'] != null
+          ? OptionModel.fromMap(map['radioDefaultValue'])
           : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(

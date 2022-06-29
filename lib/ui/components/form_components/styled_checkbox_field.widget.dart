@@ -14,7 +14,9 @@ class StyledCheckboxFieldWidget extends StatelessWidget {
   final void Function(String, List<String>?)? onSaved;
 
   List<String> get initialValues =>
-      checkboxFieldData.defaultValue?.map((option) => option.value).toList() ??
+      checkboxFieldData.checkboxDefaultValue
+          ?.map((option) => option.value)
+          .toList() ??
       [];
 
   @override

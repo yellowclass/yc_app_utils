@@ -5,7 +5,7 @@ class StyledSelectFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;
-  List<OptionModel>? defaultValue;
+  List<OptionModel>? selectDefaultValue;
   bool isDisabled;
   List<OptionModel> options;
   SelectType selectType;
@@ -15,7 +15,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     this.label,
     required this.name,
     this.validation,
-    this.defaultValue,
+    this.selectDefaultValue,
     this.isDisabled = false,
     required this.options,
     this.selectType = SelectType.SINGLE,
@@ -26,7 +26,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     V2StyledTextModel? label,
     String? name,
     Validation? validation,
-    List<OptionModel>? defaultValue,
+    List<OptionModel>? selectDefaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
     SelectType? selectType,
@@ -36,7 +36,7 @@ class StyledSelectFieldModel with FormComponentUnion {
       label: label ?? this.label,
       name: name ?? this.name,
       validation: validation ?? this.validation,
-      defaultValue: defaultValue ?? this.defaultValue,
+      selectDefaultValue: selectDefaultValue ?? this.selectDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
       selectType: selectType ?? this.selectType,
@@ -49,7 +49,7 @@ class StyledSelectFieldModel with FormComponentUnion {
       'label': label?.toMap(),
       'name': name,
       'validation': validation?.toMap(),
-      'defaultValue': defaultValue,
+      'selectDefaultValue': selectDefaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
       'selectType': selectType.name,
@@ -65,9 +65,9 @@ class StyledSelectFieldModel with FormComponentUnion {
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'])
           : null,
-      defaultValue: map['defaultValue'] != null
+      selectDefaultValue: map['selectDefaultValue'] != null
           ? List<OptionModel>.from(
-              map['defaultValue']?.map((x) => OptionModel.fromMap(x)))
+              map['selectDefaultValue']?.map((x) => OptionModel.fromMap(x)))
           : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(

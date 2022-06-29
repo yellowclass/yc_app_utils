@@ -37,7 +37,7 @@ class StyledTextFieldWidget extends StatelessWidget {
             styledText: textFieldData.label!,
           ),
         TextFormField(
-          initialValue: textFieldData.defaultValue,
+          initialValue: textFieldData.inputDefaultValue,
           enabled: !textFieldData.isDisabled,
           textAlignVertical: TextAlignVertical.bottom,
           inputFormatters: [

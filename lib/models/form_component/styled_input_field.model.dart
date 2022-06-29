@@ -9,7 +9,7 @@ class StyledInputFieldModel with FormComponentUnion {
   InputFieldEnum? inputFieldType;
   String? placeholder;
   Validation? validation;
-  String? defaultValue;
+  String? inputDefaultValue;
   bool isDisabled;
   int maxLines;
 
@@ -19,7 +19,7 @@ class StyledInputFieldModel with FormComponentUnion {
     this.inputFieldType,
     this.placeholder,
     this.validation,
-    this.defaultValue,
+    this.inputDefaultValue,
     this.isDisabled = false,
     this.maxLines = 1,
   });
@@ -30,7 +30,7 @@ class StyledInputFieldModel with FormComponentUnion {
     InputFieldEnum? inputFieldType,
     String? placeholder,
     Validation? validation,
-    String? defaultValue,
+    String? inputDefaultValue,
     bool? isDisabled,
     int? maxLines,
   }) {
@@ -40,7 +40,7 @@ class StyledInputFieldModel with FormComponentUnion {
       inputFieldType: inputFieldType ?? this.inputFieldType,
       placeholder: placeholder ?? this.placeholder,
       validation: validation ?? this.validation,
-      defaultValue: defaultValue ?? this.defaultValue,
+      inputDefaultValue: inputDefaultValue ?? this.inputDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       maxLines: maxLines ?? this.maxLines,
     );
@@ -53,7 +53,7 @@ class StyledInputFieldModel with FormComponentUnion {
       'inputFieldType': inputFieldType?.name,
       'placeholder': placeholder,
       'validation': validation?.toMap(),
-      'defaultValue': defaultValue,
+      'inputDefaultValue': inputDefaultValue,
       'isDisabled': isDisabled,
       'maxLines': maxLines,
     };
@@ -74,7 +74,7 @@ class StyledInputFieldModel with FormComponentUnion {
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'])
           : null,
-      defaultValue: map['defaultValue'],
+      inputDefaultValue: map['inputDefaultValue'],
       isDisabled: map['isDisabled'] ?? false,
       maxLines: map['maxLines'] ?? 1,
     );
