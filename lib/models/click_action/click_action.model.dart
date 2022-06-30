@@ -8,6 +8,7 @@ class ClickAction {
   final String? bottomSheetId;
   final String? functionType;
   final ClickAction? nestedClickAction;
+  final String? eventData;
   final Map<String, dynamic> stringifiedFunctionParams;
 
   ClickAction({
@@ -18,6 +19,7 @@ class ClickAction {
     this.shareImageUrl,
     this.bottomSheetId,
     this.functionType,
+    this.eventData,
     this.nestedClickAction,
   });
 
@@ -32,6 +34,7 @@ class ClickAction {
       stringifiedFunctionParams: json['stringifiedFunctionParams'] == null
           ? {}
           : jsonDecode(json['stringifiedFunctionParams']),
+      eventData: json['eventData'],
       nestedClickAction: json['nestedClickAction'] == null
           ? null
           : ClickAction.fromMap(json['nestedClickAction']),
@@ -47,6 +50,7 @@ class ClickAction {
         "functionType": functionType,
         "stringifiedFunctionParams": const JsonEncoder.withIndent('  ')
             .convert(stringifiedFunctionParams),
+        "eventData": eventData,
         "nestedClickAction": nestedClickAction,
       };
 }

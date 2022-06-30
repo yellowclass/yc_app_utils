@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/image.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
+import 'package:yc_app_utils/ui/components/styled_text/styled_text_widget.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
-class StyledText {
+class StyledText with StyledComponentUnion {
   String text;
   String textColor;
   TStyle tStyle;
@@ -150,6 +152,21 @@ class StyledText {
       text: "",
       textColor: "000000",
       tStyle: TStyle.B1_400,
+    );
+  }
+}
+
+extension StyledTextExt on StyledText {
+  StyledTextWidget buildWidget({
+    int? maxLines,
+    TextOverflow? overflow,
+    TextAlign? textAlign,
+  }) {
+    return StyledTextWidget(
+      styledText: this,
+      maxLines: maxLines,
+      overflow: overflow,
+      textAlign: textAlign,
     );
   }
 }

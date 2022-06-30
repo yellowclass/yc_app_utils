@@ -1,72 +1,62 @@
 import 'package:flutter/material.dart';
+
 import 'package:yc_app_utils/helpers/common_helpers.dart';
-
-import 'package:yc_app_utils/models/click_action.model.dart';
+import 'package:yc_app_utils/models/form_component/form_component.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
 
-class V2GridSectionColumn {
+class V2GridSectionColumnModel with V2GridSectionWidgetModel {
   String? key;
-  V2GridSection? gridSection;
-  StyledComponent? data;
-  ClickAction? clickAction;
+  V2GSColumnDataWidgetModel? widget;
   int? flexFactor;
-  MainAxisAlignment flexAlignment;
+  MainAxisAlignment mainAxisAlignment;
+  CrossAxisAlignment crossAxisAlignment;
 
-  V2GridSectionColumn({
+  V2GridSectionColumnModel({
     this.key,
-    this.gridSection,
-    this.data,
-    this.clickAction,
+    this.widget,
     this.flexFactor,
-    this.flexAlignment = MainAxisAlignment.start,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   });
-
-  V2GridSectionColumn copyWith({
-    String? key,
-    V2GridSection? gridSection,
-    StyledComponent? data,
-    ClickAction? clickAction,
-    int? flexFactor,
-    MainAxisAlignment? flexAlignment,
-  }) {
-    return V2GridSectionColumn(
-      key: key ?? this.key,
-      gridSection: gridSection ?? this.gridSection,
-      data: data ?? this.data,
-      clickAction: clickAction ?? this.clickAction,
-      flexFactor: flexFactor ?? this.flexFactor,
-      flexAlignment: flexAlignment ?? this.flexAlignment,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
       'key': key,
-      'gridSection': gridSection?.toMap(),
-      'data': data?.toMap(),
-      'clickAction': clickAction?.toMap(),
+      // 'widget': widget?.toMap(),
       'flexFactor': flexFactor,
-      'flexAlignment': flexAlignment.name,
+      'mainAxisAlignment': mainAxisAlignment.name,
+      'crossAxisAlignment': crossAxisAlignment.name,
     };
   }
 
-  factory V2GridSectionColumn.fromMap(Map<String, dynamic> map) {
-    return V2GridSectionColumn(
+  factory V2GridSectionColumnModel.fromMap(Map<String, dynamic> map) {
+    late V2GSColumnDataWidgetModel? widget;
+    switch (map['widget']['__typename']) {
+      case 'StyledComponent':
+        widget = StyledComponentModel.fromMap(map['widget']);
+        break;
+      case 'FormComponent':
+        widget = FormComponentModel.fromMap(map['widget']);
+        break;
+      case 'V2GridSection':
+        widget = V2GridSectionModel.fromMap(map['widget']);
+        break;
+      default:
+        widget = null;
+    }
+    return V2GridSectionColumnModel(
       key: map['key'],
-      gridSection: map['gridSection'] != null
-          ? V2GridSection.fromMap(map['gridSection'])
-          : null,
-      data: map['data'] != null ? StyledComponent.fromMap(map['data']) : null,
-      clickAction: map['clickAction'] != null
-          ? ClickAction.fromMap(map['clickAction'])
-          : null,
+      widget: widget,
       flexFactor: map['flexFactor']?.toInt(),
-      flexAlignment: CommonHelpers.enumFromString(
-            MainAxisAlignment.values,
-            map['flexAlignment'],
-          ) ??
-          MainAxisAlignment.start,
+      mainAxisAlignment: CommonHelpers.getMainAxisAlignmentFromString(
+        map['mainAxisAlignment'],
+      ),
+      crossAxisAlignment: CommonHelpers.getCrossAxisAlignmentFromString(
+        map['crossAxisAlignment'],
+      ),
     );
   }
 }

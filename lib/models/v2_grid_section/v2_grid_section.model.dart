@@ -1,50 +1,32 @@
-import 'package:yc_app_utils/models/click_action.model.dart';
-import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
-class V2GridSection {
+class V2GridSectionModel with V2GSColumnDataWidgetModel {
   String? key;
-  List<V2GridSectionLayer>? layers;
-  ClickAction? clickAction;
+  GSWidgetModel? data;
+  V2ClickAction? clickAction;
+  bool containsForm;
   String? backgroundColor;
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
 
-  V2GridSection({
+  V2GridSectionModel({
     this.key,
-    this.layers,
+    this.data,
     this.clickAction,
+    this.containsForm = false,
     this.backgroundColor,
     this.borderColor,
     this.borderRadius,
     this.padding,
   });
 
-  V2GridSection copyWith({
-    String? key,
-    List<V2GridSectionLayer>? layers,
-    ClickAction? clickAction,
-    String? backgroundColor,
-    String? borderColor,
-    List<int>? borderRadius,
-    List<int>? padding,
-  }) {
-    return V2GridSection(
-      key: key ?? this.key,
-      layers: layers ?? this.layers,
-      clickAction: clickAction ?? this.clickAction,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      borderColor: borderColor ?? this.borderColor,
-      borderRadius: borderRadius ?? this.borderRadius,
-      padding: padding ?? this.padding,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
       'key': key,
-      'layers': layers?.map((x) => x.toMap()).toList(),
+      // 'data': data?.toMap(),
       'clickAction': clickAction?.toMap(),
+      'containsForm': containsForm,
       'backgroundColor': backgroundColor,
       'borderColor': borderColor,
       'borderRadius': borderRadius,
@@ -52,16 +34,14 @@ class V2GridSection {
     };
   }
 
-  factory V2GridSection.fromMap(Map<String, dynamic> map) {
-    return V2GridSection(
+  factory V2GridSectionModel.fromMap(Map<String, dynamic> map) {
+    return V2GridSectionModel(
       key: map['key'],
-      layers: map['layers'] != null
-          ? List<V2GridSectionLayer>.from(
-              map['layers']?.map((x) => V2GridSectionLayer.fromMap(x)))
-          : null,
+      data: map['data'] != null ? GSWidgetModel.fromMap(map['data']) : null,
       clickAction: map['clickAction'] != null
-          ? ClickAction.fromMap(map['clickAction'])
+          ? V2ClickAction.fromMap(map['clickAction'])
           : null,
+      containsForm: map['containsForm'] ?? false,
       backgroundColor: map['backgroundColor'],
       borderColor: map['borderColor'],
       borderRadius: map['borderRadius'] == null

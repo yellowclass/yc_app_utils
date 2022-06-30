@@ -1,17 +1,17 @@
-class Option {
+class OptionModel {
   String label;
   String value;
 
-  Option({
+  OptionModel({
     required this.label,
     required this.value,
   });
 
-  Option copyWith({
+  OptionModel copyWith({
     String? label,
     String? value,
   }) {
-    return Option(
+    return OptionModel(
       label: label ?? this.label,
       value: value ?? this.value,
     );
@@ -24,8 +24,8 @@ class Option {
     };
   }
 
-  factory Option.fromMap(Map<String, dynamic> map) {
-    return Option(
+  factory OptionModel.fromMap(Map<String, dynamic> map) {
+    return OptionModel(
       label: map['label'] ?? '',
       value: map['value'] ?? '',
     );

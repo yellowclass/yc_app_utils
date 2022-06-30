@@ -2,57 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
+import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
 
-class V2GridSectionRow {
-  List<V2GridSectionColumn>? columns;
-  MainAxisAlignment? flexAlignment;
+class V2GridSectionRowModel with V2GridSectionWidgetModel {
+  List<V2GridSectionColumnModel> columns;
+  MainAxisAlignment mainAxisAlignment;
+  CrossAxisAlignment crossAxisAlignment;
   List<int>? padding;
-  int? flexFactor;
 
-  V2GridSectionRow({
-    this.columns,
-    this.flexAlignment,
+  V2GridSectionRowModel({
+    required this.columns,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     this.padding,
-    this.flexFactor,
   });
 
-  V2GridSectionRow copyWith({
-    List<V2GridSectionColumn>? columns,
-    MainAxisAlignment? flexAlignment,
+  V2GridSectionRowModel copyWith({
+    List<V2GridSectionColumnModel>? columns,
+    MainAxisAlignment? mainAxisAlignment,
+    CrossAxisAlignment? crossAxisAlignment,
     List<int>? padding,
-    int? flexFactor,
   }) {
-    return V2GridSectionRow(
+    return V2GridSectionRowModel(
       columns: columns ?? this.columns,
-      flexAlignment: flexAlignment ?? this.flexAlignment,
+      mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
       padding: padding ?? this.padding,
-      flexFactor: flexFactor ?? this.flexFactor,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'columns': columns?.map((x) => x.toMap()).toList(),
-      'flexAlignment': flexAlignment?.name,
+      'columns': columns.map((x) => x.toMap()).toList(),
+      'mainAxisAlignment': mainAxisAlignment.name,
+      'crossAxisAlignment': crossAxisAlignment.name,
       'padding': padding,
-      'flexFactor': flexFactor,
     };
   }
 
-  factory V2GridSectionRow.fromMap(Map<String, dynamic> map) {
-    return V2GridSectionRow(
-      columns: map['columns'] != null
-          ? List<V2GridSectionColumn>.from(
-              map['columns']?.map((x) => V2GridSectionColumn.fromMap(x)))
-          : null,
-      flexAlignment: CommonHelpers.enumFromString(
-            MainAxisAlignment.values,
-            map['flexAlignment'],
-          ) ??
-          MainAxisAlignment.start,
+  factory V2GridSectionRowModel.fromMap(Map<String, dynamic> map) {
+    return V2GridSectionRowModel(
+      columns: List<V2GridSectionColumnModel>.from(
+        map['columns']?.map((x) => V2GridSectionColumnModel.fromMap(x)),
+      ),
+      mainAxisAlignment: CommonHelpers.getMainAxisAlignmentFromString(
+        map['mainAxisAlignment'],
+      ),
+      crossAxisAlignment: CommonHelpers.getCrossAxisAlignmentFromString(
+        map['crossAxisAlignment'],
+      ),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
-      flexFactor: map['flexFactor']?.toInt(),
     );
   }
 }

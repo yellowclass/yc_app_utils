@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 
-import 'package:yc_app_utils/models/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_text.model.dart';
 import 'package:yc_app_utils/models/symmetric_padding.model.dart';
 import 'package:yc_app_utils/ui/styleguide/app_radius.dart';
@@ -53,7 +53,7 @@ class GenericButtonV3Model {
           : map['borderRadius'].toDouble(),
       padding: map['padding'] != null
           ? SymmetricPadding.fromMap(map['padding'])
-          : SymmetricPadding(
+          : const SymmetricPadding(
               horizontal: 0,
               vertical: 0,
             ),

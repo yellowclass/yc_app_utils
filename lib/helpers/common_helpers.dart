@@ -6,14 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
-import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
-import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
-import 'package:yc_app_utils/ui/styleguide/spacing.dart';
-import 'package:yc_app_utils/ui/text_styles/text_styles.dart';
-import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CommonHelpers {
   CommonHelpers._();
@@ -168,6 +161,42 @@ class CommonHelpers {
     }
   }
 
+  static MainAxisAlignment getMainAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return MainAxisAlignment.start;
+      case 'CENTER':
+        return MainAxisAlignment.center;
+      case 'END':
+        return MainAxisAlignment.end;
+      case 'SPACE_BETWEEN':
+        return MainAxisAlignment.spaceBetween;
+      case 'SPACE_AROUND':
+        return MainAxisAlignment.spaceAround;
+      case 'SPACE_EVENLY':
+        return MainAxisAlignment.spaceEvenly;
+      default:
+        return MainAxisAlignment.center;
+    }
+  }
+
+  static CrossAxisAlignment getCrossAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return CrossAxisAlignment.start;
+      case 'CENTER':
+        return CrossAxisAlignment.center;
+      case 'END':
+        return CrossAxisAlignment.end;
+      case 'STRETCH':
+        return CrossAxisAlignment.stretch;
+      case 'BASELINE':
+        return CrossAxisAlignment.baseline;
+      default:
+        return CrossAxisAlignment.center;
+    }
+  }
+
   static TextAlign getTextAlignmentFromString(String? alignment) {
     switch (alignment) {
       case 'LEFT':
@@ -181,10 +210,13 @@ class CommonHelpers {
     }
   }
 
-  static EdgeInsetsGeometry getPaddingFromList(List<int> paddingItems) {
+  static EdgeInsetsGeometry getPaddingFromList(List<int>? paddingItems) {
+    if (paddingItems == null) {
+      return EdgeInsets.zero;
+    }
     switch (paddingItems.length) {
       case 0:
-        return const EdgeInsets.all(0);
+        return EdgeInsets.zero;
       case 1:
         return EdgeInsets.all(paddingItems.first.toDouble());
       case 2:
@@ -209,6 +241,50 @@ class CommonHelpers {
     }
   }
 
+  static BorderRadius getBorderRadiusFromList(List<int>? borderRadiusItems) {
+    if (borderRadiusItems == null) {
+      return const BorderRadius.all(
+        Radius.zero,
+      );
+    }
+    switch (borderRadiusItems.length) {
+      case 0:
+        return const BorderRadius.all(
+          Radius.zero,
+        );
+      case 1:
+        return BorderRadius.all(
+          Radius.circular(
+            borderRadiusItems.first.toDouble(),
+          ),
+        );
+      case 2:
+        return BorderRadius.vertical(
+          top: Radius.circular(
+            borderRadiusItems.first.toDouble(),
+          ),
+          bottom: Radius.circular(
+            borderRadiusItems.last.toDouble(),
+          ),
+        );
+      default:
+        return BorderRadius.only(
+          topLeft: Radius.circular(
+            borderRadiusItems[3].toDouble(),
+          ),
+          topRight: Radius.circular(
+            borderRadiusItems[0].toDouble(),
+          ),
+          bottomRight: Radius.circular(
+            borderRadiusItems[1].toDouble(),
+          ),
+          bottomLeft: Radius.circular(
+            borderRadiusItems[2].toDouble(),
+          ),
+        );
+    }
+  }
+
   static Color v2ColorFromHex(String? hexColor) {
     if (hexColor == null) {
       return AppColors.cTRANSPARENT;
@@ -223,21 +299,23 @@ class CommonHelpers {
   }
 
   static TextStyle? getTextStyle(
-    TStyle style, {
+    TStyle? style, {
     TextStyle? customStyle,
   }) {
     Map<TStyle, TextStyle> textStyleMap = YCMediaQuery.getIsTablet()
         ? TextStyles.tabTextStyle
         : TextStyles.mobTextStyle;
-    return customStyle != null
-        ? textStyleMap[style]!.merge(customStyle)
-        : textStyleMap[style];
+    TextStyle tStyle = textStyleMap[style] ?? const TextStyle();
+    return customStyle != null ? tStyle.merge(customStyle) : tStyle;
   }
 
   static BoxDecoration getBoxDecorationWithSectionBackground({
-    required SectionBackground sectionBackground,
+    required SectionBackground? sectionBackground,
     double borderRadius = AppSpacing.s,
   }) {
+    if (sectionBackground == null) {
+      return const BoxDecoration();
+    }
     switch (sectionBackground.backgroundType) {
       case SectionBgType.TRANSPARENT:
         return const BoxDecoration();
@@ -306,6 +384,58 @@ class CommonHelpers {
     }
   }
 
+  static BoxDecoration getBoxDecorationWithCardBackground({
+    required CardBackground? cardBackground,
+    double borderRadius = AppSpacing.s,
+  }) {
+    if (cardBackground == null) {
+      return const BoxDecoration();
+    }
+    switch (cardBackground.backgroundType) {
+      case SectionBgType.TRANSPARENT:
+        return const BoxDecoration();
+      case SectionBgType.FLAT_COLOR:
+        return BoxDecoration(
+          borderRadius: showSectionBorder(
+              shouldLeaveBorder: cardBackground.shouldLeaveBorder,
+              borderRadius: borderRadius),
+          color: CommonHelpers.v2ColorFromHex(
+            cardBackground.backgroundColor,
+          ),
+        );
+      case SectionBgType.GRADIENT:
+        return BoxDecoration(
+          borderRadius: showSectionBorder(),
+          gradient: LinearGradient(
+            begin: getBeginDirection(cardBackground.gradientDirection),
+            end: getBottomDirection(cardBackground.gradientDirection),
+            colors: <Color>[
+              CommonHelpers.v2ColorFromHex(
+                cardBackground.gradientColor1,
+              ),
+              CommonHelpers.v2ColorFromHex(
+                cardBackground.gradientColor2,
+              )
+            ],
+          ),
+        );
+      case SectionBgType.IMAGE:
+        return BoxDecoration(
+          image: cardBackground.backgroundImageUrl != null
+              ? DecorationImage(
+                  // Only supports Non-vector image formats
+                  image: CachedNetworkImageProvider(
+                    cardBackground.backgroundImageUrl!,
+                  ),
+                  fit: BoxFit.cover,
+                )
+              : null,
+        );
+      default:
+        return const BoxDecoration();
+    }
+  }
+
   static BorderRadius? showSectionBorder(
       {bool shouldLeaveBorder = false, double borderRadius = AppSpacing.s}) {
     if (shouldLeaveBorder) {
@@ -361,5 +491,106 @@ class CommonHelpers {
     } else {
       return Alignment.topCenter;
     }
+  }
+
+  static String? validateTextField({
+    required String value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for minLength
+    if (validations.minLength != null) {
+      if (value.length < validations.minLength!.value) {
+        return validations.minLength!.msg;
+      }
+    }
+
+    // check for maxLength
+    if (validations.maxLength != null) {
+      if (value.length > validations.maxLength!.value) {
+        return validations.maxLength!.msg;
+      }
+    }
+
+    // check for min (for number field)
+    if (validations.min != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue < validations.min!.value) {
+        return validations.min!.msg;
+      }
+    }
+
+    // check for max (for number field)
+    if (validations.max != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue > validations.max!.value) {
+        return validations.max!.msg;
+      }
+    }
+
+    // check for regex match
+    if (validations.pattern != null) {
+      if (!RegExp(validations.pattern!.value).hasMatch(value)) {
+        return validations.pattern!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateRadioField({
+    required OptionModel? value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value == null) {
+        return validations.isRequired!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateSelectCheckField({
+    required List<OptionModel> values,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && values.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for min
+    if (validations.min != null) {
+      if (values.length < validations.min!.value) {
+        return validations.min!.msg;
+      }
+    }
+
+    // check for max
+    if (validations.max != null) {
+      if (values.length > validations.max!.value) {
+        return validations.max!.msg;
+      }
+    }
+
+    return null;
   }
 }
