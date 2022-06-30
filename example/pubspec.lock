@@ -138,11 +138,7 @@ packages:
       name: flutter_lints
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.0.4"
-=======
     version: "2.0.1"
->>>>>>> 99374eee8672a2d0ced0dba6e90ac64576e5f010
   flutter_svg:
     dependency: transitive
     description:
@@ -245,11 +241,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.16"
-=======
-    version: "2.0.15"
->>>>>>> 99374eee8672a2d0ced0dba6e90ac64576e5f010
   path_provider_ios:
     dependency: transitive
     description:
@@ -401,11 +393,7 @@ packages:
       name: typed_data
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.3.0"
-=======
     version: "1.3.1"
->>>>>>> 99374eee8672a2d0ced0dba6e90ac64576e5f010
   uuid:
     dependency: transitive
     description:
@@ -449,9 +437,5 @@ packages:
     source: path
     version: "0.0.1"
 sdks:
-<<<<<<< HEAD
-  dart: ">=2.17.0 <3.0.0"
-=======
   dart: ">=2.17.3 <3.0.0"
->>>>>>> 99374eee8672a2d0ced0dba6e90ac64576e5f010
   flutter: ">=3.0.0"
