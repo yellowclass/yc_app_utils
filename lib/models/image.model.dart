@@ -68,8 +68,8 @@ class ImageModel {
       badge: map['badge'],
       badgePosition: map['badgePosition'],
       fillColor: map['fillColor'],
-      height: map['height'],
-      width: map['width'],
+      height: map['height']?.toDouble() ?? 0.0,
+      width: map['width']?.toDouble() ?? 0.0,
       cropType: map['cropType'],
     );
   }
