@@ -1,10 +1,106 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CommonHelpers {
   CommonHelpers._();
+
+  static void copyToClipboard(String copyTxt) {
+    Clipboard.setData(ClipboardData(text: copyTxt));
+  }
+
+  static bool isNotEmptyList(List arr) {
+    return arr.isNotEmpty;
+  }
+
+  static bool isNotEmptyMap(Map map) {
+    return map.isNotEmpty;
+  }
+
+  static bool isNotEmptyString(String? str) {
+    return str != null && str.isNotEmpty && str != '';
+  }
+
+  static bool isNotNullEntity(dynamic x) {
+    return x != null;
+  }
+
+  static bool isNullEntity(dynamic x) {
+    return x == null;
+  }
+
+  static bool get isNotIos => !Platform.isIOS;
+
+  static bool get isIos => Platform.isIOS;
+
+  static bool get isAndroid => Platform.isAndroid;
+
+  static String getDurationString(Duration time) {
+    String timeText = time.toString().split('.').first;
+    if (timeText.split(':').first == "0") {
+      timeText = timeText.split(':').sublist(1).join(':');
+    }
+    return timeText;
+  }
+
+  static String cleanMobileNumber(String num) {
+    return num.replaceAll('-', '')
+        .replaceAll('(', '')
+        .replaceAll(')', '')
+        .replaceAll(' ', '')
+        .trim();
+  }
+
+  static String compactNumFormatter(int? val) {
+    return NumberFormat.compact().format(val ?? 0);
+  }
+
+  static Map<String, dynamic>? removeNullParams(
+    Map<String, dynamic>? data, {
+    List<String>? excludeParams,
+  }) {
+    if (excludeParams != null) {
+      data!.removeWhere(
+          (String k, dynamic v) => v == null && !excludeParams.contains(k));
+    } else {
+      data!.removeWhere((String k, dynamic v) => v == null);
+    }
+    return data;
+  }
+
+  // VALIDATORS
+  static bool isNumber(String str) {
+    return int.tryParse(str) != null;
+  }
+
+  static bool isValidEmail(String email) {
+    return RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+        .hasMatch(email);
+  }
+
+  static bool isValidName(String name) {
+    return RegExp("^[A-Za-zs]{1,}[.]{0,1}[A-Za-zs]{0,}").hasMatch(name) &&
+        name.length >= 2;
+  }
+
+  static Axis getAxisFromString(String? axis) {
+    if (axis == "HORIZONTAL") {
+      return Axis.horizontal;
+    } else {
+      return Axis.vertical;
+    }
+  }
+
+  int random() {
+    Random rn = Random();
+    return rn.nextInt(6);
+  }
 
   static T? enumFromString<T>(Iterable<T> values, String? value) {
     try {
