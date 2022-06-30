@@ -1,4 +1,6 @@
-class StyledImageModel {
+import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
+
+class StyledImageModel with StyledComponentUnion {
   String url;
 
   StyledImageModel({

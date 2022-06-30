@@ -1,49 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:yc_app_utils/models/form_component/form_component.model.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_checkbox_field.widget.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_radio_field.widget.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_select_field.widget.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_text_area_field.widget.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_text_field.widget.dart';
+
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentWidget extends StatelessWidget {
   const FormComponentWidget({
-    required this.formDetails,
+    required this.formComponentDetails,
     this.onSaved,
     Key? key,
   }) : super(key: key);
 
-  final FormComponentModel formDetails;
+  final FormComponentModel formComponentDetails;
   final void Function(String, dynamic)? onSaved;
 
-  @override
-  Widget build(BuildContext context) {
-    switch (formDetails.fcType) {
+  Widget buildComponent() {
+    switch (formComponentDetails.fcData?.fcType) {
       case FormComponentEnum.FORM_INPUT:
+        StyledInputFieldModel inputFieldDetails =
+            formComponentDetails.fcData?.data as StyledInputFieldModel;
         return StyledTextFieldWidget(
-          textFieldData: formDetails.inputField!,
-          onSaved: onSaved,
-        );
-      case FormComponentEnum.FORM_TEXTAREA:
-        return StyledTextAreaFieldWidget(
-          textAreaFieldData: formDetails.textAreaField!,
+          textFieldData: inputFieldDetails,
           onSaved: onSaved,
         );
       case FormComponentEnum.FORM_RADIO:
+        StyledRadioFieldModel radioFieldDetails =
+            formComponentDetails.fcData?.data as StyledRadioFieldModel;
         return StyledRadioFieldWidget(
-          radioFieldData: formDetails.radioField!,
+          radioFieldData: radioFieldDetails,
           onSaved: onSaved,
         );
       case FormComponentEnum.FORM_CHECKBOX:
+        StyledCheckboxFieldModel checkboxFieldDetails =
+            formComponentDetails.fcData?.data as StyledCheckboxFieldModel;
         return StyledCheckboxFieldWidget(
-          checkboxFieldData: formDetails.checkboxField!,
+          checkboxFieldData: checkboxFieldDetails,
           onSaved: onSaved,
         );
       case FormComponentEnum.FORM_SELECT:
+        StyledSelectFieldModel selectFieldDetails =
+            formComponentDetails.fcData?.data as StyledSelectFieldModel;
         return StyledSelectFieldWidget(
-          selectFieldData: formDetails.selectField!,
+          selectFieldData: selectFieldDetails,
           onSaved: onSaved,
         );
+      default:
+        return const SizedBox.shrink();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: CommonHelpers.getPaddingFromList(
+        formComponentDetails.padding,
+      ),
+      decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
+        sectionBackground: formComponentDetails.background,
+      ).copyWith(
+        borderRadius: CommonHelpers.getBorderRadiusFromList(
+          formComponentDetails.borderRadius,
+        ),
+        border: Border.all(
+          color: CommonHelpers.v2ColorFromHex(
+            formComponentDetails.borderColor,
+          ),
+        ),
+      ),
+      child: buildComponent(),
+    );
   }
 }

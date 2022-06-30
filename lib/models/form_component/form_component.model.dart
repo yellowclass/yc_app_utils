@@ -1,24 +1,14 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentModel with V2GSColumnDataWidgetModel {
-  FormComponentEnum fcType;
-  StyledInputFieldModel? inputField;
-  StyledTextAreaFieldModel? textAreaField;
-  StyledRadioFieldModel? radioField;
-  StyledCheckboxFieldModel? checkboxField;
-  StyledSelectFieldModel? selectField;
+  FCDataModel? fcData;
   SectionBackground? background;
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
 
   FormComponentModel({
-    required this.fcType,
-    this.inputField,
-    this.textAreaField,
-    this.radioField,
-    this.checkboxField,
-    this.selectField,
+    this.fcData,
     this.background,
     this.borderColor,
     this.borderRadius,
@@ -27,12 +17,7 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'fcType': fcType.name,
-      'inputField': inputField?.toMap(),
-      'textAreaField': textAreaField?.toMap(),
-      'radioField': radioField?.toMap(),
-      'checkboxField': checkboxField?.toMap(),
-      'selectField': selectField?.toMap(),
+      'fcData': fcData?.toMap(),
       'background': background?.toMap(),
       'borderColor': borderColor,
       'borderRadius': borderRadius,
@@ -42,25 +27,7 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
 
   factory FormComponentModel.fromMap(Map<String, dynamic> map) {
     return FormComponentModel(
-      fcType: CommonHelpers.enumFromString(
-        FormComponentEnum.values,
-        map['fcType'],
-      )!,
-      inputField: map['inputField'] != null
-          ? StyledInputFieldModel.fromMap(map['inputField'])
-          : null,
-      textAreaField: map['textAreaField'] != null
-          ? StyledTextAreaFieldModel.fromMap(map['textAreaField'])
-          : null,
-      radioField: map['radioField'] != null
-          ? StyledRadioFieldModel.fromMap(map['radioField'])
-          : null,
-      checkboxField: map['checkboxField'] != null
-          ? StyledCheckboxFieldModel.fromMap(map['checkboxField'])
-          : null,
-      selectField: map['selectField'] != null
-          ? StyledSelectFieldModel.fromMap(map['selectField'])
-          : null,
+      fcData: map['fcData'] != null ? FCDataModel.fromMap(map['fcData']) : null,
       background: map['background'] != null
           ? SectionBackground.fromMap(map['background'])
           : null,
@@ -72,12 +39,4 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
     );
   }
-}
-
-enum FormComponentEnum {
-  FORM_INPUT,
-  FORM_TEXTAREA,
-  FORM_RADIO,
-  FORM_CHECKBOX,
-  FORM_SELECT,
 }

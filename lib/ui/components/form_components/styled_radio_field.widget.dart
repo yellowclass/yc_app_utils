@@ -24,7 +24,7 @@ class StyledRadioFieldWidget extends StatelessWidget {
           ),
         FormBuilderRadioGroup(
           name: radioFieldData.name,
-          initialValue: radioFieldData.defaultValue?.value,
+          initialValue: radioFieldData.radioDefaultValue?.value,
           options: radioFieldData.options
               .map(
                 (option) => FormBuilderFieldOption(

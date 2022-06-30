@@ -1,10 +1,11 @@
+import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledRadioFieldModel {
+class StyledRadioFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;
-  OptionModel? defaultValue;
+  OptionModel? radioDefaultValue;
   bool isDisabled;
   List<OptionModel> options;
 
@@ -12,7 +13,7 @@ class StyledRadioFieldModel {
     this.label,
     required this.name,
     this.validation,
-    this.defaultValue,
+    this.radioDefaultValue,
     this.isDisabled = false,
     required this.options,
   });
@@ -21,7 +22,7 @@ class StyledRadioFieldModel {
     V2StyledTextModel? label,
     String? name,
     Validation? validation,
-    OptionModel? defaultValue,
+    OptionModel? radioDefaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
   }) {
@@ -29,7 +30,7 @@ class StyledRadioFieldModel {
       label: label ?? this.label,
       name: name ?? this.name,
       validation: validation ?? this.validation,
-      defaultValue: defaultValue ?? this.defaultValue,
+      radioDefaultValue: radioDefaultValue ?? this.radioDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
     );
@@ -40,7 +41,7 @@ class StyledRadioFieldModel {
       'label': label?.toMap(),
       'name': name,
       'validation': validation?.toMap(),
-      'defaultValue': defaultValue,
+      'radioDefaultValue': radioDefaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
     };
@@ -54,8 +55,8 @@ class StyledRadioFieldModel {
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'])
           : null,
-      defaultValue: map['defaultValue'] != null
-          ? OptionModel.fromMap(map['defaultValue'])
+      radioDefaultValue: map['radioDefaultValue'] != null
+          ? OptionModel.fromMap(map['radioDefaultValue'])
           : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(

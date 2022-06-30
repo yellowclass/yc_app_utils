@@ -1,18 +1,12 @@
-import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_image.model.dart';
-import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
-import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
+import 'package:yc_app_utils/models/styled_component/sc_data.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
 import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
 
 class StyledComponentModel
     with V2GridSectionWidgetModel, V2GSColumnDataWidgetModel {
-  StyledComponentEnum scType;
-  V2StyledTextModel? textDetails;
-  StyledImageModel? imageDetails;
-  StyledVideoModel? videoDetails;
+  SCDataModel? scData;
   V2ClickAction? clickAction;
   SectionBackground? background;
   String? borderColor;
@@ -20,10 +14,7 @@ class StyledComponentModel
   List<int>? padding;
 
   StyledComponentModel({
-    required this.scType,
-    this.textDetails,
-    this.imageDetails,
-    this.videoDetails,
+    this.scData,
     this.clickAction,
     this.background,
     this.borderColor,
@@ -33,10 +24,6 @@ class StyledComponentModel
 
   Map<String, dynamic> toMap() {
     return {
-      'scType': scType.name,
-      'textDetails': textDetails?.toMap(),
-      'imageDetails': imageDetails?.toMap(),
-      'videoDetails': videoDetails?.toMap(),
       'clickAction': clickAction?.toMap(),
       'background': background?.toMap(),
       'borderColor': borderColor,
@@ -47,19 +34,7 @@ class StyledComponentModel
 
   factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
     return StyledComponentModel(
-      scType: CommonHelpers.enumFromString(
-        StyledComponentEnum.values,
-        map['scType'],
-      )!,
-      textDetails: map['textDetails'] != null
-          ? V2StyledTextModel.fromMap(map['textDetails'])
-          : null,
-      imageDetails: map['imageDetails'] != null
-          ? StyledImageModel.fromMap(map['imageDetails'])
-          : null,
-      videoDetails: map['videoDetails'] != null
-          ? StyledVideoModel.fromMap(map['videoDetails'])
-          : null,
+      scData: map['scData'] != null ? SCDataModel.fromMap(map['scData']) : null,
       clickAction: map['clickAction'] != null
           ? V2ClickAction.fromMap(map['clickAction'])
           : null,
@@ -74,10 +49,4 @@ class StyledComponentModel
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
     );
   }
-}
-
-enum StyledComponentEnum {
-  TEXT,
-  IMAGE,
-  VIDEO,
 }

@@ -1,43 +1,48 @@
 import 'package:yc_app_utils/helpers/common_helpers.dart';
+import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledInputFieldModel {
+class StyledInputFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
-  InputFieldEnum? type;
+  InputFieldEnum? inputFieldType;
   String? placeholder;
   Validation? validation;
-  String? defaultValue;
+  String? inputDefaultValue;
   bool isDisabled;
+  int maxLines;
 
   StyledInputFieldModel({
     this.label,
     required this.name,
-    this.type,
+    this.inputFieldType,
     this.placeholder,
     this.validation,
-    this.defaultValue,
+    this.inputDefaultValue,
     this.isDisabled = false,
+    this.maxLines = 1,
   });
 
   StyledInputFieldModel copyWith({
     V2StyledTextModel? label,
     String? name,
-    InputFieldEnum? type,
+    InputFieldEnum? inputFieldType,
     String? placeholder,
     Validation? validation,
-    String? defaultValue,
+    String? inputDefaultValue,
     bool? isDisabled,
+    int? maxLines,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
       name: name ?? this.name,
-      type: type ?? this.type,
+      inputFieldType: inputFieldType ?? this.inputFieldType,
       placeholder: placeholder ?? this.placeholder,
       validation: validation ?? this.validation,
-      defaultValue: defaultValue ?? this.defaultValue,
+      inputDefaultValue: inputDefaultValue ?? this.inputDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
+      maxLines: maxLines ?? this.maxLines,
     );
   }
 
@@ -45,11 +50,12 @@ class StyledInputFieldModel {
     return {
       'label': label?.toMap(),
       'name': name,
-      'type': type?.name,
+      'inputFieldType': inputFieldType?.name,
       'placeholder': placeholder,
       'validation': validation?.toMap(),
-      'defaultValue': defaultValue,
+      'inputDefaultValue': inputDefaultValue,
       'isDisabled': isDisabled,
+      'maxLines': maxLines,
     };
   }
 
@@ -58,18 +64,19 @@ class StyledInputFieldModel {
       label:
           map['label'] != null ? V2StyledTextModel.fromMap(map['label']) : null,
       name: map['name'] ?? '',
-      type: map['type'] != null
+      inputFieldType: map['inputFieldType'] != null
           ? CommonHelpers.enumFromString(
               InputFieldEnum.values,
-              map['type'],
+              map['inputFieldType'],
             )
           : null,
       placeholder: map['placeholder'],
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'])
           : null,
-      defaultValue: map['defaultValue'],
+      inputDefaultValue: map['inputDefaultValue'],
       isDisabled: map['isDisabled'] ?? false,
+      maxLines: map['maxLines'] ?? 1,
     );
   }
 }
@@ -79,4 +86,5 @@ enum InputFieldEnum {
   EMAIL,
   NUMBER,
   PASSWORD,
+  MOBILE,
 }

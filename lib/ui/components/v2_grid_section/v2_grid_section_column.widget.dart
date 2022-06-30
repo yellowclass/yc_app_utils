@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yc_app_utils/models/form_component/form_component.model.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -57,7 +56,7 @@ class V2GridSectionColumnWidget extends StatelessWidget {
     } else if (columnDetails.widget is FormComponentModel) {
       FormComponentModel widget = columnDetails.widget as FormComponentModel;
       return FormComponentWidget(
-        formDetails: widget,
+        formComponentDetails: widget,
         onSaved: (key, value) {
           formData?[key] = value;
         },

@@ -12,7 +12,8 @@ class StyledSelectFieldWidget extends StatelessWidget {
   final StyledSelectFieldModel selectFieldData;
   final void Function(String, List<String>?)? onSaved;
 
-  List<OptionModel> get selectedValues => selectFieldData.defaultValue ?? [];
+  List<OptionModel> get selectedValues =>
+      selectFieldData.selectDefaultValue ?? [];
 
   @override
   Widget build(BuildContext context) {

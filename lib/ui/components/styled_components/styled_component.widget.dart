@@ -15,14 +15,18 @@ class StyledComponentWidget extends StatelessWidget {
   final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
-    switch (styledComponentDetails.scType) {
+    switch (styledComponentDetails.scData?.scType) {
       case StyledComponentEnum.TEXT:
+        V2StyledTextModel styledTextDetails =
+            styledComponentDetails.scData?.data as V2StyledTextModel;
         return V2StyledTextWidget(
-          styledText: styledComponentDetails.textDetails!,
+          styledText: styledTextDetails,
         );
       case StyledComponentEnum.IMAGE:
+        StyledImageModel styledImageDetails =
+            styledComponentDetails.scData?.data as StyledImageModel;
         return StyledImageWidget(
-          styledImageData: styledComponentDetails.imageDetails!,
+          styledImageData: styledImageDetails,
         );
       default:
         return const SizedBox.shrink();

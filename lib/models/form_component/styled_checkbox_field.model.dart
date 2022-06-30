@@ -1,10 +1,11 @@
+import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledCheckboxFieldModel {
+class StyledCheckboxFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;
-  List<OptionModel>? defaultValue;
+  List<OptionModel>? checkboxDefaultValue;
   bool isDisabled;
   List<OptionModel> options;
   SelectType selectType;
@@ -13,7 +14,7 @@ class StyledCheckboxFieldModel {
     this.label,
     required this.name,
     this.validation,
-    this.defaultValue,
+    this.checkboxDefaultValue,
     this.isDisabled = false,
     required this.options,
     this.selectType = SelectType.SINGLE,
@@ -23,7 +24,7 @@ class StyledCheckboxFieldModel {
     V2StyledTextModel? label,
     String? name,
     Validation? validation,
-    List<OptionModel>? defaultValue,
+    List<OptionModel>? checkboxDefaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
     SelectType? selectType,
@@ -32,7 +33,7 @@ class StyledCheckboxFieldModel {
       label: label ?? this.label,
       name: name ?? this.name,
       validation: validation ?? this.validation,
-      defaultValue: defaultValue ?? this.defaultValue,
+      checkboxDefaultValue: checkboxDefaultValue ?? this.checkboxDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
       selectType: selectType ?? this.selectType,
@@ -44,7 +45,7 @@ class StyledCheckboxFieldModel {
       'label': label?.toMap(),
       'name': name,
       'validation': validation?.toMap(),
-      'defaultValue': defaultValue,
+      'checkboxDefaultValue': checkboxDefaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
       'selectType': selectType.name,
@@ -59,9 +60,9 @@ class StyledCheckboxFieldModel {
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'])
           : null,
-      defaultValue: map['defaultValue'] != null
+      checkboxDefaultValue: map['checkboxDefaultValue'] != null
           ? List<OptionModel>.from(
-              map['defaultValue']?.map((x) => OptionModel.fromMap(x)))
+              map['checkboxDefaultValue']?.map((x) => OptionModel.fromMap(x)))
           : null,
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(

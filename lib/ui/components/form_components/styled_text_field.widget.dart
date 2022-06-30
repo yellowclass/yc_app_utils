@@ -20,6 +20,8 @@ class StyledTextFieldWidget extends StatelessWidget {
         return TextInputType.text;
       case InputFieldEnum.NUMBER:
         return TextInputType.number;
+      case InputFieldEnum.MOBILE:
+        return TextInputType.phone;
       default:
         return null;
     }
@@ -35,15 +37,16 @@ class StyledTextFieldWidget extends StatelessWidget {
             styledText: textFieldData.label!,
           ),
         TextFormField(
-          initialValue: textFieldData.defaultValue,
+          initialValue: textFieldData.inputDefaultValue,
           enabled: !textFieldData.isDisabled,
           textAlignVertical: TextAlignVertical.bottom,
           inputFormatters: [
-            if (textFieldData.type == InputFieldEnum.NUMBER)
+            if (textFieldData.inputFieldType == InputFieldEnum.NUMBER)
               FilteringTextInputFormatter.digitsOnly
           ],
-          keyboardType: getKeyboardType(textFieldData.type),
-          obscureText: textFieldData.type == InputFieldEnum.PASSWORD,
+          maxLines: textFieldData.maxLines,
+          keyboardType: getKeyboardType(textFieldData.inputFieldType),
+          obscureText: textFieldData.inputFieldType == InputFieldEnum.PASSWORD,
           decoration: InputDecoration(
             hintText: textFieldData.placeholder,
             hintStyle: const TextStyle(
