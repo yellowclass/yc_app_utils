@@ -15,19 +15,16 @@ export 'package:yc_app_utils/models/section_background/section_background_direct
 export 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
 
 // styled component
-export 'package:yc_app_utils/models/styled_component/styled_components.dart';
+export 'package:yc_app_utils/models/styled_component/styled_component_model.import.dart';
 
 // form component
-export 'package:yc_app_utils/models/form_component/form_components.dart';
+export 'package:yc_app_utils/models/form_component/form_component_model.import.dart';
 
 // v2 grid section
-export 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
-export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_column.model.dart';
-export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_row.model.dart';
-export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_layer.model.dart';
-export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_stack.model.dart';
-export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section.model.dart';
-export 'package:yc_app_utils/models/v2_grid_section/gs_widget.model.dart';
+export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_model.import.dart';
+
+// bootstrap section
+export 'package:yc_app_utils/models/bootstrap_section/bootstrap_section_model.import.dart';
 
 // validation
 export 'package:yc_app_utils/models/validation/base_validation.model.dart';

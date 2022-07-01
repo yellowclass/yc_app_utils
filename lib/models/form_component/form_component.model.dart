@@ -1,6 +1,6 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class FormComponentModel with V2GSColumnDataWidgetModel {
+class FormComponentModel with V2GSColumnDataWidgetModel, BootstrapChildUnion {
   FCDataModel? fcData;
   SectionBackground? background;
   String? borderColor;

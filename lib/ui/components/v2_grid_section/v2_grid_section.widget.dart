@@ -27,8 +27,9 @@ class V2GridSectionWidget extends StatefulWidget {
   final VoidCallback? onPressed;
   final bool showRippleEffect;
   final void Function(
-          V2ClickAction clickAction, Map<String, dynamic>? formData)?
-      innerClickAction;
+    V2ClickAction clickAction,
+    Map<String, dynamic>? formData,
+  )? innerClickAction;
 
   @override
   State<V2GridSectionWidget> createState() => _V2GridSectionWidgetState();

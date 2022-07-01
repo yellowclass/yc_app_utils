@@ -210,6 +210,28 @@ class CommonHelpers {
     }
   }
 
+  static String getBootstrapSizesFromClasses(String classes) {
+    List<String> sizes = [];
+    List<String> separatedClasses = classes.split(' ');
+    for (var separatedClass in separatedClasses) {
+      if (separatedClass.contains('col')) {
+        sizes.add(separatedClass);
+      }
+    }
+    return sizes.join(' ');
+  }
+
+  static String getBootstrapOffsetsFromClasses(String classes) {
+    List<String> sizes = [];
+    List<String> separatedClasses = classes.split(' ');
+    for (var separatedClass in separatedClasses) {
+      if (separatedClass.contains('offset')) {
+        sizes.add(separatedClass);
+      }
+    }
+    return sizes.join(' ');
+  }
+
   static EdgeInsetsGeometry getPaddingFromList(List<int>? paddingItems) {
     if (paddingItems == null) {
       return EdgeInsets.zero;
