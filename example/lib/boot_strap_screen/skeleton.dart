@@ -7,86 +7,73 @@ class BootstrapSkeleton {
     BootstrapSectionModel(
       key: 't1',
       padding: [24, 0],
-      data: BSWidgetModel(
-        bsWidget: BootstrapChildModel(
-          height: 100,
-          borderRadius: [20],
-          background: SectionBackground(
-            backgroundType: SectionBgType.IMAGE,
-            backgroundImgUrl: 'https://picsum.photos/200/300',
-          ),
-          boxAlignment: Alignment.centerLeft,
-          classes: 'col-8 offset-2',
-          child: BootstrapSectionModel(
-            key: 't2',
-            containsForm: false,
-            data: BSWidgetModel(
-              bsWidget: BootstrapSectionLayerModel(
-                children: [
-                  BootstrapChildModel(
-                    height: 24,
-                    classes: 'col-2 offset-10',
-                    padding: [
-                      4,
-                      4,
-                      0,
-                      0,
-                    ],
-                    child: StyledComponentModel(
-                      scData: SCDataModel(
-                        scType: StyledComponentEnum.IMAGE,
-                        data: StyledImageModel(
-                          url: 'https://i.ibb.co/PhFDqp2/like.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  BootstrapChildModel(
-                    height: 46,
-                    classes: 'col-12',
-                  ),
-                  BootstrapChildModel(
-                    // height: 28,
-                    classes: 'col-10',
-                    padding: [
-                      0,
-                      0,
-                      0,
-                      4,
-                    ],
-                    child: StyledComponentModel(
-                      scData: SCDataModel(
-                        scType: StyledComponentEnum.TEXT,
-                        data: V2StyledTextModel(
-                          text: 'Raju Vaishno Dhaba',
-                          textColor: '#FFF',
-                          tStyle: TStyle.H5_600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  BootstrapChildModel(
-                    classes: 'col-2',
-                    height: 24,
-                    boxAlignment: Alignment.center,
-                    padding: [
-                      0,
-                      4,
-                      4,
-                      0,
-                    ],
-                    child: StyledComponentModel(
-                      scData: SCDataModel(
-                        scType: StyledComponentEnum.IMAGE,
-                        data: StyledImageModel(
-                          url: 'https://i.ibb.co/PhFDqp2/like.png',
-                        ),
-                      ),
-                    ),
-                  ),
+      bsData: BootstrapChildModel(
+        height: 100,
+        borderRadius: [20],
+        background: SectionBackground(
+          backgroundType: SectionBgType.IMAGE,
+          backgroundImgUrl: 'https://picsum.photos/200/300',
+        ),
+        boxAlignment: Alignment.centerLeft,
+        classes: 'col-8 offset-2',
+        bcData: BootstrapSectionModel(
+          key: 't2',
+          containsForm: false,
+          bsData: BootstrapSectionLayerModel(
+            children: [
+              BootstrapChildModel(
+                height: 24,
+                classes: 'col-2 offset-10',
+                padding: [
+                  4,
+                  4,
+                  0,
+                  0,
                 ],
+                bcData: StyledComponentModel(
+                  scData: StyledImageModel(
+                    url: 'https://i.ibb.co/PhFDqp2/like.png',
+                  ),
+                ),
               ),
-            ),
+              BootstrapChildModel(
+                height: 46,
+                classes: 'col-12',
+              ),
+              BootstrapChildModel(
+                // height: 28,
+                classes: 'col-10',
+                padding: [
+                  0,
+                  0,
+                  0,
+                  4,
+                ],
+                bcData: StyledComponentModel(
+                  scData: V2StyledTextModel(
+                    text: 'Raju Vaishno Dhaba',
+                    textColor: '#FFF',
+                    tStyle: TStyle.H5_600,
+                  ),
+                ),
+              ),
+              BootstrapChildModel(
+                classes: 'col-2',
+                height: 24,
+                boxAlignment: Alignment.center,
+                padding: [
+                  0,
+                  4,
+                  4,
+                  0,
+                ],
+                bcData: StyledComponentModel(
+                  scData: StyledImageModel(
+                    url: 'https://i.ibb.co/PhFDqp2/like.png',
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -95,115 +82,227 @@ class BootstrapSkeleton {
     BootstrapSectionModel(
       key: 't1',
       padding: [24, 0],
-      data: BSWidgetModel(
-        bsWidget: BootstrapChildModel(
-          height: 100,
-          borderRadius: [20],
-          background: SectionBackground(
-            backgroundType: SectionBgType.IMAGE,
-            backgroundImgUrl: 'https://picsum.photos/200/300',
-          ),
-          boxAlignment: Alignment.centerLeft,
-          classes: 'col-8 offset-2',
-          child: BootstrapSectionModel(
-            key: 't2',
-            containsForm: false,
-            data: BSWidgetModel(
-              bsWidget: BootstrapSectionLayerModel(
-                children: [
-                  BootstrapChildModel(
-                    classes: 'col-10',
-                    child: StyledComponentModel(
-                        // scData: SCDataModel(
-                        //   scType: StyledComponentEnum.IMAGE,
-                        //   data: StyledImageModel(
-                        //     url: 'https://i.ibb.co/PhFDqp2/like.png',
-                        //   ),
-                        // ),
-                        ),
-                  ),
-                  BootstrapChildModel(
-                    classes: 'col-2',
-                    child: BootstrapSectionModel(
-                      key: 't2',
-                      height: 20,
-                      containsForm: false,
-                      data: BSWidgetModel(
-                        bsWidget: BootstrapSectionLayerModel(
-                          children: [
-                            BootstrapChildModel(
-                              classes: 'col-12',
-                              height: 20,
-                              child: StyledComponentModel(
-                                scData: SCDataModel(
-                                  scType: StyledComponentEnum.IMAGE,
-                                  data: StyledImageModel(
-                                    url: 'https://i.ibb.co/PhFDqp2/like.png',
-                                  ),
-                                ),
-                              ),
-                            ),
-                            BootstrapChildModel(
-                              classes: 'col-12',
-                              height: 20,
-                              child: StyledComponentModel(
-                                scData: SCDataModel(
-                                  scType: StyledComponentEnum.IMAGE,
-                                  data: StyledImageModel(
-                                    url: 'https://i.ibb.co/PhFDqp2/like.png',
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+      bsData: BootstrapChildModel(
+        height: 100,
+        borderRadius: [20],
+        background: SectionBackground(
+          backgroundType: SectionBgType.IMAGE,
+          backgroundImgUrl: 'https://picsum.photos/200/300',
+        ),
+        boxAlignment: Alignment.centerLeft,
+        classes: 'col-8 offset-2',
+        bcData: BootstrapSectionModel(
+          key: 't2',
+          containsForm: false,
+          bsData: BootstrapSectionLayerModel(
+            children: [
+              BootstrapChildModel(
+                classes: 'col-10',
+              ),
+              BootstrapChildModel(
+                classes: 'col-2',
+                bcData: BootstrapSectionModel(
+                  key: 't2',
+                  height: 20,
+                  containsForm: false,
+                  bsData: BootstrapSectionLayerModel(
+                    children: [
+                      BootstrapChildModel(
+                        classes: 'col-12',
+                        height: 20,
+                        bcData: StyledComponentModel(
+                          scData: StyledImageModel(
+                            url: 'https://i.ibb.co/PhFDqp2/like.png',
+                          ),
                         ),
                       ),
+                      BootstrapChildModel(
+                        classes: 'col-12',
+                        height: 20,
+                        bcData: StyledComponentModel(
+                          scData: StyledImageModel(
+                            url: 'https://i.ibb.co/PhFDqp2/like.png',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // BootstrapChildModel(
+              //   // height: 28,
+              //   classes: 'col-10',
+              //   padding: [
+              //     0,
+              //     0,
+              //     0,
+              //     4,
+              //   ],
+              //   child: StyledComponentModel(
+              //     scData: SCDataModel(
+              //       scType: StyledComponentEnum.TEXT,
+              //       data: V2StyledTextModel(
+              //         text: 'Raju Vaishno Dhaba',
+              //         textColor: '#FFF',
+              //         tStyle: TStyle.H5_600,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // BootstrapChildModel(
+              //   classes: 'col-2',
+              //   height: 24,
+              //   boxAlignment: Alignment.center,
+              //   padding: [
+              //     0,
+              //     4,
+              //     4,
+              //     0,
+              //   ],
+              //   child: StyledComponentModel(
+              //     scData: SCDataModel(
+              //       scType: StyledComponentEnum.IMAGE,
+              //       data: StyledImageModel(
+              //         url: 'https://i.ibb.co/PhFDqp2/like.png',
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ],
+          ),
+        ),
+      ),
+      containsForm: false,
+    ),
+    BootstrapSectionModel(
+      key: 't1',
+      padding: [34, 16],
+      background: SectionBackground(
+        backgroundType: SectionBgType.FLAT_COLOR,
+      ),
+      bsData: BootstrapSectionLayerModel(
+        children: [
+          BootstrapChildModel(
+            classes: 'col-sm-12',
+            bcData: FormComponentModel(
+              fcData: StyledInputFieldModel(
+                name: 'name',
+                label: V2StyledTextModel(
+                  text: 'Name',
+                  textColor: '#000',
+                ),
+              ),
+            ),
+          ),
+          BootstrapChildModel(
+            classes: 'col-sm-12',
+            bcData: FormComponentModel(
+              padding: [8, 0, 0, 0],
+              fcData: StyledSelectFieldModel(
+                name: 'gender',
+                options: [
+                  OptionModel(
+                    label: 'Male',
+                    value: 'male',
+                  ),
+                  OptionModel(
+                    label: 'Female',
+                    value: 'female',
+                  ),
+                ],
+                label: V2StyledTextModel(
+                  text: 'Gender',
+                  textColor: '#000',
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      containsForm: false,
+    ),
+    BootstrapSectionModel(
+      key: 't1',
+      background: SectionBackground(
+        backgroundType: SectionBgType.FLAT_COLOR,
+      ),
+      bsData: BootstrapSectionLayerModel(
+        children: [
+          BootstrapChildModel(
+            classes: 'col-sm-6',
+            bcData: BootstrapSectionModel(
+              key: '',
+              containsForm: false,
+              bsData: BootstrapSectionLayerModel(
+                children: [
+                  BootstrapChildModel(
+                    classes: 'col-sm-6',
+                    height: 100,
+                    background: SectionBackground(
+                      backgroundType: SectionBgType.FLAT_COLOR,
+                      backgroundColor: '#FF0000',
                     ),
                   ),
-                  // BootstrapChildModel(
-                  //   // height: 28,
-                  //   classes: 'col-10',
-                  //   padding: [
-                  //     0,
-                  //     0,
-                  //     0,
-                  //     4,
-                  //   ],
-                  //   child: StyledComponentModel(
-                  //     scData: SCDataModel(
-                  //       scType: StyledComponentEnum.TEXT,
-                  //       data: V2StyledTextModel(
-                  //         text: 'Raju Vaishno Dhaba',
-                  //         textColor: '#FFF',
-                  //         tStyle: TStyle.H5_600,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // BootstrapChildModel(
-                  //   classes: 'col-2',
-                  //   height: 24,
-                  //   boxAlignment: Alignment.center,
-                  //   padding: [
-                  //     0,
-                  //     4,
-                  //     4,
-                  //     0,
-                  //   ],
-                  //   child: StyledComponentModel(
-                  //     scData: SCDataModel(
-                  //       scType: StyledComponentEnum.IMAGE,
-                  //       data: StyledImageModel(
-                  //         url: 'https://i.ibb.co/PhFDqp2/like.png',
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  BootstrapChildModel(
+                    classes: 'col-sm-6',
+                    height: 100,
+                    background: SectionBackground(
+                      backgroundType: SectionBgType.FLAT_COLOR,
+                      backgroundColor: '#00FF00',
+                    ),
+                  ),
+                  BootstrapChildModel(
+                    classes: 'col-sm-6',
+                    height: 100,
+                    background: SectionBackground(
+                      backgroundType: SectionBgType.FLAT_COLOR,
+                      backgroundColor: '#00FF00',
+                    ),
+                  ),
+                  BootstrapChildModel(
+                    classes: 'col-sm-6',
+                    height: 100,
+                    background: SectionBackground(
+                      backgroundType: SectionBgType.FLAT_COLOR,
+                      backgroundColor: '#FF0000',
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-        ),
+          BootstrapChildModel(
+            classes: 'col-sm-6',
+            height: 200,
+            background: SectionBackground(
+              backgroundType: SectionBgType.FLAT_COLOR,
+              backgroundColor: '#00FF00',
+            ),
+          ),
+          BootstrapChildModel(
+            classes: 'col-sm-12',
+            bcData: FormComponentModel(
+              padding: [8, 0, 0, 0],
+              fcData: StyledSelectFieldModel(
+                name: 'gender',
+                options: [
+                  OptionModel(
+                    label: 'Male',
+                    value: 'male',
+                  ),
+                  OptionModel(
+                    label: 'Female',
+                    value: 'female',
+                  ),
+                ],
+                label: V2StyledTextModel(
+                  text: 'Gender',
+                  textColor: '#000',
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       containsForm: false,
     )

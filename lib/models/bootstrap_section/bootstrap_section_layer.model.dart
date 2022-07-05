@@ -16,7 +16,8 @@ class BootstrapSectionLayerModel with BootstrapSectionUnion {
   factory BootstrapSectionLayerModel.fromMap(Map<String, dynamic> map) {
     return BootstrapSectionLayerModel(
       children: List<BootstrapChildModel>.from(
-          map['children']?.map((x) => BootstrapChildModel.fromMap(x))),
+        map['children']?.map((x) => BootstrapChildModel.fromMap(x)),
+      ),
     );
   }
 }

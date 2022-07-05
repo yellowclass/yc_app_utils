@@ -17,9 +17,9 @@ class BootstrapChildWidget extends StatelessWidget {
   final Map<String, dynamic>? formData;
 
   Widget buildChild() {
-    if (bootstrapChild.child is BootstrapSectionModel) {
+    if (bootstrapChild.bcData is BootstrapSectionModel) {
       BootstrapSectionModel child =
-          bootstrapChild.child as BootstrapSectionModel;
+          bootstrapChild.bcData as BootstrapSectionModel;
       return BootstrapSectionWidget(
         bootstrapSectionData: child,
         onPressed: (child.clickAction != null && innerClickAction != null)
@@ -46,15 +46,16 @@ class BootstrapChildWidget extends StatelessWidget {
               }
             : null,
       );
-    } else if (bootstrapChild.child is StyledComponentModel) {
-      StyledComponentModel child = bootstrapChild.child as StyledComponentModel;
+    } else if (bootstrapChild.bcData is StyledComponentModel) {
+      StyledComponentModel child =
+          bootstrapChild.bcData as StyledComponentModel;
       return StyledComponentWidget(
         styledComponentDetails: child,
         containsForm: containsForm,
         innerClickAction: innerClickAction,
       );
-    } else if (bootstrapChild.child is FormComponentModel) {
-      FormComponentModel widget = bootstrapChild.child as FormComponentModel;
+    } else if (bootstrapChild.bcData is FormComponentModel) {
+      FormComponentModel widget = bootstrapChild.bcData as FormComponentModel;
       return FormComponentWidget(
         formComponentDetails: widget,
         onSaved: (key, value) {
@@ -77,11 +78,13 @@ class BootstrapChildWidget extends StatelessWidget {
       decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
         sectionBackground: bootstrapChild.background,
       ).copyWith(
-        border: Border.all(
-          color: CommonHelpers.v2ColorFromHex(
-            bootstrapChild.borderColor,
-          ),
-        ),
+        border: bootstrapChild.borderColor != null
+            ? Border.all(
+                color: CommonHelpers.v2ColorFromHex(
+                  bootstrapChild.borderColor,
+                ),
+              )
+            : null,
         borderRadius: CommonHelpers.getBorderRadiusFromList(
           bootstrapChild.borderRadius,
         ),

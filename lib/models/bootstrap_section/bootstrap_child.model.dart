@@ -4,7 +4,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 
 class BootstrapChildModel with BootstrapSectionUnion {
   String classes;
-  BootstrapChildUnion? child;
+  BootstrapChildUnion? bcData;
   SectionBackground? background;
   String? borderColor;
   List<int>? borderRadius;
@@ -14,7 +14,7 @@ class BootstrapChildModel with BootstrapSectionUnion {
 
   BootstrapChildModel({
     required this.classes,
-    this.child,
+    this.bcData,
     this.background,
     this.borderColor,
     this.borderRadius,
@@ -38,27 +38,27 @@ class BootstrapChildModel with BootstrapSectionUnion {
 
   factory BootstrapChildModel.fromMap(Map<String, dynamic> map) {
     BootstrapChildUnion? child;
-    switch (map['child']['__typename']) {
+    switch (map['bcData']['__typename']) {
       case 'StyledComponent':
         child = StyledComponentModel.fromMap(
-          map['child'],
+          map['bcData'],
         );
         break;
       case 'FormComponent':
         child = FormComponentModel.fromMap(
-          map['child'],
+          map['bcData'],
         );
         break;
       case 'BootstrapSection':
         child = BootstrapSectionModel.fromMap(
-          map['child'],
+          map['bcData'],
         );
         break;
       default:
     }
     return BootstrapChildModel(
       classes: map['classes'] ?? '',
-      child: child,
+      bcData: child,
       background: map['background'] != null
           ? SectionBackground.fromMap(map['background'])
           : null,

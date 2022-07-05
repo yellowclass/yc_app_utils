@@ -15,16 +15,18 @@ class BootstrapScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bootstrap Test Screen'),
       ),
-      body: Column(
-        children: BootstrapSkeleton()
-            .sections
-            .map(
-              (e) => BootstrapSectionWidget(
-                bootstrapSectionData: e,
-                onPressed: null,
-              ),
-            )
-            .toList(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: BootstrapSkeleton()
+              .sections
+              .map(
+                (e) => BootstrapSectionWidget(
+                  bootstrapSectionData: e,
+                  onPressed: null,
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

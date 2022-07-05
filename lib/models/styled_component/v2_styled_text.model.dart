@@ -14,6 +14,7 @@ class V2StyledTextModel with StyledComponentUnion {
   bool strikeThrough;
   TextAlign? textAlign;
   TextOverflow? textOverflow;
+  int? maxLines;
   SectionBackground? background;
   String? borderColor;
   List<int>? borderRadius;
@@ -28,6 +29,7 @@ class V2StyledTextModel with StyledComponentUnion {
     this.strikeThrough = false,
     this.textAlign,
     this.textOverflow,
+    this.maxLines,
     this.background,
     this.borderColor,
     this.borderRadius,
@@ -44,6 +46,7 @@ class V2StyledTextModel with StyledComponentUnion {
       'strikeThrough': strikeThrough,
       'textAlign': textAlign?.name,
       'textOverflow': textOverflow?.name,
+      'maxLines': maxLines,
       'background': background?.toMap(),
       'borderColor': borderColor,
       'borderRadius': borderRadius,
@@ -76,6 +79,7 @@ class V2StyledTextModel with StyledComponentUnion {
               map['textOverflow'],
             )
           : null,
+      maxLines: map['maxLines'],
       background: map['background'] != null
           ? SectionBackground.fromMap(map['background'])
           : null,

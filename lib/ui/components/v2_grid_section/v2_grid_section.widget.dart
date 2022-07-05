@@ -155,11 +155,13 @@ class _V2GridSectionWidgetState extends State<V2GridSectionWidget> {
           borderRadius: CommonHelpers.getBorderRadiusFromList(
             widget.gridDetails.borderRadius,
           ),
-          border: Border.all(
-            color: CommonHelpers.v2ColorFromHex(
-              widget.gridDetails.borderColor,
-            ),
-          ),
+          border: widget.gridDetails.borderColor != null
+              ? Border.all(
+                  color: CommonHelpers.v2ColorFromHex(
+                    widget.gridDetails.borderColor,
+                  ),
+                )
+              : null,
         ),
         child: widget.gridDetails.containsForm
             ? Form(

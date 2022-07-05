@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/helpers/helpers.dart';
-import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class V2StyledTextWidget extends StatelessWidget {
   const V2StyledTextWidget({
@@ -23,16 +22,19 @@ class V2StyledTextWidget extends StatelessWidget {
         borderRadius: CommonHelpers.getBorderRadiusFromList(
           styledText.borderRadius,
         ),
-        border: Border.all(
-          color: CommonHelpers.v2ColorFromHex(
-            styledText.borderColor,
-          ),
-        ),
+        border: styledText.borderColor != null
+            ? Border.all(
+                color: CommonHelpers.v2ColorFromHex(
+                  styledText.borderColor,
+                ),
+              )
+            : null,
       ),
       child: Text(
         styledText.text,
         textAlign: styledText.textAlign,
         overflow: styledText.textOverflow,
+        maxLines: styledText.maxLines,
         style: CommonHelpers.getTextStyle(
           styledText.tStyle,
           customStyle: TextStyle(

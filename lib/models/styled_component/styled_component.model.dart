@@ -6,7 +6,7 @@ class StyledComponentModel
         V2GSColumnDataWidgetModel,
         BootstrapSectionUnion,
         BootstrapChildUnion {
-  SCDataModel? scData;
+  StyledComponentUnion scData;
   V2ClickAction? clickAction;
   SectionBackground? background;
   String? borderColor;
@@ -14,7 +14,7 @@ class StyledComponentModel
   List<int>? padding;
 
   StyledComponentModel({
-    this.scData,
+    required this.scData,
     this.clickAction,
     this.background,
     this.borderColor,
@@ -33,8 +33,18 @@ class StyledComponentModel
   }
 
   factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
+    StyledComponentUnion? scData;
+    switch (map['data']['__typename']) {
+      case 'V2StyledText':
+        scData = V2StyledTextModel.fromMap(map['data']);
+        break;
+      case 'StyledImage':
+        scData = StyledImageModel.fromMap(map['data']);
+        break;
+      default:
+    }
     return StyledComponentModel(
-      scData: map['scData'] != null ? SCDataModel.fromMap(map['scData']) : null,
+      scData: scData!,
       clickAction: map['clickAction'] != null
           ? V2ClickAction.fromMap(map['clickAction'])
           : null,

@@ -60,11 +60,11 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
   }
 
   Widget buildChild() {
-    if (widget.bootstrapSectionData.data.bsWidget
-        is BootstrapSectionStackModel) {
-      BootstrapSectionStackModel bsWidget = widget
-          .bootstrapSectionData.data.bsWidget as BootstrapSectionStackModel;
+    if (widget.bootstrapSectionData.bsData is BootstrapSectionStackModel) {
+      BootstrapSectionStackModel bsWidget =
+          widget.bootstrapSectionData.bsData as BootstrapSectionStackModel;
       return Stack(
+        alignment: bsWidget.stackAlignment,
         children: bsWidget.layers
             .map(
               (bootstrapSectionLayer) => BootstrapSectionLayerWidget(
@@ -76,20 +76,19 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
             )
             .toList(),
       );
-    } else if (widget.bootstrapSectionData.data.bsWidget
+    } else if (widget.bootstrapSectionData.bsData
         is BootstrapSectionLayerModel) {
-      BootstrapSectionLayerModel bsWidget = widget
-          .bootstrapSectionData.data.bsWidget as BootstrapSectionLayerModel;
+      BootstrapSectionLayerModel bsWidget =
+          widget.bootstrapSectionData.bsData as BootstrapSectionLayerModel;
       return BootstrapSectionLayerWidget(
         layerDetails: bsWidget,
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
         formData: _formData,
       );
-    } else if (widget.bootstrapSectionData.data.bsWidget
-        is BootstrapChildModel) {
+    } else if (widget.bootstrapSectionData.bsData is BootstrapChildModel) {
       BootstrapChildModel bsWidget =
-          widget.bootstrapSectionData.data.bsWidget as BootstrapChildModel;
+          widget.bootstrapSectionData.bsData as BootstrapChildModel;
       return BootstrapSectionLayerWidget(
         layerDetails: BootstrapSectionLayerModel(
           children: [bsWidget],
@@ -98,10 +97,9 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         innerClickAction: innerClickActionHandler,
         formData: _formData,
       );
-    } else if (widget.bootstrapSectionData.data.bsWidget
-        is StyledComponentModel) {
+    } else if (widget.bootstrapSectionData.bsData is StyledComponentModel) {
       StyledComponentModel bsWidget =
-          widget.bootstrapSectionData.data.bsWidget as StyledComponentModel;
+          widget.bootstrapSectionData.bsData as StyledComponentModel;
       return StyledComponentWidget(
         styledComponentDetails: bsWidget,
         containsForm: widget.bootstrapSectionData.containsForm,
@@ -128,11 +126,13 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
           borderRadius: CommonHelpers.getBorderRadiusFromList(
             widget.bootstrapSectionData.borderRadius,
           ),
-          border: Border.all(
-            color: CommonHelpers.v2ColorFromHex(
-              widget.bootstrapSectionData.borderColor,
-            ),
-          ),
+          border: widget.bootstrapSectionData.borderColor != null
+              ? Border.all(
+                  color: CommonHelpers.v2ColorFromHex(
+                    widget.bootstrapSectionData.borderColor,
+                  ),
+                )
+              : null,
         ),
         child: widget.bootstrapSectionData.containsForm
             ? Form(
