@@ -1,11 +1,6 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledComponentModel
-    with
-        V2GridSectionWidgetModel,
-        V2GSColumnDataWidgetModel,
-        BootstrapSectionUnion,
-        BootstrapChildUnion {
+class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
   StyledComponentUnion scData;
   V2ClickAction? clickAction;
   SectionBackground? background;

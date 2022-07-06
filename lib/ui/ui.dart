@@ -5,8 +5,6 @@ export 'package:yc_app_utils/ui/components/styled_text/styled_text_widget.dart';
 
 export 'package:yc_app_utils/ui/components/generic_network_image.dart';
 
-export 'package:yc_app_utils/ui/components/v2_grid_section/v2_grid_section.widget.dart';
-
 export 'package:yc_app_utils/ui/components/bootstrap_section/bootstrap_section_widget.import.dart';
 
 export 'package:yc_app_utils/ui/components/styled_components/styled_components.dart';

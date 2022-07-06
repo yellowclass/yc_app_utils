@@ -20,9 +20,6 @@ export 'package:yc_app_utils/models/styled_component/styled_component_model.impo
 // form component
 export 'package:yc_app_utils/models/form_component/form_component_model.import.dart';
 
-// v2 grid section
-export 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_model.import.dart';
-
 // bootstrap section
 export 'package:yc_app_utils/models/bootstrap_section/bootstrap_section_model.import.dart';
 
