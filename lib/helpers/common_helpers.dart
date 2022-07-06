@@ -307,6 +307,17 @@ class CommonHelpers {
     }
   }
 
+  static double? getHeightFromDouble(double? height) {
+    if (height == null) {
+      return null;
+    }
+    if (height >= 0) {
+      return height;
+    } else {
+      return YCMediaQuery.screenHeight * 100 / height.abs();
+    }
+  }
+
   static Color v2ColorFromHex(String? hexColor) {
     if (hexColor == null) {
       return AppColors.cTRANSPARENT;

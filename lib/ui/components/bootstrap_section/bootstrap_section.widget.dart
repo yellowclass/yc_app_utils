@@ -116,7 +116,9 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
       onPressed: widget.onPressed,
       showRippleEffect: widget.showRippleEffect,
       child: Container(
-        height: widget.bootstrapSectionData.height,
+        height: CommonHelpers.getHeightFromDouble(
+          widget.bootstrapSectionData.height,
+        ),
         padding: CommonHelpers.getPaddingFromList(
           widget.bootstrapSectionData.padding,
         ),

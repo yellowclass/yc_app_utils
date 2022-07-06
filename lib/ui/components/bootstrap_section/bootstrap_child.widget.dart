@@ -70,7 +70,9 @@ class BootstrapChildWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: bootstrapChild.height,
+      height: CommonHelpers.getHeightFromDouble(
+        bootstrapChild.height,
+      ),
       alignment: bootstrapChild.boxAlignment,
       padding: CommonHelpers.getPaddingFromList(
         bootstrapChild.padding,
