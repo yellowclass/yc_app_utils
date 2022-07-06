@@ -15,21 +15,20 @@ class StyledComponentWidget extends StatelessWidget {
   final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
-    switch (styledComponentDetails.scData?.scType) {
-      case StyledComponentEnum.TEXT:
-        V2StyledTextModel styledTextDetails =
-            styledComponentDetails.scData?.data as V2StyledTextModel;
-        return V2StyledTextWidget(
-          styledText: styledTextDetails,
-        );
-      case StyledComponentEnum.IMAGE:
-        StyledImageModel styledImageDetails =
-            styledComponentDetails.scData?.data as StyledImageModel;
-        return StyledImageWidget(
-          styledImageData: styledImageDetails,
-        );
-      default:
-        return const SizedBox.shrink();
+    if (styledComponentDetails.scData is V2StyledTextModel) {
+      V2StyledTextModel styledTextDetails =
+          styledComponentDetails.scData as V2StyledTextModel;
+      return V2StyledTextWidget(
+        styledText: styledTextDetails,
+      );
+    } else if (styledComponentDetails.scData is StyledImageModel) {
+      StyledImageModel styledImageDetails =
+          styledComponentDetails.scData as StyledImageModel;
+      return StyledImageWidget(
+        styledImageData: styledImageDetails,
+      );
+    } else {
+      return const SizedBox.shrink();
     }
   }
 
@@ -72,11 +71,13 @@ class StyledComponentWidget extends StatelessWidget {
           borderRadius: CommonHelpers.getBorderRadiusFromList(
             styledComponentDetails.borderRadius,
           ),
-          border: Border.all(
-            color: CommonHelpers.v2ColorFromHex(
-              styledComponentDetails.borderColor,
-            ),
-          ),
+          border: styledComponentDetails.borderColor != null
+              ? Border.all(
+                  color: CommonHelpers.v2ColorFromHex(
+                    styledComponentDetails.borderColor,
+                  ),
+                )
+              : null,
         ),
         child: buildComponent(),
       ),

@@ -13,37 +13,36 @@ class FormComponentWidget extends StatelessWidget {
   final void Function(String, dynamic)? onSaved;
 
   Widget buildComponent() {
-    switch (formComponentDetails.fcData?.fcType) {
-      case FormComponentEnum.FORM_INPUT:
-        StyledInputFieldModel inputFieldDetails =
-            formComponentDetails.fcData?.data as StyledInputFieldModel;
-        return StyledTextFieldWidget(
-          textFieldData: inputFieldDetails,
-          onSaved: onSaved,
-        );
-      case FormComponentEnum.FORM_RADIO:
-        StyledRadioFieldModel radioFieldDetails =
-            formComponentDetails.fcData?.data as StyledRadioFieldModel;
-        return StyledRadioFieldWidget(
-          radioFieldData: radioFieldDetails,
-          onSaved: onSaved,
-        );
-      case FormComponentEnum.FORM_CHECKBOX:
-        StyledCheckboxFieldModel checkboxFieldDetails =
-            formComponentDetails.fcData?.data as StyledCheckboxFieldModel;
-        return StyledCheckboxFieldWidget(
-          checkboxFieldData: checkboxFieldDetails,
-          onSaved: onSaved,
-        );
-      case FormComponentEnum.FORM_SELECT:
-        StyledSelectFieldModel selectFieldDetails =
-            formComponentDetails.fcData?.data as StyledSelectFieldModel;
-        return StyledSelectFieldWidget(
-          selectFieldData: selectFieldDetails,
-          onSaved: onSaved,
-        );
-      default:
-        return const SizedBox.shrink();
+    if (formComponentDetails.fcData is StyledInputFieldModel) {
+      StyledInputFieldModel inputFieldDetails =
+          formComponentDetails.fcData as StyledInputFieldModel;
+      return StyledTextFieldWidget(
+        textFieldData: inputFieldDetails,
+        onSaved: onSaved,
+      );
+    } else if (formComponentDetails.fcData is StyledRadioFieldModel) {
+      StyledRadioFieldModel radioFieldDetails =
+          formComponentDetails.fcData as StyledRadioFieldModel;
+      return StyledRadioFieldWidget(
+        radioFieldData: radioFieldDetails,
+        onSaved: onSaved,
+      );
+    } else if (formComponentDetails.fcData is StyledCheckboxFieldModel) {
+      StyledCheckboxFieldModel checkboxFieldDetails =
+          formComponentDetails.fcData as StyledCheckboxFieldModel;
+      return StyledCheckboxFieldWidget(
+        checkboxFieldData: checkboxFieldDetails,
+        onSaved: onSaved,
+      );
+    } else if (formComponentDetails.fcData is StyledSelectFieldModel) {
+      StyledSelectFieldModel selectFieldDetails =
+          formComponentDetails.fcData as StyledSelectFieldModel;
+      return StyledSelectFieldWidget(
+        selectFieldData: selectFieldDetails,
+        onSaved: onSaved,
+      );
+    } else {
+      return const SizedBox.shrink();
     }
   }
 
@@ -59,11 +58,13 @@ class FormComponentWidget extends StatelessWidget {
         borderRadius: CommonHelpers.getBorderRadiusFromList(
           formComponentDetails.borderRadius,
         ),
-        border: Border.all(
-          color: CommonHelpers.v2ColorFromHex(
-            formComponentDetails.borderColor,
-          ),
-        ),
+        border: formComponentDetails.borderColor != null
+            ? Border.all(
+                color: CommonHelpers.v2ColorFromHex(
+                  formComponentDetails.borderColor,
+                ),
+              )
+            : null,
       ),
       child: buildComponent(),
     );

@@ -1,12 +1,7 @@
-import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/styled_component/sc_data.model.dart';
-import 'package:yc_app_utils/models/v2_grid_section/v2_gs_column_data_widget.model.dart';
-import 'package:yc_app_utils/models/v2_grid_section/v2_grid_section_widget.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledComponentModel
-    with V2GridSectionWidgetModel, V2GSColumnDataWidgetModel {
-  SCDataModel? scData;
+class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
+  StyledComponentUnion scData;
   V2ClickAction? clickAction;
   SectionBackground? background;
   String? borderColor;
@@ -14,7 +9,7 @@ class StyledComponentModel
   List<int>? padding;
 
   StyledComponentModel({
-    this.scData,
+    required this.scData,
     this.clickAction,
     this.background,
     this.borderColor,
@@ -33,8 +28,18 @@ class StyledComponentModel
   }
 
   factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
+    StyledComponentUnion? scData;
+    switch (map['data']['__typename']) {
+      case 'V2StyledText':
+        scData = V2StyledTextModel.fromMap(map['data']);
+        break;
+      case 'StyledImage':
+        scData = StyledImageModel.fromMap(map['data']);
+        break;
+      default:
+    }
     return StyledComponentModel(
-      scData: map['scData'] != null ? SCDataModel.fromMap(map['scData']) : null,
+      scData: scData!,
       clickAction: map['clickAction'] != null
           ? V2ClickAction.fromMap(map['clickAction'])
           : null,

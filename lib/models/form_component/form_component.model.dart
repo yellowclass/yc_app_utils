@@ -1,7 +1,7 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class FormComponentModel with V2GSColumnDataWidgetModel {
-  FCDataModel? fcData;
+class FormComponentModel with BootstrapChildUnion {
+  FormComponentUnion? fcData;
   SectionBackground? background;
   String? borderColor;
   List<int>? borderRadius;
@@ -17,7 +17,7 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'fcData': fcData?.toMap(),
+      // 'fcData': fcData?.toMap(),
       'background': background?.toMap(),
       'borderColor': borderColor,
       'borderRadius': borderRadius,
@@ -26,8 +26,32 @@ class FormComponentModel with V2GSColumnDataWidgetModel {
   }
 
   factory FormComponentModel.fromMap(Map<String, dynamic> map) {
+    FormComponentUnion? fcData;
+    switch (map['data']['__typename']) {
+      case 'StyledInputField':
+        fcData = StyledInputFieldModel.fromMap(
+          map['data'],
+        );
+        break;
+      case 'StyledRadioField':
+        fcData = StyledRadioFieldModel.fromMap(
+          map['data'],
+        );
+        break;
+      case 'StyledCheckboxField':
+        fcData = StyledCheckboxFieldModel.fromMap(
+          map['data'],
+        );
+        break;
+      case 'StyledSelectField':
+        fcData = StyledSelectFieldModel.fromMap(
+          map['data'],
+        );
+        break;
+      default:
+    }
     return FormComponentModel(
-      fcData: map['fcData'] != null ? FCDataModel.fromMap(map['fcData']) : null,
+      fcData: fcData,
       background: map['background'] != null
           ? SectionBackground.fromMap(map['background'])
           : null,

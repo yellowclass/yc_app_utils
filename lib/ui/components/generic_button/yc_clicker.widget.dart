@@ -45,6 +45,7 @@ class YCClicker extends StatelessWidget {
               milliseconds: 100,
             ),
             child: Material(
+              color: Colors.transparent,
               elevation: showRippleEffect ? elevation : 0,
               borderRadius: BorderRadius.circular(
                 AppRadius.s,

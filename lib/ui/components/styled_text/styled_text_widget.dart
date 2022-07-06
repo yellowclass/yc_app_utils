@@ -51,7 +51,9 @@ class StyledTextWidget extends StatelessWidget {
               ),
             )
           : BoxDecoration(
-              color: CommonHelpers.v2ColorFromHex(styledText?.backgroundColor),
+              color: CommonHelpers.v2ColorFromHex(
+                styledText?.backgroundColor,
+              ),
               borderRadius: BorderRadius.circular(
                 styledText?.borderRadius?.toDouble() ?? 0,
               ),

@@ -118,6 +118,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.0"
+  flutter_bootstrap:
+    dependency: transitive
+    description:
+      name: flutter_bootstrap
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_cache_manager:
     dependency: transitive
     description:

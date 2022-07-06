@@ -4,4 +4,4 @@ export 'package:yc_app_utils/models/form_component/styled_checkbox_field.model.d
 export 'package:yc_app_utils/models/form_component/styled_input_field.model.dart';
 export 'package:yc_app_utils/models/form_component/styled_radio_field.model.dart';
 export 'package:yc_app_utils/models/form_component/styled_select_field.model.dart';
-export 'package:yc_app_utils/models/form_component/fc_data.model.dart';
+export 'package:yc_app_utils/models/form_component/form_component_union.model.dart';

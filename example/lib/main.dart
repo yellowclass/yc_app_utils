@@ -1,3 +1,4 @@
+import 'package:example/boot_strap_screen/bootstrap_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:example/form_screen/form_screen.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -93,6 +95,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Form Demo'),
+            ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const BootstrapScreen(),
+                  ),
+                );
+              },
+              child: const Text('Bootstrap Demo'),
             ),
           ],
         ),
