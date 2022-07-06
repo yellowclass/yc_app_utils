@@ -315,7 +315,7 @@ class CommonHelpers {
     if (height >= 0) {
       return height;
     } else {
-      return YCMediaQuery.screenHeight * 100 / height.abs();
+      return YCMediaQuery.screenHeight * height.abs() / 100;
     }
   }
 
