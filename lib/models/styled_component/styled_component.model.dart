@@ -29,12 +29,12 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
 
   factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
     StyledComponentUnion? scData;
-    switch (map['data']['__typename']) {
+    switch (map['scData']['__typename']) {
       case 'V2StyledText':
-        scData = V2StyledTextModel.fromMap(map['data']);
+        scData = V2StyledTextModel.fromMap(map['scData']);
         break;
       case 'StyledImage':
-        scData = StyledImageModel.fromMap(map['data']);
+        scData = StyledImageModel.fromMap(map['scData']);
         break;
       default:
     }
