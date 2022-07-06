@@ -24,9 +24,22 @@ class BootstrapChildModel with BootstrapSectionUnion {
   });
 
   Map<String, dynamic> toMap() {
+    Map<String, dynamic> bcDataMap = {};
+    switch (bcData.runtimeType) {
+      case StyledComponentModel:
+        bcDataMap = (bcData as StyledComponentModel).toMap();
+        break;
+      case FormComponentModel:
+        bcDataMap = (bcData as FormComponentModel).toMap();
+        break;
+      case BootstrapSectionModel:
+        bcDataMap = (bcData as BootstrapSectionModel).toMap();
+        break;
+      default:
+    }
     return {
       'classes': classes,
-      // 'child': child?.toMap(),
+      'bcData': bcDataMap,
       'background': background?.toMap(),
       'borderColor': borderColor,
       'borderRadius': borderRadius,

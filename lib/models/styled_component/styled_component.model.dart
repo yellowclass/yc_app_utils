@@ -18,7 +18,18 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
   });
 
   Map<String, dynamic> toMap() {
+    Map<String, dynamic> scDataMap = {};
+    switch (scData.runtimeType) {
+      case V2StyledTextModel:
+        scDataMap = (scData as V2StyledTextModel).toMap();
+        break;
+      case StyledImageModel:
+        scDataMap = (scData as StyledImageModel).toMap();
+        break;
+      default:
+    }
     return {
+      'scData': scDataMap,
       'clickAction': clickAction?.toMap(),
       'background': background?.toMap(),
       'borderColor': borderColor,

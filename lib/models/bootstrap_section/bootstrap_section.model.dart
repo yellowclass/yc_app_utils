@@ -24,9 +24,25 @@ class BootstrapSectionModel with BootstrapChildUnion {
   });
 
   Map<String, dynamic> toMap() {
+    Map<String, dynamic> bsDataMap = {};
+    switch (bsData.runtimeType) {
+      case BootstrapSectionStackModel:
+        bsDataMap = (bsData as BootstrapSectionStackModel).toMap();
+        break;
+      case BootstrapSectionLayerModel:
+        bsDataMap = (bsData as BootstrapSectionLayerModel).toMap();
+        break;
+      case BootstrapChildModel:
+        bsDataMap = (bsData as BootstrapChildModel).toMap();
+        break;
+      case StyledComponentModel:
+        bsDataMap = (bsData as StyledComponentModel).toMap();
+        break;
+      default:
+    }
     return {
       'key': key,
-      // 'data': data.toMap(),
+      'bsData': bsDataMap,
       'clickAction': clickAction?.toMap(),
       'containsForm': containsForm,
       'background': background?.toMap(),
