@@ -83,7 +83,7 @@ class SectionBackground {
         "gradientDirection": gradientDirection?.name,
         "shouldLeaveBorder": shouldLeaveBorder,
         "backgroundImgUrl": backgroundImgUrl,
-        "gradientColors": gradientColors.toString(),
+        "gradientColors": gradientColors,
         "radialGradient": radialGradient?.toMap(),
       };
 

@@ -19,16 +19,16 @@ class FormComponentModel with BootstrapChildUnion {
     Map<String, dynamic> fcDataMap = {};
     switch (fcData.runtimeType) {
       case StyledInputFieldModel:
-        fcDataMap = (fcDataMap as StyledInputFieldModel).toMap();
+        fcDataMap = (fcData as StyledInputFieldModel).toMap();
         break;
       case StyledRadioFieldModel:
-        fcDataMap = (fcDataMap as StyledRadioFieldModel).toMap();
+        fcDataMap = (fcData as StyledRadioFieldModel).toMap();
         break;
       case StyledCheckboxFieldModel:
-        fcDataMap = (fcDataMap as StyledCheckboxFieldModel).toMap();
+        fcDataMap = (fcData as StyledCheckboxFieldModel).toMap();
         break;
       case StyledSelectFieldModel:
-        fcDataMap = (fcDataMap as StyledSelectFieldModel).toMap();
+        fcDataMap = (fcData as StyledSelectFieldModel).toMap();
         break;
       default:
     }
