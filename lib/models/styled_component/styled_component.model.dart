@@ -29,7 +29,7 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
 
   factory StyledComponentModel.fromMap(Map<String, dynamic> map) {
     StyledComponentUnion? scData;
-    switch (map['__typename']) {
+    switch (map['scData']['__typename']) {
       case 'V2StyledText':
         scData = V2StyledTextModel.fromMap(map['scData']);
         break;
