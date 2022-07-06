@@ -307,6 +307,7 @@ class CommonHelpers {
     }
   }
 
+  /// This functions gets absolute height if the height provided is positive, else provides relative height in percentage.
   static double? getHeightFromDouble(double? height) {
     if (height == null) {
       return null;
