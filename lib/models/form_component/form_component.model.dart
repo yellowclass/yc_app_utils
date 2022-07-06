@@ -27,25 +27,25 @@ class FormComponentModel with BootstrapChildUnion {
 
   factory FormComponentModel.fromMap(Map<String, dynamic> map) {
     FormComponentUnion? fcData;
-    switch (map['data']['__typename']) {
+    switch (map['__typename']) {
       case 'StyledInputField':
         fcData = StyledInputFieldModel.fromMap(
-          map['data'],
+          map['fcData'],
         );
         break;
       case 'StyledRadioField':
         fcData = StyledRadioFieldModel.fromMap(
-          map['data'],
+          map['fcData'],
         );
         break;
       case 'StyledCheckboxField':
         fcData = StyledCheckboxFieldModel.fromMap(
-          map['data'],
+          map['fcData'],
         );
         break;
       case 'StyledSelectField':
         fcData = StyledSelectFieldModel.fromMap(
-          map['data'],
+          map['fcData'],
         );
         break;
       default:
