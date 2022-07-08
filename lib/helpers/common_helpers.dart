@@ -307,6 +307,18 @@ class CommonHelpers {
     }
   }
 
+  /// This functions gets absolute height if the height provided is positive, else provides relative height in percentage.
+  static double? getHeightFromDouble(double? height) {
+    if (height == null) {
+      return null;
+    }
+    if (height >= 0) {
+      return height;
+    } else {
+      return YCMediaQuery.screenHeight * height.abs() / 100;
+    }
+  }
+
   static Color v2ColorFromHex(String? hexColor) {
     if (hexColor == null) {
       return AppColors.cTRANSPARENT;
