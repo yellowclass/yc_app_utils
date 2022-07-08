@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:yc_app_utils/helpers/helpers.dart';
+
+import 'package:yc_app_utils/models/click_action/click_action_redirection_type.enum.dart';
+
 class ClickAction {
   final String? clickActionType;
   final String? clickActionUrl;
@@ -10,6 +14,7 @@ class ClickAction {
   final ClickAction? nestedClickAction;
   final String? eventData;
   final Map<String, dynamic> stringifiedFunctionParams;
+  final RedirectionTypeEnum? redirectionType;
 
   ClickAction({
     this.stringifiedFunctionParams = const {},
@@ -21,6 +26,7 @@ class ClickAction {
     this.functionType,
     this.eventData,
     this.nestedClickAction,
+    this.redirectionType,
   });
 
   factory ClickAction.fromMap(Map<String, dynamic> json) {
@@ -38,6 +44,12 @@ class ClickAction {
       nestedClickAction: json['nestedClickAction'] == null
           ? null
           : ClickAction.fromMap(json['nestedClickAction']),
+      redirectionType: json['redirectionType'] != null
+          ? CommonHelpers.enumFromString(
+              RedirectionTypeEnum.values,
+              json['redirectionType'],
+            )
+          : null,
     );
   }
 
@@ -52,5 +64,6 @@ class ClickAction {
             .convert(stringifiedFunctionParams),
         "eventData": eventData,
         "nestedClickAction": nestedClickAction,
+        "redirectionType": redirectionType?.name,
       };
 }
