@@ -86,9 +86,10 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         innerClickAction: innerClickActionHandler,
         formData: _formData,
       );
-    } else if (widget.bootstrapSectionData.bsData is BootstrapChildModel) {
-      BootstrapChildModel bsWidget =
-          widget.bootstrapSectionData.bsData as BootstrapChildModel;
+    } else if (widget.bootstrapSectionData.bsData
+        is BootstrapSectionChildModel) {
+      BootstrapSectionChildModel bsWidget =
+          widget.bootstrapSectionData.bsData as BootstrapSectionChildModel;
       return BootstrapSectionLayerWidget(
         layerDetails: BootstrapSectionLayerModel(
           children: [bsWidget],

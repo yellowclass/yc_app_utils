@@ -11,7 +11,7 @@ class BootstrapChildWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final BootstrapChildModel bootstrapChild;
+  final BootstrapSectionChildModel bootstrapChild;
   final bool containsForm;
   final InnerClickAction? innerClickAction;
   final Map<String, dynamic>? formData;
