@@ -55,7 +55,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
 
   factory BootstrapSectionModel.fromMap(Map<String, dynamic> map) {
     BootstrapSectionUnion? bsData;
-    switch (map['bsData']['__typename']) {
+    switch (map['bsData']?['__typename']) {
       case 'BootstrapSectionStack':
         bsData = map['bsData'] != null
             ? BootstrapSectionStackModel.fromMap(map['bsData'])

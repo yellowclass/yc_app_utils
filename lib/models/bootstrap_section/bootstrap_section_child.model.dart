@@ -51,7 +51,7 @@ class BootstrapSectionChildModel with BootstrapSectionUnion {
 
   factory BootstrapSectionChildModel.fromMap(Map<String, dynamic> map) {
     BootstrapChildUnion? child;
-    switch (map['bcData']['__typename']) {
+    switch (map['bcData']?['__typename']) {
       case 'StyledComponent':
         child = StyledComponentModel.fromMap(
           map['bcData'],
