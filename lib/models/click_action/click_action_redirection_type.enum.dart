@@ -1,0 +1,4 @@
+enum RedirectionTypeEnum {
+  PUSH,
+  REPLACE,
+}
