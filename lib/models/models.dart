@@ -4,6 +4,7 @@ export 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 export 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
 export 'package:yc_app_utils/models/image.model.dart';
 export 'package:yc_app_utils/models/symmetric_padding.model.dart';
+export 'package:yc_app_utils/models/click_action/click_action_redirection_type.enum.dart';
 
 // card background
 export 'package:yc_app_utils/models/card_background/card_background.model.dart';

@@ -1,7 +1,7 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class BootstrapSectionLayerModel with BootstrapSectionUnion {
-  List<BootstrapChildModel> children;
+  List<BootstrapSectionChildModel> children;
 
   BootstrapSectionLayerModel({
     required this.children,
@@ -15,8 +15,8 @@ class BootstrapSectionLayerModel with BootstrapSectionUnion {
 
   factory BootstrapSectionLayerModel.fromMap(Map<String, dynamic> map) {
     return BootstrapSectionLayerModel(
-      children: List<BootstrapChildModel>.from(
-        map['children']?.map((x) => BootstrapChildModel.fromMap(x)),
+      children: List<BootstrapSectionChildModel>.from(
+        map['children']?.map((x) => BootstrapSectionChildModel.fromMap(x)),
       ),
     );
   }

@@ -7,21 +7,25 @@ class BootstrapSkeleton {
     BootstrapSectionModel(
       key: 't1',
       padding: [24, 0],
-      bsData: BootstrapChildModel(
+      bsData: BootstrapSectionChildModel(
         height: 100,
-        borderRadius: [20],
-        background: SectionBackground(
-          backgroundType: SectionBgType.IMAGE,
-          backgroundImgUrl: 'https://picsum.photos/200/300',
-        ),
         boxAlignment: Alignment.centerLeft,
         classes: 'col-8 offset-2',
         bcData: BootstrapSectionModel(
           key: 't2',
+          clickAction: V2ClickAction(
+            sequenceType: SequenceTypeEnum.SEQUENTIAL,
+            showRippleEffect: true,
+            actions: [],
+          ),
+          background: SectionBackground(
+            backgroundType: SectionBgType.IMAGE,
+            backgroundImgUrl: 'https://picsum.photos/200/300',
+          ),
           containsForm: false,
           bsData: BootstrapSectionLayerModel(
             children: [
-              BootstrapChildModel(
+              BootstrapSectionChildModel(
                 height: 24,
                 classes: 'col-2 offset-10',
                 padding: [
@@ -36,11 +40,11 @@ class BootstrapSkeleton {
                   ),
                 ),
               ),
-              BootstrapChildModel(
+              BootstrapSectionChildModel(
                 height: 46,
                 classes: 'col-12',
               ),
-              BootstrapChildModel(
+              BootstrapSectionChildModel(
                 // height: 28,
                 classes: 'col-10',
                 padding: [
@@ -57,7 +61,7 @@ class BootstrapSkeleton {
                   ),
                 ),
               ),
-              BootstrapChildModel(
+              BootstrapSectionChildModel(
                 classes: 'col-2',
                 height: 24,
                 boxAlignment: Alignment.center,
@@ -82,7 +86,7 @@ class BootstrapSkeleton {
     BootstrapSectionModel(
       key: 't1',
       padding: [24, 0],
-      bsData: BootstrapChildModel(
+      bsData: BootstrapSectionChildModel(
         height: 100,
         borderRadius: [20],
         background: SectionBackground(
@@ -96,10 +100,10 @@ class BootstrapSkeleton {
           containsForm: false,
           bsData: BootstrapSectionLayerModel(
             children: [
-              BootstrapChildModel(
+              BootstrapSectionChildModel(
                 classes: 'col-10',
               ),
-              BootstrapChildModel(
+              BootstrapSectionChildModel(
                 classes: 'col-2',
                 bcData: BootstrapSectionModel(
                   key: 't2',
@@ -107,7 +111,7 @@ class BootstrapSkeleton {
                   containsForm: false,
                   bsData: BootstrapSectionLayerModel(
                     children: [
-                      BootstrapChildModel(
+                      BootstrapSectionChildModel(
                         classes: 'col-12',
                         height: 20,
                         bcData: StyledComponentModel(
@@ -116,7 +120,7 @@ class BootstrapSkeleton {
                           ),
                         ),
                       ),
-                      BootstrapChildModel(
+                      BootstrapSectionChildModel(
                         classes: 'col-12',
                         height: 20,
                         bcData: StyledComponentModel(
@@ -182,7 +186,7 @@ class BootstrapSkeleton {
       ),
       bsData: BootstrapSectionLayerModel(
         children: [
-          BootstrapChildModel(
+          BootstrapSectionChildModel(
             classes: 'col-sm-12',
             bcData: FormComponentModel(
               fcData: StyledInputFieldModel(
@@ -194,7 +198,21 @@ class BootstrapSkeleton {
               ),
             ),
           ),
-          BootstrapChildModel(
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            bcData: StyledComponentModel(
+              scData: V2StyledTextModel(
+                text: 'Click Me',
+                textColor: '#000',
+              ),
+              clickAction: V2ClickAction(
+                sequenceType: SequenceTypeEnum.SEQUENTIAL,
+                actions: [],
+                showRippleEffect: true,
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
             classes: 'col-sm-12',
             bcData: FormComponentModel(
               padding: [8, 0, 0, 0],
@@ -228,14 +246,14 @@ class BootstrapSkeleton {
       ),
       bsData: BootstrapSectionLayerModel(
         children: [
-          BootstrapChildModel(
+          BootstrapSectionChildModel(
             classes: 'col-sm-6',
             bcData: BootstrapSectionModel(
               key: '',
               containsForm: false,
               bsData: BootstrapSectionLayerModel(
                 children: [
-                  BootstrapChildModel(
+                  BootstrapSectionChildModel(
                     classes: 'col-sm-6',
                     height: 100,
                     background: SectionBackground(
@@ -243,7 +261,7 @@ class BootstrapSkeleton {
                       backgroundColor: '#FF0000',
                     ),
                   ),
-                  BootstrapChildModel(
+                  BootstrapSectionChildModel(
                     classes: 'col-sm-6',
                     height: 100,
                     background: SectionBackground(
@@ -251,7 +269,7 @@ class BootstrapSkeleton {
                       backgroundColor: '#00FF00',
                     ),
                   ),
-                  BootstrapChildModel(
+                  BootstrapSectionChildModel(
                     classes: 'col-sm-6',
                     height: 100,
                     background: SectionBackground(
@@ -259,7 +277,7 @@ class BootstrapSkeleton {
                       backgroundColor: '#00FF00',
                     ),
                   ),
-                  BootstrapChildModel(
+                  BootstrapSectionChildModel(
                     classes: 'col-sm-6',
                     height: 100,
                     background: SectionBackground(
@@ -271,7 +289,7 @@ class BootstrapSkeleton {
               ),
             ),
           ),
-          BootstrapChildModel(
+          BootstrapSectionChildModel(
             classes: 'col-sm-6',
             height: 200,
             background: SectionBackground(
@@ -279,7 +297,7 @@ class BootstrapSkeleton {
               backgroundColor: '#00FF00',
             ),
           ),
-          BootstrapChildModel(
+          BootstrapSectionChildModel(
             classes: 'col-sm-12',
             bcData: FormComponentModel(
               padding: [8, 0, 0, 0],
@@ -303,6 +321,11 @@ class BootstrapSkeleton {
             ),
           ),
         ],
+      ),
+      clickAction: V2ClickAction(
+        sequenceType: SequenceTypeEnum.SEQUENTIAL,
+        actions: [],
+        showRippleEffect: true,
       ),
       containsForm: false,
     )

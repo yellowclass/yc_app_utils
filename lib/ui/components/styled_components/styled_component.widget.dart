@@ -2,28 +2,52 @@ import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledComponentWidget extends StatelessWidget {
+class StyledComponentWidget extends StatefulWidget {
   const StyledComponentWidget({
     required this.styledComponentDetails,
     required this.containsForm,
     this.innerClickAction,
+    this.buttonLoaderColor = AppColors.cGREEN_100,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
   final bool containsForm;
   final InnerClickAction? innerClickAction;
+  final Color buttonLoaderColor;
+
+  @override
+  State<StyledComponentWidget> createState() => StyledComponentWidgetState();
+}
+
+class StyledComponentWidgetState extends State<StyledComponentWidget>
+    with ClickWidgetState {
+  bool _isLoading = false;
+
+  @override
+  void setLoading(bool value) {
+    if (mounted) {
+      setState(() {
+        _isLoading = value;
+      });
+    }
+  }
 
   Widget buildComponent() {
-    if (styledComponentDetails.scData is V2StyledTextModel) {
+    if (_isLoading) {
+      return ThreeBounceLoader(
+        color: widget.buttonLoaderColor,
+        size: 24,
+      );
+    } else if (widget.styledComponentDetails.scData is V2StyledTextModel) {
       V2StyledTextModel styledTextDetails =
-          styledComponentDetails.scData as V2StyledTextModel;
+          widget.styledComponentDetails.scData as V2StyledTextModel;
       return V2StyledTextWidget(
         styledText: styledTextDetails,
       );
-    } else if (styledComponentDetails.scData is StyledImageModel) {
+    } else if (widget.styledComponentDetails.scData is StyledImageModel) {
       StyledImageModel styledImageDetails =
-          styledComponentDetails.scData as StyledImageModel;
+          widget.styledComponentDetails.scData as StyledImageModel;
       return StyledImageWidget(
         styledImageData: styledImageDetails,
       );
@@ -35,46 +59,49 @@ class StyledComponentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YCClicker(
-      onPressed: (styledComponentDetails.clickAction != null &&
-              innerClickAction != null)
+      onPressed: (widget.styledComponentDetails.clickAction != null &&
+              widget.innerClickAction != null &&
+              !_isLoading)
           ? () {
               // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
-              if (containsForm) {
+              if (widget.containsForm) {
                 // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
                 for (var action
-                    in styledComponentDetails.clickAction!.actions) {
+                    in widget.styledComponentDetails.clickAction!.actions) {
                   if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
-                    innerClickAction!.call(
-                      styledComponentDetails.clickAction!,
+                    widget.innerClickAction!.call(
+                      widget.styledComponentDetails.clickAction!,
                       true,
+                      this,
                     );
                   }
                   break;
                 }
               } else {
-                innerClickAction!.call(
-                  styledComponentDetails.clickAction!,
+                widget.innerClickAction!.call(
+                  widget.styledComponentDetails.clickAction!,
                   false,
+                  this,
                 );
               }
             }
           : null,
       showRippleEffect:
-          styledComponentDetails.clickAction?.showRippleEffect ?? false,
+          widget.styledComponentDetails.clickAction?.showRippleEffect ?? false,
       child: Container(
         padding: CommonHelpers.getPaddingFromList(
-          styledComponentDetails.padding,
+          widget.styledComponentDetails.padding,
         ),
         decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
-          sectionBackground: styledComponentDetails.background,
+          sectionBackground: widget.styledComponentDetails.background,
         ).copyWith(
           borderRadius: CommonHelpers.getBorderRadiusFromList(
-            styledComponentDetails.borderRadius,
+            widget.styledComponentDetails.borderRadius,
           ),
-          border: styledComponentDetails.borderColor != null
+          border: widget.styledComponentDetails.borderColor != null
               ? Border.all(
                   color: CommonHelpers.v2ColorFromHex(
-                    styledComponentDetails.borderColor,
+                    widget.styledComponentDetails.borderColor,
                   ),
                 )
               : null,

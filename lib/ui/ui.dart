@@ -15,6 +15,8 @@ export 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart
 
 export 'package:yc_app_utils/ui/components/loaders/bouncing_loader.dart';
 
+export 'package:yc_app_utils/ui/components/clicked_widget_state.dart';
+
 // media_query
 export 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
 

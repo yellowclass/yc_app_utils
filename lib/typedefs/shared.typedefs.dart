@@ -5,4 +5,5 @@ typedef InnerClickAction = void Function(
 
   /// boolean to signify if the clickAction is submitting form
   bool shouldSubmitForm,
+  ClickWidgetState? clickedWidgetState,
 );

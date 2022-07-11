@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class BootstrapChildModel with BootstrapSectionUnion {
+class BootstrapSectionChildModel with BootstrapSectionUnion {
   String classes;
   BootstrapChildUnion? bcData;
   SectionBackground? background;
@@ -12,7 +12,7 @@ class BootstrapChildModel with BootstrapSectionUnion {
   double? height;
   Alignment? boxAlignment;
 
-  BootstrapChildModel({
+  BootstrapSectionChildModel({
     required this.classes,
     this.bcData,
     this.background,
@@ -49,9 +49,9 @@ class BootstrapChildModel with BootstrapSectionUnion {
     };
   }
 
-  factory BootstrapChildModel.fromMap(Map<String, dynamic> map) {
+  factory BootstrapSectionChildModel.fromMap(Map<String, dynamic> map) {
     BootstrapChildUnion? child;
-    switch (map['bcData']['__typename']) {
+    switch (map['bcData']?['__typename']) {
       case 'StyledComponent':
         child = StyledComponentModel.fromMap(
           map['bcData'],
@@ -69,7 +69,7 @@ class BootstrapChildModel with BootstrapSectionUnion {
         break;
       default:
     }
-    return BootstrapChildModel(
+    return BootstrapSectionChildModel(
       classes: map['classes'] ?? '',
       bcData: child,
       background: map['background'] != null

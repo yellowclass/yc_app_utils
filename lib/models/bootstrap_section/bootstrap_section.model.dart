@@ -32,8 +32,8 @@ class BootstrapSectionModel with BootstrapChildUnion {
       case BootstrapSectionLayerModel:
         bsDataMap = (bsData as BootstrapSectionLayerModel).toMap();
         break;
-      case BootstrapChildModel:
-        bsDataMap = (bsData as BootstrapChildModel).toMap();
+      case BootstrapSectionChildModel:
+        bsDataMap = (bsData as BootstrapSectionChildModel).toMap();
         break;
       case StyledComponentModel:
         bsDataMap = (bsData as StyledComponentModel).toMap();
@@ -55,7 +55,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
 
   factory BootstrapSectionModel.fromMap(Map<String, dynamic> map) {
     BootstrapSectionUnion? bsData;
-    switch (map['bsData']['__typename']) {
+    switch (map['bsData']?['__typename']) {
       case 'BootstrapSectionStack':
         bsData = map['bsData'] != null
             ? BootstrapSectionStackModel.fromMap(map['bsData'])
@@ -66,9 +66,9 @@ class BootstrapSectionModel with BootstrapChildUnion {
             ? BootstrapSectionLayerModel.fromMap(map['bsData'])
             : null;
         break;
-      case 'BootstrapChild':
+      case 'BootstrapSectionChild':
         bsData = map['bsData'] != null
-            ? BootstrapChildModel.fromMap(map['bsData'])
+            ? BootstrapSectionChildModel.fromMap(map['bsData'])
             : null;
         break;
       case 'StyledComponent':
