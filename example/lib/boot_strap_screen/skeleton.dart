@@ -9,15 +9,19 @@ class BootstrapSkeleton {
       padding: [24, 0],
       bsData: BootstrapSectionChildModel(
         height: 100,
-        borderRadius: [20],
-        background: SectionBackground(
-          backgroundType: SectionBgType.IMAGE,
-          backgroundImgUrl: 'https://picsum.photos/200/300',
-        ),
         boxAlignment: Alignment.centerLeft,
         classes: 'col-8 offset-2',
         bcData: BootstrapSectionModel(
           key: 't2',
+          clickAction: V2ClickAction(
+            sequenceType: SequenceTypeEnum.SEQUENTIAL,
+            showRippleEffect: true,
+            actions: [],
+          ),
+          background: SectionBackground(
+            backgroundType: SectionBgType.IMAGE,
+            backgroundImgUrl: 'https://picsum.photos/200/300',
+          ),
           containsForm: false,
           bsData: BootstrapSectionLayerModel(
             children: [
@@ -196,6 +200,20 @@ class BootstrapSkeleton {
           ),
           BootstrapSectionChildModel(
             classes: 'col-sm-12',
+            bcData: StyledComponentModel(
+              scData: V2StyledTextModel(
+                text: 'Click Me',
+                textColor: '#000',
+              ),
+              clickAction: V2ClickAction(
+                sequenceType: SequenceTypeEnum.SEQUENTIAL,
+                actions: [],
+                showRippleEffect: true,
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
             bcData: FormComponentModel(
               padding: [8, 0, 0, 0],
               fcData: StyledSelectFieldModel(
@@ -303,6 +321,11 @@ class BootstrapSkeleton {
             ),
           ),
         ],
+      ),
+      clickAction: V2ClickAction(
+        sequenceType: SequenceTypeEnum.SEQUENTIAL,
+        actions: [],
+        showRippleEffect: true,
       ),
       containsForm: false,
     )

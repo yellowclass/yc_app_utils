@@ -45,6 +45,11 @@ class _BootstrapScreenState extends State<BootstrapScreen> {
                 (e) => BootstrapSectionWidget(
                   bootstrapSectionData: e,
                   onPressed: null,
+                  innerClickAction: (__, _, scK) async {
+                    scK?.setLoading(true);
+                    await Future.delayed(Duration(seconds: 5));
+                    scK?.setLoading(false);
+                  },
                 ),
               )
               .toList(),
