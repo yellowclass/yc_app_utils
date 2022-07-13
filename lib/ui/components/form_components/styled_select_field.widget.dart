@@ -21,8 +21,19 @@ class StyledSelectFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (selectFieldData.label != null)
-          V2StyledTextWidget(
-            styledText: selectFieldData.label!,
+          Row(
+            children: [
+              V2StyledTextWidget(
+                styledText: selectFieldData.label!,
+              ),
+              if (selectFieldData.validation?.isRequired?.value == true)
+                Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.cRed_100,
+                  ),
+                ),
+            ],
           ),
         if (selectFieldData.selectType == SelectType.SINGLE)
           DropdownSearch<OptionModel>(

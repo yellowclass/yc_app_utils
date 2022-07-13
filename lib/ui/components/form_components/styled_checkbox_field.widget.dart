@@ -25,8 +25,19 @@ class StyledCheckboxFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (checkboxFieldData.label != null)
-          V2StyledTextWidget(
-            styledText: checkboxFieldData.label!,
+          Row(
+            children: [
+              V2StyledTextWidget(
+                styledText: checkboxFieldData.label!,
+              ),
+              if (checkboxFieldData.validation?.isRequired?.value == true)
+                Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.cRed_100,
+                  ),
+                ),
+            ],
           ),
         FormBuilderCheckboxGroup(
           name: checkboxFieldData.name,

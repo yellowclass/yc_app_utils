@@ -33,8 +33,19 @@ class StyledTextFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (textFieldData.label != null)
-          V2StyledTextWidget(
-            styledText: textFieldData.label!,
+          Row(
+            children: [
+              V2StyledTextWidget(
+                styledText: textFieldData.label!,
+              ),
+              if (textFieldData.validation?.isRequired?.value == true)
+                Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.cRed_100,
+                  ),
+                ),
+            ],
           ),
         TextFormField(
           initialValue: textFieldData.inputDefaultValue,
