@@ -16,8 +16,7 @@ class BootstrapSectionWidget extends StatefulWidget {
   final bool showRippleEffect;
   final void Function(
     V2ClickAction clickAction,
-    Map<String, dynamic>? formData,
-    GlobalKey<FormState>? formKey,
+    FormResponse? formResponse,
     ClickWidgetState? clickedWidgetState,
   )? innerClickAction;
 
@@ -52,15 +51,16 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
       collectDataFromForm();
       widget.innerClickAction?.call(
         cta,
-        _formData,
-        _formKey,
+        FormResponse(
+          formData: _formData,
+          formKey: _formKey,
+        ),
         clickedWidgetState,
       );
       return;
     }
     widget.innerClickAction?.call(
       cta,
-      null,
       null,
       clickedWidgetState,
     );
