@@ -1,4 +1,3 @@
-import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledCheckboxFieldModel with FormComponentUnion {
@@ -8,7 +7,6 @@ class StyledCheckboxFieldModel with FormComponentUnion {
   List<OptionModel>? checkboxDefaultValue;
   bool isDisabled;
   List<OptionModel> options;
-  SelectType selectType;
 
   StyledCheckboxFieldModel({
     this.label,
@@ -17,7 +15,6 @@ class StyledCheckboxFieldModel with FormComponentUnion {
     this.checkboxDefaultValue,
     this.isDisabled = false,
     required this.options,
-    this.selectType = SelectType.SINGLE,
   });
 
   StyledCheckboxFieldModel copyWith({
@@ -36,7 +33,6 @@ class StyledCheckboxFieldModel with FormComponentUnion {
       checkboxDefaultValue: checkboxDefaultValue ?? this.checkboxDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
-      selectType: selectType ?? this.selectType,
     );
   }
 
@@ -48,7 +44,6 @@ class StyledCheckboxFieldModel with FormComponentUnion {
       'checkboxDefaultValue': checkboxDefaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
-      'selectType': selectType.name,
     };
   }
 
@@ -67,11 +62,6 @@ class StyledCheckboxFieldModel with FormComponentUnion {
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(
           map['options']?.map((x) => OptionModel.fromMap(x))),
-      selectType: CommonHelpers.enumFromString(
-            SelectType.values,
-            map['selectType'],
-          ) ??
-          SelectType.SINGLE,
     );
   }
 }
