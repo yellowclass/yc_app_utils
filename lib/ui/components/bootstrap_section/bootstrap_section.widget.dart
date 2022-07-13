@@ -17,6 +17,7 @@ class BootstrapSectionWidget extends StatefulWidget {
   final void Function(
     V2ClickAction clickAction,
     Map<String, dynamic>? formData,
+    GlobalKey<FormState>? formKey,
     ClickWidgetState? clickedWidgetState,
   )? innerClickAction;
 
@@ -52,12 +53,14 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
       widget.innerClickAction?.call(
         cta,
         _formData,
+        _formKey,
         clickedWidgetState,
       );
       return;
     }
     widget.innerClickAction?.call(
       cta,
+      null,
       null,
       clickedWidgetState,
     );
