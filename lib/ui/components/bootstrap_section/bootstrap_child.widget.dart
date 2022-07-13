@@ -36,46 +36,49 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
   }
 
   Widget buildChild() {
-    if (_isLoading) {
-      return const ThreeBounceLoader(
-        color: AppColors.cGREEN_100,
-        size: 24,
-      );
-    } else if (widget.bootstrapChild.bcData is BootstrapSectionModel) {
+    if (widget.bootstrapChild.bcData is BootstrapSectionModel) {
       BootstrapSectionModel child =
           widget.bootstrapChild.bcData as BootstrapSectionModel;
-      return BootstrapSectionWidget(
-        bootstrapSectionData: child,
-        showRippleEffect: child.clickAction?.showRippleEffect ?? false,
-        buttonLoaderColor: widget.buttonLoaderColor,
-        onPressed: (child.clickAction != null &&
-                widget.innerClickAction != null &&
-                !_isLoading)
-            ? () {
-                // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
-                if (widget.containsForm) {
-                  // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
-                  for (var action in child.clickAction!.actions) {
-                    if (action.functionType ==
-                        V2FunctionTypesEnum.SUBMIT_FORM) {
-                      widget.innerClickAction!.call(
-                        child.clickAction!,
-                        true,
-                        this,
-                      );
+      if (_isLoading) {
+        return ThreeBounceLoader(
+          color: CommonHelpers.v2ColorFromHex(
+            child.background?.backgroundColor,
+          ),
+          size: 24,
+        );
+      } else {
+        return BootstrapSectionWidget(
+          bootstrapSectionData: child,
+          showRippleEffect: child.clickAction?.showRippleEffect ?? false,
+          onPressed: (child.clickAction != null &&
+                  widget.innerClickAction != null &&
+                  !_isLoading)
+              ? () {
+                  // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
+                  if (widget.containsForm) {
+                    // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
+                    for (var action in child.clickAction!.actions) {
+                      if (action.functionType ==
+                          V2FunctionTypesEnum.SUBMIT_FORM) {
+                        widget.innerClickAction!.call(
+                          child.clickAction!,
+                          true,
+                          this,
+                        );
+                      }
+                      break;
                     }
-                    break;
+                  } else {
+                    widget.innerClickAction!.call(
+                      child.clickAction!,
+                      false,
+                      this,
+                    );
                   }
-                } else {
-                  widget.innerClickAction!.call(
-                    child.clickAction!,
-                    false,
-                    this,
-                  );
                 }
-              }
-            : null,
-      );
+              : null,
+        );
+      }
     } else if (widget.bootstrapChild.bcData is StyledComponentModel) {
       StyledComponentModel child =
           widget.bootstrapChild.bcData as StyledComponentModel;
@@ -83,7 +86,6 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
         styledComponentDetails: child,
         containsForm: widget.containsForm,
         innerClickAction: widget.innerClickAction,
-        buttonLoaderColor: widget.buttonLoaderColor,
       );
     } else if (widget.bootstrapChild.bcData is FormComponentModel) {
       FormComponentModel widgetData =

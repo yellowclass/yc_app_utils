@@ -7,7 +7,6 @@ class BootstrapSectionWidget extends StatefulWidget {
     required this.bootstrapSectionData,
     required this.onPressed,
     this.showRippleEffect = false,
-    this.buttonLoaderColor = AppColors.cGREEN_100,
     this.innerClickAction,
     Key? key,
   }) : super(key: key);
@@ -15,7 +14,6 @@ class BootstrapSectionWidget extends StatefulWidget {
   final BootstrapSectionModel bootstrapSectionData;
   final VoidCallback? onPressed;
   final bool showRippleEffect;
-  final Color buttonLoaderColor;
   final void Function(
     V2ClickAction clickAction,
     Map<String, dynamic>? formData,
@@ -78,7 +76,6 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
                 containsForm: widget.bootstrapSectionData.containsForm,
                 innerClickAction: innerClickActionHandler,
                 formData: _formData,
-                buttonLoaderColor: widget.buttonLoaderColor,
               ),
             )
             .toList(),
@@ -92,7 +89,6 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
         formData: _formData,
-        buttonLoaderColor: widget.buttonLoaderColor,
       );
     } else if (widget.bootstrapSectionData.bsData
         is BootstrapSectionChildModel) {
@@ -105,7 +101,6 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
         formData: _formData,
-        buttonLoaderColor: widget.buttonLoaderColor,
       );
     } else if (widget.bootstrapSectionData.bsData is StyledComponentModel) {
       StyledComponentModel bsWidget =
@@ -114,7 +109,6 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         styledComponentDetails: bsWidget,
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
-        buttonLoaderColor: widget.buttonLoaderColor,
       );
     } else {
       return const SizedBox.shrink();
