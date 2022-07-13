@@ -25,7 +25,7 @@ class StyledRadioFieldWidget extends StatelessWidget {
                 styledText: radioFieldData.label!,
               ),
               if (radioFieldData.validation?.isRequired?.value == true)
-                Text(
+                const Text(
                   '*',
                   style: TextStyle(
                     color: AppColors.cRed_100,

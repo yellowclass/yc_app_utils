@@ -39,7 +39,7 @@ class StyledTextFieldWidget extends StatelessWidget {
                 styledText: textFieldData.label!,
               ),
               if (textFieldData.validation?.isRequired?.value == true)
-                Text(
+                const Text(
                   '*',
                   style: TextStyle(
                     color: AppColors.cRed_100,
@@ -68,7 +68,9 @@ class StyledTextFieldWidget extends StatelessWidget {
               horizontal: AppSpacing.s,
               vertical: AppSpacing.m,
             ),
+            counter: const SizedBox.shrink(),
           ),
+          maxLength: textFieldData.validation?.maxLength?.value,
           style: const TextStyle(
             color: AppColors.cBODY_TEXT,
             fontSize: 16,
