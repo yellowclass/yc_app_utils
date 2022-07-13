@@ -19,8 +19,19 @@ class StyledRadioFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (radioFieldData.label != null)
-          V2StyledTextWidget(
-            styledText: radioFieldData.label!,
+          Row(
+            children: [
+              V2StyledTextWidget(
+                styledText: radioFieldData.label!,
+              ),
+              if (radioFieldData.validation?.isRequired?.value == true)
+                Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.cRed_100,
+                  ),
+                ),
+            ],
           ),
         FormBuilderRadioGroup(
           name: radioFieldData.name,
