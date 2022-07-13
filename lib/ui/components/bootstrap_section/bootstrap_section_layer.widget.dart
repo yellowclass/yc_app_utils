@@ -9,7 +9,6 @@ class BootstrapSectionLayerWidget extends StatelessWidget {
     required this.containsForm,
     this.innerClickAction,
     this.formData,
-    this.buttonLoaderColor = AppColors.cGREEN_100,
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +16,6 @@ class BootstrapSectionLayerWidget extends StatelessWidget {
   final bool containsForm;
   final InnerClickAction? innerClickAction;
   final Map<String, dynamic>? formData;
-  final Color buttonLoaderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,6 @@ class BootstrapSectionLayerWidget extends StatelessWidget {
                 containsForm: containsForm,
                 formData: formData,
                 innerClickAction: innerClickAction,
-                buttonLoaderColor: buttonLoaderColor,
               ),
             ),
           )

@@ -7,14 +7,12 @@ class StyledComponentWidget extends StatefulWidget {
     required this.styledComponentDetails,
     required this.containsForm,
     this.innerClickAction,
-    this.buttonLoaderColor = AppColors.cGREEN_100,
     Key? key,
   }) : super(key: key);
 
   final StyledComponentModel styledComponentDetails;
   final bool containsForm;
   final InnerClickAction? innerClickAction;
-  final Color buttonLoaderColor;
 
   @override
   State<StyledComponentWidget> createState() => StyledComponentWidgetState();
@@ -34,17 +32,21 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
   }
 
   Widget buildComponent() {
-    if (_isLoading) {
-      return ThreeBounceLoader(
-        color: widget.buttonLoaderColor,
-        size: 24,
-      );
-    } else if (widget.styledComponentDetails.scData is V2StyledTextModel) {
+    if (widget.styledComponentDetails.scData is V2StyledTextModel) {
       V2StyledTextModel styledTextDetails =
           widget.styledComponentDetails.scData as V2StyledTextModel;
-      return V2StyledTextWidget(
-        styledText: styledTextDetails,
-      );
+      if (_isLoading) {
+        return ThreeBounceLoader(
+          color: CommonHelpers.v2ColorFromHex(
+            styledTextDetails.textColor,
+          ),
+          size: 24,
+        );
+      } else {
+        return V2StyledTextWidget(
+          styledText: styledTextDetails,
+        );
+      }
     } else if (widget.styledComponentDetails.scData is StyledImageModel) {
       StyledImageModel styledImageDetails =
           widget.styledComponentDetails.scData as StyledImageModel;
