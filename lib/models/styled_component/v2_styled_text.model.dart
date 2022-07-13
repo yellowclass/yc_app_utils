@@ -22,7 +22,7 @@ class V2StyledTextModel with StyledComponentUnion {
 
   V2StyledTextModel({
     required this.text,
-    this.textColor,
+    this.textColor = '#212A39',
     this.tStyle,
     this.italic,
     this.letterSpacing,
