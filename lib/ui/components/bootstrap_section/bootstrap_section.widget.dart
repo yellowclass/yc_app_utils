@@ -52,8 +52,8 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
       widget.innerClickAction?.call(
         cta,
         FormResponse(
-          formData: _formData,
-          formKey: _formKey,
+          formData: _formData!,
+          formKey: _formKey!,
         ),
         clickedWidgetState,
       );
