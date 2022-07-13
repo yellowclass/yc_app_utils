@@ -27,7 +27,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
                 styledText: selectFieldData.label!,
               ),
               if (selectFieldData.validation?.isRequired?.value == true)
-                Text(
+                const Text(
                   '*',
                   style: TextStyle(
                     color: AppColors.cRed_100,
