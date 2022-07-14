@@ -6,6 +6,7 @@ import 'package:yc_app_utils/models/styled_component/styled_component_union.dart
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
 class V2StyledTextModel with StyledComponentUnion {
+  static const String _defaultTextColor = '#212A39';
   String text;
   String? textColor;
   TStyle? tStyle;
@@ -22,7 +23,7 @@ class V2StyledTextModel with StyledComponentUnion {
 
   V2StyledTextModel({
     required this.text,
-    this.textColor = '#212A39',
+    this.textColor = _defaultTextColor,
     this.tStyle,
     this.italic,
     this.letterSpacing,
@@ -57,7 +58,7 @@ class V2StyledTextModel with StyledComponentUnion {
   factory V2StyledTextModel.fromMap(Map<String, dynamic> map) {
     return V2StyledTextModel(
       text: map['text'] ?? '',
-      textColor: map['textColor'] ?? '#212A39',
+      textColor: map['textColor'] ?? _defaultTextColor,
       tStyle: map['tStyle'] != null
           ? CommonHelpers.enumFromString(
               TStyle.values,
