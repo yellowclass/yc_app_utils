@@ -68,14 +68,12 @@ class V2StyledTextModel with StyledComponentUnion {
       letterSpacing: map['letterSpacing'],
       strikeThrough: map['strikeThrough'] ?? false,
       textAlign: map['textAlign'] != null
-          ? CommonHelpers.enumFromString(
-              TextAlign.values,
+          ? CommonHelpers.getTextAlignmentFromString(
               map['textAlign'],
             )
           : null,
       textOverflow: map['textOverflow'] != null
-          ? CommonHelpers.enumFromString(
-              TextOverflow.values,
+          ? CommonHelpers.getTextOverflowFromString(
               map['textOverflow'],
             )
           : null,
