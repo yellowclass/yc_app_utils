@@ -210,6 +210,21 @@ class CommonHelpers {
     }
   }
 
+  static TextOverflow getTextOverflowFromString(String? alignment) {
+    switch (alignment) {
+      case 'CLIP':
+        return TextOverflow.clip;
+      case 'FADE':
+        return TextOverflow.fade;
+      case 'ELLIPSIS':
+        return TextOverflow.ellipsis;
+      case 'VISIBLE':
+        return TextOverflow.visible;
+      default:
+        return TextOverflow.ellipsis;
+    }
+  }
+
   static String getBootstrapSizesFromClasses(String classes) {
     List<String> sizes = [];
     List<String> separatedClasses = classes.split(' ');
