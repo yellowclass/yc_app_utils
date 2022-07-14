@@ -57,7 +57,7 @@ class V2StyledTextModel with StyledComponentUnion {
   factory V2StyledTextModel.fromMap(Map<String, dynamic> map) {
     return V2StyledTextModel(
       text: map['text'] ?? '',
-      textColor: map['textColor'],
+      textColor: map['textColor'] ?? '#212A39',
       tStyle: map['tStyle'] != null
           ? CommonHelpers.enumFromString(
               TStyle.values,
