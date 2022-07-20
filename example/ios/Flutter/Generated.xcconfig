@@ -1,5 +1,5 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/opt/homebrew/Caskroom/flutter/3.0.2/flutter
+FLUTTER_ROOT=/Users/vansh/Development/SDK/flutter
 FLUTTER_APPLICATION_PATH=/Users/vansh/Development/Yellow Class/APP/yc_app_utils/example
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib/main.dart
@@ -10,4 +10,4 @@ EXCLUDED_ARCHS[sdk=iphonesimulator*]=i386
 DART_OBFUSCATION=false
 TRACK_WIDGET_CREATION=false
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=.dart_tool/package_config.json
+PACKAGE_CONFIG=.packages

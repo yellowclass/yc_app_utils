@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledTextFieldWidget extends StatelessWidget {
+class StyledTextFieldWidget extends StatefulWidget {
   const StyledTextFieldWidget({
     required this.textFieldData,
     this.onSaved,
@@ -11,6 +11,18 @@ class StyledTextFieldWidget extends StatelessWidget {
 
   final StyledInputFieldModel textFieldData;
   final void Function(String, String?)? onSaved;
+
+  @override
+  State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
+}
+
+class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
+  Country _selectedCountry = Country.allCountries.firstWhere(
+    (element) => element.code == 'IN',
+  );
+
+  bool get isMobileField =>
+      widget.textFieldData.inputFieldType == InputFieldEnum.MOBILE;
 
   TextInputType? getKeyboardType(InputFieldEnum? fieldType) {
     switch (fieldType) {
@@ -32,13 +44,13 @@ class StyledTextFieldWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (textFieldData.label != null)
+        if (widget.textFieldData.label != null)
           Row(
             children: [
               V2StyledTextWidget(
-                styledText: textFieldData.label!,
+                styledText: widget.textFieldData.label!,
               ),
-              if (textFieldData.validation?.isRequired?.value == true)
+              if (widget.textFieldData.validation?.isRequired?.value == true)
                 const Text(
                   '*',
                   style: TextStyle(
@@ -47,44 +59,72 @@ class StyledTextFieldWidget extends StatelessWidget {
                 ),
             ],
           ),
-        TextFormField(
-          initialValue: textFieldData.inputDefaultValue,
-          enabled: !textFieldData.isDisabled,
-          textAlignVertical: TextAlignVertical.bottom,
-          inputFormatters: [
-            if (textFieldData.inputFieldType == InputFieldEnum.NUMBER)
-              FilteringTextInputFormatter.digitsOnly
+        Row(
+          children: [
+            if (isMobileField)
+              CountryPicker(
+                showDialingCode: true,
+                showName: false,
+                onChanged: (Country country) {
+                  setState(() {
+                    _selectedCountry = country;
+                  });
+                },
+                selectedCountry: _selectedCountry,
+                dialingCodeTextStyle: CommonHelpers.getTextStyle(
+                  TStyle.B1_600,
+                ),
+              ),
+            Flexible(
+              child: TextFormField(
+                initialValue: widget.textFieldData.inputDefaultValue,
+                enabled: !widget.textFieldData.isDisabled,
+                textAlignVertical: TextAlignVertical.bottom,
+                inputFormatters: [
+                  if (widget.textFieldData.inputFieldType ==
+                          InputFieldEnum.NUMBER ||
+                      isMobileField)
+                    FilteringTextInputFormatter.digitsOnly
+                ],
+                maxLines: widget.textFieldData.maxLines,
+                keyboardType:
+                    getKeyboardType(widget.textFieldData.inputFieldType),
+                obscureText: widget.textFieldData.inputFieldType ==
+                    InputFieldEnum.PASSWORD,
+                decoration: InputDecoration(
+                  hintText: widget.textFieldData.placeholder,
+                  hintStyle: const TextStyle(
+                    color: AppColors.cBODY_TEXT_75,
+                    fontSize: 16,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.s,
+                    vertical: AppSpacing.m,
+                  ),
+                  counter: const SizedBox.shrink(),
+                ),
+                maxLength: widget.textFieldData.validation?.maxLength?.value,
+                style: const TextStyle(
+                  color: AppColors.cBODY_TEXT,
+                  fontSize: 16,
+                ),
+                validator: (value) => CommonHelpers.validateTextField(
+                  value: value!,
+                  validations: widget.textFieldData.validation,
+                ),
+                onSaved: (value) {
+                  String updatedVal = value ?? '';
+                  if (isMobileField) {
+                    updatedVal = _selectedCountry.value + updatedVal;
+                  }
+                  widget.onSaved?.call(
+                    widget.textFieldData.name,
+                    updatedVal,
+                  );
+                },
+              ),
+            ),
           ],
-          maxLines: textFieldData.maxLines,
-          keyboardType: getKeyboardType(textFieldData.inputFieldType),
-          obscureText: textFieldData.inputFieldType == InputFieldEnum.PASSWORD,
-          decoration: InputDecoration(
-            hintText: textFieldData.placeholder,
-            hintStyle: const TextStyle(
-              color: AppColors.cBODY_TEXT_75,
-              fontSize: 16,
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.s,
-              vertical: AppSpacing.m,
-            ),
-            counter: const SizedBox.shrink(),
-          ),
-          maxLength: textFieldData.validation?.maxLength?.value,
-          style: const TextStyle(
-            color: AppColors.cBODY_TEXT,
-            fontSize: 16,
-          ),
-          validator: (value) => CommonHelpers.validateTextField(
-            value: value!,
-            validations: textFieldData.validation,
-          ),
-          onSaved: (value) {
-            onSaved?.call(
-              textFieldData.name,
-              value,
-            );
-          },
         ),
       ],
     );

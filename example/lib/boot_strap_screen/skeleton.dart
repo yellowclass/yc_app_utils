@@ -494,6 +494,27 @@ class BootstrapSkeleton {
           ),
           BootstrapSectionChildModel(
             classes: 'col-sm-12',
+            bcData: FormComponentModel(
+              fcData: StyledInputFieldModel(
+                name: 'phone',
+                label: V2StyledTextModel(
+                  text: 'Phone',
+                  textColor: '#000',
+                ),
+                inputFieldType: InputFieldEnum.MOBILE,
+                validation: Validation(
+                  isRequired: BooleanValidation.fromMap(
+                    {
+                      'value': true,
+                      'msg': 'Required',
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
             bcData: StyledComponentModel(
               scData: V2StyledTextModel(
                 text: 'Submit',
@@ -504,7 +525,16 @@ class BootstrapSkeleton {
                 textAlign: TextAlign.center,
                 padding: [12, 0],
               ),
-              // clickAction:
+              clickAction: V2ClickAction(
+                sequenceType: SequenceTypeEnum.SEQUENTIAL,
+                actions: [
+                  OneClickAction(
+                    type: V2ClickActionTypesEnum.APP_CUSTOM,
+                    functionType: V2FunctionTypesEnum.SUBMIT_FORM,
+                  ),
+                ],
+                showRippleEffect: true,
+              ),
             ),
           ),
           BootstrapSectionChildModel(
@@ -548,7 +578,7 @@ class BootstrapSkeleton {
           ),
         ],
       ),
-      containsForm: false,
+      containsForm: true,
     ),
     BootstrapSectionModel(
       key: 't1',
