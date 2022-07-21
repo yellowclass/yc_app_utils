@@ -37,6 +37,38 @@ class V2StyledTextModel with StyledComponentUnion {
     this.padding,
   });
 
+  V2StyledTextModel copyWith({
+    String? text,
+    String? textColor,
+    TStyle? tStyle,
+    bool? italic,
+    double? letterSpacing,
+    bool? strikeThrough,
+    TextAlign? textAlign,
+    TextOverflow? textOverflow,
+    int? maxLines,
+    SectionBackground? background,
+    String? borderColor,
+    List<int>? borderRadius,
+    List<int>? padding,
+  }) {
+    return V2StyledTextModel(
+      text: text ?? this.text,
+      textColor: textColor ?? this.textColor,
+      tStyle: tStyle ?? this.tStyle,
+      italic: italic ?? this.italic,
+      letterSpacing: letterSpacing ?? this.letterSpacing,
+      strikeThrough: strikeThrough ?? this.strikeThrough,
+      textAlign: textAlign ?? this.textAlign,
+      textOverflow: textOverflow ?? this.textOverflow,
+      maxLines: maxLines ?? this.maxLines,
+      background: background ?? this.background,
+      borderColor: borderColor ?? this.borderColor,
+      borderRadius: borderRadius ?? this.borderRadius,
+      padding: padding ?? this.padding,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'text': text,
