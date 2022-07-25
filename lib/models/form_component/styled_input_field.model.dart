@@ -94,7 +94,7 @@ class StyledInputFieldModel with FormComponentUnion {
 }
 
 enum InputFieldEnum {
-  STRING,
+  TEXT,
   EMAIL,
   NUMBER,
   PASSWORD,

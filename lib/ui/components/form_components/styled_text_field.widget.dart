@@ -28,7 +28,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
     switch (fieldType) {
       case InputFieldEnum.EMAIL:
         return TextInputType.emailAddress;
-      case InputFieldEnum.STRING:
+      case InputFieldEnum.TEXT:
         return TextInputType.text;
       case InputFieldEnum.NUMBER:
         return TextInputType.number;
