@@ -12,6 +12,8 @@ class StyledInputFieldModel with FormComponentUnion {
   String? inputDefaultValue;
   bool isDisabled;
   int maxLines;
+  bool isExpanded;
+  bool maxCounterVisible;
 
   StyledInputFieldModel({
     this.label,
@@ -22,6 +24,8 @@ class StyledInputFieldModel with FormComponentUnion {
     this.inputDefaultValue,
     this.isDisabled = false,
     this.maxLines = 1,
+    this.isExpanded = false,
+    this.maxCounterVisible = false,
   });
 
   StyledInputFieldModel copyWith({
@@ -33,6 +37,8 @@ class StyledInputFieldModel with FormComponentUnion {
     String? inputDefaultValue,
     bool? isDisabled,
     int? maxLines,
+    bool? isExpanded,
+    bool? maxCounterVisible,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
@@ -43,6 +49,8 @@ class StyledInputFieldModel with FormComponentUnion {
       inputDefaultValue: inputDefaultValue ?? this.inputDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       maxLines: maxLines ?? this.maxLines,
+      isExpanded: isExpanded ?? this.isExpanded,
+      maxCounterVisible: maxCounterVisible ?? this.maxCounterVisible,
     );
   }
 
@@ -56,6 +64,8 @@ class StyledInputFieldModel with FormComponentUnion {
       'inputDefaultValue': inputDefaultValue,
       'isDisabled': isDisabled,
       'maxLines': maxLines,
+      'isExpanded': isExpanded,
+      'maxCounterVisible': maxCounterVisible,
     };
   }
 
@@ -77,6 +87,8 @@ class StyledInputFieldModel with FormComponentUnion {
       inputDefaultValue: map['inputDefaultValue'],
       isDisabled: map['isDisabled'] ?? false,
       maxLines: map['maxLines'] ?? 1,
+      isExpanded: map['isExpanded'] ?? false,
+      maxCounterVisible: map['maxCounterVisible'] ?? false,
     );
   }
 }
