@@ -46,9 +46,12 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
       children: [
         if (widget.textFieldData.label != null)
           Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              V2StyledTextWidget(
-                styledText: widget.textFieldData.label!,
+              Flexible(
+                child: V2StyledTextWidget(
+                  styledText: widget.textFieldData.label!,
+                ),
               ),
               if (widget.textFieldData.validation?.isRequired?.value == true)
                 const Text(
@@ -87,6 +90,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                     FilteringTextInputFormatter.digitsOnly
                 ],
                 maxLines: widget.textFieldData.maxLines,
+                minLines: widget.textFieldData.isExpanded ? null : 1,
                 keyboardType:
                     getKeyboardType(widget.textFieldData.inputFieldType),
                 obscureText: widget.textFieldData.inputFieldType ==
@@ -101,7 +105,9 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                     horizontal: AppSpacing.s,
                     vertical: AppSpacing.m,
                   ),
-                  counter: const SizedBox.shrink(),
+                  counter: widget.textFieldData.maxCounterVisible
+                      ? null
+                      : const SizedBox.shrink(),
                 ),
                 maxLength: widget.textFieldData.validation?.maxLength?.value,
                 style: const TextStyle(

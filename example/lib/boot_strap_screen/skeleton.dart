@@ -700,16 +700,24 @@ class BootstrapSkeleton {
             ),
           ),
           BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            bcData: StyledComponentModel(
+              scData: V2StyledTextModel(
+                text: 'Date of Birth',
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
             padding: [0, 8, 0, 0],
             classes: 'col-sm-4',
             bcData: FormComponentModel(
               fcData: StyledInputFieldModel(
                 name: 'dobDay',
                 placeholder: 'DD',
-                label: V2StyledTextModel(
-                  text: 'DOB',
-                ),
                 inputFieldType: InputFieldEnum.NUMBER,
+                label: V2StyledTextModel(
+                  text: 'Day',
+                ),
                 validation: Validation(
                   isRequired: BooleanValidation.fromMap({
                     'msg': 'This field is required',
@@ -732,12 +740,12 @@ class BootstrapSkeleton {
             classes: 'col-sm-4',
             bcData: FormComponentModel(
               fcData: StyledInputFieldModel(
-                label: V2StyledTextModel(
-                  text: '',
-                ),
                 name: 'dobMonth',
                 placeholder: 'MM',
                 inputFieldType: InputFieldEnum.NUMBER,
+                label: V2StyledTextModel(
+                  text: 'Month',
+                ),
                 validation: Validation(
                   isRequired: BooleanValidation.fromMap({
                     'msg': 'This field is required',
@@ -764,7 +772,7 @@ class BootstrapSkeleton {
                 placeholder: 'YYYY',
                 inputFieldType: InputFieldEnum.NUMBER,
                 label: V2StyledTextModel(
-                  text: 'DOB',
+                  text: 'Year',
                 ),
               ),
             ),
@@ -974,6 +982,7 @@ class BootstrapSkeleton {
                 ),
                 name: 'reason',
                 maxLines: 5,
+                maxCounterVisible: true,
                 validation: Validation(
                   isRequired: BooleanValidation.fromMap({
                     'msg': 'This field is required',
