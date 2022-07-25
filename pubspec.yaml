@@ -8,13 +8,13 @@ environment:
   flutter: '>=1.17.0'
 
 dependencies:
-  cached_network_image: ^3.2.0
+  cached_network_image: 3.2.0
   dropdown_search: 2.0.1
   flutter:
     sdk: flutter
-  flutter_svg: ^0.22.0
-  flutter_form_builder: 7.3.1
-  intl: ^0.17.0
+  flutter_svg: 0.22.0
+  flutter_form_builder: 7.1.1
+  intl: 0.17.0
   flutter_bootstrap: 2.0.0
 
 dev_dependencies:
