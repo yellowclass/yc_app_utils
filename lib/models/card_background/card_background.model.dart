@@ -39,6 +39,27 @@ class CardBackground {
         shouldLeaveBorder: json["shouldLeaveBorder"] ?? false,
       );
 
+  CardBackground copyWith({
+    SectionBgType? backgroundType,
+    String? backgroundColor,
+    String? backgroundImageUrl,
+    String? aspectRatio,
+    String? gradientColor1,
+    String? gradientColor2,
+    SectionGradientDirections? gradientDirection,
+    bool? shouldLeaveBorder,
+  }) =>
+      CardBackground(
+        backgroundType: backgroundType ?? this.backgroundType,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        backgroundImageUrl: backgroundImageUrl ?? this.backgroundImageUrl,
+        aspectRatio: aspectRatio ?? this.aspectRatio,
+        gradientColor1: gradientColor1 ?? this.gradientColor1,
+        gradientColor2: gradientColor2 ?? this.gradientColor2,
+        gradientDirection: gradientDirection ?? this.gradientDirection,
+        shouldLeaveBorder: shouldLeaveBorder ?? this.shouldLeaveBorder,
+      );
+
   Map<String, dynamic> toMap() => {
         "backgroundType": backgroundType?.name,
         "backgroundColor": backgroundColor,
