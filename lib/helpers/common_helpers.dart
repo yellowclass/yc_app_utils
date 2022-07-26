@@ -1,18 +1,106 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
-import 'package:yc_app_utils/models/card_background/card_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background.model.dart';
-import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
-import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart';
-import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
-import 'package:yc_app_utils/ui/styleguide/spacing.dart';
-import 'package:yc_app_utils/ui/text_styles/text_styles.dart';
-import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CommonHelpers {
   CommonHelpers._();
+
+  static void copyToClipboard(String copyTxt) {
+    Clipboard.setData(ClipboardData(text: copyTxt));
+  }
+
+  static bool isNotEmptyList(List arr) {
+    return arr.isNotEmpty;
+  }
+
+  static bool isNotEmptyMap(Map map) {
+    return map.isNotEmpty;
+  }
+
+  static bool isNotEmptyString(String? str) {
+    return str != null && str.isNotEmpty && str != '';
+  }
+
+  static bool isNotNullEntity(dynamic x) {
+    return x != null;
+  }
+
+  static bool isNullEntity(dynamic x) {
+    return x == null;
+  }
+
+  static bool get isNotIos => !Platform.isIOS;
+
+  static bool get isIos => Platform.isIOS;
+
+  static bool get isAndroid => Platform.isAndroid;
+
+  static String getDurationString(Duration time) {
+    String timeText = time.toString().split('.').first;
+    if (timeText.split(':').first == "0") {
+      timeText = timeText.split(':').sublist(1).join(':');
+    }
+    return timeText;
+  }
+
+  static String cleanMobileNumber(String num) {
+    return num.replaceAll('-', '')
+        .replaceAll('(', '')
+        .replaceAll(')', '')
+        .replaceAll(' ', '')
+        .trim();
+  }
+
+  static String compactNumFormatter(int? val) {
+    return NumberFormat.compact().format(val ?? 0);
+  }
+
+  static Map<String, dynamic>? removeNullParams(
+    Map<String, dynamic>? data, {
+    List<String>? excludeParams,
+  }) {
+    if (excludeParams != null) {
+      data!.removeWhere(
+          (String k, dynamic v) => v == null && !excludeParams.contains(k));
+    } else {
+      data!.removeWhere((String k, dynamic v) => v == null);
+    }
+    return data;
+  }
+
+  // VALIDATORS
+  static bool isNumber(String str) {
+    return int.tryParse(str) != null;
+  }
+
+  static bool isValidEmail(String email) {
+    return RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+        .hasMatch(email);
+  }
+
+  static bool isValidName(String name) {
+    return RegExp("^[A-Za-zs]{1,}[.]{0,1}[A-Za-zs]{0,}").hasMatch(name) &&
+        name.length >= 2;
+  }
+
+  static Axis getAxisFromString(String? axis) {
+    if (axis == "HORIZONTAL") {
+      return Axis.horizontal;
+    } else {
+      return Axis.vertical;
+    }
+  }
+
+  int random() {
+    Random rn = Random();
+    return rn.nextInt(6);
+  }
 
   static T? enumFromString<T>(Iterable<T> values, String? value) {
     try {
@@ -73,6 +161,42 @@ class CommonHelpers {
     }
   }
 
+  static MainAxisAlignment getMainAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return MainAxisAlignment.start;
+      case 'CENTER':
+        return MainAxisAlignment.center;
+      case 'END':
+        return MainAxisAlignment.end;
+      case 'SPACE_BETWEEN':
+        return MainAxisAlignment.spaceBetween;
+      case 'SPACE_AROUND':
+        return MainAxisAlignment.spaceAround;
+      case 'SPACE_EVENLY':
+        return MainAxisAlignment.spaceEvenly;
+      default:
+        return MainAxisAlignment.center;
+    }
+  }
+
+  static CrossAxisAlignment getCrossAxisAlignmentFromString(String? alignment) {
+    switch (alignment) {
+      case 'START':
+        return CrossAxisAlignment.start;
+      case 'CENTER':
+        return CrossAxisAlignment.center;
+      case 'END':
+        return CrossAxisAlignment.end;
+      case 'STRETCH':
+        return CrossAxisAlignment.stretch;
+      case 'BASELINE':
+        return CrossAxisAlignment.baseline;
+      default:
+        return CrossAxisAlignment.center;
+    }
+  }
+
   static TextAlign getTextAlignmentFromString(String? alignment) {
     switch (alignment) {
       case 'LEFT':
@@ -84,6 +208,43 @@ class CommonHelpers {
       default:
         return TextAlign.left;
     }
+  }
+
+  static TextOverflow getTextOverflowFromString(String? alignment) {
+    switch (alignment) {
+      case 'CLIP':
+        return TextOverflow.clip;
+      case 'FADE':
+        return TextOverflow.fade;
+      case 'ELLIPSIS':
+        return TextOverflow.ellipsis;
+      case 'VISIBLE':
+        return TextOverflow.visible;
+      default:
+        return TextOverflow.ellipsis;
+    }
+  }
+
+  static String getBootstrapSizesFromClasses(String classes) {
+    List<String> sizes = [];
+    List<String> separatedClasses = classes.split(' ');
+    for (var separatedClass in separatedClasses) {
+      if (separatedClass.contains('col')) {
+        sizes.add(separatedClass);
+      }
+    }
+    return sizes.join(' ');
+  }
+
+  static String getBootstrapOffsetsFromClasses(String classes) {
+    List<String> sizes = [];
+    List<String> separatedClasses = classes.split(' ');
+    for (var separatedClass in separatedClasses) {
+      if (separatedClass.contains('offset')) {
+        sizes.add(separatedClass);
+      }
+    }
+    return sizes.join(' ');
   }
 
   static EdgeInsetsGeometry getPaddingFromList(List<int>? paddingItems) {
@@ -161,6 +322,18 @@ class CommonHelpers {
     }
   }
 
+  /// This functions gets absolute height if the height provided is positive, else provides relative height in percentage.
+  static double? getHeightFromDouble(double? height) {
+    if (height == null) {
+      return null;
+    }
+    if (height >= 0) {
+      return height;
+    } else {
+      return YCMediaQuery.screenHeight * height.abs() / 100;
+    }
+  }
+
   static Color v2ColorFromHex(String? hexColor) {
     if (hexColor == null) {
       return AppColors.cTRANSPARENT;
@@ -175,21 +348,23 @@ class CommonHelpers {
   }
 
   static TextStyle? getTextStyle(
-    TStyle style, {
+    TStyle? style, {
     TextStyle? customStyle,
   }) {
     Map<TStyle, TextStyle> textStyleMap = YCMediaQuery.getIsTablet()
         ? TextStyles.tabTextStyle
         : TextStyles.mobTextStyle;
-    return customStyle != null
-        ? textStyleMap[style]!.merge(customStyle)
-        : textStyleMap[style];
+    TextStyle tStyle = textStyleMap[style] ?? const TextStyle();
+    return customStyle != null ? tStyle.merge(customStyle) : tStyle;
   }
 
   static BoxDecoration getBoxDecorationWithSectionBackground({
-    required SectionBackground sectionBackground,
+    required SectionBackground? sectionBackground,
     double borderRadius = AppSpacing.s,
   }) {
+    if (sectionBackground == null) {
+      return const BoxDecoration();
+    }
     switch (sectionBackground.backgroundType) {
       case SectionBgType.TRANSPARENT:
         return const BoxDecoration();
@@ -365,5 +540,106 @@ class CommonHelpers {
     } else {
       return Alignment.topCenter;
     }
+  }
+
+  static String? validateTextField({
+    required String value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for minLength
+    if (validations.minLength != null) {
+      if (value.length < validations.minLength!.value) {
+        return validations.minLength!.msg;
+      }
+    }
+
+    // check for maxLength
+    if (validations.maxLength != null) {
+      if (value.length > validations.maxLength!.value) {
+        return validations.maxLength!.msg;
+      }
+    }
+
+    // check for min (for number field)
+    if (validations.min != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue < validations.min!.value) {
+        return validations.min!.msg;
+      }
+    }
+
+    // check for max (for number field)
+    if (validations.max != null) {
+      double? numericValue = double.tryParse(value);
+      if (numericValue != null && numericValue > validations.max!.value) {
+        return validations.max!.msg;
+      }
+    }
+
+    // check for regex match
+    if (validations.pattern != null) {
+      if (!RegExp(validations.pattern!.value).hasMatch(value)) {
+        return validations.pattern!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateRadioField({
+    required OptionModel? value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value == null) {
+        return validations.isRequired!.msg;
+      }
+    }
+    return null;
+  }
+
+  static String? validateSelectCheckField({
+    required List<OptionModel> values,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && values.isEmpty) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    // check for min
+    if (validations.min != null) {
+      if (values.length < validations.min!.value) {
+        return validations.min!.msg;
+      }
+    }
+
+    // check for max
+    if (validations.max != null) {
+      if (values.length > validations.max!.value) {
+        return validations.max!.msg;
+      }
+    }
+
+    return null;
   }
 }

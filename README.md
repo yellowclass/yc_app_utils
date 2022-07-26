@@ -1,39 +1,47 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# YC App Utils Package
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+This package provides access to custom dart-only functionalities/utilities required by `Yellow Class` App.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+## Installing
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+To use this package:
+
+Add the following to your `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  yc_app_utils:
+    git:
+      url: https://github.com/yellowclass/yc_app_utils.git
+      ref: master
+```
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+#### UI Components
+- BootstrapSection
+- FormComponents
+    - StyledTextField
+    - StyledRadioField
+    - StyledSelectField
+    - StyledCheckboxField
+- GenericButtonV3
+- YCClicker
+- BouncingLoader
+- StyledComponents
+    - StyledImage
+    - V2StyledText
+- StyledText
+- GenericNetworkImage
 
-## Getting started
+#### Design Utils
+- YCMediaQuery
+- StyleGuide
+    - AppRadius
+    - AppColors
+    - IconSize
+    - AppSpacing
+- TextStyles
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+#### Miscellaneous
+- CommonHelpers
