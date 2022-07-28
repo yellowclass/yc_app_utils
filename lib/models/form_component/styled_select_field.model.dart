@@ -1,4 +1,3 @@
-import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledSelectFieldModel with FormComponentUnion {
