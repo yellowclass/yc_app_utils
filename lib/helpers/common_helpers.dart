@@ -643,7 +643,7 @@ class CommonHelpers {
     return null;
   }
 
-  static Future<T?> ycDialog<T>({
+  static Future<T?> showYcDialog<T>({
     required BuildContext context,
     required Widget Function(BuildContext) builder,
     required String dialogName,
