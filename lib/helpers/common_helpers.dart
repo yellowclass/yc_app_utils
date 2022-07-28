@@ -642,4 +642,27 @@ class CommonHelpers {
 
     return null;
   }
+
+  static Future<T?> ycDialog<T>({
+    required BuildContext context,
+    required Widget Function(BuildContext) builder,
+    required String dialogName,
+    bool barrierDismissible = true,
+    bool useRootNavigator = true,
+    bool useSafeArea = true,
+    Color? barrierColor,
+    Map<String, dynamic>? args,
+    String? barrierLabel,
+  }) {
+    return showDialog<T>(
+      context: context,
+      builder: builder,
+      routeSettings: RouteSettings(name: dialogName, arguments: args),
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      barrierLabel: barrierLabel,
+      useRootNavigator: useRootNavigator,
+      useSafeArea: useSafeArea,
+    );
+  }
 }
