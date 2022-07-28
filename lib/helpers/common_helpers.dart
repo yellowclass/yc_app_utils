@@ -650,7 +650,7 @@ class CommonHelpers {
     bool barrierDismissible = true,
     bool useRootNavigator = true,
     bool useSafeArea = true,
-    Color? barrierColor,
+    Color barrierColor = Colors.black54,
     Map<String, dynamic>? args,
     String? barrierLabel,
   }) {
