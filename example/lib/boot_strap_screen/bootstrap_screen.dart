@@ -18,7 +18,7 @@ class _BootstrapScreenState extends State<BootstrapScreen> {
   @override
   void initState() {
     super.initState();
-    for (var section in BootstrapSkeleton().claimSections) {
+    for (var section in BootstrapSkeleton().programSections) {
       log(jsonEncode(section.toMap()));
     }
   }
@@ -37,8 +37,7 @@ class _BootstrapScreenState extends State<BootstrapScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: BootstrapSkeleton()
-              .claimSections
-              // children: _sections
+              .programSections
               .map(
                 (e) => BootstrapSectionWidget(
                   bootstrapSectionData: e,
