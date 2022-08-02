@@ -128,5 +128,51 @@ class BootstrapSkeleton {
       ),
       containsForm: false,
     ),
+    BootstrapSectionModel(
+      key: 'appreciation_certificate',
+      background: SectionBackground(
+        backgroundType: SectionBgType.IMAGE,
+        backgroundImgUrl: 'https://i.ibb.co/wrxdLD2/group-22-3x.png',
+      ),
+      bsData: BootstrapSectionLayerModel(
+        children: [
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            padding: [36, 0, 4, 0],
+            bcData: StyledComponentModel(
+              scData: V2StyledTextModel(
+                text: 'Appreciation Certificate',
+                textColor: '#FFFFFF',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            padding: [0, 0, 36, 0],
+            bcData: StyledComponentModel(
+              scData: V2StyledTextModel(
+                text:
+                    'You\'ll get certificate as a recognition for your effort and mastering the skill',
+                textColor: '#FFFFFF',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            padding: [0, 32],
+            bcData: StyledComponentModel(
+              scData: StyledImageModel(
+                borderRadius: [8, 0],
+                url:
+                    'https://ycimg-dev.imgix.net/PROGRAM_CERTIFICATE/61138970509ce570bb91c301/fb6f12a2-74ec-4cc0-8062-be7929b639cd/BASE/blob.jpg',
+              ),
+            ),
+          ),
+        ],
+      ),
+      containsForm: false,
+    ),
   ];
 }

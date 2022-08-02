@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:yc_app_utils/models/styled_component/styled_image.model.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledImageWidget extends StatelessWidget {
   const StyledImageWidget({
@@ -23,13 +23,34 @@ class StyledImageWidget extends StatelessWidget {
     Widget image = isSvg
         ? SvgPicture.network(
             url,
+            fit: styledImageData.imageFit ?? BoxFit.contain,
+            color: styledImageData.fillColor != null
+                ? CommonHelpers.v2ColorFromHex(styledImageData.fillColor)
+                : null,
           )
         : CachedNetworkImage(
             imageUrl: url,
             httpHeaders: const {
               "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
             },
+            fit: styledImageData.imageFit ?? BoxFit.contain,
+            color: styledImageData.fillColor != null
+                ? CommonHelpers.v2ColorFromHex(styledImageData.fillColor)
+                : null,
           );
-    return image;
+    return SizedBox(
+      height: styledImageData.height,
+      width: styledImageData.width,
+      child: styledImageData.cropType == ImageCropTypes.CIRCLE
+          ? ClipOval(
+              child: image,
+            )
+          : ClipRRect(
+              borderRadius: CommonHelpers.getBorderRadiusFromList(
+                styledImageData.borderRadius,
+              ),
+              child: image,
+            ),
+    );
   }
 }
