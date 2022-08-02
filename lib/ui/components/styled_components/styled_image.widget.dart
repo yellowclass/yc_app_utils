@@ -33,7 +33,7 @@ class StyledImageWidget extends StatelessWidget {
             httpHeaders: const {
               "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
             },
-            fit: styledImageData.imageFit ?? BoxFit.contain,
+            fit: styledImageData.imageFit,
             color: styledImageData.fillColor != null
                 ? CommonHelpers.v2ColorFromHex(styledImageData.fillColor)
                 : null,
