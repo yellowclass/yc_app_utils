@@ -21,6 +21,9 @@ class FormComponentModel with BootstrapChildUnion {
       case StyledInputFieldModel:
         fcDataMap = (fcData as StyledInputFieldModel).toMap();
         break;
+      case StyledDateTimeFieldModel:
+        fcDataMap = (fcData as StyledDateTimeFieldModel).toMap();
+        break;
       case StyledRadioFieldModel:
         fcDataMap = (fcData as StyledRadioFieldModel).toMap();
         break;
@@ -46,6 +49,11 @@ class FormComponentModel with BootstrapChildUnion {
     switch (map['fcData']['__typename']) {
       case 'StyledInputField':
         fcData = StyledInputFieldModel.fromMap(
+          map['fcData'],
+        );
+        break;
+      case 'StyledDateTimeField':
+        fcData = StyledDateTimeFieldModel.fromMap(
           map['fcData'],
         );
         break;

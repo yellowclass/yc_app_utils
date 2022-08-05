@@ -174,5 +174,48 @@ class BootstrapSkeleton {
       ),
       containsForm: false,
     ),
+    BootstrapSectionModel(
+      key: 'form',
+      bsData: BootstrapSectionLayerModel(
+        children: [
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            bcData: FormComponentModel(
+              fcData: StyledDateTimeFieldModel(
+                  name: 'dob',
+                  isDisabled: false,
+                  dateTimeFieldType: DateTimeFieldTypeEnum.DATE,
+                  placeholder: 'Date of Birth',
+                  firstDate: DateTime.now().toIso8601String(),
+                  lastDate: DateTime(2022, 12).toIso8601String(),
+                  validation: Validation(
+                    isRequired: BooleanValidation.fromMap({
+                      'msg': 'requried',
+                      'value': true,
+                    }),
+                  )),
+            ),
+          ),
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            bcData: StyledComponentModel(
+                scData: V2StyledTextModel(
+                  text: 'Submit',
+                ),
+                clickAction: V2ClickAction(
+                  sequenceType: SequenceTypeEnum.SEQUENTIAL,
+                  actions: [
+                    OneClickAction(
+                      type: V2ClickActionTypesEnum.APP_CUSTOM,
+                      functionType: V2FunctionTypesEnum.SUBMIT_FORM,
+                    ),
+                  ],
+                  showRippleEffect: true,
+                )),
+          ),
+        ],
+      ),
+      containsForm: true,
+    ),
   ];
 }
