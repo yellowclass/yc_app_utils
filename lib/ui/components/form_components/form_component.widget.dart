@@ -20,6 +20,13 @@ class FormComponentWidget extends StatelessWidget {
         textFieldData: inputFieldDetails,
         onSaved: onSaved,
       );
+    } else if (formComponentDetails.fcData is StyledDateTimeFieldModel) {
+      StyledDateTimeFieldModel dateTimeFieldDetails =
+          formComponentDetails.fcData as StyledDateTimeFieldModel;
+      return StyledDateTimeFieldWidget(
+        dateTimeFieldData: dateTimeFieldDetails,
+        onSaved: onSaved,
+      );
     } else if (formComponentDetails.fcData is StyledRadioFieldModel) {
       StyledRadioFieldModel radioFieldDetails =
           formComponentDetails.fcData as StyledRadioFieldModel;

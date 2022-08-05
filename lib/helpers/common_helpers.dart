@@ -595,6 +595,23 @@ class CommonHelpers {
     return null;
   }
 
+  static String? validateDateTimeField({
+    required DateTime? value,
+    required Validation? validations,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    // check for required
+    if (validations.isRequired != null) {
+      if (validations.isRequired!.value && value == null) {
+        return validations.isRequired!.msg;
+      }
+    }
+
+    return null;
+  }
+
   static String? validateRadioField({
     required OptionModel? value,
     required Validation? validations,
