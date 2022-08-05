@@ -21,7 +21,11 @@ class StyledDateTimeFieldWidget extends StatefulWidget {
 class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
   DateTime? getParsedDate(String? datetime) {
     if (datetime != null) {
-      return DateTime.parse(datetime);
+      try {
+        return DateTime.parse(datetime);
+      } catch (e) {
+        return null;
+      }
     }
     return null;
   }
