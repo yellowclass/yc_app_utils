@@ -78,7 +78,8 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
           ),
         FormBuilderDateTimePicker(
           name: widget.dateTimeFieldData.name,
-          initialDate: getParsedDate(widget.dateTimeFieldData.initialDateValue),
+          initialDate:
+              getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue),
           firstDate: getParsedDate(widget.dateTimeFieldData.firstDate),
           lastDate: getParsedDate(widget.dateTimeFieldData.lastDate),
           inputType: dateTimeInputType,

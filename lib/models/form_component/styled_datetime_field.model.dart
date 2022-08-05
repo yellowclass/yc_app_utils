@@ -8,7 +8,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   String name;
   Validation? validation;
   DateTimeFieldTypeEnum dateTimeFieldType;
-  String? initialDateValue;
+  String? defaultDateTimeValue;
   String? inputDefaultValue;
   bool isDisabled;
   String? placeholder;
@@ -20,7 +20,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     required this.name,
     this.validation,
     required this.dateTimeFieldType,
-    this.initialDateValue,
+    this.defaultDateTimeValue,
     this.inputDefaultValue,
     required this.isDisabled,
     this.placeholder,
@@ -33,7 +33,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     String? name,
     Validation? validation,
     DateTimeFieldTypeEnum? dateTimeFieldType,
-    String? initialDateValue,
+    String? defaultDateTimeValue,
     String? inputDefaultValue,
     bool? isDisabled,
     String? placeholder,
@@ -45,7 +45,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       name: name ?? this.name,
       validation: validation ?? this.validation,
       dateTimeFieldType: dateTimeFieldType ?? this.dateTimeFieldType,
-      initialDateValue: initialDateValue ?? this.initialDateValue,
+      defaultDateTimeValue: defaultDateTimeValue ?? this.defaultDateTimeValue,
       inputDefaultValue: inputDefaultValue ?? this.inputDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       placeholder: placeholder ?? this.placeholder,
@@ -60,7 +60,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       'name': name,
       'validation': validation?.toMap(),
       'dateTimeFieldType': dateTimeFieldType.name,
-      'initialDateValue': initialDateValue,
+      'defaultDateTimeValue': defaultDateTimeValue,
       'inputDefaultValue': inputDefaultValue,
       'isDisabled': isDisabled,
       'placeholder': placeholder,
@@ -82,7 +82,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
             map['dateTimeFieldType'],
           ) ??
           DateTimeFieldTypeEnum.DATE,
-      initialDateValue: map['initialDateValue'],
+      defaultDateTimeValue: map['defaultDateTimeValue'],
       inputDefaultValue: map['inputDefaultValue'],
       isDisabled: map['isDisabled'] ?? false,
       placeholder: map['placeholder'],
