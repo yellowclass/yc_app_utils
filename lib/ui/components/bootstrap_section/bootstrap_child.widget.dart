@@ -77,6 +77,27 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                   }
                 }
               : null,
+          innerClickAction: (clickAction, _, clickedWidgetState) {
+            if (widget.containsForm) {
+              // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
+              for (var action in clickAction.actions) {
+                if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
+                  widget.innerClickAction!.call(
+                    clickAction,
+                    true,
+                    clickedWidgetState,
+                  );
+                }
+                break;
+              }
+            } else {
+              widget.innerClickAction!.call(
+                clickAction,
+                false,
+                clickedWidgetState,
+              );
+            }
+          },
         );
       }
     } else if (widget.bootstrapChild.bcData is StyledComponentModel) {

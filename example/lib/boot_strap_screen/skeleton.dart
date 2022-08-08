@@ -217,5 +217,117 @@ class BootstrapSkeleton {
       ),
       containsForm: true,
     ),
+    BootstrapSectionModel(
+      key: 'sub',
+      padding: [100, 32],
+      bsData: BootstrapSectionLayerModel(
+        children: [
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            bcData: StyledComponentModel(
+              scData: StyledImageModel(
+                url:
+                    'https://dev-img.yellowclass.com/assets/icons/yc-emoji.webp',
+                height: 60,
+              ),
+            ),
+          ),
+          BootstrapSectionChildModel(
+            classes: 'col-sm-12',
+            background: SectionBackground(
+              backgroundType: SectionBgType.FLAT_COLOR,
+              backgroundColor: '#FFF',
+            ),
+            height: -50,
+            borderRadius: [16],
+            bcData: BootstrapSectionModel(
+              key: '1',
+              bsData: BootstrapSectionLayerModel(
+                children: [
+                  BootstrapSectionChildModel(
+                    classes: 'col-sm-12',
+                    bcData: StyledComponentModel(
+                      padding: [24, 0],
+                      scData: V2StyledTextModel(
+                        text: 'What\'s your class',
+                        tStyle: TStyle.H2_700,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  BootstrapSectionChildModel(
+                    classes: 'col-sm-12',
+                    bcData: StyledComponentModel(
+                        padding: [8, 36],
+                        scData: V2StyledTextModel(
+                          text: 'Option A',
+                          padding: [16],
+                          tStyle: TStyle.B1_400,
+                          textAlign: TextAlign.center,
+                          borderColor: '#50000000',
+                          borderRadius: [6],
+                        ),
+                        clickAction: V2ClickAction(
+                          sequenceType: SequenceTypeEnum.SEQUENTIAL,
+                          actions: [],
+                          showRippleEffect: true,
+                        )),
+                  ),
+                  BootstrapSectionChildModel(
+                    classes: 'col-sm-12',
+                    bcData: StyledComponentModel(
+                      padding: [8, 36],
+                      scData: V2StyledTextModel(
+                        text: 'Option A',
+                        padding: [16],
+                        tStyle: TStyle.B1_400,
+                        textAlign: TextAlign.center,
+                        borderColor: '#50000000',
+                        borderRadius: [6],
+                      ),
+                    ),
+                  ),
+                  BootstrapSectionChildModel(
+                    classes: 'col-sm-12',
+                    bcData: StyledComponentModel(
+                      padding: [8, 36],
+                      scData: V2StyledTextModel(
+                        text: 'Option A',
+                        padding: [16],
+                        tStyle: TStyle.B1_400,
+                        textAlign: TextAlign.center,
+                        borderColor: '#50000000',
+                        borderRadius: [6],
+                      ),
+                    ),
+                  ),
+                  BootstrapSectionChildModel(
+                    classes: 'col-sm-12',
+                    bcData: StyledComponentModel(
+                      padding: [8, 36],
+                      scData: V2StyledTextModel(
+                        text: 'Option A',
+                        padding: [16],
+                        tStyle: TStyle.B1_400,
+                        textAlign: TextAlign.center,
+                        borderColor: '#50000000',
+                        borderRadius: [6],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              containsForm: false,
+            ),
+          ),
+        ],
+      ),
+      background: SectionBackground(
+        backgroundType: SectionBgType.FLAT_COLOR,
+        backgroundColor: '#FDEFFA',
+      ),
+      containsForm: false,
+      height: -90,
+    )
   ];
 }

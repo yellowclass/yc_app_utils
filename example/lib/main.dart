@@ -2,6 +2,7 @@ import 'package:example/boot_strap_screen/bootstrap_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:example/form_screen/form_screen.dart';
+import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,6 +55,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    YCMediaQuery.init(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
