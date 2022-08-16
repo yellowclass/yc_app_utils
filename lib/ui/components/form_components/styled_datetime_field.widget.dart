@@ -92,6 +92,7 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
             color: AppColors.cBODY_TEXT,
             fontSize: 16,
           ),
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
           format: dateFormat,
           decoration: InputDecoration(
             hintStyle: const TextStyle(
