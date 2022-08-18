@@ -322,6 +322,25 @@ class CommonHelpers {
     }
   }
 
+  static List<BoxShadow>? getBoxShadowFromList(List<dynamic> shadow) {
+    if (shadow.isEmpty) {
+      return null;
+    }
+    return shadow
+        .map(
+          (s) => BoxShadow(
+            color: CommonHelpers.v2ColorFromHex(s['color']),
+            offset: Offset(
+              s['offset']['dx'].toDouble(),
+              s['offset']['dy'].toDouble(),
+            ),
+            blurRadius: s['blurRadius'].toDouble(),
+            spreadRadius: s['spreadRadius'].toDouble(),
+          ),
+        )
+        .toList();
+  }
+
   /// This functions gets absolute height if the height provided is positive, else provides relative height in percentage.
   static double? getHeightFromDouble(double? height) {
     if (height == null) {
