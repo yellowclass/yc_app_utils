@@ -307,16 +307,16 @@ class CommonHelpers {
       default:
         return BorderRadius.only(
           topLeft: Radius.circular(
-            borderRadiusItems[3].toDouble(),
-          ),
-          topRight: Radius.circular(
             borderRadiusItems[0].toDouble(),
           ),
-          bottomRight: Radius.circular(
+          topRight: Radius.circular(
             borderRadiusItems[1].toDouble(),
           ),
-          bottomLeft: Radius.circular(
+          bottomRight: Radius.circular(
             borderRadiusItems[2].toDouble(),
+          ),
+          bottomLeft: Radius.circular(
+            borderRadiusItems[3].toDouble(),
           ),
         );
     }
