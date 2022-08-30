@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 class EventData {
   String action;
   String? category;
   String? label;
   double? value;
   String? others;
+  Map<String, dynamic>? additionalData;
 
   EventData({
     required this.action,
@@ -11,6 +14,7 @@ class EventData {
     this.label,
     this.value,
     this.others,
+    this.additionalData,
   });
 
   EventData copyWith({
@@ -36,6 +40,8 @@ class EventData {
       'label': label,
       'value': value,
       'others': others,
+      'additionalData':
+          additionalData == null ? null : jsonEncode(additionalData),
     };
   }
 
@@ -46,6 +52,7 @@ class EventData {
       label: map['label'],
       value: map['value']?.toDouble(),
       others: map['others'],
+      additionalData: jsonDecode(map['additionalData']),
     );
   }
 }
