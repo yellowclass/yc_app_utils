@@ -61,15 +61,15 @@ class CommonHelpers {
     return NumberFormat.compact().format(val ?? 0);
   }
 
-  static Map<String, dynamic>? removeNullParams(
-    Map<String, dynamic>? data, {
+  static Map<String, dynamic> removeNullParams(
+    Map<String, dynamic> data, {
     List<String>? excludeParams,
   }) {
     if (excludeParams != null) {
-      data!.removeWhere(
+      data.removeWhere(
           (String k, dynamic v) => v == null && !excludeParams.contains(k));
     } else {
-      data!.removeWhere((String k, dynamic v) => v == null);
+      data.removeWhere((String k, dynamic v) => v == null);
     }
     return data;
   }
