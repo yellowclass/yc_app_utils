@@ -22,6 +22,7 @@ class StyledText with StyledComponentUnion {
   String? backgroundColor;
   String? borderColor;
   int? borderRadius;
+  List<int>? borderRadii;
   List<int>? padding;
   SectionBackground? background;
   MainAxisAlignment? flexAlignment;
@@ -41,6 +42,7 @@ class StyledText with StyledComponentUnion {
     this.backgroundColor,
     this.borderColor,
     this.borderRadius,
+    this.borderRadii,
     this.padding,
     this.background,
     this.flexAlignment,
@@ -61,6 +63,7 @@ class StyledText with StyledComponentUnion {
     String? backgroundColor,
     String? borderColor,
     int? borderRadius,
+    List<int>? borderRadii,
     List<int>? padding,
     SectionBackground? background,
     MainAxisAlignment? flexAlignment,
@@ -80,6 +83,7 @@ class StyledText with StyledComponentUnion {
       backgroundColor: backgroundColor ?? this.backgroundColor,
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
+      borderRadii: borderRadii ?? this.borderRadii,
       padding: padding ?? this.padding,
       background: background ?? this.background,
       flexAlignment: flexAlignment ?? this.flexAlignment,
@@ -102,6 +106,7 @@ class StyledText with StyledComponentUnion {
       'backgroundColor': backgroundColor,
       'borderColor': borderColor,
       'borderRadius': borderRadius,
+      'borderRadii': borderRadii,
       'padding': padding,
       'background': background?.toMap(),
       'flexAlignment': flexAlignment?.name,
@@ -136,6 +141,9 @@ class StyledText with StyledComponentUnion {
       backgroundColor: map['backgroundColor'],
       borderColor: map['borderColor'],
       borderRadius: map['borderRadius'],
+      borderRadii: map['borderRadii'] == null
+          ? <int>[]
+          : List<int>.from(map['borderRadii']),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       background: map['background'] != null
