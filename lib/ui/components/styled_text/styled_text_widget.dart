@@ -45,9 +45,13 @@ class StyledTextWidget extends StatelessWidget {
           ? CommonHelpers.getBoxDecorationWithSectionBackground(
               sectionBackground: styledText!.background!,
             ).copyWith(
-              borderRadius: BorderRadius.circular(
-                styledText?.borderRadius?.toDouble() ?? 0,
-              ),
+              borderRadius: styledText?.borderRadii != null
+                  ? CommonHelpers.getBorderRadiusFromList(
+                      styledText!.borderRadii,
+                    )
+                  : BorderRadius.circular(
+                      styledText?.borderRadius?.toDouble() ?? 0,
+                    ),
             )
           : BoxDecoration(
               color: CommonHelpers.v2ColorFromHex(
