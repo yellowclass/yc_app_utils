@@ -45,7 +45,6 @@ class StyledTextWidget extends StatelessWidget {
           ? CommonHelpers.getBoxDecorationWithSectionBackground(
               sectionBackground: styledText!.background!,
             ).copyWith(
-              color: CommonHelpers.v2ColorFromHex(styledText?.backgroundColor),
               borderRadius: BorderRadius.circular(
                 styledText?.borderRadius?.toDouble() ?? 0,
               ),
