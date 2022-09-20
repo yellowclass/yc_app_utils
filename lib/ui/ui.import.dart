@@ -20,6 +20,9 @@ export 'package:yc_app_utils/ui/components/loaders/bouncing_loader.dart';
 export 'package:yc_app_utils/ui/components/clicked_widget_state.dart';
 
 export 'package:yc_app_utils/ui/components/decorators/decorators.import.dart';
+export 'package:yc_app_utils/ui/components/decorators/dashed_line.widget.dart';
+
+export 'package:yc_app_utils/ui/components/video_player/video_player_side_menu_widget.dart';
 
 // media_query
 export 'package:yc_app_utils/ui/media_query/yc_media_query.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/ui/ui.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class YCClicker extends StatelessWidget {
   YCClicker({

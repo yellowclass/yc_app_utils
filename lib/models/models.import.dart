@@ -30,3 +30,7 @@ export 'package:yc_app_utils/models/validation/boolean_validation.model.dart';
 export 'package:yc_app_utils/models/validation/int_validation.model.dart';
 export 'package:yc_app_utils/models/validation/string_validation.model.dart';
 export 'package:yc_app_utils/models/validation/validation.model.dart';
+
+// video player
+export 'package:yc_app_utils/models/video_player/video_player_side_menu.model.dart';
+export 'package:yc_app_utils/models/video_player/video_player_options.model.dart';

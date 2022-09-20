@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
 
 class DashedLine extends StatelessWidget {
   const DashedLine({
