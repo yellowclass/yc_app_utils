@@ -426,7 +426,7 @@ class CommonHelpers {
                   image: CachedNetworkImageProvider(
                     sectionBackground.backgroundImgUrl!,
                   ),
-                  fit: BoxFit.cover,
+                  fit: sectionBackground.backgroundImgBoxFit ?? BoxFit.cover,
                 )
               : null,
         );
