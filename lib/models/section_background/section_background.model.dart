@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/section_background/radial_gradient.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background_direction.enum.dart';
@@ -8,6 +9,7 @@ import 'package:yc_app_utils/models/section_background/section_bg_type.enum.dart
 class SectionBackground {
   SectionBackground({
     required this.backgroundType,
+    this.backgroundImgBoxFit,
     this.backgroundColor,
     this.gradientColor1,
     this.gradientColor2,
@@ -27,6 +29,7 @@ class SectionBackground {
   final String? backgroundImgUrl;
   final List<String>? gradientColors;
   final YcRadialGradient? radialGradient;
+  final BoxFit? backgroundImgBoxFit;
 
   SectionBackground copyWith({
     SectionBgType? backgroundType,
@@ -38,6 +41,7 @@ class SectionBackground {
     String? backgroundImgUrl,
     List<String>? gradientColors,
     YcRadialGradient? radialGradient,
+    BoxFit? backgroundImgBoxFit,
   }) =>
       SectionBackground(
         backgroundType: backgroundType ?? this.backgroundType,
@@ -49,6 +53,7 @@ class SectionBackground {
         backgroundImgUrl: backgroundImgUrl ?? this.backgroundImgUrl,
         gradientColors: gradientColors ?? this.gradientColors,
         radialGradient: radialGradient ?? this.radialGradient,
+        backgroundImgBoxFit: backgroundImgBoxFit ?? this.backgroundImgBoxFit,
       );
 
   factory SectionBackground.fromMap(Map<String, dynamic> json) =>
@@ -73,6 +78,10 @@ class SectionBackground {
         radialGradient: json["radialGradient"] != null
             ? YcRadialGradient.fromMap(json["radialGradient"])
             : null,
+        backgroundImgBoxFit: json["backgroundImgBoxFit"] != null
+            ? CommonHelpers.enumFromString(
+                BoxFit.values, json["backgroundImgBoxFit"])
+            : null,
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -85,6 +94,7 @@ class SectionBackground {
         "backgroundImgUrl": backgroundImgUrl,
         "gradientColors": gradientColors,
         "radialGradient": radialGradient?.toMap(),
+        "backgroundImgBoxFit": backgroundImgBoxFit?.name,
       };
 
   String toJson() => json.encode(toMap());
