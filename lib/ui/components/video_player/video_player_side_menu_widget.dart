@@ -16,8 +16,8 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: double.infinity,
-      width: double.infinity,
+      height: height,
+      width: width,
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.m,
         vertical: AppSpacing.s,
@@ -26,6 +26,7 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
         sectionBackground: sideMenu.background,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ...sideMenu.options.sublist(0, sideMenu.spacerIndex).map(
                 (option) => GenericButtonV3Widget(buttonDetails: option),
