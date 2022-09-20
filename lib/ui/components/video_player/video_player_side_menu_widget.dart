@@ -16,8 +16,8 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: double.infinity,
-      width: double.infinity,
+      height: height,
+      width: width,
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.m,
         vertical: AppSpacing.s,
