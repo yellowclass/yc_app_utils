@@ -27,11 +27,11 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ...?sideMenu.options?.sublist(0, sideMenu.spacerIndex).map(
+          ...sideMenu.options.sublist(0, sideMenu.spacerIndex).map(
                 (option) => GenericButtonV3Widget(buttonDetails: option),
               ),
           const Spacer(),
-          ...?sideMenu.options?.sublist(sideMenu.spacerIndex).map(
+          ...sideMenu.options.sublist(sideMenu.spacerIndex).map(
                 (option) => GenericButtonV3Widget(buttonDetails: option),
               ),
         ],
