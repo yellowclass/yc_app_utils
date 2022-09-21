@@ -112,6 +112,20 @@ class CommonHelpers {
     }
   }
 
+  static String cleanEventString(String x) {
+    String res = x;
+    res = res.replaceAll(' ', '_');
+    res = res.replaceAll('-', '_');
+    return convertCamelToSnake(res);
+  }
+
+  static String convertCamelToSnake(String text) {
+    RegExp exp = RegExp(r'(?<=[a-z])[A-Z]');
+    return text
+        .replaceAllMapped(exp, (Match m) => ('_' + (m.group(0) ?? '')))
+        .toLowerCase();
+  }
+
   static Alignment getAlignmentFromString(String? alignment) {
     switch (alignment) {
       case 'TOP_LEFT':
