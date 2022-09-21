@@ -112,8 +112,8 @@ class CommonHelpers {
     }
   }
 
-  static String cleanEventString(String x) {
-    String res = x;
+  static String cleanEventString(String str) {
+    String res = str;
     res = res.replaceAll(' ', '_');
     res = res.replaceAll('-', '_');
     return convertCamelToSnake(res);
