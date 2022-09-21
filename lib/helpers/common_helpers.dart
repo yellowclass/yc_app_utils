@@ -114,7 +114,11 @@ class CommonHelpers {
 
   static String cleanEventString(String str) {
     String res = str;
+    // Remove all except A-Z, a-z, 0-9 and white spaces.
+    res = res.replaceAll(RegExp('[^A-Za-z0-9 ]'), '');
+    // Replace all white spaces with underscores.
     res = res.replaceAll(' ', '_');
+    // Replace all hyphens with underscores.
     res = res.replaceAll('-', '_');
     return convertCamelToSnake(res);
   }
