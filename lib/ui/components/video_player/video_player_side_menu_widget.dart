@@ -4,6 +4,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class VideoPlayerSideMenuWidget extends StatelessWidget {
   const VideoPlayerSideMenuWidget({
     required this.sideMenu,
+    required this.onPressed,
     this.height,
     this.width,
     Key? key,
@@ -12,6 +13,7 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
   final VideoPlayerSideMenuModel sideMenu;
   final double? height;
   final double? width;
+  final ValueChanged<ClickAction?> onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +30,20 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ...sideMenu.options.sublist(0, sideMenu.spacerIndex).map(
-                (option) => GenericButtonV3Widget(buttonDetails: option),
-              ),
+          ...sideMenu.options
+              .sublist(0, sideMenu.spacerIndex)
+              .map(_buildButton),
           const Spacer(),
-          ...sideMenu.options.sublist(sideMenu.spacerIndex).map(
-                (option) => GenericButtonV3Widget(buttonDetails: option),
-              ),
+          ...sideMenu.options.sublist(sideMenu.spacerIndex).map(_buildButton),
         ],
       ),
+    );
+  }
+
+  Widget _buildButton(GenericButtonV3Model model) {
+    return GenericButtonV3Widget(
+      buttonDetails: model,
+      onPressed: () => onPressed(model.clickAction),
     );
   }
 }
