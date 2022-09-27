@@ -78,9 +78,8 @@ class SectionBackground {
         radialGradient: json["radialGradient"] != null
             ? YcRadialGradient.fromMap(json["radialGradient"])
             : null,
-        backgroundImgBoxFit: json["backgroundImgBoxFit"] != null
-            ? CommonHelpers.enumFromString(
-                BoxFit.values, json["backgroundImgBoxFit"])
+        backgroundImgBoxFit: json["boxFit"] != null
+            ? CommonHelpers.getBoxFitFromString(json["boxFit"])
             : null,
       );
 
@@ -94,7 +93,7 @@ class SectionBackground {
         "backgroundImgUrl": backgroundImgUrl,
         "gradientColors": gradientColors,
         "radialGradient": radialGradient?.toMap(),
-        "backgroundImgBoxFit": backgroundImgBoxFit?.name,
+        "boxFit": backgroundImgBoxFit?.name,
       };
 
   String toJson() => json.encode(toMap());
