@@ -78,8 +78,8 @@ class SectionBackground {
         radialGradient: json["radialGradient"] != null
             ? YcRadialGradient.fromMap(json["radialGradient"])
             : null,
-        backgroundImgBoxFit: json["backgroundImgBoxFit"] != null
-            ? CommonHelpers.getBoxFitFromString(json["backgroundImgBoxFit"])
+        backgroundImgBoxFit: json["boxFit"] != null
+            ? CommonHelpers.getBoxFitFromString(json["boxFit"])
             : null,
       );
 
