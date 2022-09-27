@@ -15,6 +15,8 @@ export 'package:yc_app_utils/ui/components/form_components/form_components.impor
 export 'package:yc_app_utils/ui/components/generic_button/generic_button_v3.widget.dart';
 export 'package:yc_app_utils/ui/components/generic_button/yc_clicker.widget.dart';
 
+export 'package:yc_app_utils/ui/components/image_viewer/image_viewer.dart';
+
 export 'package:yc_app_utils/ui/components/loaders/bouncing_loader.dart';
 
 export 'package:yc_app_utils/ui/components/clicked_widget_state.dart';
