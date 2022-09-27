@@ -93,7 +93,7 @@ class SectionBackground {
         "backgroundImgUrl": backgroundImgUrl,
         "gradientColors": gradientColors,
         "radialGradient": radialGradient?.toMap(),
-        "backgroundImgBoxFit": backgroundImgBoxFit?.name,
+        "boxFit": backgroundImgBoxFit?.name,
       };
 
   String toJson() => json.encode(toMap());
