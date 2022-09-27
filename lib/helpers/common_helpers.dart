@@ -243,6 +243,27 @@ class CommonHelpers {
     }
   }
 
+  static BoxFit getBoxFitFromString(String boxFit) {
+    switch (boxFit) {
+      case "FILL":
+        return BoxFit.fill;
+      case "CONTAIN":
+        return BoxFit.contain;
+      case "COVER":
+        return BoxFit.cover;
+      case "FITWIDTH":
+        return BoxFit.fitWidth;
+      case "FITHEIGHT":
+        return BoxFit.fitHeight;
+      case "NONE":
+        return BoxFit.none;
+      case "SCALEDOWN":
+        return BoxFit.scaleDown;
+      default:
+        return BoxFit.none;
+    }
+  }
+
   static String getBootstrapSizesFromClasses(String classes) {
     List<String> sizes = [];
     List<String> separatedClasses = classes.split(' ');

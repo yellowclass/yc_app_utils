@@ -79,8 +79,7 @@ class SectionBackground {
             ? YcRadialGradient.fromMap(json["radialGradient"])
             : null,
         backgroundImgBoxFit: json["backgroundImgBoxFit"] != null
-            ? CommonHelpers.enumFromString(
-                BoxFit.values, json["backgroundImgBoxFit"])
+            ? CommonHelpers.getBoxFitFromString(json["backgroundImgBoxFit"])
             : null,
       );
 
