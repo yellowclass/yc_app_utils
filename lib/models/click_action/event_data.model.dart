@@ -57,7 +57,7 @@ class EventData {
       label: map['label'],
       value: map['value']?.toDouble(),
       others: map['others'],
-      additionalData: jsonDecode(map['additionalData']),
+      additionalData: jsonDecode(map['additionalData'] ?? "{}"),
       description: map["description"],
     );
   }
