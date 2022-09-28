@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 
 import 'package:yc_app_utils/models/click_action/click_action.model.dart';
+import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_text.model.dart';
 import 'package:yc_app_utils/models/symmetric_padding.model.dart';
 import 'package:yc_app_utils/ui/styleguide/app_radius.dart';
@@ -10,12 +11,15 @@ class GenericButtonV3Model {
   String? key;
   List<GenericButtonV3Row>? buttonRows;
   double elevation;
-  ClickAction? clickAction;
   String? backgroundColor;
   String? borderColor;
   double borderRadius;
   SymmetricPadding padding;
   int? height;
+  V2ClickAction? v2ClickAction;
+
+  @Deprecated("Use v2ClickAction")
+  ClickAction? clickAction;
 
   GenericButtonV3Model({
     this.key,
@@ -30,6 +34,7 @@ class GenericButtonV3Model {
       vertical: 0,
     ),
     this.height,
+    this.v2ClickAction,
   });
 
   factory GenericButtonV3Model.fromMap(Map<String, dynamic> map) {
@@ -58,6 +63,9 @@ class GenericButtonV3Model {
               vertical: 0,
             ),
       height: map["height"],
+      v2ClickAction: map["v2ClickAction"] != null
+          ? V2ClickAction.fromMap(map["v2ClickAction"])
+          : null,
     );
   }
 
@@ -73,6 +81,7 @@ class GenericButtonV3Model {
       'borderRadius': borderRadius,
       'padding': padding.toMap(),
       'height': height,
+      'v2ClickAction': v2ClickAction?.toMap(),
     };
   }
 }
