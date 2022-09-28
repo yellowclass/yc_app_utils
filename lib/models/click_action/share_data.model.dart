@@ -4,11 +4,18 @@ class ShareData {
   String entityType;
   String source;
 
+  String? entityId;
+  String? entityImageUrl;
+  String? extraParams;
+
   ShareData({
     required this.url,
     required this.entityTitle,
     required this.entityType,
     required this.source,
+    this.entityId,
+    this.entityImageUrl,
+    this.extraParams,
   });
 
   ShareData copyWith({
@@ -16,12 +23,18 @@ class ShareData {
     String? entityTitle,
     String? entityType,
     String? source,
+    String? entityId,
+    String? entityImageUrl,
+    String? extraParams,
   }) {
     return ShareData(
       url: url ?? this.url,
       entityTitle: entityTitle ?? this.entityTitle,
       entityType: entityType ?? this.entityType,
       source: source ?? this.source,
+      entityId: entityId ?? this.entityId,
+      entityImageUrl: entityImageUrl ?? this.entityImageUrl,
+      extraParams: extraParams ?? this.extraParams,
     );
   }
 
@@ -31,6 +44,9 @@ class ShareData {
       'entityTitle': entityTitle,
       'entityType': entityType,
       'source': source,
+      "entityId": entityId,
+      "entityImageUrl": entityImageUrl,
+      "extraParams": extraParams,
     };
   }
 
@@ -40,6 +56,9 @@ class ShareData {
       entityTitle: map['entityTitle'] ?? '',
       entityType: map['entityType'] ?? '',
       source: map['source'] ?? '',
+      extraParams: map["extraParams"],
+      entityImageUrl: map["entityImageUrl"],
+      entityId: map["entityId"],
     );
   }
 }
