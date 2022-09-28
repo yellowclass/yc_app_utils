@@ -7,6 +7,7 @@ class EventData {
   double? value;
   String? others;
   Map<String, dynamic>? additionalData;
+  String? description;
 
   EventData({
     required this.action,
@@ -15,6 +16,7 @@ class EventData {
     this.value,
     this.others,
     this.additionalData,
+    this.description,
   });
 
   EventData copyWith({
@@ -23,6 +25,7 @@ class EventData {
     String? label,
     double? value,
     String? others,
+    String? description,
   }) {
     return EventData(
       action: action ?? this.action,
@@ -30,6 +33,7 @@ class EventData {
       label: label ?? this.label,
       value: value ?? this.value,
       others: others ?? this.others,
+      description: description ?? this.description,
     );
   }
 
@@ -42,6 +46,7 @@ class EventData {
       'others': others,
       'additionalData':
           additionalData == null ? null : jsonEncode(additionalData),
+      'description': description,
     };
   }
 
@@ -53,6 +58,7 @@ class EventData {
       value: map['value']?.toDouble(),
       others: map['others'],
       additionalData: jsonDecode(map['additionalData']),
+      description: map["description"],
     );
   }
 }
