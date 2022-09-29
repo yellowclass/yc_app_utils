@@ -8,6 +8,7 @@ class ImageViewer extends StatelessWidget {
   final int defaultSelectedIndex;
   final String? defaultImageKey;
   final ValueChanged<String>? onDownloadClick;
+  final Widget? downloadIcon;
   late int _currentIndex = 0;
 
   ImageViewer({
@@ -15,6 +16,7 @@ class ImageViewer extends StatelessWidget {
     this.defaultSelectedIndex = 0,
     this.defaultImageKey,
     this.onDownloadClick,
+    this.downloadIcon,
     Key? key,
   }) : super(key: key) {
     _currentIndex = defaultSelectedIndex;
@@ -34,7 +36,8 @@ class ImageViewer extends StatelessWidget {
           ? null
           : FloatingActionButton(
               mini: true,
-              child: const Icon(Icons.download_outlined),
+              backgroundColor: AppColors.cGREEN_TEXT,
+              child: downloadIcon ?? const Icon(Icons.download_outlined),
               onPressed: () => onDownloadClick!.call(images[_currentIndex]),
             ),
       body: SizedBox(
