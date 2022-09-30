@@ -1,34 +1,34 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class VideoPlayerOptionsModel {
-  String url;
+  String videoUrl;
   VideoPlayerSideMenuModel? sideMenu;
 
   VideoPlayerOptionsModel({
-    required this.url,
+    required this.videoUrl,
     this.sideMenu,
   });
 
   VideoPlayerOptionsModel copyWith({
-    String? url,
+    String? videoUrl,
     VideoPlayerSideMenuModel? sideMenu,
   }) {
     return VideoPlayerOptionsModel(
-      url: url ?? this.url,
+      videoUrl: videoUrl ?? this.videoUrl,
       sideMenu: sideMenu ?? this.sideMenu,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'url': url,
+      'videoUrl': videoUrl,
       'sideMenu': sideMenu?.toMap(),
     };
   }
 
   factory VideoPlayerOptionsModel.fromMap(Map<String, dynamic> map) {
     return VideoPlayerOptionsModel(
-      url: map['url'] ?? '',
+      videoUrl: map['videoUrl'] ?? '',
       sideMenu: map['sideMenu'] != null
           ? VideoPlayerSideMenuModel.fromMap(map['sideMenu'])
           : null,
