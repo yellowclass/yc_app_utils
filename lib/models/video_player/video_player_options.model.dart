@@ -34,7 +34,7 @@ class VideoPlayerOptionsModel {
   factory VideoPlayerOptionsModel.fromMap(Map<String, dynamic> map) {
     return VideoPlayerOptionsModel(
       videoUrl: map['videoUrl'] ?? '',
-      playFrom: map['playFrom'] ?? '',
+      playFrom: map['playFrom'] ?? 0,
       sideMenu: map['sideMenu'] != null
           ? VideoPlayerSideMenuModel.fromMap(map['sideMenu'])
           : null,
