@@ -125,7 +125,7 @@ class V2StyledTextModel with StyledComponentUnion {
           : List<int>.from(map['borderRadius']),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
-      underline: map['underline'],
+      underline: map['underline'] ?? false,
     );
   }
 }
