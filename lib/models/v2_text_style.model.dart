@@ -14,6 +14,7 @@ class V2TextStyle {
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
+  bool? underline;
 
   V2TextStyle({
     this.textColor,
@@ -28,58 +29,8 @@ class V2TextStyle {
     this.borderColor,
     this.borderRadius,
     this.padding,
+    this.underline,
   });
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is V2TextStyle &&
-          runtimeType == other.runtimeType &&
-          textColor == other.textColor &&
-          tStyle == other.tStyle &&
-          italic == other.italic &&
-          letterSpacing == other.letterSpacing &&
-          strikeThrough == other.strikeThrough &&
-          textAlign == other.textAlign &&
-          textOverflow == other.textOverflow &&
-          maxLines == other.maxLines &&
-          background == other.background &&
-          borderColor == other.borderColor &&
-          borderRadius == other.borderRadius &&
-          padding == other.padding);
-
-  @override
-  int get hashCode =>
-      textColor.hashCode ^
-      tStyle.hashCode ^
-      italic.hashCode ^
-      letterSpacing.hashCode ^
-      strikeThrough.hashCode ^
-      textAlign.hashCode ^
-      textOverflow.hashCode ^
-      maxLines.hashCode ^
-      background.hashCode ^
-      borderColor.hashCode ^
-      borderRadius.hashCode ^
-      padding.hashCode;
-
-  @override
-  String toString() {
-    return 'V2TextStyle{' +
-        ' textColor: $textColor,' +
-        ' tStyle: $tStyle,' +
-        ' italic: $italic,' +
-        ' letterSpacing: $letterSpacing,' +
-        ' strikeThrough: $strikeThrough,' +
-        ' textAlign: $textAlign,' +
-        ' textOverflow: $textOverflow,' +
-        ' maxLines: $maxLines,' +
-        ' background: $background,' +
-        ' borderColor: $borderColor,' +
-        ' borderRadius: $borderRadius,' +
-        ' padding: $padding,' +
-        '}';
-  }
 
   V2TextStyle copyWith({
     String? textColor,
@@ -94,6 +45,7 @@ class V2TextStyle {
     String? borderColor,
     List<int>? borderRadius,
     List<int>? padding,
+    bool? underline,
   }) {
     return V2TextStyle(
       textColor: textColor ?? this.textColor,
@@ -108,23 +60,25 @@ class V2TextStyle {
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
+      underline: underline ?? this.underline,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'textColor': this.textColor,
-      'tStyle': this.tStyle,
-      'italic': this.italic,
-      'letterSpacing': this.letterSpacing,
-      'strikeThrough': this.strikeThrough,
-      'textAlign': this.textAlign?.name,
-      'textOverflow': this.textOverflow?.name,
-      'maxLines': this.maxLines,
-      'background': this.background?.toMap(),
-      'borderColor': this.borderColor,
-      'borderRadius': this.borderRadius,
-      'padding': this.padding,
+      'textColor': textColor,
+      'tStyle': tStyle,
+      'italic': italic,
+      'letterSpacing': letterSpacing,
+      'strikeThrough': strikeThrough,
+      'textAlign': textAlign?.name,
+      'textOverflow': textOverflow?.name,
+      'maxLines': maxLines,
+      'background': background?.toMap(),
+      'borderColor': borderColor,
+      'borderRadius': borderRadius,
+      'padding': padding,
+      'underline': underline,
     };
   }
 
@@ -160,6 +114,7 @@ class V2TextStyle {
           : List<int>.from(map['borderRadius']),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
+      underline: map['underline'],
     );
   }
 }

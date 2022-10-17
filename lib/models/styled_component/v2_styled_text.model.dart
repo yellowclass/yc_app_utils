@@ -20,6 +20,7 @@ class V2StyledTextModel with StyledComponentUnion {
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
+  bool underline;
 
   V2StyledTextModel({
     required this.text,
@@ -35,6 +36,7 @@ class V2StyledTextModel with StyledComponentUnion {
     this.borderColor,
     this.borderRadius,
     this.padding,
+    this.underline = false,
   });
 
   V2StyledTextModel copyWith({
@@ -51,6 +53,7 @@ class V2StyledTextModel with StyledComponentUnion {
     String? borderColor,
     List<int>? borderRadius,
     List<int>? padding,
+    bool? underline,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -66,6 +69,7 @@ class V2StyledTextModel with StyledComponentUnion {
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
+      underline: underline ?? this.underline,
     );
   }
 
@@ -84,6 +88,7 @@ class V2StyledTextModel with StyledComponentUnion {
       'borderColor': borderColor,
       'borderRadius': borderRadius,
       'padding': padding,
+      'underline': underline,
     };
   }
 
@@ -120,6 +125,7 @@ class V2StyledTextModel with StyledComponentUnion {
           : List<int>.from(map['borderRadius']),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
+      underline: map['underline'],
     );
   }
 }
