@@ -30,31 +30,26 @@ class V2StyledTextWidget extends StatelessWidget {
               )
             : null,
       ),
-      child: Column(
-        children: [
-          Text(
-            styledText.text,
-            textAlign: styledText.textAlign,
-            overflow: styledText.textOverflow,
-            maxLines: styledText.maxLines,
-            style: CommonHelpers.getTextStyle(
-              styledText.tStyle,
-              customStyle: TextStyle(
-                letterSpacing: styledText.letterSpacing,
-                fontStyle: styledText.italic == true
-                    ? FontStyle.italic
-                    : FontStyle.normal,
-                color: CommonHelpers.v2ColorFromHex(
-                  styledText.textColor,
-                ),
-                decoration: TextDecoration.combine([
-                  if (styledText.strikeThrough) TextDecoration.lineThrough,
-                  if (styledText.underline) TextDecoration.underline,
-                ]),
-              ),
+      child: Text(
+        styledText.text,
+        textAlign: styledText.textAlign,
+        overflow: styledText.textOverflow,
+        maxLines: styledText.maxLines,
+        style: CommonHelpers.getTextStyle(
+          styledText.tStyle,
+          customStyle: TextStyle(
+            letterSpacing: styledText.letterSpacing,
+            fontStyle:
+                styledText.italic == true ? FontStyle.italic : FontStyle.normal,
+            color: CommonHelpers.v2ColorFromHex(
+              styledText.textColor,
             ),
+            decoration: TextDecoration.combine([
+              if (styledText.strikeThrough) TextDecoration.lineThrough,
+              if (styledText.underline) TextDecoration.underline,
+            ]),
           ),
-        ],
+        ),
       ),
     );
   }
