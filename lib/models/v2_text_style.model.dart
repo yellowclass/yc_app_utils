@@ -6,7 +6,7 @@ class V2TextStyle {
   TStyle? tStyle;
   bool? italic;
   double? letterSpacing;
-  bool? strikeThrough;
+  bool strikeThrough;
   TextAlign? textAlign;
   TextOverflow? textOverflow;
   int? maxLines;
@@ -14,14 +14,14 @@ class V2TextStyle {
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
-  bool? underline;
+  bool underline;
 
   V2TextStyle({
     this.textColor,
     this.tStyle,
     this.italic,
     this.letterSpacing,
-    this.strikeThrough,
+    this.strikeThrough = false,
     this.textAlign,
     this.textOverflow,
     this.maxLines,
@@ -29,7 +29,7 @@ class V2TextStyle {
     this.borderColor,
     this.borderRadius,
     this.padding,
-    this.underline,
+    this.underline = false,
   });
 
   V2TextStyle copyWith({
@@ -93,7 +93,7 @@ class V2TextStyle {
           : null,
       italic: map['italic'],
       letterSpacing: map['letterSpacing'],
-      strikeThrough: map['strikeThrough'],
+      strikeThrough: map['strikeThrough'] ?? false,
       textAlign: map['textAlign'] != null
           ? CommonHelpers.getTextAlignmentFromString(
               map['textAlign'],
@@ -114,7 +114,7 @@ class V2TextStyle {
           : List<int>.from(map['borderRadius']),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
-      underline: map['underline'],
+      underline: map['underline'] ?? false,
     );
   }
 }
