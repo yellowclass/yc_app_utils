@@ -22,7 +22,7 @@ class GenericButtonV3Widget extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final Widget? loadingReplacement;
-  final int? height;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class GenericButtonV3Widget extends StatelessWidget {
       constraints: BoxConstraints(
         minHeight: buttonDetails.height != null ? 0 : 48,
       ),
-      height: buttonDetails.height?.toDouble(),
+      height: height ?? buttonDetails.height?.toDouble(),
       child: MaterialButton(
         padding: EdgeInsets.symmetric(
           horizontal: buttonDetails.padding.horizontal,
