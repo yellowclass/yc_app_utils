@@ -49,3 +49,22 @@ enum SequenceTypeEnum {
   PARALLEL,
   SEQUENTIAL,
 }
+
+extension V2ClickActionHelper on V2ClickAction {
+  bool hasAnyDefaultAction() {
+    return actions.any((element) {
+      return element.type == V2ClickActionTypesEnum.DEFAULT;
+    });
+  }
+
+  OneClickAction? getFirstDefault() {
+    if (hasAnyDefaultAction()) {
+      for (var element in actions) {
+        if (element.type == V2ClickActionTypesEnum.DEFAULT) {
+          return element;
+        }
+      }
+    }
+    return null;
+  }
+}
