@@ -31,8 +31,6 @@ class StyledImageWidget extends StatelessWidget {
           )
         : CachedNetworkImage(
             imageUrl: url,
-            width: double.infinity,
-            height: 200,
             httpHeaders: const {
               "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
             },
@@ -44,6 +42,7 @@ class StyledImageWidget extends StatelessWidget {
               baseColor: AppColors.cBLACK_10,
               highlightColor: AppColors.cWHITE_100,
               child: Container(
+                height: 200,
                 color: AppColors.cBLACK_10,
               ),
             ),
