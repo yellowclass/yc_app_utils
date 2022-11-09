@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -19,7 +20,8 @@ class StyledImageWidget extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final bool isSvg = Uri.parse(url).path.split(".").last == 'svg';
+    Uri parsedUri = Uri.parse(url);
+    final bool isSvg = parsedUri.path.split(".").last == 'svg';
     Widget image = isSvg
         ? SvgPicture.network(
             url,
@@ -36,6 +38,22 @@ class StyledImageWidget extends StatelessWidget {
             fit: styledImageData.imageFit,
             color: styledImageData.fillColor != null
                 ? CommonHelpers.v2ColorFromHex(styledImageData.fillColor)
+                : null,
+            placeholder: (parsedUri.queryParameters['shimmerHeight'] != null &&
+                    parsedUri.queryParameters['shimmerWidth'] != null)
+                ? (_, __) => Shimmer.fromColors(
+                      baseColor: AppColors.cBLACK_10,
+                      highlightColor: AppColors.cWHITE_100,
+                      child: Container(
+                        height: double.tryParse(
+                          parsedUri.queryParameters['shimmerHeight']!,
+                        ),
+                        width: double.tryParse(
+                          parsedUri.queryParameters['shimmerWidth']!,
+                        ),
+                        color: AppColors.cBLACK_10,
+                      ),
+                    )
                 : null,
           );
     return SizedBox(
