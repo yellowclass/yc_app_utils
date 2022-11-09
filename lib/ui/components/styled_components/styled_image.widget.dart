@@ -46,10 +46,10 @@ class StyledImageWidget extends StatelessWidget {
                       highlightColor: AppColors.cWHITE_100,
                       child: Container(
                         height: double.tryParse(
-                          parsedUri.queryParameters['shimmerHeight'] ?? '200',
+                          parsedUri.queryParameters['shimmerHeight']!,
                         ),
                         width: double.tryParse(
-                          parsedUri.queryParameters['shimmerWidth'] ?? '200',
+                          parsedUri.queryParameters['shimmerWidth']!,
                         ),
                         color: AppColors.cBLACK_10,
                       ),
