@@ -20,7 +20,8 @@ class StyledImageWidget extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final bool isSvg = Uri.parse(url).path.split(".").last == 'svg';
+    Uri parsedUri = Uri.parse(url);
+    final bool isSvg = parsedUri.path.split(".").last == 'svg';
     Widget image = isSvg
         ? SvgPicture.network(
             url,
@@ -38,14 +39,22 @@ class StyledImageWidget extends StatelessWidget {
             color: styledImageData.fillColor != null
                 ? CommonHelpers.v2ColorFromHex(styledImageData.fillColor)
                 : null,
-            placeholder: (_, __) => Shimmer.fromColors(
-              baseColor: AppColors.cBLACK_10,
-              highlightColor: AppColors.cWHITE_100,
-              child: Container(
-                height: 200,
-                color: AppColors.cBLACK_10,
-              ),
-            ),
+            placeholder: (parsedUri.queryParameters['shimmerHeight'] != null &&
+                    parsedUri.queryParameters['shimmerWidth'] != null)
+                ? (_, __) => Shimmer.fromColors(
+                      baseColor: AppColors.cBLACK_10,
+                      highlightColor: AppColors.cWHITE_100,
+                      child: Container(
+                        height: double.tryParse(
+                          parsedUri.queryParameters['shimmerHeight'] ?? '200',
+                        ),
+                        width: double.tryParse(
+                          parsedUri.queryParameters['shimmerWidth'] ?? '200',
+                        ),
+                        color: AppColors.cBLACK_10,
+                      ),
+                    )
+                : null,
           );
     return SizedBox(
       height: styledImageData.height,
