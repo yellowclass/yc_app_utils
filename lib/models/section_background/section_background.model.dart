@@ -18,6 +18,7 @@ class SectionBackground {
     this.backgroundImgUrl,
     this.gradientColors,
     this.radialGradient,
+    this.borderRadius,
   });
 
   final SectionBgType backgroundType;
@@ -30,6 +31,7 @@ class SectionBackground {
   final List<String>? gradientColors;
   final YcRadialGradient? radialGradient;
   final BoxFit? backgroundImgBoxFit;
+  final List<int>? borderRadius;
 
   SectionBackground copyWith({
     SectionBgType? backgroundType,
@@ -42,6 +44,7 @@ class SectionBackground {
     List<String>? gradientColors,
     YcRadialGradient? radialGradient,
     BoxFit? backgroundImgBoxFit,
+    List<int>? borderRadius,
   }) =>
       SectionBackground(
         backgroundType: backgroundType ?? this.backgroundType,
@@ -54,6 +57,7 @@ class SectionBackground {
         gradientColors: gradientColors ?? this.gradientColors,
         radialGradient: radialGradient ?? this.radialGradient,
         backgroundImgBoxFit: backgroundImgBoxFit ?? this.backgroundImgBoxFit,
+        borderRadius: borderRadius ?? this.borderRadius,
       );
 
   factory SectionBackground.fromMap(Map<String, dynamic> json) =>
@@ -81,6 +85,9 @@ class SectionBackground {
         backgroundImgBoxFit: json["boxFit"] != null
             ? CommonHelpers.getBoxFitFromString(json["boxFit"])
             : null,
+        borderRadius: json['borderRadius'] == null
+            ? <int>[]
+            : List<int>.from(json['borderRadius']),
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -94,6 +101,7 @@ class SectionBackground {
         "gradientColors": gradientColors,
         "radialGradient": radialGradient?.toMap(),
         "boxFit": backgroundImgBoxFit?.name,
+        'borderRadius': borderRadius,
       };
 
   String toJson() => json.encode(toMap());
