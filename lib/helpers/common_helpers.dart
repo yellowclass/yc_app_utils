@@ -430,7 +430,7 @@ class CommonHelpers {
         return const BoxDecoration();
       case SectionBgType.FLAT_COLOR:
         return BoxDecoration(
-          borderRadius: sectionBackground.borderRadius == null
+          borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder()
               : borderRadiusGeometry,
           color: CommonHelpers.v2ColorFromHex(
@@ -439,7 +439,7 @@ class CommonHelpers {
         );
       case SectionBgType.GRADIENT:
         return BoxDecoration(
-          borderRadius: sectionBackground.borderRadius == null
+          borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder(
                   shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
                   borderRadius: borderRadius,
@@ -480,7 +480,7 @@ class CommonHelpers {
 
       case SectionBgType.RADIAL_GRADIENT:
         return BoxDecoration(
-          borderRadius: sectionBackground.borderRadius == null
+          borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder(
                   shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
                   borderRadius: borderRadius)
