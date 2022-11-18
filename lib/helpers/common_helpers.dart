@@ -423,21 +423,28 @@ class CommonHelpers {
     if (sectionBackground == null) {
       return const BoxDecoration();
     }
+    BorderRadius borderRadiusGeometry =
+        getBorderRadiusFromList(sectionBackground.borderRadius);
     switch (sectionBackground.backgroundType) {
       case SectionBgType.TRANSPARENT:
         return const BoxDecoration();
       case SectionBgType.FLAT_COLOR:
         return BoxDecoration(
-          borderRadius: showSectionBorder(),
+          borderRadius: sectionBackground.borderRadius == null
+              ? showSectionBorder()
+              : borderRadiusGeometry,
           color: CommonHelpers.v2ColorFromHex(
             sectionBackground.backgroundColor,
           ),
         );
       case SectionBgType.GRADIENT:
         return BoxDecoration(
-          borderRadius: showSectionBorder(
-              shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
-              borderRadius: borderRadius),
+          borderRadius: sectionBackground.borderRadius == null
+              ? showSectionBorder(
+                  shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
+                  borderRadius: borderRadius,
+                )
+              : borderRadiusGeometry,
           gradient: LinearGradient(
             begin: getBeginDirection(sectionBackground.gradientDirection),
             end: getBottomDirection(sectionBackground.gradientDirection),
@@ -459,6 +466,7 @@ class CommonHelpers {
         );
       case SectionBgType.IMAGE:
         return BoxDecoration(
+          borderRadius: borderRadiusGeometry,
           image: sectionBackground.backgroundImgUrl != null
               ? DecorationImage(
                   // Only supports Non-vector image formats
@@ -472,9 +480,11 @@ class CommonHelpers {
 
       case SectionBgType.RADIAL_GRADIENT:
         return BoxDecoration(
-          borderRadius: showSectionBorder(
-              shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
-              borderRadius: borderRadius),
+          borderRadius: sectionBackground.borderRadius == null
+              ? showSectionBorder(
+                  shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
+                  borderRadius: borderRadius)
+              : borderRadiusGeometry,
           gradient: RadialGradient(
             center:
                 sectionBackground.radialGradient?.center ?? Alignment.center,
