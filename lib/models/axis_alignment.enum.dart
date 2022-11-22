@@ -1,0 +1,4 @@
+enum AxisAlignment {
+  HORIZONTAL,
+  VERTICAL,
+}
