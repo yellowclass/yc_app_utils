@@ -50,7 +50,7 @@ class VideoPlayerOptionsModel {
       persistentOptions: map['persistentOptions'] != null
           ? List<VideoPlayerOverlayEnum>.from(map['persistentOptions']?.map(
               (x) => CommonHelpers.enumFromString(
-                  VideoPlayerOverlayEnum.values, map['persistentOptions'])))
+                  VideoPlayerOverlayEnum.values, x)))
           : null,
       videoEndDialog: map['videoEndDialog'] != null
           ? AlertDialogModel.fromMap(map['videoEndDialog'])
