@@ -13,7 +13,7 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
   final VideoPlayerSideMenuModel sideMenu;
   final double? height;
   final double? width;
-  final ValueChanged<ClickAction?> onPressed;
+  final void Function(String?, ClickAction?) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,10 @@ class VideoPlayerSideMenuWidget extends StatelessWidget {
   Widget _buildButton(GenericButtonV3Model model) {
     return GenericButtonV3Widget(
       buttonDetails: model,
-      onPressed: () => onPressed(model.clickAction),
+      onPressed: () => onPressed(
+        model.key,
+        model.clickAction,
+      ),
     );
   }
 }
