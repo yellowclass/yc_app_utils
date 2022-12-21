@@ -21,6 +21,7 @@ class V2StyledTextModel with StyledComponentUnion {
   List<int>? borderRadius;
   List<int>? padding;
   bool underline;
+  TextDecorationStyle? textDecorationStyle;
 
   V2StyledTextModel({
     required this.text,
@@ -37,6 +38,7 @@ class V2StyledTextModel with StyledComponentUnion {
     this.borderRadius,
     this.padding,
     this.underline = false,
+    this.textDecorationStyle,
   });
 
   V2StyledTextModel copyWith({
@@ -54,6 +56,7 @@ class V2StyledTextModel with StyledComponentUnion {
     List<int>? borderRadius,
     List<int>? padding,
     bool? underline,
+    TextDecorationStyle? textDecorationStyle,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -70,6 +73,7 @@ class V2StyledTextModel with StyledComponentUnion {
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
       underline: underline ?? this.underline,
+      textDecorationStyle: textDecorationStyle ?? this.textDecorationStyle,
     );
   }
 
@@ -89,43 +93,45 @@ class V2StyledTextModel with StyledComponentUnion {
       'borderRadius': borderRadius,
       'padding': padding,
       'underline': underline,
+      'textDecorationStyle': textDecorationStyle?.name,
     };
   }
 
   factory V2StyledTextModel.fromMap(Map<String, dynamic> map) {
     return V2StyledTextModel(
-      text: map['text'] ?? '',
-      textColor: map['textColor'] ?? _defaultTextColor,
-      tStyle: map['tStyle'] != null
-          ? CommonHelpers.enumFromString(
-              TStyle.values,
-              map['tStyle'],
-            )
-          : null,
-      italic: map['italic'],
-      letterSpacing: map['letterSpacing'],
-      strikeThrough: map['strikeThrough'] ?? false,
-      textAlign: map['textAlign'] != null
-          ? CommonHelpers.getTextAlignmentFromString(
-              map['textAlign'],
-            )
-          : null,
-      textOverflow: map['textOverflow'] != null
-          ? CommonHelpers.getTextOverflowFromString(
-              map['textOverflow'],
-            )
-          : null,
-      maxLines: map['maxLines'],
-      background: map['background'] != null
-          ? SectionBackground.fromMap(map['background'])
-          : null,
-      borderColor: map['borderColor'],
-      borderRadius: map['borderRadius'] == null
-          ? <int>[]
-          : List<int>.from(map['borderRadius']),
-      padding:
-          map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
-      underline: map['underline'] ?? false,
-    );
+        text: map['text'] ?? '',
+        textColor: map['textColor'] ?? _defaultTextColor,
+        tStyle: map['tStyle'] != null
+            ? CommonHelpers.enumFromString(
+                TStyle.values,
+                map['tStyle'],
+              )
+            : null,
+        italic: map['italic'],
+        letterSpacing: map['letterSpacing'],
+        strikeThrough: map['strikeThrough'] ?? false,
+        textAlign: map['textAlign'] != null
+            ? CommonHelpers.getTextAlignmentFromString(
+                map['textAlign'],
+              )
+            : null,
+        textOverflow: map['textOverflow'] != null
+            ? CommonHelpers.getTextOverflowFromString(
+                map['textOverflow'],
+              )
+            : null,
+        maxLines: map['maxLines'],
+        background: map['background'] != null
+            ? SectionBackground.fromMap(map['background'])
+            : null,
+        borderColor: map['borderColor'],
+        borderRadius: map['borderRadius'] == null
+            ? <int>[]
+            : List<int>.from(map['borderRadius']),
+        padding:
+            map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
+        underline: map['underline'] ?? false,
+        textDecorationStyle: CommonHelpers.getTextDecorationStyleFromString(
+            map["textDecorationStyle"]));
   }
 }
