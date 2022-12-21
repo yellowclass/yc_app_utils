@@ -86,6 +86,7 @@ class V2StyledTextWidget extends StatelessWidget {
           if (styledText.strikeThrough) TextDecoration.lineThrough,
           if (styledText.underline) TextDecoration.underline,
         ]),
+        decorationStyle: styledText.textDecorationStyle,
       ),
     );
   }
