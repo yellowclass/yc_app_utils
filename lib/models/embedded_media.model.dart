@@ -1,4 +1,6 @@
+// ignore_for_file: constant_identifier_names
 import 'package:yc_app_utils/helpers/common_helpers.dart';
+import 'package:yc_app_utils/models/models.import.dart';
 
 enum MediaTypeEnum {
   IMAGE,
@@ -10,26 +12,32 @@ enum MediaTypeEnum {
 class EmbeddedMediaModel {
   MediaTypeEnum type;
   String url;
+  V2ClickAction? v2ClickAction;
 
   EmbeddedMediaModel({
     required this.type,
     required this.url,
+    this.v2ClickAction,
   });
 
   EmbeddedMediaModel copyWith({
     MediaTypeEnum? type,
     String? url,
+    V2ClickAction? v2ClickAction,
   }) {
     return EmbeddedMediaModel(
       type: type ?? this.type,
       url: url ?? this.url,
+     v2ClickAction:v2ClickAction?? this.v2ClickAction,
+
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'type': this.type.name,
-      'url': this.url,
+      'type': type.name,
+      'url': url,
+      'v2ClickAction':v2ClickAction
     };
   }
 
@@ -37,6 +45,7 @@ class EmbeddedMediaModel {
     return EmbeddedMediaModel(
       type: CommonHelpers.enumFromString(MediaTypeEnum.values, map['type'])!,
       url: map['url'],
+      v2ClickAction: map['v2ClickAction'],
     );
   }
 }
