@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CommonHelpers {
@@ -423,13 +422,25 @@ class CommonHelpers {
     if (sectionBackground == null) {
       return const BoxDecoration();
     }
+
+    final Border? _border = sectionBackground.borderColor != null
+        ? Border.all(
+            width: sectionBackground.borderWidth,
+            color: CommonHelpers.v2ColorFromHex(
+              sectionBackground.borderColor,
+            ),
+          )
+        : null;
+
     BorderRadius borderRadiusGeometry =
         getBorderRadiusFromList(sectionBackground.borderRadius);
+
     switch (sectionBackground.backgroundType) {
       case SectionBgType.TRANSPARENT:
         return const BoxDecoration();
       case SectionBgType.FLAT_COLOR:
         return BoxDecoration(
+          border: _border,
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder()
               : borderRadiusGeometry,
@@ -439,6 +450,7 @@ class CommonHelpers {
         );
       case SectionBgType.GRADIENT:
         return BoxDecoration(
+          border: _border,
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder(
                   shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
@@ -466,6 +478,7 @@ class CommonHelpers {
         );
       case SectionBgType.IMAGE:
         return BoxDecoration(
+          border: _border,
           borderRadius: borderRadiusGeometry,
           image: sectionBackground.backgroundImgUrl != null
               ? DecorationImage(
@@ -480,10 +493,12 @@ class CommonHelpers {
 
       case SectionBgType.RADIAL_GRADIENT:
         return BoxDecoration(
+          border: _border,
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder(
                   shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
-                  borderRadius: borderRadius)
+                  borderRadius: borderRadius,
+                )
               : borderRadiusGeometry,
           gradient: RadialGradient(
             center:
