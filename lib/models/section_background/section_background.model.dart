@@ -19,6 +19,7 @@ class SectionBackground {
     this.gradientColors,
     this.radialGradient,
     this.borderRadius,
+    this.borderColor,
   });
 
   final SectionBgType backgroundType;
@@ -32,6 +33,7 @@ class SectionBackground {
   final YcRadialGradient? radialGradient;
   final BoxFit? backgroundImgBoxFit;
   final List<int>? borderRadius;
+  final String? borderColor;
 
   SectionBackground copyWith({
     SectionBgType? backgroundType,
@@ -45,6 +47,7 @@ class SectionBackground {
     YcRadialGradient? radialGradient,
     BoxFit? backgroundImgBoxFit,
     List<int>? borderRadius,
+    String? borderColor,
   }) =>
       SectionBackground(
         backgroundType: backgroundType ?? this.backgroundType,
@@ -58,6 +61,7 @@ class SectionBackground {
         radialGradient: radialGradient ?? this.radialGradient,
         backgroundImgBoxFit: backgroundImgBoxFit ?? this.backgroundImgBoxFit,
         borderRadius: borderRadius ?? this.borderRadius,
+        borderColor: borderColor ?? this.borderColor,
       );
 
   factory SectionBackground.fromMap(Map<String, dynamic> json) =>
@@ -88,6 +92,7 @@ class SectionBackground {
         borderRadius: json['borderRadius'] == null
             ? <int>[]
             : List<int>.from(json['borderRadius']),
+        borderColor: json["borderColor"],
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -102,13 +107,16 @@ class SectionBackground {
         "radialGradient": radialGradient?.toMap(),
         "boxFit": backgroundImgBoxFit?.name,
         'borderRadius': borderRadius,
+        'borderColor': borderColor,
       };
 
   String toJson() => json.encode(toMap());
 
-  factory SectionBackground.fromJson(Map<String, dynamic> source) =>
-      SectionBackground.fromMap(source);
+  factory SectionBackground.fromJson(Map<String, dynamic> source) {
+    return SectionBackground.fromMap(source);
+  }
 
-  factory SectionBackground.transparent() =>
-      SectionBackground(backgroundType: SectionBgType.TRANSPARENT);
+  factory SectionBackground.transparent() {
+    return SectionBackground(backgroundType: SectionBgType.TRANSPARENT);
+  }
 }
