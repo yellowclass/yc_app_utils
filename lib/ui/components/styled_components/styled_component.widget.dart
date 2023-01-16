@@ -11,7 +11,7 @@ class StyledComponentWidget extends StatefulWidget {
   }) : super(key: key) {
     assert(
       styledComponent.scData.runtimeType == StyledVideoModel &&
-          getPlayer == null,
+          getPlayer != null,
       "[getPlayer] should not be null when [styledComponentDetails.scData] is type of [StyledVideoModel].",
     );
   }
