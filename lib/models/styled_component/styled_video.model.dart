@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 
-class StyledVideoModel {
+class StyledVideoModel with StyledComponentUnion {
   String url;
   String thumbnail;
   List<StyledVideoIconModel>? icons;
