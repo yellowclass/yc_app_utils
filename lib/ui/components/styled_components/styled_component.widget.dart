@@ -9,11 +9,12 @@ class StyledComponentWidget extends StatefulWidget {
     this.getPlayer,
     Key? key,
   }) : super(key: key) {
-    assert(
-      styledComponent.scData.runtimeType == StyledVideoModel &&
-          getPlayer != null,
-      "[getPlayer] should not be null when [styledComponentDetails.scData] is type of [StyledVideoModel].",
-    );
+    if (styledComponent.scData.runtimeType == StyledVideoModel) {
+      assert(
+        getPlayer != null,
+        "[getPlayer] should not be null when [styledComponentDetails.scData] is type of [StyledVideoModel].",
+      );
+    }
   }
 
   final StyledComponentModel styledComponent;
