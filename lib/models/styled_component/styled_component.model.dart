@@ -27,7 +27,7 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
         scDataMap = (scData as StyledImageModel).toMap();
         break;
       case StyledVideoModel:
-        scDataMap = (scData as StyledVideoModel).toMap();
+        scDataMap = (scData as StyledImageModel).toMap();
         break;
       default:
     }
