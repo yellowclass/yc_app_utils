@@ -104,7 +104,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
       StyledComponentModel child =
           widget.bootstrapChild.bcData as StyledComponentModel;
       return StyledComponentWidget(
-        styledComponentDetails: child,
+        styledComponent: child,
         containsForm: widget.containsForm,
         innerClickAction: widget.innerClickAction,
       );

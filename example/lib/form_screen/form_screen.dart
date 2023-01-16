@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:example/form_screen/skeleton.dart';
-
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key}) : super(key: key);
 
