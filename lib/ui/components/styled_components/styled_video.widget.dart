@@ -96,22 +96,25 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     }
     return SizedBox(
       width: widget.styledVideoData.width.toDouble(),
-      child: AspectRatio(
-        aspectRatio: widget.styledVideoData.aspectRatio,
-        child: FittedBox(
-          fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
-          child: ValueListenableBuilder<bool>(
-            valueListenable: showImage,
-            builder: (context, value, child) {
-              if (value && videoPlayer != null) {
-                return _getImage(widget.styledVideoData.thumbnail);
-              }
-              return Stack(
-                children: [videoPlayer!, ..._overlayIcons],
-              );
-            },
+      child: Stack(
+        children: [
+          AspectRatio(
+            aspectRatio: widget.styledVideoData.aspectRatio,
+            child: FittedBox(
+              fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
+              child: ValueListenableBuilder<bool>(
+                valueListenable: showImage,
+                builder: (context, value, child) {
+                  if (value && videoPlayer != null) {
+                    return _getImage(widget.styledVideoData.thumbnail);
+                  }
+                  return videoPlayer!;
+                },
+              ),
+            ),
           ),
-        ),
+          ..._overlayIcons
+        ],
       ),
     );
   }
