@@ -40,23 +40,25 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
 
     _icons.forEach((key, value) {
       _overlayIcons.add(
-        key == Alignment.topLeft
-            ? Positioned(
-                left: 0,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: value!.map((e) => BackButton()).toList(),
-                ),
-              )
-            : Positioned.fill(
-                child: Align(
-                  alignment: key,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: value!.map((e) => BackButton()).toList(),
-                  ),
-                ),
-              ),
+        // key == Alignment.topLeft
+        //     ? Positioned(
+        //         left: 0,
+        //         child: Row(
+        //           mainAxisSize: MainAxisSize.min,
+        //           children: value!.map((e) => BackButton()).toList(),
+        //         ),
+        //       )
+        //     :
+
+        Positioned.fill(
+          child: Align(
+            alignment: key,
+            child: Wrap(
+              // mainAxisSize: MainAxisSize.min,
+              children: value!.map((e) => BackButton()).toList(),
+            ),
+          ),
+        ),
       );
     });
   }
