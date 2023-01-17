@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
+import 'package:yc_app_utils/ui/components/generic_network_image.dart';
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
 import 'package:yc_app_utils/ui/styleguide/spacing.dart';
 
@@ -53,13 +54,13 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
             children: value!.map((e) {
               String _activeURL = e.activeIconUrl ?? "";
               String _inActiveURL = e.inactiveIconUrl ?? "";
-              // if (_activeURL.isEmpty && _inActiveURL.isEmpty) {
-              //   return Container(
-              //     width: AppSpacing.m,
-              //     height: AppSpacing.m,
-              //     color: AppColors.cBLACK_05,
-              //   );
-              // }
+              if (_activeURL.isEmpty && _inActiveURL.isEmpty) {
+                return Container(
+                  width: AppSpacing.xxl,
+                  height: AppSpacing.xxl,
+                  color: AppColors.cBLACK_20,
+                );
+              }
               return InkWell(
                 onTap: e.clickAction == null
                     ? null
@@ -68,19 +69,13 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                         _buildIcons();
                         setState(() {});
                       },
-                child: Container(
-                  width: AppSpacing.xxl,
-                  height: AppSpacing.xxl,
-                  margin: const EdgeInsets.all(4),
-                  color: e.isActive ? AppColors.cBLUE_50 : AppColors.cGREEN_50,
+                child: GenericNetworkImage(
+                  e.isActive && _activeURL.isNotEmpty
+                      ? _activeURL
+                      : _inActiveURL.isNotEmpty
+                          ? _inActiveURL
+                          : _activeURL,
                 ),
-                // child: GenericNetworkImage(
-                //   e.isActive && _activeURL.isNotEmpty
-                //       ? _activeURL
-                //       : _inActiveURL.isNotEmpty
-                //           ? _inActiveURL
-                //           : _activeURL,
-                // ),
               );
             }).toList(),
           ),
