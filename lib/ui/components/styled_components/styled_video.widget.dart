@@ -71,7 +71,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                   width: AppSpacing.xxl,
                   height: AppSpacing.xxl,
                   margin: const EdgeInsets.all(4),
-                  color: e.isActive ? AppColors.cBLUE_15 : AppColors.cGREEN_15,
+                  color: e.isActive ? AppColors.cBLUE_50 : AppColors.cGREEN_50,
                 ),
                 // child: GenericNetworkImage(
                 //   e.isActive && _activeURL.isNotEmpty
@@ -94,16 +94,25 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     if (url.isEmpty) {
       return const SizedBox.shrink();
     }
-    return ValueListenableBuilder<bool>(
-      valueListenable: showImage,
-      builder: (context, value, child) {
-        if (value && videoPlayer != null) {
-          return _getImage(widget.styledVideoData.thumbnail);
-        }
-        return Stack(
-          children: [videoPlayer!, ..._overlayIcons],
-        );
-      },
+    return SizedBox(
+      width: widget.styledVideoData.width.toDouble(),
+      child: AspectRatio(
+        aspectRatio: widget.styledVideoData.aspectRatio,
+        child: FittedBox(
+          fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
+          child: ValueListenableBuilder<bool>(
+            valueListenable: showImage,
+            builder: (context, value, child) {
+              if (value && videoPlayer != null) {
+                return _getImage(widget.styledVideoData.thumbnail);
+              }
+              return Stack(
+                children: [videoPlayer!, ..._overlayIcons],
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 
