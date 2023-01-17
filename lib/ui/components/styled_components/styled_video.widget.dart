@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,21 +40,23 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
 
     _icons.forEach((key, value) {
       _overlayIcons.add(
-        Positioned.fill(
-          child: Align(
-            alignment: key,
-            child: SizedBox(
-              // width: double.minPositive,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [BackButton(), CloseButton()],
+        key == Alignment.topLeft
+            ? Positioned(
+                left: 0,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: value!.map((e) => BackButton()).toList(),
+                ),
+              )
+            : Positioned.fill(
+                child: Align(
+                  alignment: key,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: value!.map((e) => BackButton()).toList(),
+                  ),
+                ),
               ),
-              // color: Color(
-              //   (math.Random().nextDouble() * 0xFFFFFF).toInt(),
-              // ).withOpacity(1.0),
-            ),
-          ),
-        ),
       );
     });
   }
