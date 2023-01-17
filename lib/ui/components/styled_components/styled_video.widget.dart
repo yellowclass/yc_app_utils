@@ -68,10 +68,10 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                         setState(() {});
                       },
                 child: Container(
-                  width: AppSpacing.m,
-                  height: AppSpacing.m,
+                  width: AppSpacing.xxl,
+                  height: AppSpacing.xxl,
                   margin: const EdgeInsets.all(4),
-                  color: e.isActive ? AppColors.cBLACK_20 : AppColors.cGREEN_15,
+                  color: e.isActive ? AppColors.cBLUE_15 : AppColors.cGREEN_15,
                 ),
                 // child: GenericNetworkImage(
                 //   e.isActive && _activeURL.isNotEmpty
