@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
+import 'package:yc_app_utils/ui/styleguide/colors.dart';
+import 'package:yc_app_utils/ui/styleguide/spacing.dart';
 
 class StyledVideoWidget extends StatefulWidget {
   const StyledVideoWidget({
@@ -37,29 +39,52 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
         _icons[element.iconPosition!]?.add(element);
       }
     });
+    _buildIcons();
+  }
 
+  void _buildIcons() {
     _icons.forEach((key, value) {
-      _overlayIcons.add(
-        // key == Alignment.topLeft
-        //     ? Positioned(
-        //         left: 0,
-        //         child: Row(
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: value!.map((e) => BackButton()).toList(),
-        //         ),
-        //       )
-        //     :
-
-        Positioned.fill(
-          child: Align(
-            alignment: key,
-            child: Wrap(
-              // mainAxisSize: MainAxisSize.min,
-              children: value!.map((e) => BackButton()).toList(),
-            ),
+      _overlayIcons.add(Positioned.fill(
+        child: Align(
+          alignment: key,
+          child: Wrap(
+            children: value!.map((e) {
+              String _activeURL = e.activeIconUrl ?? "";
+              String _inActiveURL = e.inactiveIconUrl ?? "";
+              // if (_activeURL.isEmpty && _inActiveURL.isEmpty) {
+              //   return Container(
+              //     width: AppSpacing.m,
+              //     height: AppSpacing.m,
+              //     color: AppColors.cBLACK_05,
+              //   );
+              // }
+              return InkWell(
+                onTap: e.clickAction == null
+                    ? null
+                    : () {
+                        // handle click action here
+                        e.isActive = !e.isActive;
+                        _buildIcons();
+                        setState(() {});
+                      },
+                child: Container(
+                  width: AppSpacing.m,
+                  height: AppSpacing.m,
+                  margin: const EdgeInsets.all(4),
+                  color: e.isActive ? AppColors.cBLACK_20 : AppColors.cGREEN_15,
+                ),
+                // child: GenericNetworkImage(
+                //   e.isActive && _activeURL.isNotEmpty
+                //       ? _activeURL
+                //       : _inActiveURL.isNotEmpty
+                //           ? _inActiveURL
+                //           : _activeURL,
+                // ),
+              );
+            }).toList(),
           ),
         ),
-      );
+      ));
     });
   }
 
