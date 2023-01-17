@@ -45,15 +45,15 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
         Positioned.fill(
           child: Align(
             alignment: key,
-            child: Container(
-              width: double.minPositive,
+            child: SizedBox(
+              // width: double.minPositive,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [BackButton(), CloseButton()],
               ),
-              color: Color(
-                (math.Random().nextDouble() * 0xFFFFFF).toInt(),
-              ).withOpacity(1.0),
+              // color: Color(
+              //   (math.Random().nextDouble() * 0xFFFFFF).toInt(),
+              // ).withOpacity(1.0),
             ),
           ),
         ),
