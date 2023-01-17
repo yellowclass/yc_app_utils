@@ -64,7 +64,6 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                 onTap: e.clickAction == null
                     ? null
                     : () {
-                        e.isActive = !e.isActive;
                         widget.onClick.call(e);
                         _buildIcons();
                         setState(() {});
