@@ -22,8 +22,6 @@ class _BootstrapScreenState extends State<BootstrapScreen> {
     }
   }
 
-  List<BootstrapSectionModel> _sections = [];
-
   @override
   Widget build(BuildContext context) {
     bootstrapGridParameters(
@@ -47,7 +45,6 @@ class _BootstrapScreenState extends State<BootstrapScreen> {
                         return;
                       }
                       scK?.setLoading(true);
-                      print(_?.formData);
                       await Future.delayed(const Duration(seconds: 1));
                       scK?.setLoading(false);
                     },

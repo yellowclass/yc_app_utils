@@ -26,6 +26,9 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
       case StyledImageModel:
         scDataMap = (scData as StyledImageModel).toMap();
         break;
+      case StyledVideoModel:
+        scDataMap = (scData as StyledImageModel).toMap();
+        break;
       default:
     }
     return {
@@ -46,6 +49,9 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
         break;
       case 'StyledImage':
         scData = StyledImageModel.fromMap(map['scData']);
+        break;
+      case 'StyledVideo':
+        scData = StyledVideoModel.fromMap(map['scData']);
         break;
       default:
     }

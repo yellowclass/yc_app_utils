@@ -109,7 +109,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
       StyledComponentModel bsWidget =
           widget.bootstrapSectionData.bsData as StyledComponentModel;
       return StyledComponentWidget(
-        styledComponentDetails: bsWidget,
+        styledComponent: bsWidget,
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
       );

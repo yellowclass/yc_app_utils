@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
-
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentWidget extends StatefulWidget {
-  const StyledComponentWidget({
-    required this.styledComponentDetails,
+  StyledComponentWidget({
+    required this.styledComponent,
     required this.containsForm,
     this.innerClickAction,
+    this.getPlayer,
+    this.onClick,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key) {
+    if (styledComponent.scData.runtimeType == StyledVideoModel) {
+      assert(
+        getPlayer != null,
+        "[getPlayer] should not be null when [styledComponentDetails.scData] is type of [StyledVideoModel].",
+      );
+    }
+  }
 
-  final StyledComponentModel styledComponentDetails;
+  final StyledComponentModel styledComponent;
   final bool containsForm;
   final InnerClickAction? innerClickAction;
+  final Widget Function(ValueNotifier<bool>)? getPlayer;
+  final void Function(StyledVideoIconModel)? onClick;
 
   @override
   State<StyledComponentWidget> createState() => StyledComponentWidgetState();
@@ -21,6 +31,10 @@ class StyledComponentWidget extends StatefulWidget {
 class StyledComponentWidgetState extends State<StyledComponentWidget>
     with ClickWidgetState {
   bool _isLoading = false;
+
+  StyledComponentUnion get _scData {
+    return widget.styledComponent.scData;
+  }
 
   @override
   void setLoading(bool value) {
@@ -31,37 +45,10 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
     }
   }
 
-  Widget buildComponent() {
-    if (widget.styledComponentDetails.scData is V2StyledTextModel) {
-      V2StyledTextModel styledTextDetails =
-          widget.styledComponentDetails.scData as V2StyledTextModel;
-      if (_isLoading) {
-        return ThreeBounceLoader(
-          color: CommonHelpers.v2ColorFromHex(
-            styledTextDetails.textColor,
-          ),
-          size: 24,
-        );
-      } else {
-        return V2StyledTextWidget(
-          styledText: styledTextDetails,
-        );
-      }
-    } else if (widget.styledComponentDetails.scData is StyledImageModel) {
-      StyledImageModel styledImageDetails =
-          widget.styledComponentDetails.scData as StyledImageModel;
-      return StyledImageWidget(
-        styledImageData: styledImageDetails,
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return YCClicker(
-      onPressed: (widget.styledComponentDetails.clickAction != null &&
+      onPressed: (widget.styledComponent.clickAction != null &&
               widget.innerClickAction != null &&
               !_isLoading)
           ? () {
@@ -69,10 +56,10 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
               if (widget.containsForm) {
                 // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
                 for (var action
-                    in widget.styledComponentDetails.clickAction!.actions) {
+                    in widget.styledComponent.clickAction!.actions) {
                   if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {
                     widget.innerClickAction!.call(
-                      widget.styledComponentDetails.clickAction!,
+                      widget.styledComponent.clickAction!,
                       true,
                       this,
                     );
@@ -81,7 +68,7 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
                 }
               } else {
                 widget.innerClickAction!.call(
-                  widget.styledComponentDetails.clickAction!,
+                  widget.styledComponent.clickAction!,
                   false,
                   this,
                 );
@@ -89,21 +76,21 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
             }
           : null,
       showRippleEffect:
-          widget.styledComponentDetails.clickAction?.showRippleEffect ?? false,
+          widget.styledComponent.clickAction?.showRippleEffect ?? false,
       child: Container(
         padding: CommonHelpers.getPaddingFromList(
-          widget.styledComponentDetails.padding,
+          widget.styledComponent.padding,
         ),
         decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
-          sectionBackground: widget.styledComponentDetails.background,
+          sectionBackground: widget.styledComponent.background,
         ).copyWith(
           borderRadius: CommonHelpers.getBorderRadiusFromList(
-            widget.styledComponentDetails.borderRadius,
+            widget.styledComponent.borderRadius,
           ),
-          border: widget.styledComponentDetails.borderColor != null
+          border: widget.styledComponent.borderColor != null
               ? Border.all(
                   color: CommonHelpers.v2ColorFromHex(
-                    widget.styledComponentDetails.borderColor,
+                    widget.styledComponent.borderColor,
                   ),
                 )
               : null,
@@ -111,5 +98,35 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
         child: buildComponent(),
       ),
     );
+  }
+
+  Widget buildComponent() {
+    switch (_scData.runtimeType) {
+      case V2StyledTextModel:
+        final styledTextDetails = _scData as V2StyledTextModel;
+        if (_isLoading) {
+          return ThreeBounceLoader(
+            color: CommonHelpers.v2ColorFromHex(styledTextDetails.textColor),
+            size: 24,
+          );
+        } else {
+          return V2StyledTextWidget(styledText: styledTextDetails);
+        }
+      case StyledImageModel:
+        final styledImageDetails = _scData as StyledImageModel;
+        return StyledImageWidget(styledImageData: styledImageDetails);
+      case StyledVideoModel:
+        if (widget.getPlayer != null && widget.onClick != null) {
+          final styledVideoDetails = _scData as StyledVideoModel;
+          return StyledVideoWidget(
+            styledVideoData: styledVideoDetails,
+            getVideoPlayer: widget.getPlayer!,
+            onClick: widget.onClick!,
+          );
+        }
+        return const SizedBox.shrink();
+      default:
+        return const SizedBox.shrink();
+    }
   }
 }
