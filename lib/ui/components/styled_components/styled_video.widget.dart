@@ -23,7 +23,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
   final ValueNotifier<bool> showImage = ValueNotifier<bool>(true);
   Widget? videoPlayer;
   final _icons = <Alignment, List<StyledVideoIconModel>?>{};
-  final List<Widget> _overlayIcons = [];
+  final List<Positioned> _overlayIcons = [];
 
   @override
   void initState() {
@@ -41,18 +41,23 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     });
 
     _icons.forEach((key, value) {
-      _overlayIcons.add(Align(
-        alignment: key,
-        child: Container(
-          child: Row(
-            children: [BackButton(), CloseButton()],
+      _overlayIcons.add(
+        Positioned.fill(
+          child: Align(
+            alignment: key,
+            child: Container(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [BackButton(), CloseButton()],
+              ),
+              padding: EdgeInsets.all(2),
+              color: Color(
+                (math.Random().nextDouble() * 0xFFFFFF).toInt(),
+              ).withOpacity(1.0),
+            ),
           ),
-          padding: EdgeInsets.all(2),
-          color: Color(
-            (math.Random().nextDouble() * 0xFFFFFF).toInt(),
-          ).withOpacity(1.0),
         ),
-      ));
+      );
     });
   }
 
