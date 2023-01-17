@@ -9,11 +9,13 @@ class StyledVideoWidget extends StatefulWidget {
   const StyledVideoWidget({
     required this.styledVideoData,
     required this.getVideoPlayer,
+    required this.onClick,
     Key? key,
   }) : super(key: key);
 
   final StyledVideoModel styledVideoData;
   final Widget Function(ValueNotifier<bool>) getVideoPlayer;
+  final void Function(StyledVideoIconModel) onClick;
 
   @override
   State<StyledVideoWidget> createState() => _StyledVideoWidgetState();
@@ -62,8 +64,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                 onTap: e.clickAction == null
                     ? null
                     : () {
-                        // handle click action here
                         e.isActive = !e.isActive;
+                        widget.onClick.call(e);
                         _buildIcons();
                         setState(() {});
                       },

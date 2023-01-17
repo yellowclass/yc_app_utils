@@ -92,6 +92,7 @@ class StyledVideoIconModel {
   Alignment? iconPosition;
   V2ClickAction? clickAction;
   bool isActive;
+  int index;
 
   StyledVideoIconModel({
     required this.activeIconUrl,
@@ -99,6 +100,7 @@ class StyledVideoIconModel {
     required this.iconPosition,
     required this.clickAction,
     this.isActive = true,
+    this.index = 0,
   });
 
   StyledVideoIconModel copyWith({
