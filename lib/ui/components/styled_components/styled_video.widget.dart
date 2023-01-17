@@ -46,12 +46,11 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
           child: Align(
             alignment: key,
             child: Container(
-              width: 100,
+              width: double.minPositive,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [BackButton(), CloseButton()],
               ),
-              padding: EdgeInsets.all(2),
               color: Color(
                 (math.Random().nextDouble() * 0xFFFFFF).toInt(),
               ).withOpacity(1.0),
