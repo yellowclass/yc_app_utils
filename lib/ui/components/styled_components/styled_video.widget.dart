@@ -90,28 +90,30 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     if (url.isEmpty) {
       return const SizedBox.shrink();
     }
-    return SizedBox(
-      width: widget.styledVideoData.width.toDouble(),
-      child: Stack(
-        children: [
-          AspectRatio(
-            aspectRatio: widget.styledVideoData.aspectRatio,
-            child: FittedBox(
-              fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
-              child: ValueListenableBuilder<bool>(
-                valueListenable: showImage,
-                builder: (context, value, child) {
-                  if (value && videoPlayer != null) {
-                    return GenericNetworkImage(
-                        widget.styledVideoData.thumbnail);
-                  }
-                  return videoPlayer!;
-                },
+    return ClipRect(
+      child: SizedBox(
+        width: widget.styledVideoData.width.toDouble(),
+        child: Stack(
+          children: [
+            AspectRatio(
+              aspectRatio: widget.styledVideoData.aspectRatio,
+              child: FittedBox(
+                fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: showImage,
+                  builder: (context, value, child) {
+                    if (value && videoPlayer != null) {
+                      return GenericNetworkImage(
+                          widget.styledVideoData.thumbnail);
+                    }
+                    return videoPlayer!;
+                  },
+                ),
               ),
             ),
-          ),
-          ..._overlayIcons
-        ],
+            ..._overlayIcons
+          ],
+        ),
       ),
     );
   }
