@@ -102,7 +102,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                 valueListenable: showImage,
                 builder: (context, value, child) {
                   if (value && videoPlayer != null) {
-                    return _getImage(widget.styledVideoData.thumbnail);
+                    return GenericNetworkImage(
+                        widget.styledVideoData.thumbnail);
                   }
                   return videoPlayer!;
                 },
@@ -113,17 +114,5 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
         ],
       ),
     );
-  }
-
-  Widget _getImage(String url) {
-    final bool isSvg = Uri.parse(url).path.split(".").last == 'svg';
-    return isSvg
-        ? SvgPicture.network(url)
-        : CachedNetworkImage(
-            imageUrl: url,
-            httpHeaders: const {
-              "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
-            },
-          );
   }
 }
