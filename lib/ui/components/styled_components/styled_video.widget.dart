@@ -1,7 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 
 class StyledVideoWidget extends StatefulWidget {
@@ -21,11 +22,38 @@ class StyledVideoWidget extends StatefulWidget {
 class _StyledVideoWidgetState extends State<StyledVideoWidget> {
   final ValueNotifier<bool> showImage = ValueNotifier<bool>(true);
   Widget? videoPlayer;
+  final _icons = <Alignment, List<StyledVideoIconModel>?>{};
+  final List<Widget> _overlayIcons = [];
 
   @override
   void initState() {
     super.initState();
+    _icons.clear();
+    _overlayIcons.clear();
+
     videoPlayer = widget.getVideoPlayer.call(showImage);
+
+    widget.styledVideoData.icons?.forEach((element) {
+      if (element.iconPosition != null) {
+        _icons.putIfAbsent(element.iconPosition!, () => []);
+        _icons[element.iconPosition!]?.add(element);
+      }
+    });
+
+    _icons.forEach((key, value) {
+      _overlayIcons.add(Align(
+        alignment: key,
+        child: Container(
+          child: Row(
+            children: [BackButton(), CloseButton()],
+          ),
+          padding: EdgeInsets.all(2),
+          color: Color(
+            (math.Random().nextDouble() * 0xFFFFFF).toInt(),
+          ).withOpacity(1.0),
+        ),
+      ));
+    });
   }
 
   @override
@@ -40,15 +68,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
         if (value && videoPlayer != null) {
           return _getImage(widget.styledVideoData.thumbnail);
         }
-        //todo(kshivam1177) : render icons with the help of stack
         return Stack(
-          children: [
-            videoPlayer!,
-            Text(
-              widget.styledVideoData.icons?.length.toString() ??
-                  "icons count (0) ",
-            )
-          ],
+          children: [videoPlayer!, ..._overlayIcons],
         );
       },
     );
