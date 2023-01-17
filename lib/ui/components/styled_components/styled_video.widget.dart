@@ -102,13 +102,12 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
           fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
           child: ValueListenableBuilder<bool>(
             valueListenable: showImage,
-            child: videoPlayer,
             builder: (context, value, child) {
               if (value && videoPlayer != null) {
                 return _getImage(widget.styledVideoData.thumbnail);
               }
               return Stack(
-                children: [child!, ..._overlayIcons],
+                children: [videoPlayer!, ..._overlayIcons],
               );
             },
           ),
