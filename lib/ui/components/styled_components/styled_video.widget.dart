@@ -46,6 +46,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
           child: Align(
             alignment: key,
             child: Container(
+              width: 100,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [BackButton(), CloseButton()],
