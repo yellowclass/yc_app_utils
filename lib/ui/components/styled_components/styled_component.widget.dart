@@ -7,6 +7,7 @@ class StyledComponentWidget extends StatefulWidget {
     required this.containsForm,
     this.innerClickAction,
     this.getPlayer,
+    this.onClick,
     Key? key,
   }) : super(key: key) {
     if (styledComponent.scData.runtimeType == StyledVideoModel) {
@@ -21,6 +22,7 @@ class StyledComponentWidget extends StatefulWidget {
   final bool containsForm;
   final InnerClickAction? innerClickAction;
   final Widget Function(ValueNotifier<bool>)? getPlayer;
+  final void Function(StyledVideoIconModel)? onClick;
 
   @override
   State<StyledComponentWidget> createState() => StyledComponentWidgetState();
@@ -114,11 +116,12 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
         final styledImageDetails = _scData as StyledImageModel;
         return StyledImageWidget(styledImageData: styledImageDetails);
       case StyledVideoModel:
-        if (widget.getPlayer != null) {
+        if (widget.getPlayer != null && widget.onClick != null) {
           final styledVideoDetails = _scData as StyledVideoModel;
           return StyledVideoWidget(
             styledVideoData: styledVideoDetails,
             getVideoPlayer: widget.getPlayer!,
+            onClick: widget.onClick!,
           );
         }
         return const SizedBox.shrink();
