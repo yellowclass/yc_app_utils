@@ -72,9 +72,13 @@ class StyledVideoModel with StyledComponentUnion {
         BoxFit.values,
         map['videoBoxFit'] ?? '',
       ),
-      aspectRatio: map['aspectRatio'] ?? 1,
+      aspectRatio: map['aspectRatio'] == null
+          ? 1
+          : double.tryParse(map['aspectRatio'].toString()) ?? 1,
       initialDelay: map['initialDelay'] ?? 0,
-      volume: map['volume'] ?? 0,
+      volume: map['volume'] == null
+          ? 0
+          : double.tryParse(map['volume'].toString()) ?? 0,
       width: map['width'] ?? 0,
       loop: map['loop'] ?? false,
       icons: map['icons'] == null
