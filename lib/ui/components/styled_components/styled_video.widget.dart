@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 import 'package:yc_app_utils/ui/components/generic_network_image.dart';
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
@@ -90,9 +88,12 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     if (url.isEmpty) {
       return const SizedBox.shrink();
     }
+    double _screenWidth = MediaQuery.of(context).size.width;
+    double _width = _screenWidth * widget.styledVideoData.width;
+
     return ClipRect(
       child: SizedBox(
-        width: widget.styledVideoData.width.toDouble(),
+        width: _width,
         child: Stack(
           children: [
             AspectRatio(
