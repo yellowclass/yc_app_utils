@@ -79,7 +79,7 @@ class StyledVideoModel with StyledComponentUnion {
       volume: map['volume'] == null
           ? 0
           : double.tryParse(map['volume'].toString()) ?? 0,
-      width: map['width'] ?? 0,
+      width: map['width'] ?? 1,
       loop: map['loop'] ?? false,
       icons: map['icons'] == null
           ? null
