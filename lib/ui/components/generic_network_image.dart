@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class GenericNetworkImage extends StatelessWidget {
@@ -79,7 +78,9 @@ class GenericNetworkImage extends StatelessWidget {
                 errorBuilder:
                     errorWidget != null ? (_, __, ___) => errorWidget! : null,
                 loadingBuilder: loadingBuilder ??
-                    (placeholder != null ? (_, __, ___) => placeholder! : null),
+                    (placeholder != null
+                        ? (_, __, ___) => sizedPlaceHolder!
+                        : null),
               );
 
     if (isCircular) {
@@ -89,5 +90,17 @@ class GenericNetworkImage extends StatelessWidget {
     } else {
       return image;
     }
+  }
+
+  Widget? get sizedPlaceHolder {
+    final qpm = Uri.parse(url).queryParameters;
+    // if (qpm.containsKey("mW") && qpm.containsKey("mH")) {
+    return SizedBox(
+      width: int.tryParse(qpm["mW"] ?? "")?.toDouble(),
+      height: int.tryParse(qpm["mH"] ?? "")?.toDouble(),
+      child: placeholder,
+    );
+    // }
+    // return placeholder;
   }
 }
