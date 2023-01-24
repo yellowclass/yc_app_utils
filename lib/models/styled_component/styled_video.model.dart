@@ -14,6 +14,7 @@ class StyledVideoModel with StyledComponentUnion {
   final BoxFit? videoBoxFit;
   final bool loop;
   final bool hasSeekbar;
+  final bool autoPlay;
 
   StyledVideoModel({
     required this.url,
@@ -23,6 +24,7 @@ class StyledVideoModel with StyledComponentUnion {
     this.aspectRatio = 1,
     this.width = 0,
     this.loop = false,
+    this.autoPlay = false,
     this.hasSeekbar = false,
     this.videoBoxFit,
     this.icons,
@@ -39,6 +41,7 @@ class StyledVideoModel with StyledComponentUnion {
     BoxFit? videoBoxFit,
     bool? loop,
     bool? hasSeekbar,
+    bool? autoPlay,
   }) {
     return StyledVideoModel(
       url: url ?? this.url,
@@ -51,6 +54,7 @@ class StyledVideoModel with StyledComponentUnion {
       videoBoxFit: videoBoxFit ?? this.videoBoxFit,
       loop: loop ?? this.loop,
       hasSeekbar: hasSeekbar ?? this.hasSeekbar,
+      autoPlay: autoPlay ?? this.autoPlay,
     );
   }
 
@@ -65,6 +69,7 @@ class StyledVideoModel with StyledComponentUnion {
       'width': width,
       'loop': loop,
       'hasSeekbar': hasSeekbar,
+      'autoPlay': autoPlay,
       'icons': icons?.map((e) => e.toMap()),
     };
   }
@@ -87,6 +92,7 @@ class StyledVideoModel with StyledComponentUnion {
       width: map['width'] ?? 1,
       loop: map['loop'] ?? false,
       hasSeekbar: map['hasSeekbar'] ?? false,
+      autoPlay: map['autoPlay'] ?? false,
       icons: map['icons'] == null
           ? null
           : (map['icons'] as List<dynamic>)
