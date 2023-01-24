@@ -94,13 +94,13 @@ class GenericNetworkImage extends StatelessWidget {
 
   Widget? get sizedPlaceHolder {
     final qpm = Uri.parse(url).queryParameters;
-    if (qpm.containsKey("mW") && qpm.containsKey("mH")) {
-      return SizedBox(
-        width: int.tryParse(qpm["mW"] ?? "")?.toDouble(),
-        height: int.tryParse(qpm["mH"] ?? "")?.toDouble(),
-        child: placeholder,
-      );
-    }
-    return placeholder;
+    // if (qpm.containsKey("mW") && qpm.containsKey("mH")) {
+    return SizedBox(
+      width: int.tryParse(qpm["mW"] ?? "")?.toDouble(),
+      height: int.tryParse(qpm["mH"] ?? "")?.toDouble(),
+      child: placeholder,
+    );
+    // }
+    // return placeholder;
   }
 }
