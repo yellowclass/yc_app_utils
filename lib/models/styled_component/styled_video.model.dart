@@ -4,15 +4,16 @@ import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 
 class StyledVideoModel with StyledComponentUnion {
-  String url;
-  String thumbnail;
-  List<StyledVideoIconModel>? icons;
-  int initialDelay;
-  int width;
-  double volume;
-  double aspectRatio;
-  BoxFit? videoBoxFit;
-  bool loop;
+  final String url;
+  final String thumbnail;
+  final List<StyledVideoIconModel>? icons;
+  final int initialDelay;
+  final int width;
+  final double volume;
+  final double aspectRatio;
+  final BoxFit? videoBoxFit;
+  final bool loop;
+  final bool hasSeekbar;
 
   StyledVideoModel({
     required this.url,
@@ -22,6 +23,7 @@ class StyledVideoModel with StyledComponentUnion {
     this.aspectRatio = 1,
     this.width = 0,
     this.loop = false,
+    this.hasSeekbar = false,
     this.videoBoxFit,
     this.icons,
   });
@@ -36,6 +38,7 @@ class StyledVideoModel with StyledComponentUnion {
     double? aspectRatio,
     BoxFit? videoBoxFit,
     bool? loop,
+    bool? hasSeekbar,
   }) {
     return StyledVideoModel(
       url: url ?? this.url,
@@ -47,6 +50,7 @@ class StyledVideoModel with StyledComponentUnion {
       aspectRatio: aspectRatio ?? this.aspectRatio,
       videoBoxFit: videoBoxFit ?? this.videoBoxFit,
       loop: loop ?? this.loop,
+      hasSeekbar: hasSeekbar ?? this.hasSeekbar,
     );
   }
 
@@ -60,6 +64,7 @@ class StyledVideoModel with StyledComponentUnion {
       'volume': volume,
       'width': width,
       'loop': loop,
+      'hasSeekbar': hasSeekbar,
       'icons': icons?.map((e) => e.toMap()),
     };
   }
@@ -81,6 +86,7 @@ class StyledVideoModel with StyledComponentUnion {
           : double.tryParse(map['volume'].toString()) ?? 0,
       width: map['width'] ?? 1,
       loop: map['loop'] ?? false,
+      hasSeekbar: map['hasSeekbar'] ?? false,
       icons: map['icons'] == null
           ? null
           : (map['icons'] as List<dynamic>)
@@ -91,12 +97,12 @@ class StyledVideoModel with StyledComponentUnion {
 }
 
 class StyledVideoIconModel {
-  String? activeIconUrl;
-  String? inactiveIconUrl;
-  Alignment? iconPosition;
-  V2ClickAction? clickAction;
-  bool isActive;
-  int index;
+  final String? activeIconUrl;
+  final String? inactiveIconUrl;
+  final Alignment? iconPosition;
+  final V2ClickAction? clickAction;
+  final bool isActive;
+  final int index;
 
   StyledVideoIconModel({
     required this.activeIconUrl,

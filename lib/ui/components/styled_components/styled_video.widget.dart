@@ -105,7 +105,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                   builder: (context, value, child) {
                     if (value && videoPlayer != null) {
                       return GenericNetworkImage(
-                          widget.styledVideoData.thumbnail);
+                        widget.styledVideoData.thumbnail,
+                      );
                     }
                     return videoPlayer!;
                   },
