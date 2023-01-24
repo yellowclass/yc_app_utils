@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 import 'package:yc_app_utils/ui/text_styles/yc_fonts.dart';
@@ -192,6 +191,9 @@ class TextStyles {
       fontSize: 8,
       color: AppColors.cBODY_TEXT,
     ),
+    TStyle.ZS_000: TextStyle(
+      fontSize: 0,
+    ),
   };
 
   static const Map<TStyle, TextStyle> tabTextStyle = {
@@ -335,6 +337,9 @@ class TextStyles {
       fontFamily: YCFonts.nunitoRegular,
       fontSize: 10,
       color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.ZS_000: TextStyle(
+      fontSize: 0,
     ),
   };
 }
