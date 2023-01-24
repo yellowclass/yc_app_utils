@@ -92,7 +92,7 @@ class StyledVideoModel with StyledComponentUnion {
       width: map['width'] ?? 1,
       loop: map['loop'] ?? false,
       hasSeekbar: map['hasSeekbar'] ?? false,
-      autoPlay: map['autoPlay'] ?? false,
+      autoPlay: map['autoplay'] ?? false,
       icons: map['icons'] == null
           ? null
           : (map['icons'] as List<dynamic>)
