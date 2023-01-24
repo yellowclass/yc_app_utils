@@ -101,8 +101,8 @@ class StyledVideoIconModel {
   final String? inactiveIconUrl;
   final Alignment? iconPosition;
   final V2ClickAction? clickAction;
-  final bool isActive;
   final int index;
+  bool isActive;
 
   StyledVideoIconModel({
     required this.activeIconUrl,
