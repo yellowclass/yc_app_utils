@@ -4,6 +4,7 @@ import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 
 class StyledVideoModel with StyledComponentUnion {
+  final String? key;
   final String url;
   final String thumbnail;
   final List<StyledVideoIconModel>? icons;
@@ -28,9 +29,11 @@ class StyledVideoModel with StyledComponentUnion {
     this.hasSeekbar = false,
     this.videoBoxFit,
     this.icons,
+    this.key,
   });
 
   StyledVideoModel copyWith({
+    String? key,
     String? url,
     String? thumbnail,
     List<StyledVideoIconModel>? icons,
@@ -55,6 +58,7 @@ class StyledVideoModel with StyledComponentUnion {
       loop: loop ?? this.loop,
       hasSeekbar: hasSeekbar ?? this.hasSeekbar,
       autoPlay: autoPlay ?? this.autoPlay,
+      key: key ?? this.key,
     );
   }
 
@@ -70,12 +74,14 @@ class StyledVideoModel with StyledComponentUnion {
       'loop': loop,
       'hasSeekbar': hasSeekbar,
       'autoPlay': autoPlay,
+      'key': key,
       'icons': icons?.map((e) => e.toMap()),
     };
   }
 
   factory StyledVideoModel.fromMap(Map<String, dynamic> map) {
     return StyledVideoModel(
+      key: map['key'],
       url: map['url'] ?? '',
       thumbnail: map['thumbnail'] ?? '',
       videoBoxFit: CommonHelpers.enumFromString(
