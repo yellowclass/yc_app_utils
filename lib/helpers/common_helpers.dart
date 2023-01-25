@@ -103,9 +103,10 @@ class CommonHelpers {
 
   static T? enumFromString<T>(Iterable<T> values, String? value) {
     try {
-      return values.firstWhere(
-        (T type) => type.toString().split(".").last == value,
-      );
+      return values.firstWhere((T type) {
+        final elements = type.toString().split(".");
+        return elements.last.toUpperCase() == value?.toUpperCase();
+      });
     } catch (e) {
       return null;
     }
