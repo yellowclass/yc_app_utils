@@ -77,7 +77,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
         child: Align(
           key: ValueKey(key.toString()),
           alignment: key,
-          child: Wrap(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: value!.map((e) {
               String _activeURL = e.activeIconUrl ?? "";
               String _inActiveURL = e.inactiveIconUrl ?? "";
@@ -102,6 +103,11 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                       : _inActiveURL.isNotEmpty
                           ? _inActiveURL
                           : _activeURL,
+                  placeholder: Container(
+                    width: AppSpacing.xxl,
+                    height: AppSpacing.xxl,
+                    color: AppColors.cBLACK_20,
+                  ),
                 ),
               );
             }).toList(),
