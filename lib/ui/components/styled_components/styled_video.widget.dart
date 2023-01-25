@@ -103,7 +103,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                       : _inActiveURL.isNotEmpty
                           ? _inActiveURL
                           : _activeURL,
-                  placeholder: Container(
+                  placeholder: const SizedBox(
                     width: AppSpacing.m,
                     height: AppSpacing.m,
                   ),
