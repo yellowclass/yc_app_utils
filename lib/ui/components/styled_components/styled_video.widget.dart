@@ -92,7 +92,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                     ? null
                     : () {
                         widget.onClick.call(e);
-                        _buildIcons();
+                        // _buildIcons();
                         setState(() {});
                       },
                 child: GenericNetworkImage(
