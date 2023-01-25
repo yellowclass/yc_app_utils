@@ -104,9 +104,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                           ? _inActiveURL
                           : _activeURL,
                   placeholder: Container(
-                    width: AppSpacing.xxl,
-                    height: AppSpacing.xxl,
-                    color: AppColors.cBLACK_20,
+                    width: AppSpacing.m,
+                    height: AppSpacing.m,
                   ),
                 ),
               );
