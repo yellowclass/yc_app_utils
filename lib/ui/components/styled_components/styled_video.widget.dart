@@ -32,7 +32,6 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
   void initState() {
     super.initState();
     _icons.clear();
-    _overlayIcons.clear();
 
     bool _playInMute = false;
 
@@ -72,9 +71,11 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
   }
 
   void _buildIcons() {
+    _overlayIcons.clear();
     _icons.forEach((key, value) {
       _overlayIcons.add(Positioned.fill(
         child: Align(
+          key: ValueKey(key.toString()),
           alignment: key,
           child: Wrap(
             children: value!.map((e) {
@@ -92,7 +93,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                     ? null
                     : () {
                         widget.onClick.call(e);
-                        // _buildIcons();
+                        _buildIcons();
                         setState(() {});
                       },
                 child: GenericNetworkImage(
