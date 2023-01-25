@@ -75,6 +75,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     _icons.forEach((key, value) {
       _overlayIcons.add(Positioned.fill(
         child: Align(
+          key: ValueKey(key.toString()),
           alignment: key,
           child: Wrap(
             children: value!.map((e) {
