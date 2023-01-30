@@ -32,7 +32,6 @@ class GenericNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool shouldCache = getShouldCache;
     if (url.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -50,7 +49,7 @@ class GenericNetworkImage extends StatelessWidget {
             placeholderBuilder:
                 placeholder != null ? (_) => placeholder! : null,
           )
-        : shouldCache
+        : getShouldCache
             ? CachedNetworkImage(
                 imageUrl: url,
                 width: width,
