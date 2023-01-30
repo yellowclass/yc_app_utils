@@ -32,6 +32,7 @@ class GenericNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool shouldCache = getShouldCache;
     if (url.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -89,6 +90,15 @@ class GenericNetworkImage extends StatelessWidget {
       );
     } else {
       return image;
+    }
+  }
+
+  bool get getShouldCache {
+    final qpm = Uri.parse(url).queryParameters;
+    if (qpm['nc'] != null) {
+      return !(int.tryParse(qpm['nc'].toString()) == 1);
+    } else {
+      return shouldCache;
     }
   }
 
