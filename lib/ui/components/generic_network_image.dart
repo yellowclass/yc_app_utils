@@ -94,8 +94,8 @@ class GenericNetworkImage extends StatelessWidget {
 
   bool get getShouldCache {
     final qpm = Uri.parse(url).queryParameters;
-    if (qpm['nc'] != null) {
-      return !(int.tryParse(qpm['nc'].toString()) == 1);
+    if (qpm.containsKey('nc')) {
+      return qpm['nc'] != "1";
     } else {
       return shouldCache;
     }
