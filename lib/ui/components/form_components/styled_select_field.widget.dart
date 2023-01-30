@@ -10,7 +10,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   final StyledSelectFieldModel selectFieldData;
-  final void Function(String, List<String>?)? onSaved;
+  final void Function(String, dynamic)? onSaved;
 
   List<OptionModel> get selectedValues =>
       selectFieldData.selectDefaultValue ?? [];
@@ -67,7 +67,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
               validations: selectFieldData.validation,
             ),
             onSaved: (value) {
-              List<String> data = value?.value != null ? [value!.value] : [];
+              String? data = value?.value != null ? value!.value : null;
               onSaved?.call(selectFieldData.name, data);
             },
           )
