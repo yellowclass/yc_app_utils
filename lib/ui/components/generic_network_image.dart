@@ -49,7 +49,7 @@ class GenericNetworkImage extends StatelessWidget {
             placeholderBuilder:
                 placeholder != null ? (_) => placeholder! : null,
           )
-        : shouldCache
+        : getShouldCache
             ? CachedNetworkImage(
                 imageUrl: url,
                 width: width,
@@ -89,6 +89,15 @@ class GenericNetworkImage extends StatelessWidget {
       );
     } else {
       return image;
+    }
+  }
+
+  bool get getShouldCache {
+    final qpm = Uri.parse(url).queryParameters;
+    if (qpm.containsKey('nc')) {
+      return qpm['nc'] != "1";
+    } else {
+      return shouldCache;
     }
   }
 
