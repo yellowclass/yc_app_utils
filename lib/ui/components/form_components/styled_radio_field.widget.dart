@@ -45,6 +45,7 @@ class StyledRadioFieldWidget extends StatelessWidget {
               .toList(),
           decoration: const InputDecoration(
             border: InputBorder.none,
+            contentPadding: EdgeInsets.zero,
           ),
           validator: (value) => CommonHelpers.validateRadioField(
             value: value != null
