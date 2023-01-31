@@ -9,6 +9,7 @@ class StyledSelectFieldModel with FormComponentUnion {
   List<OptionModel> options;
   SelectType selectType;
   bool isSearchable;
+  String? placeholder;
 
   StyledSelectFieldModel({
     this.label,
@@ -19,6 +20,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     required this.options,
     this.selectType = SelectType.SINGLE,
     this.isSearchable = false,
+    this.placeholder,
   });
 
   StyledSelectFieldModel copyWith({
@@ -30,6 +32,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     List<OptionModel>? options,
     SelectType? selectType,
     bool? isSearchable,
+    String? placeholder,
   }) {
     return StyledSelectFieldModel(
       label: label ?? this.label,
@@ -40,6 +43,7 @@ class StyledSelectFieldModel with FormComponentUnion {
       options: options ?? this.options,
       selectType: selectType ?? this.selectType,
       isSearchable: isSearchable ?? this.isSearchable,
+      placeholder: placeholder ?? this.placeholder,
     );
   }
 
@@ -53,6 +57,7 @@ class StyledSelectFieldModel with FormComponentUnion {
       'options': options.map((x) => x.toMap()).toList(),
       'selectType': selectType.name,
       'isSearchable': isSearchable,
+      'placeholder': placeholder,
     };
   }
 
@@ -77,6 +82,7 @@ class StyledSelectFieldModel with FormComponentUnion {
           ) ??
           SelectType.SINGLE,
       isSearchable: map['isSearchable'] ?? false,
+      placeholder: map['placeholder'],
     );
   }
 }
