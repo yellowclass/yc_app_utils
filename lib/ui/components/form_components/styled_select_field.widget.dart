@@ -44,6 +44,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
             items: selectFieldData.options,
             enabled: !selectFieldData.isDisabled,
             dropdownSearchDecoration: InputDecoration(
+              hintText: selectFieldData.placeholder,
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 0,
                 horizontal: AppSpacing.s,
