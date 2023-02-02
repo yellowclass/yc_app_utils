@@ -28,6 +28,7 @@ class ImageViewer extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: Color(0x44000000).withOpacity(0.001),
         iconTheme: const IconThemeData(
           color: AppColors.cBLACK,
         ),
