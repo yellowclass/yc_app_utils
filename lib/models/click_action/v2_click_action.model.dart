@@ -5,22 +5,26 @@ class V2ClickAction {
   SequenceTypeEnum sequenceType;
   List<OneClickAction> actions;
   bool showRippleEffect;
+  bool refreshOrigin;
 
   V2ClickAction({
     required this.sequenceType,
     required this.actions,
     required this.showRippleEffect,
+    this.refreshOrigin = false,
   });
 
   V2ClickAction copyWith({
     SequenceTypeEnum? sequenceType,
     List<OneClickAction>? actions,
     bool? showRippleEffect,
+    bool? refreshOrigin,
   }) {
     return V2ClickAction(
       sequenceType: sequenceType ?? this.sequenceType,
       actions: actions ?? this.actions,
       showRippleEffect: showRippleEffect ?? this.showRippleEffect,
+      refreshOrigin: refreshOrigin ?? this.refreshOrigin,
     );
   }
 
@@ -29,6 +33,7 @@ class V2ClickAction {
       'sequenceType': sequenceType.name,
       'actions': actions.map((x) => x.toMap()).toList(),
       'showRippleEffect': showRippleEffect,
+      'refreshOrigin': refreshOrigin,
     };
   }
 
@@ -41,6 +46,7 @@ class V2ClickAction {
       actions: List<OneClickAction>.from(
           map['actions']?.map((x) => OneClickAction.fromMap(x))),
       showRippleEffect: map['showRippleEffect'] ?? false,
+      refreshOrigin: map['refreshOrigin'] ?? false,
     );
   }
 }
