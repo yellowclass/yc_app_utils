@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
@@ -16,7 +17,7 @@ class StyledVideoWidget extends StatefulWidget {
 
   final StyledVideoModel styledVideoData;
   final Widget Function(ValueNotifier<bool>, bool playInMute) getVideoPlayer;
-  final void Function(StyledVideoIconModel) onClick;
+  final AsyncValueSetter<StyledVideoIconModel> onClick;
 
   @override
   State<StyledVideoWidget> createState() => _StyledVideoWidgetState();
@@ -92,8 +93,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
               return InkWell(
                 onTap: e.clickAction == null
                     ? null
-                    : () {
-                        widget.onClick.call(e);
+                    : () async {
+                        await widget.onClick.call(e);
                         _buildIcons();
                         setState(() {});
                       },
