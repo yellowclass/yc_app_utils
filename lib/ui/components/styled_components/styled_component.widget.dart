@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -22,7 +23,7 @@ class StyledComponentWidget extends StatefulWidget {
   final bool containsForm;
   final InnerClickAction? innerClickAction;
   final Widget Function(ValueNotifier<bool>, bool playInMute)? getPlayer;
-  final void Function(StyledVideoIconModel)? onClick;
+  final AsyncValueSetter<StyledVideoIconModel>? onClick;
 
   @override
   State<StyledComponentWidget> createState() => StyledComponentWidgetState();
