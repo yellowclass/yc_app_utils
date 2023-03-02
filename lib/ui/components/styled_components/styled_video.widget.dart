@@ -16,7 +16,7 @@ class StyledVideoWidget extends StatefulWidget {
 
   final StyledVideoModel styledVideoData;
   final Widget Function(ValueNotifier<bool>, bool playInMute) getVideoPlayer;
-  final void Function(StyledVideoIconModel) onClick;
+  final Future<StyledVideoIconModel> Function(StyledVideoIconModel) onClick;
 
   @override
   State<StyledVideoWidget> createState() => _StyledVideoWidgetState();
@@ -48,8 +48,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
       final _isPlayPause = element.clickAction?.actions.any((ea) {
         return ea.functionType == V2FunctionTypesEnum.PLAY_PAUSE;
       });
-
-      if (_isPlayPause ?? false) {
+      if ((_isPlayPause ?? false) && element.isActive) {
         element.isActive = widget.styledVideoData.autoPlay;
         continue;
       }
@@ -92,8 +91,9 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
               return InkWell(
                 onTap: e.clickAction == null
                     ? null
-                    : () {
-                        widget.onClick.call(e);
+                    : () async {
+                        final updated = await widget.onClick.call(e);
+                        widget.styledVideoData.icons![updated.index] = updated;
                         _buildIcons();
                         setState(() {});
                       },
