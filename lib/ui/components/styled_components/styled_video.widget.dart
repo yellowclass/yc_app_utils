@@ -123,7 +123,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
       return const SizedBox.shrink();
     }
     double _screenWidth = YCMediaQuery.screenWidth!;
-    double _width = _screenWidth * widget.styledVideoData.width;
+    double _width = _screenWidth * (widget.styledVideoData.width / 100);
 
     return ClipRect(
       child: SizedBox(
