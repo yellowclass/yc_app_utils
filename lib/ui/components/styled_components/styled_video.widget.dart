@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
@@ -17,7 +16,7 @@ class StyledVideoWidget extends StatefulWidget {
 
   final StyledVideoModel styledVideoData;
   final Widget Function(ValueNotifier<bool>, bool playInMute) getVideoPlayer;
-  final AsyncValueSetter<StyledVideoIconModel> onClick;
+  final Future<StyledVideoIconModel> Function(StyledVideoIconModel) onClick;
 
   @override
   State<StyledVideoWidget> createState() => _StyledVideoWidgetState();
@@ -49,8 +48,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
       final _isPlayPause = element.clickAction?.actions.any((ea) {
         return ea.functionType == V2FunctionTypesEnum.PLAY_PAUSE;
       });
-
-      if (_isPlayPause ?? false) {
+      if ((_isPlayPause ?? false) && element.isActive) {
         element.isActive = widget.styledVideoData.autoPlay;
         continue;
       }
@@ -94,7 +92,8 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
                 onTap: e.clickAction == null
                     ? null
                     : () async {
-                        await widget.onClick.call(e);
+                        final updated = await widget.onClick.call(e);
+                        widget.styledVideoData.icons![updated.index] = updated;
                         _buildIcons();
                         setState(() {});
                       },

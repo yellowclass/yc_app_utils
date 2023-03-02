@@ -80,6 +80,15 @@ class StyledVideoModel with StyledComponentUnion {
   }
 
   factory StyledVideoModel.fromMap(Map<String, dynamic> map) {
+    List<StyledVideoIconModel>? icons;
+    if (map['icons'] != null) {
+      icons = [];
+      List iconsRaw = map['icons'] as List<dynamic>;
+      for (int i = 0; i < iconsRaw.length; i++) {
+        icons.add(StyledVideoIconModel.fromMap(iconsRaw[i], i));
+      }
+    }
+
     return StyledVideoModel(
       key: map['key'],
       url: map['url'] ?? '',
@@ -99,11 +108,7 @@ class StyledVideoModel with StyledComponentUnion {
       loop: map['loop'] ?? false,
       hasSeekbar: map['hasSeekbar'] ?? false,
       autoPlay: map['autoplay'] ?? false,
-      icons: map['icons'] == null
-          ? null
-          : (map['icons'] as List<dynamic>)
-              .map((e) => StyledVideoIconModel.fromMap(e))
-              .toList(),
+      icons: icons,
     );
   }
 }
@@ -130,12 +135,16 @@ class StyledVideoIconModel {
     String? inactiveIconUrl,
     Alignment? iconPosition,
     V2ClickAction? clickAction,
+    int? index,
+    bool? isActive,
   }) {
     return StyledVideoIconModel(
+      index: index ?? this.index,
       activeIconUrl: activeIconUrl ?? this.activeIconUrl,
       inactiveIconUrl: inactiveIconUrl ?? this.inactiveIconUrl,
       iconPosition: iconPosition ?? this.iconPosition,
       clickAction: clickAction ?? this.clickAction,
+      isActive: isActive ?? this.isActive,
     );
   }
 
@@ -145,11 +154,14 @@ class StyledVideoIconModel {
       'inactiveIconUrl': inactiveIconUrl,
       'iconPosition': iconPosition?.toString(),
       'clickAction': clickAction?.toMap(),
+      'index': index,
+      'isActive': isActive
     };
   }
 
-  factory StyledVideoIconModel.fromMap(Map<String, dynamic> map) {
+  factory StyledVideoIconModel.fromMap(Map<String, dynamic> map, int index) {
     return StyledVideoIconModel(
+      index: index,
       activeIconUrl: map['activeIconUrl'],
       inactiveIconUrl: map['inactiveIconUrl'],
       iconPosition: CommonHelpers.getAlignmentFromString(

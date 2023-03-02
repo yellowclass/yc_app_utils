@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -23,7 +22,7 @@ class StyledComponentWidget extends StatefulWidget {
   final bool containsForm;
   final InnerClickAction? innerClickAction;
   final Widget Function(ValueNotifier<bool>, bool playInMute)? getPlayer;
-  final AsyncValueSetter<StyledVideoIconModel>? onClick;
+  final Future<StyledVideoIconModel> Function(StyledVideoIconModel)? onClick;
 
   @override
   State<StyledComponentWidget> createState() => StyledComponentWidgetState();
@@ -122,7 +121,7 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
           return StyledVideoWidget(
             styledVideoData: styledVideoDetails,
             getVideoPlayer: widget.getPlayer!,
-            onClick: widget.onClick!,
+            onClick: (videoIcon) => widget.onClick!(videoIcon),
           );
         }
         return const SizedBox.shrink();
