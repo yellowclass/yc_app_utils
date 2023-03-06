@@ -1,5 +1,6 @@
 import 'package:yc_app_utils/helpers/helpers.dart';
 import 'package:yc_app_utils/models/click_action/event_data.model.dart';
+import 'package:yc_app_utils/models/click_action/fb_event_data.model.dart';
 import 'package:yc_app_utils/models/click_action/share_data.model.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 
@@ -11,6 +12,7 @@ class OneClickAction {
   ShareData? shareData;
   String? miscParams;
   V2ClickAction? toastClickAction;
+  FBEventData? fbEventData;
 
   OneClickAction({
     required this.type,
@@ -20,6 +22,7 @@ class OneClickAction {
     this.shareData,
     this.miscParams,
     this.toastClickAction,
+    this.fbEventData,
   });
 
   OneClickAction copyWith({
@@ -30,6 +33,7 @@ class OneClickAction {
     ShareData? shareData,
     String? miscParams,
     V2ClickAction? toastClickAction,
+    FBEventData? fbEventData,
   }) {
     return OneClickAction(
       type: type ?? this.type,
@@ -39,6 +43,7 @@ class OneClickAction {
       shareData: shareData ?? this.shareData,
       miscParams: miscParams ?? this.miscParams,
       toastClickAction: toastClickAction ?? this.toastClickAction,
+      fbEventData: fbEventData ?? this.fbEventData,
     );
   }
 
@@ -51,6 +56,7 @@ class OneClickAction {
       'shareData': shareData?.toMap(),
       'miscParams': miscParams,
       'toastClickAction': toastClickAction?.toMap(),
+      'fbEventData': fbEventData?.toMap(),
     };
   }
 
@@ -72,6 +78,9 @@ class OneClickAction {
       miscParams: map['miscParams'],
       toastClickAction: map['toastClickAction'] != null
           ? V2ClickAction.fromMap(map['toastClickAction'])
+          : null,
+      fbEventData: map['fbEventData'] != null
+          ? FBEventData.fromMap(map['fbEventData'])
           : null,
     );
   }
