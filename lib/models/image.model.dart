@@ -9,6 +9,7 @@ class ImageModel {
   double? height;
   double? width;
   String? cropType;
+  List<int>? padding;
 
   ImageModel({
     this.id,
@@ -21,6 +22,7 @@ class ImageModel {
     this.height,
     this.width,
     this.cropType,
+    this.padding,
   });
 
   ImageModel copyWith({
@@ -32,6 +34,7 @@ class ImageModel {
     String? badgePosition,
     String? fillColor,
     String? cropType,
+    List<int>? padding,
   }) {
     return ImageModel(
       id: id ?? this.id,
@@ -42,6 +45,7 @@ class ImageModel {
       badgePosition: badgePosition ?? this.badgePosition,
       fillColor: fillColor ?? this.fillColor,
       cropType: cropType ?? this.cropType,
+      padding: padding ?? this.padding,
     );
   }
 
@@ -56,6 +60,7 @@ class ImageModel {
       'fillColor': fillColor,
       'height': height,
       'width': width,
+      'padding': padding?.toList(),
     };
   }
 
@@ -71,6 +76,7 @@ class ImageModel {
       height: map['height']?.toDouble() ?? 0.0,
       width: map['width']?.toDouble() ?? 0.0,
       cropType: map['cropType'],
+      padding: map["padding"] != null ? List<int>.from(map["padding"]) : null,
     );
   }
 }
