@@ -4,11 +4,13 @@ class MultiButtonSchema {
   AxisAlignment alignment;
   List<FlexWidgetModel>? buttons;
   List<int>? padding;
+  SectionBackground? background;
 
   MultiButtonSchema({
     required this.alignment,
     this.buttons,
     this.padding,
+    this.background,
   });
 
   factory MultiButtonSchema.fromMap(Map<String, dynamic> map) {
@@ -21,6 +23,9 @@ class MultiButtonSchema {
               map['buttons']?.map((x) => FlexWidgetModel.fromMap(x)))
           : null,
       padding: map["padding"] != null ? List<int>.from(map["padding"]) : null,
+      background: map['background'] != null
+          ? SectionBackground.fromMap(map['background'])
+          : null,
     );
   }
 }
