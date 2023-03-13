@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/click_action/one_click_action.model.dart';
+import 'package:yc_app_utils/models/media_manager_info.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_video.model.dart';
 import 'package:yc_app_utils/ui/components/generic_network_image.dart';
 import 'package:yc_app_utils/ui/media_query/yc_media_query.dart';
@@ -17,8 +18,7 @@ class StyledVideoWidget extends StatefulWidget {
   final StyledVideoModel styledVideoData;
   final Widget Function(
     ValueNotifier<bool>,
-    bool playInMute,
-    bool playInitially,
+    MediaManagerInfo mediInfo,
   ) getVideoPlayer;
   final Future<StyledVideoIconModel> Function(StyledVideoIconModel) onClick;
 
@@ -74,8 +74,12 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
 
     videoPlayer = widget.getVideoPlayer.call(
       showImage,
-      _playInMute,
-      playInitially,
+      MediaManagerInfo(
+        url: widget.styledVideoData.url,
+        autoPlay: widget.styledVideoData.autoPlay && playInitially,
+        looping: widget.styledVideoData.loop,
+        volume: _playInMute ? 0 : widget.styledVideoData.volume,
+      ),
     );
     _buildIcons();
   }

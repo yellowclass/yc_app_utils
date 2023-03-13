@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yc_app_utils/models/media_manager_info.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentWidget extends StatefulWidget {
@@ -23,8 +24,7 @@ class StyledComponentWidget extends StatefulWidget {
   final InnerClickAction? innerClickAction;
   final Widget Function(
     ValueNotifier<bool>,
-    bool playInMute,
-    bool playInitially,
+    MediaManagerInfo mediainfo,
   )? getPlayer;
   final Future<StyledVideoIconModel> Function(StyledVideoIconModel)? onClick;
 
