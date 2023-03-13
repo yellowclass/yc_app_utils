@@ -21,7 +21,11 @@ class StyledComponentWidget extends StatefulWidget {
   final StyledComponentModel styledComponent;
   final bool containsForm;
   final InnerClickAction? innerClickAction;
-  final Widget Function(ValueNotifier<bool>, bool playInMute)? getPlayer;
+  final Widget Function(
+    ValueNotifier<bool>,
+    bool playInMute,
+    bool playInitially,
+  )? getPlayer;
   final Future<StyledVideoIconModel> Function(StyledVideoIconModel)? onClick;
 
   @override
