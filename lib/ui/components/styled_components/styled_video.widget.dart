@@ -15,7 +15,11 @@ class StyledVideoWidget extends StatefulWidget {
   }) : super(key: key);
 
   final StyledVideoModel styledVideoData;
-  final Widget Function(ValueNotifier<bool>, bool playInMute) getVideoPlayer;
+  final Widget Function(
+    ValueNotifier<bool>,
+    bool playInMute,
+    bool playInitially,
+  ) getVideoPlayer;
   final Future<StyledVideoIconModel> Function(StyledVideoIconModel) onClick;
 
   @override
@@ -33,7 +37,7 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     super.initState();
     _icons.clear();
 
-    bool _playInMute = false;
+    bool _playInMute = false, playInitially = false;
 
     for (int x = 0; x < (widget.styledVideoData.icons?.length ?? 0); x++) {
       final element = widget.styledVideoData.icons![x];
@@ -48,8 +52,11 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
       final _isPlayPause = element.clickAction?.actions.any((ea) {
         return ea.functionType == V2FunctionTypesEnum.PLAY_PAUSE;
       });
-      if ((_isPlayPause ?? false) && element.isActive) {
-        element.isActive = widget.styledVideoData.autoPlay;
+      if (_isPlayPause ?? false) {
+        if (element.isActive) {
+          element.isActive = widget.styledVideoData.autoPlay;
+        }
+        playInitially = element.isActive;
         continue;
       }
 
@@ -65,7 +72,11 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
       }
     }
 
-    videoPlayer = widget.getVideoPlayer.call(showImage, _playInMute);
+    videoPlayer = widget.getVideoPlayer.call(
+      showImage,
+      _playInMute,
+      playInitially,
+    );
     _buildIcons();
   }
 
