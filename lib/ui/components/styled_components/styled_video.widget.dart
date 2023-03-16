@@ -136,34 +136,31 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     double _screenWidth = YCMediaQuery.screenWidth!;
     double _width = _screenWidth * (widget.styledVideoData.width / 100);
 
-    return Hero(
-      tag: url,
-      child: ClipRect(
-        child: SizedBox(
-          width: _width,
-          child: Stack(
-            children: [
-              AspectRatio(
-                aspectRatio: widget.styledVideoData.aspectRatio,
-                child: FittedBox(
-                  fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
-                  child: videoPlayer!,
-                  // child: ValueListenableBuilder<bool>(
-                  //   valueListenable: showImage,
-                  //   builder: (context, value, child) {
-                  //     if (value && videoPlayer != null) {
-                  //       return GenericNetworkImage(
-                  //         widget.styledVideoData.thumbnail,
-                  //       );
-                  //     }
-                  //     return videoPlayer!;
-                  //   },
-                  // ),
-                ),
+    return ClipRect(
+      child: SizedBox(
+        width: _width,
+        child: Stack(
+          children: [
+            AspectRatio(
+              aspectRatio: widget.styledVideoData.aspectRatio,
+              child: FittedBox(
+                fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
+                child: videoPlayer!,
+                // child: ValueListenableBuilder<bool>(
+                //   valueListenable: showImage,
+                //   builder: (context, value, child) {
+                //     if (value && videoPlayer != null) {
+                //       return GenericNetworkImage(
+                //         widget.styledVideoData.thumbnail,
+                //       );
+                //     }
+                //     return videoPlayer!;
+                //   },
+                // ),
               ),
-              ..._overlayIcons
-            ],
-          ),
+            ),
+            ..._overlayIcons
+          ],
         ),
       ),
     );
