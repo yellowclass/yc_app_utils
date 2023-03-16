@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class CountryPicker extends StatelessWidget {
@@ -60,8 +59,10 @@ class CountryPicker extends StatelessWidget {
     );
   }
 
-  Future<Null> _selectCountry(
-      BuildContext context, Country defaultCountry) async {
+  Future<void> _selectCountry(
+    BuildContext context,
+    Country defaultCountry,
+  ) async {
     final Country? picked = await showCountryPicker(
       context: context,
       defaultCountry: defaultCountry,

@@ -16,10 +16,7 @@ class StyledVideoWidget extends StatefulWidget {
   }) : super(key: key);
 
   final StyledVideoModel styledVideoData;
-  final Widget Function(
-    ValueNotifier<bool>,
-    MediaManagerInfo mediInfo,
-  ) getVideoPlayer;
+  final Widget Function(MediaManagerInfo mediInfo) getVideoPlayer;
   final Future<StyledVideoIconModel> Function(StyledVideoIconModel) onClick;
 
   @override
@@ -27,7 +24,7 @@ class StyledVideoWidget extends StatefulWidget {
 }
 
 class _StyledVideoWidgetState extends State<StyledVideoWidget> {
-  final ValueNotifier<bool> showImage = ValueNotifier<bool>(true);
+  // final ValueNotifier<bool> showImage = ValueNotifier<bool>(true);
   Widget? videoPlayer;
   final _icons = <Alignment, List<StyledVideoIconModel>?>{};
   final List<Positioned> _overlayIcons = [];
@@ -73,7 +70,6 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     }
 
     videoPlayer = widget.getVideoPlayer.call(
-      showImage,
       MediaManagerInfo(
         url: widget.styledVideoData.url,
         autoPlay: widget.styledVideoData.autoPlay && playInitially,
@@ -140,30 +136,34 @@ class _StyledVideoWidgetState extends State<StyledVideoWidget> {
     double _screenWidth = YCMediaQuery.screenWidth!;
     double _width = _screenWidth * (widget.styledVideoData.width / 100);
 
-    return ClipRect(
-      child: SizedBox(
-        width: _width,
-        child: Stack(
-          children: [
-            AspectRatio(
-              aspectRatio: widget.styledVideoData.aspectRatio,
-              child: FittedBox(
-                fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
-                child: ValueListenableBuilder<bool>(
-                  valueListenable: showImage,
-                  builder: (context, value, child) {
-                    if (value && videoPlayer != null) {
-                      return GenericNetworkImage(
-                        widget.styledVideoData.thumbnail,
-                      );
-                    }
-                    return videoPlayer!;
-                  },
+    return Hero(
+      tag: url,
+      child: ClipRect(
+        child: SizedBox(
+          width: _width,
+          child: Stack(
+            children: [
+              AspectRatio(
+                aspectRatio: widget.styledVideoData.aspectRatio,
+                child: FittedBox(
+                  fit: widget.styledVideoData.videoBoxFit ?? BoxFit.contain,
+                  child: videoPlayer!,
+                  // child: ValueListenableBuilder<bool>(
+                  //   valueListenable: showImage,
+                  //   builder: (context, value, child) {
+                  //     if (value && videoPlayer != null) {
+                  //       return GenericNetworkImage(
+                  //         widget.styledVideoData.thumbnail,
+                  //       );
+                  //     }
+                  //     return videoPlayer!;
+                  //   },
+                  // ),
                 ),
               ),
-            ),
-            ..._overlayIcons
-          ],
+              ..._overlayIcons
+            ],
+          ),
         ),
       ),
     );

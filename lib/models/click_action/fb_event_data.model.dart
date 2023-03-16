@@ -21,8 +21,8 @@ class FBEventData {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'parameters': this.parameters,
+      'name': name,
+      'parameters': parameters,
     };
   }
 
