@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:yc_app_utils/models/audio_overlay_config.dart';
 
 class MediaManagerInfo {
   String url;
@@ -10,6 +11,7 @@ class MediaManagerInfo {
   MediaDataSource source;
   double playbackSpeed = 0;
   double volume = 1;
+  AudioOverlayConfig? audioOverlayConfig;
 
   MediaManagerInfo({
     required this.url,
@@ -21,6 +23,7 @@ class MediaManagerInfo {
     this.playbackSpeed = 1.0,
     this.volume = 1,
     this.source = MediaDataSource.network,
+    this.audioOverlayConfig,
   });
 
   MediaManagerInfo.asset({
@@ -32,6 +35,7 @@ class MediaManagerInfo {
     this.playbackSpeed = 1.0,
     this.volume = 1.0,
     this.source = MediaDataSource.asset,
+    this.audioOverlayConfig,
   });
 }
 
