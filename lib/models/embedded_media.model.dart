@@ -13,23 +13,26 @@ class EmbeddedMediaModel {
   MediaTypeEnum type;
   String url;
   V2ClickAction? v2ClickAction;
+  double? aspectRatio;
 
   EmbeddedMediaModel({
     required this.type,
     required this.url,
     this.v2ClickAction,
+    this.aspectRatio,
   });
 
   EmbeddedMediaModel copyWith({
     MediaTypeEnum? type,
     String? url,
     V2ClickAction? v2ClickAction,
+    double? aspectRatio,
   }) {
     return EmbeddedMediaModel(
       type: type ?? this.type,
       url: url ?? this.url,
-     v2ClickAction:v2ClickAction?? this.v2ClickAction,
-
+      v2ClickAction: v2ClickAction ?? this.v2ClickAction,
+      aspectRatio: aspectRatio ?? this.aspectRatio,
     );
   }
 
@@ -37,7 +40,8 @@ class EmbeddedMediaModel {
     return {
       'type': type.name,
       'url': url,
-      'v2ClickAction':v2ClickAction
+      'v2ClickAction': v2ClickAction,
+      'aspectRatio': aspectRatio
     };
   }
 
@@ -46,6 +50,7 @@ class EmbeddedMediaModel {
       type: CommonHelpers.enumFromString(MediaTypeEnum.values, map['type'])!,
       url: map['url'],
       v2ClickAction: map['v2ClickAction'],
+      aspectRatio: map['aspectRatio'],
     );
   }
 }
