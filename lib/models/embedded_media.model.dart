@@ -14,12 +14,14 @@ class EmbeddedMediaModel {
   String url;
   V2ClickAction? v2ClickAction;
   double? aspectRatio;
+  bool isLooping;
 
   EmbeddedMediaModel({
     required this.type,
     required this.url,
     this.v2ClickAction,
     this.aspectRatio,
+    this.isLooping = false,
   });
 
   EmbeddedMediaModel copyWith({
@@ -27,12 +29,14 @@ class EmbeddedMediaModel {
     String? url,
     V2ClickAction? v2ClickAction,
     double? aspectRatio,
+    bool? isLooping,
   }) {
     return EmbeddedMediaModel(
       type: type ?? this.type,
       url: url ?? this.url,
       v2ClickAction: v2ClickAction ?? this.v2ClickAction,
       aspectRatio: aspectRatio ?? this.aspectRatio,
+      isLooping: isLooping ?? this.isLooping,
     );
   }
 
@@ -41,7 +45,8 @@ class EmbeddedMediaModel {
       'type': type.name,
       'url': url,
       'v2ClickAction': v2ClickAction,
-      'aspectRatio': aspectRatio
+      'aspectRatio': aspectRatio,
+      'isLooping': isLooping,
     };
   }
 
@@ -51,6 +56,7 @@ class EmbeddedMediaModel {
       url: map['url'],
       v2ClickAction: map['v2ClickAction'],
       aspectRatio: map['aspectRatio'],
+      isLooping: map['isLooping'] ?? false,
     );
   }
 }
