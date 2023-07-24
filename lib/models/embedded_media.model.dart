@@ -15,6 +15,7 @@ class EmbeddedMediaModel {
   V2ClickAction? v2ClickAction;
   double? aspectRatio;
   bool isLooping;
+  String? thumbUrl;
 
   EmbeddedMediaModel({
     required this.type,
@@ -22,6 +23,7 @@ class EmbeddedMediaModel {
     this.v2ClickAction,
     this.aspectRatio,
     this.isLooping = false,
+    this.thumbUrl,
   });
 
   EmbeddedMediaModel copyWith({
@@ -30,6 +32,7 @@ class EmbeddedMediaModel {
     V2ClickAction? v2ClickAction,
     double? aspectRatio,
     bool? isLooping,
+    String? thumbUrl,
   }) {
     return EmbeddedMediaModel(
       type: type ?? this.type,
@@ -37,6 +40,7 @@ class EmbeddedMediaModel {
       v2ClickAction: v2ClickAction ?? this.v2ClickAction,
       aspectRatio: aspectRatio ?? this.aspectRatio,
       isLooping: isLooping ?? this.isLooping,
+      thumbUrl: thumbUrl ?? this.thumbUrl,
     );
   }
 
@@ -47,6 +51,7 @@ class EmbeddedMediaModel {
       'v2ClickAction': v2ClickAction,
       'aspectRatio': aspectRatio,
       'isLooping': isLooping,
+      'thumbUrl': thumbUrl,
     };
   }
 
@@ -57,6 +62,7 @@ class EmbeddedMediaModel {
       v2ClickAction: map['v2ClickAction'],
       aspectRatio: map['aspectRatio'],
       isLooping: map['isLooping'] ?? false,
+      thumbUrl: map['thumbUrl'],
     );
   }
 }
