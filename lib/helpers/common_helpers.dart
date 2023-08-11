@@ -802,4 +802,16 @@ class CommonHelpers {
       return null;
     }
   }
+
+  static V2StyledTextWidget getV2StyledTextWidgetFromTextStyle({
+    required String text,
+    required V2TextStyle textStyle,
+  }) {
+    return V2StyledTextWidget(
+      styledText: V2StyledTextModel.fromTextStyle(
+        text: text,
+        textStyle: textStyle,
+      ),
+    );
+  }
 }
