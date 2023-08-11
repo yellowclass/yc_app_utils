@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
+import 'package:yc_app_utils/models/v2_text_style.model.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
 class V2StyledTextModel with StyledComponentUnion {
@@ -133,5 +134,27 @@ class V2StyledTextModel with StyledComponentUnion {
         underline: map['underline'] ?? false,
         textDecorationStyle: CommonHelpers.getTextDecorationStyleFromString(
             map["textDecorationStyle"]));
+  }
+
+  factory V2StyledTextModel.fromTextStyle({
+    required String text,
+    required V2TextStyle textStyle,
+  }) {
+    return V2StyledTextModel(
+      text: text,
+      borderColor: textStyle.borderColor,
+      background: textStyle.background,
+      borderRadius: textStyle.borderRadius,
+      italic: textStyle.italic,
+      letterSpacing: textStyle.letterSpacing,
+      maxLines: textStyle.maxLines,
+      padding: textStyle.padding,
+      strikeThrough: textStyle.strikeThrough,
+      textAlign: textStyle.textAlign,
+      textColor: textStyle.textColor,
+      textOverflow: textStyle.textOverflow,
+      tStyle: textStyle.tStyle,
+      underline: textStyle.underline,
+    );
   }
 }
