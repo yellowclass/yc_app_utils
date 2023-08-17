@@ -13,7 +13,7 @@ class GenericNetworkImage extends StatelessWidget {
     this.color,
     this.shouldCache = true,
     this.errorWidget,
-    this.placeholder,
+    this.placeholder = const SizedBox.shrink(),
     this.loadingBuilder,
     Key? key,
   }) : super(key: key);
@@ -27,7 +27,7 @@ class GenericNetworkImage extends StatelessWidget {
   final Color? color;
   final bool shouldCache;
   final Widget? errorWidget;
-  final Widget? placeholder;
+  final Widget placeholder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
 
   @override
@@ -46,8 +46,7 @@ class GenericNetworkImage extends StatelessWidget {
             fit: fit,
             alignment: alignment,
             color: color,
-            placeholderBuilder:
-                placeholder != null ? (_) => placeholder! : null,
+            placeholderBuilder: (_) => placeholder,
           )
         : getShouldCache
             ? CachedNetworkImage(
@@ -60,8 +59,7 @@ class GenericNetworkImage extends StatelessWidget {
                   "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
                 },
                 color: color,
-                placeholder:
-                    placeholder != null ? (_, __) => placeholder! : null,
+                placeholder: (_, __) => placeholder,
                 errorWidget:
                     errorWidget != null ? (_, __, ___) => errorWidget! : null,
               )
