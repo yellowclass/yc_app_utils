@@ -10,14 +10,29 @@ class Country {
   });
 
   @override
-  bool operator ==(o) =>
-      o is Country && o.label == label && o.value == value;
+  bool operator ==(o) => o is Country && o.label == label && o.value == value;
 
   int get hashCode {
     int hash = 7;
     hash = 31 * hash + label.hashCode;
     hash = 31 * hash + value.hashCode;
     return hash;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'label': this.label,
+      'value': this.value,
+      'code': this.code,
+    };
+  }
+
+  factory Country.fromMap(Map<String, dynamic> map) {
+    return Country(
+      label: map['label'],
+      value: map['value'],
+      code: map['code'],
+    );
   }
 
   /// All the countries in the picker list
@@ -50,7 +65,8 @@ class Country {
     const Country(label: "Bosnia and Herzegovina", value: "+387", code: "BA"),
     const Country(label: "Botswana", value: "+267", code: "BW"),
     const Country(label: "Brazil", value: "+55", code: "BR"),
-    const Country(label: "British Indian Ocean Territory", value: "+246", code: "IO"),
+    const Country(
+        label: "British Indian Ocean Territory", value: "+246", code: "IO"),
     const Country(label: "Bulgaria", value: "+359", code: "BG"),
     const Country(label: "Burkina Faso", value: "+226", code: "BF"),
     const Country(label: "Burundi", value: "+257", code: "BI"),
@@ -88,7 +104,8 @@ class Country {
     const Country(label: "Eritrea", value: "+291", code: "ER"),
     const Country(label: "Estonia", value: "+372", code: "EE"),
     const Country(label: "Ethiopia", value: "+251", code: "ET"),
-    const Country(label: "Falkland Islands (Malvinas)", value: "+500", code: "FK"),
+    const Country(
+        label: "Falkland Islands (Malvinas)", value: "+500", code: "FK"),
     const Country(label: "Faroe Islands", value: "+298", code: "FO"),
     const Country(label: "Fiji", value: "+679", code: "FJ"),
     const Country(label: "Finland", value: "+358", code: "FI"),
@@ -128,7 +145,8 @@ class Country {
     const Country(label: "Kenya", value: "+254", code: "KE"),
     const Country(label: "Kiribati", value: "+686", code: "KI"),
     const Country(label: "North Korea", value: "+850", code: "KP"),
-    const Country(label: "Korea, Republic of South Korea", value: "+82", code: "KR"),
+    const Country(
+        label: "Korea, Republic of South Korea", value: "+82", code: "KR"),
     const Country(label: "Kosovo", value: "+383", code: "XK"),
     const Country(label: "Kuwait", value: "+965", code: "KW"),
     const Country(label: "Kyrgyzstan", value: "+996", code: "KG"),
@@ -178,7 +196,8 @@ class Country {
     const Country(label: "Nigeria", value: "+234", code: "NG"),
     const Country(label: "Niue", value: "+683", code: "NU"),
     const Country(label: "Norfolk Island", value: "+672", code: "NF"),
-    const Country(label: "Northern Mariana Islands", value: "+1670", code: "MP"),
+    const Country(
+        label: "Northern Mariana Islands", value: "+1670", code: "MP"),
     const Country(label: "Norway", value: "+47", code: "NO"),
     const Country(label: "Oman", value: "+968", code: "OM"),
     const Country(label: "Pakistan", value: "+92", code: "PK"),
@@ -204,7 +223,8 @@ class Country {
     ),
     const Country(label: "Saint Kitts and Nevis", value: "+1869", code: "KN"),
     const Country(label: "Saint Lucia", value: "+1758", code: "LC"),
-    const Country(label: "Saint Pierre and Miquelon", value: "+508", code: "PM"),
+    const Country(
+        label: "Saint Pierre and Miquelon", value: "+508", code: "PM"),
     const Country(
       label: "Saint Vincent and the Grenadines",
       value: "+1784",
@@ -249,7 +269,8 @@ class Country {
     const Country(label: "Tunisia", value: "+216", code: "TN"),
     const Country(label: "Turkey", value: "+90", code: "TR"),
     const Country(label: "Turkmenistan", value: "+993", code: "TM"),
-    const Country(label: "Turks and Caicos Islands", value: "+1649", code: "TC"),
+    const Country(
+        label: "Turks and Caicos Islands", value: "+1649", code: "TC"),
     const Country(label: "Tuvalu", value: "+688", code: "TV"),
     const Country(label: "Uganda", value: "+256", code: "UG"),
     const Country(label: "Ukraine", value: "+380", code: "UA"),
