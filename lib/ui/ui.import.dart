@@ -39,3 +39,6 @@ export 'package:yc_app_utils/ui/styleguide/spacing.dart';
 export 'package:yc_app_utils/ui/text_styles/text_styles.dart';
 export 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 export 'package:yc_app_utils/ui/text_styles/yc_fonts.dart';
+
+// misc
+export 'package:yc_app_utils/ui/components/country_picker/country.dart';
