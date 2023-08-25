@@ -11,6 +11,7 @@ class CountryPicker extends StatelessWidget {
     this.dialingCodeTextStyle,
     this.showName = true,
     this.showDialingCode = false,
+    this.countries,
     Key? key,
   }) : super(key: key);
 
@@ -20,6 +21,7 @@ class CountryPicker extends StatelessWidget {
   final bool showName;
   final TextStyle? nameTextStyle;
   final TextStyle? dialingCodeTextStyle;
+  final List<Country>? countries;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class CountryPicker extends StatelessWidget {
     final Country? picked = await showCountryPicker(
       context: context,
       defaultCountry: defaultCountry,
+      countries: countries,
     );
 
     if (picked != null && picked != selectedCountry) {
@@ -79,6 +82,7 @@ class CountryPicker extends StatelessWidget {
 Future<Country?> showCountryPicker({
   required BuildContext context,
   required Country defaultCountry,
+  List<Country>? countries,
 }) async {
   assert(Country.findByCountryCode(defaultCountry.value) != null);
 
@@ -87,6 +91,7 @@ Future<Country?> showCountryPicker({
     useRootNavigator: true,
     builder: (BuildContext context) => _CountryPickerDialog(
       defaultCountry: defaultCountry,
+      countries: countries,
     ),
   );
 }
@@ -95,7 +100,9 @@ class _CountryPickerDialog extends StatefulWidget {
   const _CountryPickerDialog({
     Key? key,
     Country? defaultCountry,
+    this.countries,
   }) : super(key: key);
+  final List<Country>? countries;
 
   @override
   State<StatefulWidget> createState() => _CountryPickerDialogState();
@@ -109,6 +116,9 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
   @override
   void initState() {
     super.initState();
+    if (widget.countries != null && widget.countries!.length > 0) {
+      countries = widget.countries!;
+    }
     controller.addListener(() {
       setState(() {
         filter = controller.text;
