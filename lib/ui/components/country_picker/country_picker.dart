@@ -84,8 +84,6 @@ Future<Country?> showCountryPicker({
   required Country defaultCountry,
   List<Country>? countries,
 }) async {
-  assert(Country.findByCountryCode(defaultCountry.value) != null);
-
   return await showDialog<Country>(
     context: context,
     useRootNavigator: true,
@@ -139,7 +137,10 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
             height: YCMediaQuery.getScreenHeight(divideBy: 2),
             child: child,
           )
-        : child;
+        : SizedBox(
+            height: YCMediaQuery.getScreenHeight(divideBy: 2),
+            child: child,
+          );
   }
 
   @override
@@ -148,93 +149,97 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      child: tabletContainer(
-        child: Column(
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Search country',
-                prefixIcon: const Icon(
-                  Icons.search,
-                ),
-                suffixIcon: filter == null || filter == ""
-                    ? InkWell(
-                        child: const Icon(
-                          Icons.clear,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      )
-                    : InkWell(
-                        child: const Icon(
-                          Icons.clear,
-                        ),
-                        onTap: () {
-                          controller.clear();
-                        },
-                      ),
-              ),
-              controller: controller,
-            ),
-            Expanded(
-              child: Scrollbar(
-                child: ListView.builder(
-                  itemCount: countries.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    Country country = countries[index];
-                    if (filter == null ||
-                        filter == "" ||
-                        country.label
-                            .toLowerCase()
-                            .contains(filter!.toLowerCase())) {
-                      return Container(
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(color: AppColors.cBLACK_10),
+      child: ClipRRect(
+        clipBehavior: Clip.hardEdge,
+        borderRadius: BorderRadius.circular(12),
+        child: tabletContainer(
+          child: Column(
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search country',
+                  prefixIcon: const Icon(
+                    Icons.search,
+                  ),
+                  suffixIcon: filter == null || filter == ""
+                      ? InkWell(
+                          child: const Icon(
+                            Icons.clear,
                           ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        )
+                      : InkWell(
+                          child: const Icon(
+                            Icons.clear,
+                          ),
+                          onTap: () {
+                            controller.clear();
+                          },
                         ),
-                        child: InkWell(
-                          splashColor: AppColors.cGREEN_06,
-                          highlightColor: AppColors.cGREEN_06,
-                          child: ListTile(
-                            hoverColor: AppColors.cGREEN_50,
-                            trailing: Text(
-                              country.value,
-                              style: CommonHelpers.getTextStyle(
-                                TStyle.B1_600,
-                              ),
+                ),
+                controller: controller,
+              ),
+              Expanded(
+                child: Scrollbar(
+                  child: ListView.builder(
+                    itemCount: countries.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Country country = countries[index];
+                      if (filter == null ||
+                          filter == "" ||
+                          country.label
+                              .toLowerCase()
+                              .contains(filter!.toLowerCase())) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: AppColors.cBLACK_10),
                             ),
-                            title: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(left: 8.0),
-                                    child: Text(
-                                      country.label,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: CommonHelpers.getTextStyle(
-                                        TStyle.B1_600,
+                          ),
+                          child: InkWell(
+                            splashColor: AppColors.cGREEN_06,
+                            highlightColor: AppColors.cGREEN_06,
+                            child: ListTile(
+                              hoverColor: AppColors.cGREEN_50,
+                              trailing: Text(
+                                country.value,
+                                style: CommonHelpers.getTextStyle(
+                                  TStyle.B1_600,
+                                ),
+                              ),
+                              title: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        country.label,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: CommonHelpers.getTextStyle(
+                                          TStyle.B1_600,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
+                            onTap: () {
+                              Navigator.pop(context, country);
+                            },
                           ),
-                          onTap: () {
-                            Navigator.pop(context, country);
-                          },
-                        ),
-                      );
-                    }
-                    return Container();
-                  },
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
