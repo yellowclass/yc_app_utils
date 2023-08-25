@@ -31,7 +31,7 @@ class Country {
     return Country(
       label: map['label'],
       value: map['value'],
-      code: map['code'],
+      code: map['code'].toString().toUpperCase(),
     );
   }
 
