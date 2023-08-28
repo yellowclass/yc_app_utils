@@ -117,4 +117,5 @@ enum V2FunctionTypesEnum {
   DELETE_ACCOUNT,
   V2_OPEN_BOTTOM_SHEET,
   PLAY_AUDIO,
+  OPEN_POPUP,
 }
