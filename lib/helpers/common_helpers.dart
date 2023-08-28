@@ -394,6 +394,16 @@ class CommonHelpers {
     }
   }
 
+    static double? getWidthFromDouble(double? width) {
+    if (width == null) {
+      return null;
+    } else if (width >= 0) {
+      return width;
+    } else {
+      return YCMediaQuery.screenWidth! * width!.abs() / 100;
+    }
+  }
+
   static Color v2ColorFromHex(String? hexColor) {
     if (hexColor == null) {
       return AppColors.cTRANSPARENT;
