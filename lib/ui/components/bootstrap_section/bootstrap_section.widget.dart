@@ -127,6 +127,9 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         height: CommonHelpers.getHeightFromDouble(
           widget.bootstrapSectionData.height,
         ),
+        width: CommonHelpers.getWidthFromDouble(
+          widget.bootstrapSectionData.width,
+        ),
         padding: CommonHelpers.getPaddingFromList(
           widget.bootstrapSectionData.padding,
         ),

@@ -10,6 +10,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
   List<int>? borderRadius;
   List<int>? padding;
   double? height;
+  double? width;
 
   BootstrapSectionModel({
     required this.key,
@@ -21,6 +22,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
     this.borderRadius,
     this.padding,
     this.height,
+    this.width,
   });
 
   Map<String, dynamic> toMap() {
@@ -50,6 +52,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
       'borderRadius': borderRadius,
       'padding': padding,
       'height': height,
+      'width': width,
     };
   }
 
@@ -96,6 +99,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       height: map['height']?.toDouble(),
+      width: map['width']?.toDouble(),
     );
   }
 }
