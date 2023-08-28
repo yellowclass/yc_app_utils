@@ -394,10 +394,11 @@ class CommonHelpers {
     }
   }
 
-    static double? getWidthFromDouble(double? width) {
+  static double? getWidthFromDouble(double? width) {
     if (width == null) {
       return null;
-    } else if (width >= 0) {
+    }
+    if (width >= 0) {
       return width;
     } else {
       return YCMediaQuery.screenWidth! * width!.abs() / 100;
