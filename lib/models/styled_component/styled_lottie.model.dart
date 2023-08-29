@@ -6,6 +6,7 @@ class StyledLottieModel with StyledComponentUnion {
   String url;
   int? width;
   int? height;
+
   StyledLottieModel({
     required this.url,
     this.width,
@@ -23,8 +24,10 @@ class StyledLottieModel with StyledComponentUnion {
   factory StyledLottieModel.fromMap(Map<String, dynamic> map) {
     return StyledLottieModel(
       url: map['url'] as String,
-      width: map['width'] != null ? map['width'] as int : null,
-      height: map['height'] != null ? map['height'] as int : null,
+      width:
+          map['width'] != null ? int.tryParse(map['width'].toString()) : null,
+      height:
+          map['height'] != null ? int.tryParse(map['height'].toString()) : null,
     );
   }
 }

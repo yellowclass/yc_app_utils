@@ -4,7 +4,11 @@ import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
 
 class StyledLottieWidget extends StatelessWidget {
   final StyledLottieModel styledLottieModel;
-  const StyledLottieWidget({required this.styledLottieModel, super.key});
+
+  const StyledLottieWidget({
+    required this.styledLottieModel,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
