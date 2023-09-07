@@ -23,6 +23,7 @@ class V2StyledTextModel with StyledComponentUnion {
   List<int>? padding;
   bool underline;
   TextDecorationStyle? textDecorationStyle;
+  String? fontFamily;
 
   V2StyledTextModel({
     required this.text,
@@ -40,6 +41,7 @@ class V2StyledTextModel with StyledComponentUnion {
     this.padding,
     this.underline = false,
     this.textDecorationStyle,
+    this.fontFamily,
   });
 
   V2StyledTextModel copyWith({
@@ -58,6 +60,7 @@ class V2StyledTextModel with StyledComponentUnion {
     List<int>? padding,
     bool? underline,
     TextDecorationStyle? textDecorationStyle,
+    String? fontFamily,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -75,6 +78,7 @@ class V2StyledTextModel with StyledComponentUnion {
       padding: padding ?? this.padding,
       underline: underline ?? this.underline,
       textDecorationStyle: textDecorationStyle ?? this.textDecorationStyle,
+      fontFamily: fontFamily ?? this.fontFamily,
     );
   }
 
@@ -95,45 +99,49 @@ class V2StyledTextModel with StyledComponentUnion {
       'padding': padding,
       'underline': underline,
       'textDecorationStyle': textDecorationStyle?.name,
+      'fontFamily': fontFamily,
     };
   }
 
   factory V2StyledTextModel.fromMap(Map<String, dynamic> map) {
     return V2StyledTextModel(
-        text: map['text'] ?? '',
-        textColor: map['textColor'] ?? _defaultTextColor,
-        tStyle: map['tStyle'] != null
-            ? CommonHelpers.enumFromString(
-                TStyle.values,
-                map['tStyle'],
-              )
-            : null,
-        italic: map['italic'],
-        letterSpacing: map['letterSpacing'],
-        strikeThrough: map['strikeThrough'] ?? false,
-        textAlign: map['textAlign'] != null
-            ? CommonHelpers.getTextAlignmentFromString(
-                map['textAlign'],
-              )
-            : null,
-        textOverflow: map['textOverflow'] != null
-            ? CommonHelpers.getTextOverflowFromString(
-                map['textOverflow'],
-              )
-            : null,
-        maxLines: map['maxLines'],
-        background: map['background'] != null
-            ? SectionBackground.fromMap(map['background'])
-            : null,
-        borderColor: map['borderColor'],
-        borderRadius: map['borderRadius'] == null
-            ? <int>[]
-            : List<int>.from(map['borderRadius']),
-        padding:
-            map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
-        underline: map['underline'] ?? false,
-        textDecorationStyle: CommonHelpers.getTextDecorationStyleFromString(
-            map["textDecorationStyle"]));
+      text: map['text'] ?? '',
+      textColor: map['textColor'] ?? _defaultTextColor,
+      tStyle: map['tStyle'] != null
+          ? CommonHelpers.enumFromString(
+              TStyle.values,
+              map['tStyle'],
+            )
+          : null,
+      italic: map['italic'],
+      letterSpacing: map['letterSpacing'],
+      strikeThrough: map['strikeThrough'] ?? false,
+      textAlign: map['textAlign'] != null
+          ? CommonHelpers.getTextAlignmentFromString(
+              map['textAlign'],
+            )
+          : null,
+      textOverflow: map['textOverflow'] != null
+          ? CommonHelpers.getTextOverflowFromString(
+              map['textOverflow'],
+            )
+          : null,
+      maxLines: map['maxLines'],
+      background: map['background'] != null
+          ? SectionBackground.fromMap(map['background'])
+          : null,
+      borderColor: map['borderColor'],
+      borderRadius: map['borderRadius'] == null
+          ? <int>[]
+          : List<int>.from(map['borderRadius']),
+      padding:
+          map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
+      underline: map['underline'] ?? false,
+      textDecorationStyle: CommonHelpers.getTextDecorationStyleFromString(
+        map["textDecorationStyle"],
+      ),
+      fontFamily: map['fontFamily'],
+    );
   }
 
   factory V2StyledTextModel.fromTextStyle({
