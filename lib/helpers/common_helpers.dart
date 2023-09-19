@@ -825,4 +825,22 @@ class CommonHelpers {
       ),
     );
   }
+
+  static Alignment getAlignmentFromList(List<int>? alignmentValues) {
+    if (alignmentValues == null) {
+      return Alignment.centerLeft;
+    }
+    switch (alignmentValues.length) {
+      case 0:
+        return Alignment.centerLeft;
+      case 1:
+        return Alignment(
+            alignmentValues.first.toDouble(), alignmentValues.first.toDouble());
+      default:
+        return Alignment(
+          alignmentValues[1].toDouble(),
+          alignmentValues[0].toDouble(),
+        );
+    }
+  }
 }
