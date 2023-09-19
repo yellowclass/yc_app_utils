@@ -401,7 +401,7 @@ class CommonHelpers {
     if (width >= 0) {
       return width;
     } else {
-      return YCMediaQuery.screenWidth! * width!.abs() / 100;
+      return YCMediaQuery.screenWidth! * width.abs() / 100;
     }
   }
 
@@ -826,7 +826,7 @@ class CommonHelpers {
     );
   }
 
-  static Alignment getAlignmentFromList(List<int>? alignmentValues) {
+  static Alignment getAlignmentFromList(List<String>? alignmentValues) {
     if (alignmentValues == null) {
       return Alignment.centerLeft;
     }
@@ -835,11 +835,13 @@ class CommonHelpers {
         return Alignment.centerLeft;
       case 1:
         return Alignment(
-            alignmentValues.first.toDouble(), alignmentValues.first.toDouble());
+          double.tryParse(alignmentValues.first) ?? 0,
+          double.tryParse(alignmentValues.first) ?? 0,
+        );
       default:
         return Alignment(
-          alignmentValues[1].toDouble(),
-          alignmentValues[0].toDouble(),
+          double.tryParse(alignmentValues[0]) ?? 0,
+          double.tryParse(alignmentValues[1]) ?? 0,
         );
     }
   }
