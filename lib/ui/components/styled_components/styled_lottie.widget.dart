@@ -15,7 +15,10 @@ class StyledLottieWidget extends StatelessWidget {
     return SizedBox(
       width: styledLottieModel.width?.toDouble(),
       height: styledLottieModel.height?.toDouble(),
-      child: Lottie.network(styledLottieModel.url),
+      child: Lottie.network(
+        styledLottieModel.url,
+        fit: styledLottieModel.lottieFit,
+      ),
     );
   }
 }
