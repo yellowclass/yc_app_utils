@@ -12,13 +12,11 @@ class StyledLottieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Lottie.network(
       width: styledLottieModel.width?.toDouble(),
       height: styledLottieModel.height?.toDouble(),
-      child: Lottie.network(
-        styledLottieModel.url,
-        fit: styledLottieModel.lottieFit,
-      ),
+      styledLottieModel.url,
+      fit: styledLottieModel.lottieFit,
     );
   }
 }
