@@ -211,6 +211,7 @@ class AppColors {
   static const Color cTANGERINE_06 = Color(0xFFFFE3CC);
 
   static const Color cDISABLED_COLOR = Color(0xFFB5B5B5);
+  static const Color cBLUEBERRY = Color(0xFF3A7EF7);
 }
 
 class HexColor extends Color {
