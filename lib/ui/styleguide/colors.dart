@@ -202,6 +202,13 @@ class AppColors {
   static const Color cGAME_TRANSACTION_HEADER_BG = Color(0xFF3260EF);
 
   static const Color cTRANSPARENT = Colors.transparent;
+
+  static const Color cTANGERINE_TEXT = Color(0xFFFF6600);
+  static const Color cTANGERINE_100 = Color(0xFFFF7100);
+  static const Color cTANGERINE_50 = Color(0xFFFF8D33);
+  static const Color cTANGERINE_25 = Color(0xFFFFAA66);
+  static const Color cTANGERINE_15 = Color(0xFFFFC699);
+  static const Color cTANGERINE_06 = Color(0xFFFFE3CC);
 }
 
 class HexColor extends Color {
