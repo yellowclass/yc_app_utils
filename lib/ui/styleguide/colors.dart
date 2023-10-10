@@ -209,6 +209,8 @@ class AppColors {
   static const Color cTANGERINE_25 = Color(0xFFFFAA66);
   static const Color cTANGERINE_15 = Color(0xFFFFC699);
   static const Color cTANGERINE_06 = Color(0xFFFFE3CC);
+
+  static const Color cDISABLED_COLOR = Color(0xFFB5B5B5);
 }
 
 class HexColor extends Color {
