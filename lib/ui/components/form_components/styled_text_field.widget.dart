@@ -5,12 +5,18 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class StyledTextFieldWidget extends StatefulWidget {
   const StyledTextFieldWidget({
     required this.textFieldData,
+    this.showBorder = false,
     this.onSaved,
+    this.textValueNotifier,
+    this.borderRadius,
     Key? key,
   }) : super(key: key);
 
   final StyledInputFieldModel textFieldData;
+  final bool showBorder;
   final void Function(String, String?)? onSaved;
+  final ValueNotifier? textValueNotifier;
+  final double? borderRadius;
 
   @override
   State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
@@ -38,6 +44,8 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
         return null;
     }
   }
+
+  final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +88,12 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
               ),
             Flexible(
               child: TextFormField(
+                controller: _textController,
+                onChanged: (value) {
+                  widget.textValueNotifier != null
+                      ? widget.textValueNotifier!.value = value
+                      : null;
+                },
                 initialValue: widget.textFieldData.inputDefaultValue,
                 enabled: !widget.textFieldData.isDisabled,
                 textAlignVertical: TextAlignVertical.bottom,
@@ -97,6 +111,18 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                     InputFieldEnum.PASSWORD,
                 decoration: InputDecoration(
                   hintText: widget.textFieldData.placeholder,
+                  border: OutlineInputBorder(
+                    borderRadius: widget.borderRadius != null
+                        ? BorderRadius.all(
+                            Radius.circular(widget.borderRadius!))
+                        : BorderRadius.zero,
+                    borderSide: widget.showBorder
+                        ? const BorderSide(
+                            color: Colors.green,
+                            width: 10,
+                          )
+                        : BorderSide.none,
+                  ),
                   hintStyle: const TextStyle(
                     color: AppColors.cBODY_TEXT_75,
                     fontSize: 16,
