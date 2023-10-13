@@ -88,9 +88,9 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
               child: TextFormField(
                 cursorColor: AppColors.cTANGERINE_100,
                 onChanged: (value) {
-                  widget.textValueNotifier != null
-                      ? widget.textValueNotifier!.value = value
-                      : null;
+                  if (widget.textValueNotifier != null) {
+                    widget.textValueNotifier!.value = value;
+                  }
                 },
                 initialValue: widget.textFieldData.inputDefaultValue,
                 enabled: !widget.textFieldData.isDisabled,
