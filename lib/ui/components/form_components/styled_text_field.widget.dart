@@ -88,6 +88,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
               ),
             Flexible(
               child: TextFormField(
+                cursorColor: AppColors.cTANGERINE_100,
                 controller: _textController,
                 onChanged: (value) {
                   widget.textValueNotifier != null
@@ -118,11 +119,18 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                         : BorderRadius.zero,
                     borderSide: widget.showBorder
                         ? const BorderSide(
-                            color: Colors.green,
+                            color: AppColors.cTANGERINE_100,
                             width: 10,
                           )
                         : BorderSide.none,
                   ),
+                  focusedBorder: widget.showBorder
+                      ? const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.cTANGERINE_100,
+                          ),
+                        )
+                      : null,
                   hintStyle: const TextStyle(
                     color: AppColors.cBODY_TEXT_75,
                     fontSize: 16,
