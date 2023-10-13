@@ -5,18 +5,18 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class StyledTextFieldWidget extends StatefulWidget {
   const StyledTextFieldWidget({
     required this.textFieldData,
-    this.showBorder = false,
     this.onSaved,
     this.textValueNotifier,
-    this.borderRadius,
+    this.border,
+    this.focusedBorder,
     Key? key,
   }) : super(key: key);
 
   final StyledInputFieldModel textFieldData;
-  final bool showBorder;
   final void Function(String, String?)? onSaved;
-  final ValueNotifier? textValueNotifier;
-  final double? borderRadius;
+  final ValueNotifier<String>? textValueNotifier;
+  final OutlineInputBorder? border;
+  final OutlineInputBorder? focusedBorder;
 
   @override
   State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
@@ -44,8 +44,6 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
         return null;
     }
   }
-
-  final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +87,6 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
             Flexible(
               child: TextFormField(
                 cursorColor: AppColors.cTANGERINE_100,
-                controller: _textController,
                 onChanged: (value) {
                   widget.textValueNotifier != null
                       ? widget.textValueNotifier!.value = value
@@ -111,26 +108,9 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                 obscureText: widget.textFieldData.inputFieldType ==
                     InputFieldEnum.PASSWORD,
                 decoration: InputDecoration(
+                  border: widget.border,
+                  focusedBorder: widget.focusedBorder,
                   hintText: widget.textFieldData.placeholder,
-                  border: OutlineInputBorder(
-                    borderRadius: widget.borderRadius != null
-                        ? BorderRadius.all(
-                            Radius.circular(widget.borderRadius!))
-                        : BorderRadius.zero,
-                    borderSide: widget.showBorder
-                        ? const BorderSide(
-                            color: AppColors.cTANGERINE_100,
-                            width: 10,
-                          )
-                        : BorderSide.none,
-                  ),
-                  focusedBorder: widget.showBorder
-                      ? const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.cTANGERINE_100,
-                          ),
-                        )
-                      : null,
                   hintStyle: const TextStyle(
                     color: AppColors.cBODY_TEXT_75,
                     fontSize: 16,
