@@ -6,11 +6,17 @@ class StyledTextFieldWidget extends StatefulWidget {
   const StyledTextFieldWidget({
     required this.textFieldData,
     this.onSaved,
+    this.textValueNotifier,
+    this.border,
+    this.focusedBorder,
     Key? key,
   }) : super(key: key);
 
   final StyledInputFieldModel textFieldData;
   final void Function(String, String?)? onSaved;
+  final ValueNotifier<String>? textValueNotifier;
+  final OutlineInputBorder? border;
+  final OutlineInputBorder? focusedBorder;
 
   @override
   State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
@@ -80,6 +86,12 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
               ),
             Flexible(
               child: TextFormField(
+                cursorColor: AppColors.cTANGERINE_100,
+                onChanged: (value) {
+                  if (widget.textValueNotifier != null) {
+                    widget.textValueNotifier!.value = value;
+                  }
+                },
                 initialValue: widget.textFieldData.inputDefaultValue,
                 enabled: !widget.textFieldData.isDisabled,
                 textAlignVertical: TextAlignVertical.bottom,
@@ -96,6 +108,8 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                 obscureText: widget.textFieldData.inputFieldType ==
                     InputFieldEnum.PASSWORD,
                 decoration: InputDecoration(
+                  border: widget.border,
+                  focusedBorder: widget.focusedBorder,
                   hintText: widget.textFieldData.placeholder,
                   hintStyle: const TextStyle(
                     color: AppColors.cBODY_TEXT_75,
