@@ -780,23 +780,6 @@ class CommonHelpers {
     );
   }
 
-  static TextDecorationStyle? getTextDecorationStyleFromString(String? style) {
-    switch (style) {
-      case "SOLID":
-        return TextDecorationStyle.solid;
-      case "DOUBLE":
-        return TextDecorationStyle.double;
-      case "DOTTED":
-        return TextDecorationStyle.dotted;
-      case "DASHED":
-        return TextDecorationStyle.dashed;
-      case "WAVY":
-        return TextDecorationStyle.wavy;
-      default:
-        return null;
-    }
-  }
-
   static T? getValueFromEventData<T>(
     EventData? data, {
     required String key,

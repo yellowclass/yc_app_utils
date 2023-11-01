@@ -86,8 +86,8 @@ class V2StyledTextWidget extends StatelessWidget {
           if (styledText.strikeThrough) TextDecoration.lineThrough,
           if (styledText.underline) TextDecoration.underline,
         ]),
-        decorationStyle: styledText.textDecorationStyle,
         fontFamily: styledText.fontFamily == 'LUCKY_GUY' ? "LuckyGuy" : null,
+        fontSize: styledText.fontSize,
       ),
     );
   }
