@@ -15,6 +15,8 @@ class V2TextStyle {
   List<int>? borderRadius;
   List<int>? padding;
   bool underline;
+  String? fontFamily;
+  double? fontSize;
 
   V2TextStyle({
     this.textColor,
@@ -30,6 +32,8 @@ class V2TextStyle {
     this.borderRadius,
     this.padding,
     this.underline = false,
+    this.fontFamily,
+    this.fontSize,
   });
 
   V2TextStyle copyWith({
@@ -46,6 +50,8 @@ class V2TextStyle {
     List<int>? borderRadius,
     List<int>? padding,
     bool? underline,
+    String? fontFamily,
+    double? fontSize,
   }) {
     return V2TextStyle(
       textColor: textColor ?? this.textColor,
@@ -61,6 +67,8 @@ class V2TextStyle {
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
       underline: underline ?? this.underline,
+      fontFamily: fontFamily ?? this.fontFamily,
+      fontSize: fontSize ?? this.fontSize,
     );
   }
 
@@ -79,6 +87,8 @@ class V2TextStyle {
       'borderRadius': borderRadius,
       'padding': padding,
       'underline': underline,
+      'fontFamily': fontFamily,
+      'fontSize': fontSize,
     };
   }
 
@@ -115,6 +125,8 @@ class V2TextStyle {
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       underline: map['underline'] ?? false,
+      fontFamily: map['fontFamily'],
+      fontSize: map['fontSize']?.toDouble(),
     );
   }
 }

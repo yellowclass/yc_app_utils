@@ -22,8 +22,8 @@ class V2StyledTextModel with StyledComponentUnion {
   List<int>? borderRadius;
   List<int>? padding;
   bool underline;
-  TextDecorationStyle? textDecorationStyle;
   String? fontFamily;
+  double? fontSize;
 
   V2StyledTextModel({
     required this.text,
@@ -40,8 +40,8 @@ class V2StyledTextModel with StyledComponentUnion {
     this.borderRadius,
     this.padding,
     this.underline = false,
-    this.textDecorationStyle,
     this.fontFamily,
+    this.fontSize,
   });
 
   V2StyledTextModel copyWith({
@@ -59,8 +59,8 @@ class V2StyledTextModel with StyledComponentUnion {
     List<int>? borderRadius,
     List<int>? padding,
     bool? underline,
-    TextDecorationStyle? textDecorationStyle,
     String? fontFamily,
+    double? fontSize,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -77,8 +77,8 @@ class V2StyledTextModel with StyledComponentUnion {
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
       underline: underline ?? this.underline,
-      textDecorationStyle: textDecorationStyle ?? this.textDecorationStyle,
       fontFamily: fontFamily ?? this.fontFamily,
+      fontSize: fontSize ?? this.fontSize,
     );
   }
 
@@ -98,8 +98,8 @@ class V2StyledTextModel with StyledComponentUnion {
       'borderRadius': borderRadius,
       'padding': padding,
       'underline': underline,
-      'textDecorationStyle': textDecorationStyle?.name,
       'fontFamily': fontFamily,
+      'fontSize': fontSize,
     };
   }
 
@@ -137,10 +137,8 @@ class V2StyledTextModel with StyledComponentUnion {
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       underline: map['underline'] ?? false,
-      textDecorationStyle: CommonHelpers.getTextDecorationStyleFromString(
-        map["textDecorationStyle"],
-      ),
       fontFamily: map['fontFamily'],
+      fontSize: map['fontSize']?.toDouble(),
     );
   }
 
@@ -163,6 +161,8 @@ class V2StyledTextModel with StyledComponentUnion {
       textOverflow: textStyle.textOverflow,
       tStyle: textStyle.tStyle,
       underline: textStyle.underline,
+      fontFamily: textStyle.fontFamily,
+      fontSize: textStyle.fontSize,
     );
   }
 }
