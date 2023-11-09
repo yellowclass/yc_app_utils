@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/media_manager_info.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_lottie.widget.dart';
+import 'package:yc_app_utils/ui/components/styled_components/styled_timer.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentWidget extends StatefulWidget {
@@ -132,6 +134,11 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
         final styledImageDetails = _scData as StyledLottieModel;
         return StyledLottieWidget(
           styledLottieModel: styledImageDetails,
+        );
+      case StyledTimerModel:
+        final styledTimerData = _scData as StyledTimerModel;
+        return StyledTimerWidget(
+          styledTimerData: styledTimerData,
         );
       default:
         return const SizedBox.shrink();
