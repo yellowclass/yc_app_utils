@@ -1,4 +1,5 @@
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
@@ -56,6 +57,9 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
         break;
       case 'StyledLottie':
         scData = StyledLottieModel.fromMap(map['scData']);
+        break;
+      case 'StyledTimer':
+        scData = StyledTimerModel.fromMap(map['scData']);
         break;
       default:
     }
