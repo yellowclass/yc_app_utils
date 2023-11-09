@@ -23,7 +23,6 @@ class V2StyledTextModel with StyledComponentUnion {
   List<int>? padding;
   bool underline;
   String? fontFamily;
-  double? fontSize;
 
   V2StyledTextModel({
     required this.text,
@@ -41,7 +40,6 @@ class V2StyledTextModel with StyledComponentUnion {
     this.padding,
     this.underline = false,
     this.fontFamily,
-    this.fontSize,
   });
 
   V2StyledTextModel copyWith({
@@ -60,7 +58,6 @@ class V2StyledTextModel with StyledComponentUnion {
     List<int>? padding,
     bool? underline,
     String? fontFamily,
-    double? fontSize,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -78,7 +75,6 @@ class V2StyledTextModel with StyledComponentUnion {
       padding: padding ?? this.padding,
       underline: underline ?? this.underline,
       fontFamily: fontFamily ?? this.fontFamily,
-      fontSize: fontSize ?? this.fontSize,
     );
   }
 
@@ -99,7 +95,6 @@ class V2StyledTextModel with StyledComponentUnion {
       'padding': padding,
       'underline': underline,
       'fontFamily': fontFamily,
-      'fontSize': fontSize,
     };
   }
 
@@ -138,7 +133,6 @@ class V2StyledTextModel with StyledComponentUnion {
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       underline: map['underline'] ?? false,
       fontFamily: map['fontFamily'],
-      fontSize: map['fontSize']?.toDouble(),
     );
   }
 
@@ -162,7 +156,6 @@ class V2StyledTextModel with StyledComponentUnion {
       tStyle: textStyle.tStyle,
       underline: textStyle.underline,
       fontFamily: textStyle.fontFamily,
-      fontSize: textStyle.fontSize,
     );
   }
 }

@@ -5,6 +5,66 @@ import 'package:yc_app_utils/ui/text_styles/yc_fonts.dart';
 
 class TextStyles {
   static const Map<TStyle, TextStyle> mobTextStyle = {
+    TStyle.XH1_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH1_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH1_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH1_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
     TStyle.H1_800: TextStyle(
       fontFamily: YCFonts.nunitoExtraBold,
       fontSize: 28,
@@ -197,6 +257,66 @@ class TextStyles {
   };
 
   static const Map<TStyle, TextStyle> tabTextStyle = {
+    TStyle.XH1_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH1_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH1_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH1_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 40,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH2_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 36,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XH3_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 32,
+      color: AppColors.cBODY_TEXT,
+    ),
     TStyle.H1_700: TextStyle(
       fontFamily: YCFonts.nunitoBold,
       fontSize: 32,
