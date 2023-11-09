@@ -87,7 +87,6 @@ class V2StyledTextWidget extends StatelessWidget {
           if (styledText.underline) TextDecoration.underline,
         ]),
         fontFamily: styledText.fontFamily == 'LUCKY_GUY' ? "LuckyGuy" : null,
-        fontSize: styledText.fontSize,
       ),
     );
   }
