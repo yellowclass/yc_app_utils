@@ -73,8 +73,8 @@ class ImageModel {
       badge: map['badge'],
       badgePosition: map['badgePosition'],
       fillColor: map['fillColor'],
-      height: map['height']?.toDouble() ?? 0.0,
-      width: map['width']?.toDouble() ?? 0.0,
+      height: map['height']?.toDouble(),
+      width: map['width']?.toDouble(),
       cropType: map['cropType'],
       padding: map["padding"] != null ? List<int>.from(map["padding"]) : null,
     );
