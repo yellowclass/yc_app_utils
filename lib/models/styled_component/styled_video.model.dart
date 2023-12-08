@@ -16,6 +16,7 @@ class StyledVideoModel with StyledComponentUnion {
   final bool loop;
   final bool hasSeekbar;
   final bool autoPlay;
+  final int? loopCount;
 
   StyledVideoModel({
     required this.url,
@@ -30,6 +31,7 @@ class StyledVideoModel with StyledComponentUnion {
     this.videoBoxFit,
     this.icons,
     this.key,
+    this.loopCount,
   });
 
   StyledVideoModel copyWith({
@@ -45,6 +47,7 @@ class StyledVideoModel with StyledComponentUnion {
     bool? loop,
     bool? hasSeekbar,
     bool? autoPlay,
+    int? loopCount,
   }) {
     return StyledVideoModel(
       url: url ?? this.url,
@@ -59,6 +62,7 @@ class StyledVideoModel with StyledComponentUnion {
       hasSeekbar: hasSeekbar ?? this.hasSeekbar,
       autoPlay: autoPlay ?? this.autoPlay,
       key: key ?? this.key,
+      loopCount: loopCount ?? this.loopCount,
     );
   }
 
@@ -76,6 +80,7 @@ class StyledVideoModel with StyledComponentUnion {
       'autoPlay': autoPlay,
       'key': key,
       'icons': icons?.map((e) => e.toMap()),
+      'loopCount': loopCount,
     };
   }
 
@@ -109,6 +114,7 @@ class StyledVideoModel with StyledComponentUnion {
       hasSeekbar: map['hasSeekbar'] ?? false,
       autoPlay: map['autoplay'] ?? false,
       icons: icons,
+      loopCount: map['loopCount'],
     );
   }
 }
