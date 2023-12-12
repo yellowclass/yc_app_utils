@@ -9,6 +9,7 @@ class StyledTextFieldWidget extends StatefulWidget {
     this.textValueNotifier,
     this.border,
     this.focusedBorder,
+    this.autofocus,
     Key? key,
   }) : super(key: key);
 
@@ -17,6 +18,7 @@ class StyledTextFieldWidget extends StatefulWidget {
   final ValueNotifier<String>? textValueNotifier;
   final OutlineInputBorder? border;
   final OutlineInputBorder? focusedBorder;
+  final bool? autofocus;
 
   @override
   State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
@@ -142,6 +144,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                     updatedVal,
                   );
                 },
+                autofocus: widget.autofocus ?? false,
               ),
             ),
           ],
