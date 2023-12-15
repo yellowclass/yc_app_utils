@@ -84,6 +84,32 @@ class GenericButtonV3Model {
       'v2ClickAction': v2ClickAction?.toMap(),
     };
   }
+
+  GenericButtonV3Model copyWith({
+    String? key,
+    List<GenericButtonV3Row>? buttonRows,
+    double? elevation,
+    String? backgroundColor,
+    String? borderColor,
+    double? borderRadius,
+    SymmetricPadding? padding,
+    int? height,
+    V2ClickAction? v2ClickAction,
+    ClickAction? clickAction,
+  }) {
+    return GenericButtonV3Model(
+      key: key ?? this.key,
+      buttonRows: buttonRows ?? this.buttonRows,
+      elevation: elevation ?? this.elevation,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      borderColor: borderColor ?? this.borderColor,
+      borderRadius: borderRadius ?? this.borderRadius,
+      padding: padding ?? this.padding,
+      height: height ?? this.height,
+      v2ClickAction: v2ClickAction ?? this.v2ClickAction,
+      clickAction: clickAction ?? this.clickAction,
+    );
+  }
 }
 
 class GenericButtonV3Row {
