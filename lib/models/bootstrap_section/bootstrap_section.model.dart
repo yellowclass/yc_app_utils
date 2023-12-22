@@ -3,6 +3,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class BootstrapSectionModel with BootstrapChildUnion {
   String key;
   BootstrapSectionUnion? bsData;
+  String? miscParams;
   V2ClickAction? clickAction;
   bool containsForm;
   SectionBackground? background;
@@ -18,6 +19,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
     this.clickAction,
     required this.containsForm,
     this.background,
+    this.miscParams,
     this.borderColor,
     this.borderRadius,
     this.padding,
@@ -49,6 +51,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
       'containsForm': containsForm,
       'background': background?.toMap(),
       'borderColor': borderColor,
+      'miscParams': miscParams,
       'borderRadius': borderRadius,
       'padding': padding,
       'height': height,
@@ -93,6 +96,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
           ? SectionBackground.fromMap(map['background'])
           : null,
       borderColor: map['borderColor'],
+      miscParams: map['miscParams'],
       borderRadius: map['borderRadius'] == null
           ? <int>[]
           : List<int>.from(map['borderRadius']),
