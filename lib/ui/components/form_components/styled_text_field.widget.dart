@@ -110,8 +110,12 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                 obscureText: widget.textFieldData.inputFieldType ==
                     InputFieldEnum.PASSWORD,
                 decoration: InputDecoration(
-                  border: widget.border,
-                  focusedBorder: widget.focusedBorder,
+                  border: widget.textFieldData.showUnderline
+                      ? widget.border
+                      : InputBorder.none,
+                  focusedBorder: widget.textFieldData.showUnderline
+                      ? widget.focusedBorder
+                      : InputBorder.none,
                   hintText: widget.textFieldData.placeholder,
                   hintStyle: const TextStyle(
                     color: AppColors.cBODY_TEXT_75,

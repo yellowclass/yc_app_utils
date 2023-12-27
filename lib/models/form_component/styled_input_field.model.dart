@@ -14,6 +14,7 @@ class StyledInputFieldModel with FormComponentUnion {
   int maxLines;
   bool isExpanded;
   bool maxCounterVisible;
+  bool showUnderline;
 
   StyledInputFieldModel({
     this.label,
@@ -26,6 +27,7 @@ class StyledInputFieldModel with FormComponentUnion {
     this.maxLines = 1,
     this.isExpanded = false,
     this.maxCounterVisible = false,
+    this.showUnderline = true,
   });
 
   StyledInputFieldModel copyWith({
@@ -39,6 +41,7 @@ class StyledInputFieldModel with FormComponentUnion {
     int? maxLines,
     bool? isExpanded,
     bool? maxCounterVisible,
+    bool? showUnderline,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
@@ -51,6 +54,7 @@ class StyledInputFieldModel with FormComponentUnion {
       maxLines: maxLines ?? this.maxLines,
       isExpanded: isExpanded ?? this.isExpanded,
       maxCounterVisible: maxCounterVisible ?? this.maxCounterVisible,
+      showUnderline: showUnderline ?? this.showUnderline,
     );
   }
 
@@ -66,6 +70,7 @@ class StyledInputFieldModel with FormComponentUnion {
       'maxLines': maxLines,
       'isExpanded': isExpanded,
       'maxCounterVisible': maxCounterVisible,
+      'showUnderline': showUnderline,
     };
   }
 
@@ -89,6 +94,7 @@ class StyledInputFieldModel with FormComponentUnion {
       maxLines: map['maxLines'] ?? 1,
       isExpanded: map['isExpanded'] ?? false,
       maxCounterVisible: map['maxCounterVisible'] ?? false,
+      showUnderline: map['showUnderline'] ?? true,
     );
   }
 }
