@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:yc_app_utils/models/click_action/event_data.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -263,6 +264,17 @@ class CommonHelpers {
         return BoxFit.scaleDown;
       default:
         return BoxFit.none;
+    }
+  }
+
+  static OptionsOrientation getOptionsOrientationFromString(String? optionsOrientation) {
+    switch (optionsOrientation) {
+      case "VERTICAL":
+        return OptionsOrientation.vertical;
+      case "HORIZONTAL":
+        return OptionsOrientation.horizontal;
+      default:
+        return OptionsOrientation.wrap;
     }
   }
 

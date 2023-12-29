@@ -55,7 +55,13 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                   !_isLoading)
               ? () {
                   // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
-                  if (widget.containsForm) {
+                  // IF THE SECTION HAS FORM true AND ITS CLICK ACTION HAS SUBMIT_FORM
+                  // ONLY THEN IT WILL GO TO IF. OTHER CLICK ACTION EXCEPT SUBMIT_FORM
+                  // WILL RUN NORMALLY
+                  if (widget.containsForm &&
+                      child.clickAction!.actions.any((action) =>
+                          action.functionType ==
+                          V2FunctionTypesEnum.SUBMIT_FORM)) {
                     // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
                     for (var action in child.clickAction!.actions) {
                       if (action.functionType ==
@@ -78,7 +84,13 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                 }
               : null,
           innerClickAction: (clickAction, _, clickedWidgetState) {
-            if (widget.containsForm) {
+            // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
+            // IF THE SECTION HAS FORM true AND ITS CLICK ACTION HAS SUBMIT_FORM
+            // ONLY THEN IT WILL GO TO IF. OTHER CLICK ACTION EXCEPT SUBMIT_FORM
+            // WILL RUN NORMALLY
+            if (widget.containsForm &&
+                child.clickAction!.actions.any((action) =>
+                    action.functionType == V2FunctionTypesEnum.SUBMIT_FORM)) {
               // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
               for (var action in clickAction.actions) {
                 if (action.functionType == V2FunctionTypesEnum.SUBMIT_FORM) {

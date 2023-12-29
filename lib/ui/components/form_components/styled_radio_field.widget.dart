@@ -36,6 +36,8 @@ class StyledRadioFieldWidget extends StatelessWidget {
         FormBuilderRadioGroup(
           name: radioFieldData.name,
           initialValue: radioFieldData.radioDefaultValue?.value,
+          orientation: radioFieldData.radioButtonArrangement ??
+              OptionsOrientation.wrap,
           options: radioFieldData.options
               .map(
                 (option) => FormBuilderFieldOption(
