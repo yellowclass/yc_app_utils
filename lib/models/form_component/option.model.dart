@@ -1,19 +1,29 @@
+import 'package:yc_app_utils/models/form_component/form_component_model.import.dart';
+
 class OptionModel {
   String label;
   String value;
+  bool? disabled;
+  StyledInputFieldModel? inputField;
 
   OptionModel({
     required this.label,
     required this.value,
+    this.disabled,
+    this.inputField,
   });
 
   OptionModel copyWith({
     String? label,
     String? value,
+    bool? disabled,
+    StyledInputFieldModel? inputField,
   }) {
     return OptionModel(
       label: label ?? this.label,
       value: value ?? this.value,
+      disabled: disabled ?? this.disabled,
+      inputField: inputField ?? this.inputField,
     );
   }
 
@@ -21,6 +31,8 @@ class OptionModel {
     return {
       'label': label,
       'value': value,
+      'disabled': disabled,
+      'inputField': inputField,
     };
   }
 
@@ -28,6 +40,10 @@ class OptionModel {
     return OptionModel(
       label: map['label'] ?? '',
       value: map['value'] ?? '',
+      disabled: map['disabled'] ?? false,
+      inputField: map['inputField'] != null
+          ? StyledInputFieldModel.fromMap(map['inputField'])
+          : null,
     );
   }
 }

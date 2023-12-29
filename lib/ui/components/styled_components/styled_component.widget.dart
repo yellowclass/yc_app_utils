@@ -58,7 +58,11 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
               !_isLoading)
           ? () {
               // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
-              if (widget.containsForm) {
+              // If the section has form true and its click action has SUBMIT_FORM
+              // only then the submit form functionality will work rejecting other
+              if (widget.containsForm &&
+                  widget.styledComponent.clickAction!.actions.any((action) =>
+                      action.functionType == V2FunctionTypesEnum.SUBMIT_FORM)) {
                 // CHECKS IF THERE IS ANY SUBMIT BUTTON INSIDE CLICKACTIONS (Checks for only 1
                 for (var action
                     in widget.styledComponent.clickAction!.actions) {

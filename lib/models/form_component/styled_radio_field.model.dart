@@ -1,3 +1,4 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -8,6 +9,7 @@ class StyledRadioFieldModel with FormComponentUnion {
   OptionModel? radioDefaultValue;
   bool isDisabled;
   List<OptionModel> options;
+  OptionsOrientation? radioButtonArrangement;
 
   StyledRadioFieldModel({
     this.label,
@@ -15,6 +17,7 @@ class StyledRadioFieldModel with FormComponentUnion {
     this.validation,
     this.radioDefaultValue,
     this.isDisabled = false,
+    this.radioButtonArrangement = OptionsOrientation.wrap,
     required this.options,
   });
 
@@ -25,6 +28,7 @@ class StyledRadioFieldModel with FormComponentUnion {
     OptionModel? radioDefaultValue,
     bool? isDisabled,
     List<OptionModel>? options,
+    OptionsOrientation? radioButtonArrangement,
   }) {
     return StyledRadioFieldModel(
       label: label ?? this.label,
@@ -33,6 +37,8 @@ class StyledRadioFieldModel with FormComponentUnion {
       radioDefaultValue: radioDefaultValue ?? this.radioDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       options: options ?? this.options,
+      radioButtonArrangement:
+          radioButtonArrangement ?? this.radioButtonArrangement,
     );
   }
 
@@ -44,6 +50,7 @@ class StyledRadioFieldModel with FormComponentUnion {
       'radioDefaultValue': radioDefaultValue,
       'isDisabled': isDisabled,
       'options': options.map((x) => x.toMap()).toList(),
+      'radioButtonArrangement': radioButtonArrangement,
     };
   }
 
@@ -61,6 +68,8 @@ class StyledRadioFieldModel with FormComponentUnion {
       isDisabled: map['isDisabled'] ?? false,
       options: List<OptionModel>.from(
           map['options']?.map((x) => OptionModel.fromMap(x))),
+      radioButtonArrangement: CommonHelpers.getOptionsOrientationFromString(
+              map['radioButtonArrangement']),
     );
   }
 }
