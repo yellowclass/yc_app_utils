@@ -55,9 +55,8 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                   !_isLoading)
               ? () {
                   // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
-                  // IF THE SECTION HAS FORM true AND ITS CLICK ACTION HAS SUBMIT_FORM
-                  // ONLY THEN IT WILL GO TO IF. OTHER CLICK ACTION EXCEPT SUBMIT_FORM
-                  // WILL RUN NORMALLY
+                  // If the section has form true and its click action has SUBMIT_FORM
+                  // only then the submit form functionality will work rejecting other
                   if (widget.containsForm &&
                       child.clickAction!.actions.any((action) =>
                           action.functionType ==
@@ -85,9 +84,8 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
               : null,
           innerClickAction: (clickAction, _, clickedWidgetState) {
             // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
-            // IF THE SECTION HAS FORM true AND ITS CLICK ACTION HAS SUBMIT_FORM
-            // ONLY THEN IT WILL GO TO IF. OTHER CLICK ACTION EXCEPT SUBMIT_FORM
-            // WILL RUN NORMALLY
+            // If the section has form true and its click action has SUBMIT_FORM
+            // only then the submit form functionality will work rejecting other
             if (widget.containsForm &&
                 child.clickAction!.actions.any((action) =>
                     action.functionType == V2FunctionTypesEnum.SUBMIT_FORM)) {
