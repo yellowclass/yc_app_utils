@@ -417,7 +417,7 @@ class CommonHelpers {
     }
   }
 
-  static Color v2ColorFromHex(String? hexColor) {
+  static Color v2ColorFromHex(String? hexColor, {double opacity = 1}) {
     if (hexColor == null) {
       return AppColors.cTRANSPARENT;
     } else {
@@ -426,7 +426,11 @@ class CommonHelpers {
         // Refer https://www.w3.org/TR/css-color-3/
         hexCode = hexCode.characters.map((String e) => e + e).join();
       }
-      return Color(int.parse('FF$hexCode', radix: 16));
+      Color color = Color(int.parse('FF$hexCode', radix: 16));
+      if (opacity != 1) {
+        color = color.withOpacity(opacity);
+      }
+      return color;
     }
   }
 
@@ -470,9 +474,8 @@ class CommonHelpers {
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder()
               : borderRadiusGeometry,
-          color: CommonHelpers.v2ColorFromHex(
-            sectionBackground.backgroundColor,
-          ),
+          color: CommonHelpers.v2ColorFromHex(sectionBackground.backgroundColor,
+              opacity: sectionBackground.opacity),
         );
       case SectionBgType.GRADIENT:
         return BoxDecoration(
