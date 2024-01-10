@@ -15,6 +15,9 @@ class StyledInputFieldModel with FormComponentUnion {
   bool isExpanded;
   bool maxCounterVisible;
   bool showUnderline;
+  String? borderColor;
+  List<int>? borderRadius;
+  List<int>? padding;
 
   StyledInputFieldModel({
     this.label,
@@ -28,6 +31,9 @@ class StyledInputFieldModel with FormComponentUnion {
     this.isExpanded = false,
     this.maxCounterVisible = false,
     this.showUnderline = true,
+    this.borderColor,
+    this.borderRadius,
+    this.padding,
   });
 
   StyledInputFieldModel copyWith({
@@ -42,6 +48,9 @@ class StyledInputFieldModel with FormComponentUnion {
     bool? isExpanded,
     bool? maxCounterVisible,
     bool? showUnderline,
+    String? borderColor,
+    List<int>? borderRadius,
+    List<int>? padding,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
@@ -55,6 +64,9 @@ class StyledInputFieldModel with FormComponentUnion {
       isExpanded: isExpanded ?? this.isExpanded,
       maxCounterVisible: maxCounterVisible ?? this.maxCounterVisible,
       showUnderline: showUnderline ?? this.showUnderline,
+      borderColor: borderColor ?? this.borderColor,
+      borderRadius: borderRadius ?? this.borderRadius,
+      padding: padding ?? this.padding,
     );
   }
 
@@ -71,6 +83,9 @@ class StyledInputFieldModel with FormComponentUnion {
       'isExpanded': isExpanded,
       'maxCounterVisible': maxCounterVisible,
       'showUnderline': showUnderline,
+      'borderColor': borderColor,
+      'borderRadius': borderRadius,
+      'padding': padding,
     };
   }
 
@@ -95,6 +110,12 @@ class StyledInputFieldModel with FormComponentUnion {
       isExpanded: map['isExpanded'] ?? false,
       maxCounterVisible: map['maxCounterVisible'] ?? false,
       showUnderline: map['showUnderline'] ?? true,
+      borderColor: map['borderColor'],
+      borderRadius: map['borderRadius'] == null
+          ? <int>[]
+          : List<int>.from(map['borderRadius']),
+      padding:
+          map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
     );
   }
 }

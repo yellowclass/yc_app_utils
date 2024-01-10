@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledRadioFieldWidget extends StatelessWidget {
+class StyledRadioFieldWidget extends StatefulWidget {
   const StyledRadioFieldWidget({
     required this.radioFieldData,
     this.onSaved,
@@ -14,17 +14,24 @@ class StyledRadioFieldWidget extends StatelessWidget {
   final void Function(String, String?)? onSaved;
 
   @override
+  State<StyledRadioFieldWidget> createState() => _StyledRadioFieldWidgetState();
+}
+
+class _StyledRadioFieldWidgetState extends State<StyledRadioFieldWidget> {
+  StyledInputFieldModel? inputField;
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (radioFieldData.label != null)
+        if (widget.radioFieldData.label != null)
           Row(
             children: [
               V2StyledTextWidget(
-                styledText: radioFieldData.label!,
+                styledText: widget.radioFieldData.label!,
               ),
-              if (radioFieldData.validation?.isRequired?.value == true)
+              if (widget.radioFieldData.validation?.isRequired?.value == true)
                 const Text(
                   '*',
                   style: TextStyle(
@@ -34,11 +41,11 @@ class StyledRadioFieldWidget extends StatelessWidget {
             ],
           ),
         FormBuilderRadioGroup(
-          name: radioFieldData.name,
-          initialValue: radioFieldData.radioDefaultValue?.value,
-          orientation: radioFieldData.radioButtonArrangement ??
+          name: widget.radioFieldData.name,
+          initialValue: widget.radioFieldData.radioDefaultValue?.value,
+          orientation: widget.radioFieldData.radioButtonArrangement ??
               OptionsOrientation.wrap,
-          options: radioFieldData.options
+          options: widget.radioFieldData.options
               .map(
                 (option) => FormBuilderFieldOption(
                   value: option.value,
@@ -56,12 +63,34 @@ class StyledRadioFieldWidget extends StatelessWidget {
                     value: value,
                   )
                 : null,
-            validations: radioFieldData.validation,
+            validations: widget.radioFieldData.validation,
           ),
           onSaved: (String? value) {
-            onSaved?.call(radioFieldData.name, value);
+            widget.onSaved?.call(widget.radioFieldData.name, value);
           },
+          onChanged: (String? value) => setState(() => inputField = widget
+              .radioFieldData.options
+              .firstWhere((option) => option.value == value)
+              .inputField),
         ),
+        if (inputField != null)
+          StyledTextFieldWidget(
+            textFieldData: inputField!,
+            onSaved: widget.onSaved,
+            border: OutlineInputBorder(
+              borderRadius: CommonHelpers.getBorderRadiusFromList(
+                inputField!.borderRadius,
+              ),
+              borderSide: BorderSide(
+                color: inputField!.borderColor != null
+                    ? CommonHelpers.v2ColorFromHex(
+                        inputField!.borderColor,
+                      )
+                    : AppColors.cTANGERINE_15,
+                width: 10,
+              ),
+            ),
+          ),
       ],
     );
   }

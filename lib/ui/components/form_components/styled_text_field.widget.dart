@@ -49,111 +49,116 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (widget.textFieldData.label != null)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Flexible(
-                child: V2StyledTextWidget(
-                  styledText: widget.textFieldData.label!,
-                ),
-              ),
-              if (widget.textFieldData.validation?.isRequired?.value == true)
-                const Text(
-                  '*',
-                  style: TextStyle(
-                    color: AppColors.cRed_100,
+    return Padding(
+      padding: CommonHelpers.getPaddingFromList(
+        widget.textFieldData.padding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.textFieldData.label != null)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Flexible(
+                  child: V2StyledTextWidget(
+                    styledText: widget.textFieldData.label!,
                   ),
                 ),
-            ],
-          ),
-        Row(
-          children: [
-            if (isMobileField)
-              CountryPicker(
-                showDialingCode: true,
-                showName: false,
-                onChanged: (Country country) {
-                  setState(() {
-                    _selectedCountry = country;
-                  });
-                },
-                selectedCountry: _selectedCountry,
-                dialingCodeTextStyle: CommonHelpers.getTextStyle(
-                  TStyle.B1_600,
+                if (widget.textFieldData.validation?.isRequired?.value == true)
+                  const Text(
+                    '*',
+                    style: TextStyle(
+                      color: AppColors.cRed_100,
+                    ),
+                  ),
+              ],
+            ),
+          Row(
+            children: [
+              if (isMobileField)
+                CountryPicker(
+                  showDialingCode: true,
+                  showName: false,
+                  onChanged: (Country country) {
+                    setState(() {
+                      _selectedCountry = country;
+                    });
+                  },
+                  selectedCountry: _selectedCountry,
+                  dialingCodeTextStyle: CommonHelpers.getTextStyle(
+                    TStyle.B1_600,
+                  ),
                 ),
-              ),
-            Flexible(
-              child: TextFormField(
-                cursorColor: AppColors.cTANGERINE_100,
-                onChanged: (value) {
-                  if (widget.textValueNotifier != null) {
-                    widget.textValueNotifier!.value = value;
-                  }
-                },
-                initialValue: widget.textFieldData.inputDefaultValue,
-                enabled: !widget.textFieldData.isDisabled,
-                textAlignVertical: TextAlignVertical.bottom,
-                inputFormatters: [
-                  if (widget.textFieldData.inputFieldType ==
-                          InputFieldEnum.NUMBER ||
-                      isMobileField)
-                    FilteringTextInputFormatter.digitsOnly
-                ],
-                maxLines: widget.textFieldData.maxLines,
-                minLines: widget.textFieldData.isExpanded ? null : 1,
-                keyboardType:
-                    getKeyboardType(widget.textFieldData.inputFieldType),
-                obscureText: widget.textFieldData.inputFieldType ==
-                    InputFieldEnum.PASSWORD,
-                decoration: InputDecoration(
-                  border: widget.textFieldData.showUnderline
-                      ? widget.border
-                      : InputBorder.none,
-                  focusedBorder: widget.textFieldData.showUnderline
-                      ? widget.focusedBorder
-                      : InputBorder.none,
-                  hintText: widget.textFieldData.placeholder,
-                  hintStyle: const TextStyle(
-                    color: AppColors.cBODY_TEXT_75,
+              Flexible(
+                child: TextFormField(
+                  cursorColor: AppColors.cTANGERINE_100,
+                  onChanged: (value) {
+                    if (widget.textValueNotifier != null) {
+                      widget.textValueNotifier!.value = value;
+                    }
+                  },
+                  initialValue: widget.textFieldData.inputDefaultValue,
+                  enabled: !widget.textFieldData.isDisabled,
+                  textAlignVertical: TextAlignVertical.bottom,
+                  inputFormatters: [
+                    if (widget.textFieldData.inputFieldType ==
+                            InputFieldEnum.NUMBER ||
+                        isMobileField)
+                      FilteringTextInputFormatter.digitsOnly
+                  ],
+                  maxLines: widget.textFieldData.maxLines,
+                  minLines: widget.textFieldData.isExpanded ? null : 1,
+                  keyboardType:
+                      getKeyboardType(widget.textFieldData.inputFieldType),
+                  obscureText: widget.textFieldData.inputFieldType ==
+                      InputFieldEnum.PASSWORD,
+                  decoration: InputDecoration(
+                    border: widget.textFieldData.showUnderline
+                        ? widget.border
+                        : InputBorder.none,
+                    focusedBorder: widget.textFieldData.showUnderline
+                        ? widget.focusedBorder
+                        : InputBorder.none,
+                    hintText: widget.textFieldData.placeholder,
+                    hintStyle: const TextStyle(
+                      color: AppColors.cBODY_TEXT_75,
+                      fontSize: 16,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.s,
+                      vertical: AppSpacing.m,
+                    ),
+                    counter: widget.textFieldData.maxCounterVisible
+                        ? null
+                        : const SizedBox.shrink(),
+                  ),
+                  maxLength: widget.textFieldData.validation?.maxLength?.value,
+                  style: const TextStyle(
+                    color: AppColors.cBODY_TEXT,
                     fontSize: 16,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.s,
-                    vertical: AppSpacing.m,
+                  validator: (value) => CommonHelpers.validateTextField(
+                    value: value!,
+                    validations: widget.textFieldData.validation,
                   ),
-                  counter: widget.textFieldData.maxCounterVisible
-                      ? null
-                      : const SizedBox.shrink(),
+                  onSaved: (value) {
+                    String updatedVal = value ?? '';
+                    if (isMobileField) {
+                      updatedVal = _selectedCountry.value + updatedVal;
+                    }
+                    widget.onSaved?.call(
+                      widget.textFieldData.name,
+                      updatedVal,
+                    );
+                  },
+                  autofocus: widget.autofocus ?? false,
                 ),
-                maxLength: widget.textFieldData.validation?.maxLength?.value,
-                style: const TextStyle(
-                  color: AppColors.cBODY_TEXT,
-                  fontSize: 16,
-                ),
-                validator: (value) => CommonHelpers.validateTextField(
-                  value: value!,
-                  validations: widget.textFieldData.validation,
-                ),
-                onSaved: (value) {
-                  String updatedVal = value ?? '';
-                  if (isMobileField) {
-                    updatedVal = _selectedCountry.value + updatedVal;
-                  }
-                  widget.onSaved?.call(
-                    widget.textFieldData.name,
-                    updatedVal,
-                  );
-                },
-                autofocus: widget.autofocus ?? false,
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
