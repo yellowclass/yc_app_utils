@@ -267,8 +267,7 @@ class CommonHelpers {
     }
   }
 
-  static OptionsOrientation getOptionsOrientationFromString(
-      String? optionsOrientation) {
+  static OptionsOrientation getOptionsOrientationFromString(String? optionsOrientation) {
     switch (optionsOrientation) {
       case "VERTICAL":
         return OptionsOrientation.vertical;
