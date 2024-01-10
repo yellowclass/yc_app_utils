@@ -267,7 +267,8 @@ class CommonHelpers {
     }
   }
 
-  static OptionsOrientation getOptionsOrientationFromString(String? optionsOrientation) {
+  static OptionsOrientation getOptionsOrientationFromString(
+      String? optionsOrientation) {
     switch (optionsOrientation) {
       case "VERTICAL":
         return OptionsOrientation.vertical;
@@ -471,7 +472,10 @@ class CommonHelpers {
               ? showSectionBorder()
               : borderRadiusGeometry,
           color: CommonHelpers.v2ColorFromHex(
-            sectionBackground.backgroundColor,
+            "#" +
+                ((sectionBackground.opacity * 256).toInt().toRadixString(16))
+                    .toString() +
+                sectionBackground.backgroundColor!.split('#').last,
           ),
         );
       case SectionBgType.GRADIENT:
