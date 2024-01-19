@@ -11,6 +11,7 @@ class GenericButtonV3Model {
   String? key;
   List<GenericButtonV3Row>? buttonRows;
   double elevation;
+  double highlightElevation;
   String? backgroundColor;
   String? borderColor;
   double borderRadius;
@@ -25,6 +26,7 @@ class GenericButtonV3Model {
     this.key,
     this.buttonRows,
     this.elevation = 0,
+    this.highlightElevation = 0,
     this.clickAction,
     this.backgroundColor,
     this.borderColor,
@@ -48,6 +50,7 @@ class GenericButtonV3Model {
             )
           : null,
       elevation: map['elevation'] == null ? 0 : map['elevation'].toDouble(),
+      highlightElevation: map['highlightElevation'] == null ? 0 : map['highlightElevation'].toDouble(),
       clickAction: map['clickAction'] != null
           ? ClickAction.fromMap(map['clickAction'])
           : null,
@@ -75,6 +78,7 @@ class GenericButtonV3Model {
       'buttonRows': List<dynamic>.from(
           buttonRows?.map((GenericButtonV3Row x) => x.toMap()) ?? {}),
       'elevation': elevation,
+      'highlightElevation': highlightElevation,
       'clickAction': clickAction?.toMap(),
       'backgroundColor': backgroundColor,
       'borderColor': borderColor,
@@ -89,6 +93,7 @@ class GenericButtonV3Model {
     String? key,
     List<GenericButtonV3Row>? buttonRows,
     double? elevation,
+    double? highlightElevation,
     String? backgroundColor,
     String? borderColor,
     double? borderRadius,
@@ -101,6 +106,7 @@ class GenericButtonV3Model {
       key: key ?? this.key,
       buttonRows: buttonRows ?? this.buttonRows,
       elevation: elevation ?? this.elevation,
+      highlightElevation: highlightElevation ?? this.highlightElevation,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
