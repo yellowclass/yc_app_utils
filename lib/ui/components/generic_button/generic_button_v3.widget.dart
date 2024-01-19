@@ -41,6 +41,11 @@ class GenericButtonV3Widget extends StatelessWidget {
         color: CommonHelpers.v2ColorFromHex(
           buttonDetails.backgroundColor,
         ),
+        splashColor: buttonDetails.splashColor != null
+            ? CommonHelpers.v2ColorFromHex(
+                buttonDetails.splashColor!,
+              )
+            : null,
         disabledColor: CommonHelpers.v2ColorFromHex(
           buttonDetails.backgroundColor,
         ),
