@@ -37,6 +37,7 @@ class GenericButtonV3Widget extends StatelessWidget {
           vertical: buttonDetails.padding.vertical,
         ),
         elevation: buttonDetails.elevation,
+        highlightElevation: buttonDetails.highlightElevation,
         color: CommonHelpers.v2ColorFromHex(
           buttonDetails.backgroundColor,
         ),
