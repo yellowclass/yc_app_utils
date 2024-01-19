@@ -13,6 +13,7 @@ class GenericButtonV3Model {
   double elevation;
   double highlightElevation;
   String? backgroundColor;
+  String? splashColor;
   String? borderColor;
   double borderRadius;
   SymmetricPadding padding;
@@ -29,6 +30,7 @@ class GenericButtonV3Model {
     this.highlightElevation = 0,
     this.clickAction,
     this.backgroundColor,
+    this.splashColor,
     this.borderColor,
     this.borderRadius = AppRadius.s,
     this.padding = const SymmetricPadding(
@@ -55,6 +57,7 @@ class GenericButtonV3Model {
           ? ClickAction.fromMap(map['clickAction'])
           : null,
       backgroundColor: map['backgroundColor'],
+      splashColor: map['splashColor'],
       borderColor: map['borderColor'],
       borderRadius: map['borderRadius'] == null
           ? AppRadius.s
@@ -81,6 +84,7 @@ class GenericButtonV3Model {
       'highlightElevation': highlightElevation,
       'clickAction': clickAction?.toMap(),
       'backgroundColor': backgroundColor,
+      'splashColor': splashColor,
       'borderColor': borderColor,
       'borderRadius': borderRadius,
       'padding': padding.toMap(),
@@ -95,6 +99,7 @@ class GenericButtonV3Model {
     double? elevation,
     double? highlightElevation,
     String? backgroundColor,
+    String? splashColor,
     String? borderColor,
     double? borderRadius,
     SymmetricPadding? padding,
@@ -108,6 +113,7 @@ class GenericButtonV3Model {
       elevation: elevation ?? this.elevation,
       highlightElevation: highlightElevation ?? this.highlightElevation,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      splashColor: splashColor ?? this.splashColor,
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
