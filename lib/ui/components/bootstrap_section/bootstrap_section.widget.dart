@@ -17,8 +17,9 @@ class BootstrapSectionWidget extends StatefulWidget {
   final void Function(
     V2ClickAction clickAction,
     FormResponse? formResponse,
-    ClickWidgetState? clickedWidgetState,
-  )? innerClickAction;
+    ClickWidgetState? clickedWidgetState, {
+    required String? key,
+  })? innerClickAction;
 
   @override
   State<BootstrapSectionWidget> createState() => _BootstrapSectionWidgetState();
@@ -45,8 +46,12 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     }
   }
 
-  void innerClickActionHandler(V2ClickAction cta, bool shouldSubmitForm,
-      ClickWidgetState? clickedWidgetState) {
+  void innerClickActionHandler(
+    V2ClickAction cta,
+    bool shouldSubmitForm,
+    ClickWidgetState? clickedWidgetState, {
+    required String? key,
+  }) {
     if (shouldSubmitForm) {
       collectDataFromForm();
       widget.innerClickAction?.call(
@@ -56,6 +61,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
           formKey: _formKey!,
         ),
         clickedWidgetState,
+        key: key,
       );
       return;
     }
@@ -63,6 +69,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
       cta,
       null,
       clickedWidgetState,
+      key: key,
     );
   }
 
