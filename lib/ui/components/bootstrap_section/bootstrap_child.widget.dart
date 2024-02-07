@@ -69,6 +69,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                           child.clickAction!,
                           true,
                           this,
+                          key: child.key,
                         );
                       }
                       break;
@@ -78,11 +79,17 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                       child.clickAction!,
                       false,
                       this,
+                      key: child.key,
                     );
                   }
                 }
               : null,
-          innerClickAction: (clickAction, _, clickedWidgetState) {
+          innerClickAction: (
+            clickAction,
+            _,
+            clickedWidgetState, {
+            String? key,
+          }) {
             // BUTTON SUBMIT (Validation/Data Collection in formData) LOGIC
             // If the section has form true and its click action has SUBMIT_FORM
             // only then the submit form functionality will work rejecting other
@@ -96,6 +103,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                     clickAction,
                     true,
                     clickedWidgetState,
+                    key: key,
                   );
                 }
                 break;
@@ -105,6 +113,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                 clickAction,
                 false,
                 clickedWidgetState,
+                key: key,
               );
             }
           },

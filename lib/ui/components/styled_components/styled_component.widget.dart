@@ -71,6 +71,7 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
                       widget.styledComponent.clickAction!,
                       true,
                       this,
+                      key: widget.styledComponent.uniqueKey,
                     );
                   }
                   break;
@@ -80,6 +81,7 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
                   widget.styledComponent.clickAction!,
                   false,
                   this,
+                  key: widget.styledComponent.uniqueKey,
                 );
               }
             }

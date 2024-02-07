@@ -4,6 +4,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
   StyledComponentUnion scData;
+  String? uniqueKey;
   V2ClickAction? clickAction;
   SectionBackground? background;
   String? borderColor;
@@ -12,6 +13,7 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
 
   StyledComponentModel({
     required this.scData,
+    this.uniqueKey,
     this.clickAction,
     this.background,
     this.borderColor,
@@ -65,6 +67,7 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
     }
     return StyledComponentModel(
       scData: scData!,
+      uniqueKey: map["uniqueKey"],
       clickAction: map['clickAction'] != null
           ? V2ClickAction.fromMap(map['clickAction'])
           : null,
