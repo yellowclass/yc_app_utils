@@ -9,12 +9,14 @@ class StyledLottieModel with StyledComponentUnion {
   int? width;
   int? height;
   BoxFit? lottieFit;
+  double? startOffset;
 
   StyledLottieModel({
     required this.url,
     this.width,
     this.height,
     this.lottieFit,
+    this.startOffset,
   });
 
   Map<String, dynamic> toMap() {
@@ -39,6 +41,8 @@ class StyledLottieModel with StyledComponentUnion {
               map['lottieFit'],
             )
           : null,
+      startOffset:
+          map['startOffset'] != null ? double.parse(map["startOffset"]) : null,
     );
   }
 }

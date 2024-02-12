@@ -19,6 +19,7 @@ dependencies:
   carousel_slider: 4.2.1
   shimmer: ^2.0.0
   lottie: 2.3.0
+  visibility_detector: 0.4.0+2
 
 dev_dependencies:
   flutter_test:
