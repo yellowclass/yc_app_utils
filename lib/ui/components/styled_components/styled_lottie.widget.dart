@@ -12,25 +12,35 @@ class StyledLottieWidget extends StatelessWidget {
     super.key,
   });
 
+  Widget getVisibilityDetectorIfRequired({required Widget child}) {
+    if (styledLottieModel.startOffset != null) {
+      return VisibilityDetector(
+        onVisibilityChanged: (info) {
+          showLottie.value =
+              info.visibleFraction > (styledLottieModel.startOffset ?? 0);
+        },
+        key: UniqueKey(),
+        child: child,
+      );
+    }
+    return child;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return VisibilityDetector(
-      onVisibilityChanged: (info) {
-        showLottie.value =
-            info.visibleFraction > (styledLottieModel.startOffset ?? 0);
-      },
-      key: UniqueKey(),
+    return getVisibilityDetectorIfRequired(
       child: ValueListenableBuilder<bool>(
-          valueListenable: showLottie,
-          builder: (context, val, _) {
-            return Lottie.network(
-              width: styledLottieModel.width?.toDouble(),
-              height: styledLottieModel.height?.toDouble(),
-              styledLottieModel.url,
-              fit: styledLottieModel.lottieFit,
-              animate: styledLottieModel.startOffset == null ? true : val,
-            );
-          }),
+        valueListenable: showLottie,
+        builder: (context, val, _) {
+          return Lottie.network(
+            width: styledLottieModel.width?.toDouble(),
+            height: styledLottieModel.height?.toDouble(),
+            styledLottieModel.url,
+            fit: styledLottieModel.lottieFit,
+            animate: styledLottieModel.startOffset == null ? true : val,
+          );
+        },
+      ),
     );
   }
 }
