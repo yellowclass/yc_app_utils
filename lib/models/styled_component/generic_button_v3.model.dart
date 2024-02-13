@@ -18,6 +18,7 @@ class GenericButtonV3Model {
   double borderRadius;
   SymmetricPadding padding;
   int? height;
+  int? width;
   V2ClickAction? v2ClickAction;
 
   @Deprecated("Use v2ClickAction")
@@ -38,6 +39,7 @@ class GenericButtonV3Model {
       vertical: 0,
     ),
     this.height,
+    this.width,
     this.v2ClickAction,
   });
 
@@ -69,6 +71,7 @@ class GenericButtonV3Model {
               vertical: 0,
             ),
       height: map["height"],
+      width: map["width"],
       v2ClickAction: map["v2ClickAction"] != null
           ? V2ClickAction.fromMap(map["v2ClickAction"])
           : null,
@@ -89,6 +92,7 @@ class GenericButtonV3Model {
       'borderRadius': borderRadius,
       'padding': padding.toMap(),
       'height': height,
+      'width': width,
       'v2ClickAction': v2ClickAction?.toMap(),
     };
   }
@@ -104,6 +108,7 @@ class GenericButtonV3Model {
     double? borderRadius,
     SymmetricPadding? padding,
     int? height,
+    int? width,
     V2ClickAction? v2ClickAction,
     ClickAction? clickAction,
   }) {
@@ -118,6 +123,7 @@ class GenericButtonV3Model {
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
       height: height ?? this.height,
+      width: width ?? this.width,
       v2ClickAction: v2ClickAction ?? this.v2ClickAction,
       clickAction: clickAction ?? this.clickAction,
     );

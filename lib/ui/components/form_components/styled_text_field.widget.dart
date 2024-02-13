@@ -10,6 +10,7 @@ class StyledTextFieldWidget extends StatefulWidget {
     this.border,
     this.focusedBorder,
     this.autofocus,
+    this.prefilledText,
     Key? key,
   }) : super(key: key);
 
@@ -19,12 +20,14 @@ class StyledTextFieldWidget extends StatefulWidget {
   final OutlineInputBorder? border;
   final OutlineInputBorder? focusedBorder;
   final bool? autofocus;
+  final String? prefilledText;
 
   @override
   State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
 }
 
 class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
+  TextEditingController controller = TextEditingController();
   Country _selectedCountry = Country.allCountries.firstWhere(
     (element) => element.code == 'IN',
   );
@@ -44,6 +47,17 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
         return TextInputType.phone;
       default:
         return null;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.prefilledText != null) {
+      if (widget.textValueNotifier != null) {
+        widget.textValueNotifier!.value = widget.prefilledText!;
+      }
+      controller.text = widget.prefilledText!;
     }
   }
 
@@ -153,6 +167,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                     );
                   },
                   autofocus: widget.autofocus ?? false,
+                  controller: controller,
                 ),
               ),
             ],

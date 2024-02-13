@@ -15,6 +15,7 @@ class GenericButtonV3Widget extends StatelessWidget {
     this.isLoading = false,
     this.loadingReplacement,
     this.height,
+    this.width,
     Key? key,
   }) : super(key: key);
 
@@ -23,6 +24,7 @@ class GenericButtonV3Widget extends StatelessWidget {
   final bool isLoading;
   final Widget? loadingReplacement;
   final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class GenericButtonV3Widget extends StatelessWidget {
         minHeight: buttonDetails.height != null ? 0 : 48,
       ),
       height: height ?? buttonDetails.height?.toDouble(),
+      width: width ?? buttonDetails.width?.toDouble(),
       child: MaterialButton(
         padding: EdgeInsets.symmetric(
           horizontal: buttonDetails.padding.horizontal,
