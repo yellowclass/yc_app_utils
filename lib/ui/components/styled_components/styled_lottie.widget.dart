@@ -13,11 +13,11 @@ class StyledLottieWidget extends StatelessWidget {
   });
 
   Widget getVisibilityDetectorIfRequired({required Widget child}) {
-    if (styledLottieModel.startOffset != null) {
+    if (styledLottieModel.visibiltyAnimationFraction != null) {
       return VisibilityDetector(
         onVisibilityChanged: (info) {
-          showLottie.value =
-              info.visibleFraction > (styledLottieModel.startOffset ?? 0);
+          showLottie.value = info.visibleFraction >
+              (styledLottieModel.visibiltyAnimationFraction ?? 0);
         },
         key: UniqueKey(),
         child: child,
@@ -32,13 +32,24 @@ class StyledLottieWidget extends StatelessWidget {
       child: ValueListenableBuilder<bool>(
         valueListenable: showLottie,
         builder: (context, val, _) {
-          return Lottie.network(
-            width: styledLottieModel.width?.toDouble(),
-            height: styledLottieModel.height?.toDouble(),
-            styledLottieModel.url,
-            fit: styledLottieModel.lottieFit,
-            animate: styledLottieModel.startOffset == null ? true : val,
-          );
+          return val
+              ? Lottie.network(
+                  key: UniqueKey(),
+                  width: styledLottieModel.width?.toDouble(),
+                  height: styledLottieModel.height?.toDouble(),
+                  styledLottieModel.url,
+                  fit: styledLottieModel.lottieFit,
+                  animate: true,
+                  repeat: false,
+                )
+              : Lottie.network(
+                  key: UniqueKey(),
+                  width: styledLottieModel.width?.toDouble(),
+                  height: styledLottieModel.height?.toDouble(),
+                  styledLottieModel.url,
+                  fit: styledLottieModel.lottieFit,
+                  animate: false,
+                );
         },
       ),
     );
