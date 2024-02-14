@@ -9,14 +9,16 @@ class StyledLottieModel with StyledComponentUnion {
   int? width;
   int? height;
   BoxFit? lottieFit;
-  double? visibiltyAnimationFraction;
+  double? visibilityAnimationFraction;
+  bool? repeatAnimation;
 
   StyledLottieModel({
     required this.url,
     this.width,
     this.height,
     this.lottieFit,
-    this.visibiltyAnimationFraction,
+    this.visibilityAnimationFraction,
+    this.repeatAnimation,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,9 +43,10 @@ class StyledLottieModel with StyledComponentUnion {
               map['lottieFit'],
             )
           : null,
-      visibiltyAnimationFraction: map['visibiltyAnimationFraction'] != null
-          ? double.parse(map["visibiltyAnimationFraction"])
+      visibilityAnimationFraction: map['visibilityAnimationFraction'] != null
+          ? double.parse(map["visibilityAnimationFraction"])
           : null,
+      repeatAnimation: map['repeatAnimation'],
     );
   }
 }

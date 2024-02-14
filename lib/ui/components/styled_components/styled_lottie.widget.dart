@@ -13,11 +13,11 @@ class StyledLottieWidget extends StatelessWidget {
   });
 
   Widget getVisibilityDetectorIfRequired({required Widget child}) {
-    if (styledLottieModel.visibiltyAnimationFraction != null) {
+    if (styledLottieModel.visibilityAnimationFraction != null) {
       return VisibilityDetector(
         onVisibilityChanged: (info) {
           showLottie.value = info.visibleFraction >
-              (styledLottieModel.visibiltyAnimationFraction ?? 0);
+              (styledLottieModel.visibilityAnimationFraction ?? 0);
         },
         key: UniqueKey(),
         child: child,
@@ -40,7 +40,7 @@ class StyledLottieWidget extends StatelessWidget {
                   styledLottieModel.url,
                   fit: styledLottieModel.lottieFit,
                   animate: true,
-                  repeat: false,
+                  repeat: styledLottieModel.repeatAnimation ?? true,
                 )
               : Lottie.network(
                   key: UniqueKey(),
