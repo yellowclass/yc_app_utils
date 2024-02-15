@@ -3,21 +3,35 @@ import 'package:lottie/lottie.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
 
-class StyledLottieWidget extends StatelessWidget {
+class StyledLottieWidget extends StatefulWidget {
   final StyledLottieModel styledLottieModel;
-  final ValueNotifier<bool> showLottie = ValueNotifier(false);
 
-  StyledLottieWidget({
+  const StyledLottieWidget({
     required this.styledLottieModel,
     super.key,
   });
 
+  @override
+  State<StyledLottieWidget> createState() => _StyledLottieWidgetState();
+}
+
+class _StyledLottieWidgetState extends State<StyledLottieWidget> {
+  late final ValueNotifier<bool> showLottie;
+
+  @override
+  void initState() {
+    super.initState();
+    showLottie = ValueNotifier<bool>(
+      widget.styledLottieModel.visibilityAnimationFraction == null,
+    );
+  }
+
   Widget getVisibilityDetectorIfRequired({required Widget child}) {
-    if (styledLottieModel.visibilityAnimationFraction != null) {
+    if (widget.styledLottieModel.visibilityAnimationFraction != null) {
       return VisibilityDetector(
         onVisibilityChanged: (info) {
           showLottie.value = info.visibleFraction >
-              (styledLottieModel.visibilityAnimationFraction ?? 0);
+              (widget.styledLottieModel.visibilityAnimationFraction!);
         },
         key: UniqueKey(),
         child: child,
@@ -34,20 +48,18 @@ class StyledLottieWidget extends StatelessWidget {
         builder: (context, val, _) {
           return val
               ? Lottie.network(
-                  key: UniqueKey(),
-                  width: styledLottieModel.width?.toDouble(),
-                  height: styledLottieModel.height?.toDouble(),
-                  styledLottieModel.url,
-                  fit: styledLottieModel.lottieFit,
+                  width: widget.styledLottieModel.width?.toDouble(),
+                  height: widget.styledLottieModel.height?.toDouble(),
+                  widget.styledLottieModel.url,
+                  fit: widget.styledLottieModel.lottieFit,
                   animate: true,
-                  repeat: styledLottieModel.repeatAnimation ?? true,
+                  repeat: widget.styledLottieModel.repeatAnimation ?? true,
                 )
               : Lottie.network(
-                  key: UniqueKey(),
-                  width: styledLottieModel.width?.toDouble(),
-                  height: styledLottieModel.height?.toDouble(),
-                  styledLottieModel.url,
-                  fit: styledLottieModel.lottieFit,
+                  width: widget.styledLottieModel.width?.toDouble(),
+                  height: widget.styledLottieModel.height?.toDouble(),
+                  widget.styledLottieModel.url,
+                  fit: widget.styledLottieModel.lottieFit,
                   animate: false,
                 );
         },
