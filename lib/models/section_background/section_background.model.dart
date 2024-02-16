@@ -21,7 +21,7 @@ class SectionBackground {
     this.borderRadius,
     this.borderColor,
     this.borderWidth = 0,
-    this.opacity=1,
+    this.opacity = 1,
   });
 
   final SectionBgType backgroundType;
@@ -69,7 +69,7 @@ class SectionBackground {
         borderRadius: borderRadius ?? this.borderRadius,
         borderColor: borderColor ?? this.borderColor,
         borderWidth: borderWidth ?? this.borderWidth,
-        opacity: opacity?? this.opacity,
+        opacity: opacity ?? this.opacity,
       );
 
   factory SectionBackground.fromMap(Map<String, dynamic> json) =>
@@ -101,8 +101,9 @@ class SectionBackground {
             ? <int>[]
             : List<int>.from(json['borderRadius']),
         borderColor: json["borderColor"],
-        borderWidth: json["borderWidth"] ?? 0,
-        opacity: json["opacity"]!=null ? json["opacity"]/100 : 1,
+        borderWidth:
+            double.tryParse(json["borderWidth"]?.toString() ?? '0') ?? 0,
+        opacity: json["opacity"] != null ? json["opacity"] / 100 : 1,
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
