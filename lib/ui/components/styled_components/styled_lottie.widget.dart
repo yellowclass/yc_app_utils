@@ -48,6 +48,7 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
         builder: (context, val, _) {
           return val
               ? Lottie.network(
+                  key: UniqueKey(),
                   width: widget.styledLottieModel.width?.toDouble(),
                   height: widget.styledLottieModel.height?.toDouble(),
                   widget.styledLottieModel.url,
@@ -56,6 +57,7 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
                   repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
                 )
               : Lottie.network(
+                  key: UniqueKey(),
                   width: widget.styledLottieModel.width?.toDouble(),
                   height: widget.styledLottieModel.height?.toDouble(),
                   widget.styledLottieModel.url,
