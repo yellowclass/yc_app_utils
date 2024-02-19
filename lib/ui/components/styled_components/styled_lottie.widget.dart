@@ -22,16 +22,16 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
   void initState() {
     super.initState();
     showLottie = ValueNotifier<bool>(
-      widget.styledLottieModel.visibilityAnimationFraction == null,
+      widget.styledLottieModel.animateOnPercentage == null,
     );
   }
 
   Widget getVisibilityDetectorIfRequired({required Widget child}) {
-    if (widget.styledLottieModel.visibilityAnimationFraction != null) {
+    if (widget.styledLottieModel.animateOnPercentage != null) {
       return VisibilityDetector(
         onVisibilityChanged: (info) {
           showLottie.value = info.visibleFraction >
-              (widget.styledLottieModel.visibilityAnimationFraction!);
+              (widget.styledLottieModel.animateOnPercentage! / 100);
         },
         key: UniqueKey(),
         child: child,
@@ -53,7 +53,7 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
                   widget.styledLottieModel.url,
                   fit: widget.styledLottieModel.lottieFit,
                   animate: true,
-                  repeat: widget.styledLottieModel.repeatAnimation ?? true,
+                  repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
                 )
               : Lottie.network(
                   width: widget.styledLottieModel.width?.toDouble(),

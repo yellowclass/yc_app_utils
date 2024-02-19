@@ -9,6 +9,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:yc_app_utils/models/click_action/event_data.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
+import 'package:collection/collection.dart';
 
 class CommonHelpers {
   CommonHelpers._();
@@ -267,7 +268,9 @@ class CommonHelpers {
     }
   }
 
-  static OptionsOrientation getOptionsOrientationFromString(String? optionsOrientation) {
+  static OptionsOrientation getOptionsOrientationFromString(
+    String? optionsOrientation,
+  ) {
     switch (optionsOrientation) {
       case "VERTICAL":
         return OptionsOrientation.vertical;
@@ -455,7 +458,7 @@ class CommonHelpers {
 
     final Border? _border = sectionBackground.borderColor != null
         ? Border.all(
-            width: sectionBackground.borderWidth,
+            width: sectionBackground.borderWidth.firstOrNull ?? 1,
             color: CommonHelpers.v2ColorFromHex(
               sectionBackground.borderColor,
             ),

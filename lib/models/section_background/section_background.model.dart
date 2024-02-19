@@ -20,7 +20,7 @@ class SectionBackground {
     this.radialGradient,
     this.borderRadius,
     this.borderColor,
-    this.borderWidth = 0,
+    this.borderWidth = const [1],
     this.opacity = 1,
   });
 
@@ -36,7 +36,7 @@ class SectionBackground {
   final BoxFit? backgroundImgBoxFit;
   final List<int>? borderRadius;
   final String? borderColor;
-  final double borderWidth;
+  final List<double> borderWidth;
   final double opacity;
 
   SectionBackground copyWith({
@@ -52,7 +52,7 @@ class SectionBackground {
     BoxFit? backgroundImgBoxFit,
     List<int>? borderRadius,
     String? borderColor,
-    double? borderWidth,
+    List<double>? borderWidth,
     double? opacity,
   }) =>
       SectionBackground(
@@ -101,8 +101,11 @@ class SectionBackground {
             ? <int>[]
             : List<int>.from(json['borderRadius']),
         borderColor: json["borderColor"],
-        borderWidth:
-            double.tryParse(json["borderWidth"]?.toString() ?? '0') ?? 0,
+        borderWidth: json['borderWidth'] == null
+            ? <double>[]
+            : List<double>.from(
+                json["borderWidth"].map((x) => double.tryParse(x.toString())),
+              ),
         opacity: json["opacity"] != null ? json["opacity"] / 100 : 1,
       );
 
