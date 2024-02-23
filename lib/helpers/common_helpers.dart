@@ -448,6 +448,25 @@ class CommonHelpers {
     return customStyle != null ? tStyle.merge(customStyle) : tStyle;
   }
 
+  static TextStyle? getTextStyleFromV2TextStyle(V2StyledTextModel v2TextStyle) {
+    return CommonHelpers.getTextStyle(
+      v2TextStyle.tStyle,
+      customStyle: TextStyle(
+        letterSpacing: v2TextStyle.letterSpacing,
+        fontStyle:
+            v2TextStyle.italic == true ? FontStyle.italic : FontStyle.normal,
+        color: CommonHelpers.v2ColorFromHex(
+          v2TextStyle.textColor,
+        ),
+        decoration: TextDecoration.combine([
+          if (v2TextStyle.strikeThrough) TextDecoration.lineThrough,
+          if (v2TextStyle.underline) TextDecoration.underline,
+        ]),
+        fontFamily: v2TextStyle.fontFamily == 'LUCKY_GUY' ? "LuckyGuy" : null,
+      ),
+    );
+  }
+
   static BoxDecoration getBoxDecorationWithSectionBackground({
     required SectionBackground? sectionBackground,
     double borderRadius = AppSpacing.s,
@@ -845,5 +864,85 @@ class CommonHelpers {
           double.tryParse(alignmentValues[1]) ?? 0,
         );
     }
+  }
+
+  static InputBorder? getInputBorderFromMap(
+    Map<String, dynamic>? borderData,
+  ) {
+    if (borderData == null) {
+      return null;
+    }
+    switch (borderData['type']) {
+      case 'OUTLINE':
+        return OutlineInputBorder(
+          borderSide: BorderSide(
+            color: CommonHelpers.v2ColorFromHex(
+              borderData['color'],
+            ),
+            width: borderData['width']?.toDouble() ?? 1,
+          ),
+          borderRadius: getBorderRadiusFromList(
+            List<int>.from(borderData['borderRadius']),
+          ),
+        );
+      case 'UNDERLINE':
+        return UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: CommonHelpers.v2ColorFromHex(
+              borderData['color'],
+            ),
+            width: borderData['width']?.toDouble() ?? 1,
+          ),
+        );
+      default:
+        return InputBorder.none;
+    }
+  }
+
+  static InputDecoration getInputDecorationFromMap(
+    Map<String, dynamic> inputDecoration,
+  ) {
+    return InputDecoration(
+      contentPadding: inputDecoration['contentPadding'] != null
+          ? getPaddingFromList(
+              List<int>.from(inputDecoration['contentPadding']),
+            )
+          : null,
+      border: getInputBorderFromMap(
+        inputDecoration['border'],
+      ),
+      focusedBorder: getInputBorderFromMap(
+        inputDecoration['focusedBorder'],
+      ),
+      errorBorder: getInputBorderFromMap(
+        inputDecoration['errorBorder'],
+      ),
+      enabledBorder: getInputBorderFromMap(
+        inputDecoration['enabledBorder'],
+      ),
+      focusedErrorBorder: getInputBorderFromMap(
+        inputDecoration['focusedErrorBorder'],
+      ),
+      disabledBorder: getInputBorderFromMap(
+        inputDecoration['disabledBorder'],
+      ),
+      errorStyle: inputDecoration['errorStyle'] != null
+          ? getTextStyleFromV2TextStyle(
+              V2StyledTextModel.fromMap(inputDecoration['errorStyle']),
+            )
+          : null,
+      hintText: inputDecoration['hintText'],
+      hintStyle: inputDecoration['hintStyle'] != null
+          ? getTextStyleFromV2TextStyle(
+              V2StyledTextModel.fromMap(inputDecoration['hintStyle']),
+            )
+          : null,
+      enabled: inputDecoration['enabled'] ?? true,
+      counter: inputDecoration['maxCounterVisible'] == null ||
+              inputDecoration['maxCounterVisible'] == true
+          ? null
+          : const SizedBox.shrink(),
+      isDense: inputDecoration['isDense'] ?? true,
+    );
   }
 }

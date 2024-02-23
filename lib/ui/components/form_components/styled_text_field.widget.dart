@@ -127,26 +127,27 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                       getKeyboardType(widget.textFieldData.inputFieldType),
                   obscureText: widget.textFieldData.inputFieldType ==
                       InputFieldEnum.PASSWORD,
-                  decoration: InputDecoration(
-                    border: widget.textFieldData.showUnderline
-                        ? widget.border
-                        : InputBorder.none,
-                    focusedBorder: widget.textFieldData.showUnderline
-                        ? widget.focusedBorder
-                        : InputBorder.none,
-                    hintText: widget.textFieldData.placeholder,
-                    hintStyle: const TextStyle(
-                      color: AppColors.cBODY_TEXT_75,
-                      fontSize: 16,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.s,
-                      vertical: AppSpacing.m,
-                    ),
-                    counter: widget.textFieldData.maxCounterVisible
-                        ? null
-                        : const SizedBox.shrink(),
-                  ),
+                  decoration: widget.textFieldData.inputDecoration ??
+                      InputDecoration(
+                        border: widget.textFieldData.showUnderline
+                            ? widget.border
+                            : InputBorder.none,
+                        focusedBorder: widget.textFieldData.showUnderline
+                            ? widget.focusedBorder
+                            : InputBorder.none,
+                        hintText: widget.textFieldData.placeholder,
+                        hintStyle: const TextStyle(
+                          color: AppColors.cBODY_TEXT_75,
+                          fontSize: 16,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.s,
+                          vertical: AppSpacing.m,
+                        ),
+                        counter: widget.textFieldData.maxCounterVisible
+                            ? null
+                            : const SizedBox.shrink(),
+                      ),
                   maxLength: widget.textFieldData.validation?.maxLength?.value,
                   style: const TextStyle(
                     color: AppColors.cBODY_TEXT,
