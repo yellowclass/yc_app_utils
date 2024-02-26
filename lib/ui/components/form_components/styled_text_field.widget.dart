@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledTextFieldWidget extends StatefulWidget {
@@ -70,9 +71,8 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.textFieldData.label != null)
+          if (widget.textFieldData.label != null) ...{
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Flexible(
                   child: V2StyledTextWidget(
@@ -81,13 +81,15 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                 ),
                 if (widget.textFieldData.validation?.isRequired?.value == true)
                   const Text(
-                    '*',
+                    ' *',
                     style: TextStyle(
                       color: AppColors.cRed_100,
                     ),
                   ),
               ],
             ),
+            SizedBox(height: AppSpacing.xxs),
+          },
           Row(
             children: [
               if (isMobileField)
@@ -105,10 +107,11 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                   ),
                 ),
               Flexible(
-                child: TextFormField(
+                child: FormBuilderTextField(
+                  name: widget.textFieldData.name,
                   cursorColor: AppColors.cTANGERINE_100,
                   onChanged: (value) {
-                    if (widget.textValueNotifier != null) {
+                    if (widget.textValueNotifier != null && value != null) {
                       widget.textValueNotifier!.value = value;
                     }
                   },
@@ -149,10 +152,11 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                             : const SizedBox.shrink(),
                       ),
                   maxLength: widget.textFieldData.validation?.maxLength?.value,
-                  style: const TextStyle(
-                    color: AppColors.cBODY_TEXT,
-                    fontSize: 16,
-                  ),
+                  style: widget.textFieldData.textStyle ??
+                      const TextStyle(
+                        color: AppColors.cBODY_TEXT,
+                        fontSize: 16,
+                      ),
                   validator: (value) => CommonHelpers.validateTextField(
                     value: value!,
                     validations: widget.textFieldData.validation,

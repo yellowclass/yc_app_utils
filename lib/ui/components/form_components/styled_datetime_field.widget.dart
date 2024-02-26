@@ -61,9 +61,8 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.dateTimeFieldData.label != null)
+        if (widget.dateTimeFieldData.label != null) ...{
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Flexible(
                 child: V2StyledTextWidget(
@@ -73,13 +72,15 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
               if (widget.dateTimeFieldData.validation?.isRequired?.value ==
                   true)
                 const Text(
-                  '*',
+                  ' *',
                   style: TextStyle(
                     color: AppColors.cRed_100,
                   ),
                 ),
             ],
           ),
+          SizedBox(height: AppSpacing.xxs),
+        },
         FormBuilderDateTimePicker(
           name: widget.dateTimeFieldData.name,
           initialDate:
@@ -88,23 +89,25 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
           lastDate: getParsedDate(widget.dateTimeFieldData.lastDate),
           inputType: dateTimeInputType,
           enabled: !widget.dateTimeFieldData.isDisabled,
-          style: const TextStyle(
-            color: AppColors.cBODY_TEXT,
-            fontSize: 16,
-          ),
+          style: widget.dateTimeFieldData.textStyle ??
+              const TextStyle(
+                color: AppColors.cBODY_TEXT,
+                fontSize: 16,
+              ),
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           format: dateFormat,
-          decoration: InputDecoration(
-            hintStyle: const TextStyle(
-              color: AppColors.cBODY_TEXT_75,
-              fontSize: 16,
-            ),
-            hintText: widget.dateTimeFieldData.placeholder,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.s,
-              vertical: AppSpacing.m,
-            ),
-          ),
+          decoration: widget.dateTimeFieldData.inputDecoration ??
+              InputDecoration(
+                hintStyle: const TextStyle(
+                  color: AppColors.cBODY_TEXT_75,
+                  fontSize: 16,
+                ),
+                hintText: widget.dateTimeFieldData.placeholder,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.s,
+                  vertical: AppSpacing.m,
+                ),
+              ),
           validator: (value) => CommonHelpers.validateDateTimeField(
             value: value,
             validations: widget.dateTimeFieldData.validation,

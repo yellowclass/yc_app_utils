@@ -33,7 +33,7 @@ class _StyledRadioFieldWidgetState extends State<StyledRadioFieldWidget> {
               ),
               if (widget.radioFieldData.validation?.isRequired?.value == true)
                 const Text(
-                  '*',
+                  ' *',
                   style: TextStyle(
                     color: AppColors.cRed_100,
                   ),
@@ -77,19 +77,6 @@ class _StyledRadioFieldWidgetState extends State<StyledRadioFieldWidget> {
           StyledTextFieldWidget(
             textFieldData: inputField!,
             onSaved: widget.onSaved,
-            border: OutlineInputBorder(
-              borderRadius: CommonHelpers.getBorderRadiusFromList(
-                inputField!.borderRadius,
-              ),
-              borderSide: BorderSide(
-                color: inputField!.borderColor != null
-                    ? CommonHelpers.v2ColorFromHex(
-                        inputField!.borderColor,
-                      )
-                    : AppColors.cTANGERINE_15,
-                width: 10,
-              ),
-            ),
           ),
       ],
     );

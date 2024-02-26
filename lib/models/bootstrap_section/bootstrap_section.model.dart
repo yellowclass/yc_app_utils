@@ -12,6 +12,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
   List<int>? padding;
   double? height;
   double? width;
+  GenericButtonV3Model? bottomActionButton;
 
   BootstrapSectionModel({
     required this.key,
@@ -25,6 +26,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
     this.padding,
     this.height,
     this.width,
+    this.bottomActionButton,
   });
 
   Map<String, dynamic> toMap() {
@@ -56,6 +58,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
       'padding': padding,
       'height': height,
       'width': width,
+      'bottomActionButton': bottomActionButton?.toString() ?? '',
     };
   }
 
@@ -104,6 +107,9 @@ class BootstrapSectionModel with BootstrapChildUnion {
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       height: map['height']?.toDouble(),
       width: map['width']?.toDouble(),
+      bottomActionButton: map['bottomActionButton'] != null
+          ? GenericButtonV3Model.fromMap(map['bottomActionButton'])
+          : null,
     );
   }
 }

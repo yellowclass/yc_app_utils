@@ -32,7 +32,7 @@ class StyledCheckboxFieldWidget extends StatelessWidget {
               ),
               if (checkboxFieldData.validation?.isRequired?.value == true)
                 const Text(
-                  '*',
+                  ' *',
                   style: TextStyle(
                     color: AppColors.cRed_100,
                   ),
