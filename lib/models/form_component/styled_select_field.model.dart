@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledSelectFieldModel with FormComponentUnion {
@@ -10,6 +11,8 @@ class StyledSelectFieldModel with FormComponentUnion {
   SelectType selectType;
   bool isSearchable;
   String? placeholder;
+  InputDecoration? inputDecoration;
+  TextStyle? textStyle;
 
   StyledSelectFieldModel({
     this.label,
@@ -21,6 +24,8 @@ class StyledSelectFieldModel with FormComponentUnion {
     this.selectType = SelectType.SINGLE,
     this.isSearchable = false,
     this.placeholder,
+    this.inputDecoration,
+    this.textStyle,
   });
 
   StyledSelectFieldModel copyWith({
@@ -33,6 +38,8 @@ class StyledSelectFieldModel with FormComponentUnion {
     SelectType? selectType,
     bool? isSearchable,
     String? placeholder,
+    InputDecoration? inputDecoration,
+    TextStyle? textStyle,
   }) {
     return StyledSelectFieldModel(
       label: label ?? this.label,
@@ -44,6 +51,8 @@ class StyledSelectFieldModel with FormComponentUnion {
       selectType: selectType ?? this.selectType,
       isSearchable: isSearchable ?? this.isSearchable,
       placeholder: placeholder ?? this.placeholder,
+      inputDecoration: inputDecoration ?? this.inputDecoration,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 
@@ -58,6 +67,8 @@ class StyledSelectFieldModel with FormComponentUnion {
       'selectType': selectType.name,
       'isSearchable': isSearchable,
       'placeholder': placeholder,
+      'inputDecoration': inputDecoration,
+      'textStyle': textStyle,
     };
   }
 
@@ -83,6 +94,14 @@ class StyledSelectFieldModel with FormComponentUnion {
           SelectType.SINGLE,
       isSearchable: map['isSearchable'] ?? false,
       placeholder: map['placeholder'],
+      inputDecoration: map['inputDecoration'] != null
+          ? CommonHelpers.getInputDecorationFromMap(map['inputDecoration'])
+          : null,
+      textStyle: map['textStyle'] != null
+          ? CommonHelpers.getTextStyleFromV2TextStyle(
+              V2StyledTextModel.fromMap((map['textStyle'])),
+            )
+          : null,
     );
   }
 }

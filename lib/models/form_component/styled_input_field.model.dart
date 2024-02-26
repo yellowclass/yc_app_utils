@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
@@ -18,6 +19,8 @@ class StyledInputFieldModel with FormComponentUnion {
   String? borderColor;
   List<int>? borderRadius;
   List<int>? padding;
+  InputDecoration? inputDecoration;
+  TextStyle? textStyle;
 
   StyledInputFieldModel({
     this.label,
@@ -34,6 +37,8 @@ class StyledInputFieldModel with FormComponentUnion {
     this.borderColor,
     this.borderRadius,
     this.padding,
+    this.inputDecoration,
+    this.textStyle,
   });
 
   StyledInputFieldModel copyWith({
@@ -51,6 +56,8 @@ class StyledInputFieldModel with FormComponentUnion {
     String? borderColor,
     List<int>? borderRadius,
     List<int>? padding,
+    InputDecoration? inputDecoration,
+    TextStyle? textStyle,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
@@ -67,6 +74,8 @@ class StyledInputFieldModel with FormComponentUnion {
       borderColor: borderColor ?? this.borderColor,
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
+      inputDecoration: inputDecoration ?? this.inputDecoration,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 
@@ -86,6 +95,8 @@ class StyledInputFieldModel with FormComponentUnion {
       'borderColor': borderColor,
       'borderRadius': borderRadius,
       'padding': padding,
+      'inputDecoration': inputDecoration?.toString(),
+      'textStyle': textStyle?.toString(),
     };
   }
 
@@ -116,6 +127,14 @@ class StyledInputFieldModel with FormComponentUnion {
           : List<int>.from(map['borderRadius']),
       padding:
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
+      inputDecoration: map['inputDecoration'] != null
+          ? CommonHelpers.getInputDecorationFromMap(map['inputDecoration'])
+          : null,
+      textStyle: map['textStyle'] != null
+          ? CommonHelpers.getTextStyleFromV2TextStyle(
+              V2StyledTextModel.fromMap((map['textStyle'])),
+            )
+          : null,
     );
   }
 }

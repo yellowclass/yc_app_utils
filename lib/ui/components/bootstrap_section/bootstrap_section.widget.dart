@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -26,14 +27,18 @@ class BootstrapSectionWidget extends StatefulWidget {
 }
 
 class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
-  GlobalKey<FormState>? _formKey;
+  GlobalKey<FormBuilderState>? _formKey;
   Map<String, dynamic>? _formData;
+
+  final ValueNotifier<bool> formValidationNotifier = ValueNotifier(false);
 
   @override
   void initState() {
     if (widget.bootstrapSectionData.containsForm) {
       _formData = {};
-      _formKey = GlobalKey<FormState>();
+      _formKey = GlobalKey<FormBuilderState>();
+    } else {
+      formValidationNotifier.value = true;
     }
     super.initState();
   }
@@ -42,7 +47,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     if (_formKey?.currentState?.validate() ?? false) {
       _formKey?.currentState?.save();
     } else {
-      _formData?.clear();
+      // _formData?.clear();
     }
   }
 
@@ -155,9 +160,47 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
               : null,
         ),
         child: widget.bootstrapSectionData.containsForm
-            ? Form(
+            ? FormBuilder(
                 key: _formKey,
-                child: buildChild(),
+                onChanged: () {
+                  formValidationNotifier.value =
+                      _formKey?.currentState?.isValid ?? false;
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildChild(),
+                    if (widget.bootstrapSectionData.bottomActionButton != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: AppSpacing.m),
+                        child: ValueListenableBuilder<bool>(
+                          valueListenable: formValidationNotifier,
+                          builder: (ctx, isValid, _) {
+                            final buttonKey = widget
+                                .bootstrapSectionData.bottomActionButton!.key;
+                            return Container(
+                              foregroundDecoration: !isValid &&
+                                      buttonKey == 'form_submit_button'
+                                  ? BoxDecoration(
+                                      backgroundBlendMode: BlendMode.saturation,
+                                      color: AppColors.cBLACK_05,
+                                    )
+                                  : null,
+                              child: GenericButtonV3Widget(
+                                buttonDetails: widget
+                                    .bootstrapSectionData.bottomActionButton!,
+                                onPressed: !isValid &&
+                                        buttonKey == 'form_submit_button'
+                                    ? null
+                                    : () {},
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                  ],
+                ),
               )
             : buildChild(),
       ),

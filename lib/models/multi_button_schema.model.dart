@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class MultiButtonSchema {
@@ -27,5 +28,10 @@ class MultiButtonSchema {
           ? SectionBackground.fromMap(map['background'])
           : null,
     );
+  }
+
+  @override
+  String toString() {
+    return 'MultiButtonSchema(alignment: $alignment, buttons: $buttons, padding: $padding, background: $background)';
   }
 }

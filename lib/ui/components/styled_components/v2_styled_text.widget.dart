@@ -73,21 +73,6 @@ class V2StyledTextWidget extends StatelessWidget {
   }
 
   TextStyle? _getStyle() {
-    return CommonHelpers.getTextStyle(
-      styledText.tStyle,
-      customStyle: TextStyle(
-        letterSpacing: styledText.letterSpacing,
-        fontStyle:
-            styledText.italic == true ? FontStyle.italic : FontStyle.normal,
-        color: CommonHelpers.v2ColorFromHex(
-          styledText.textColor,
-        ),
-        decoration: TextDecoration.combine([
-          if (styledText.strikeThrough) TextDecoration.lineThrough,
-          if (styledText.underline) TextDecoration.underline,
-        ]),
-        fontFamily: styledText.fontFamily == 'LUCKY_GUY' ? "LuckyGuy" : null,
-      ),
-    );
+    return CommonHelpers.getTextStyleFromV2TextStyle(styledText);
   }
 }

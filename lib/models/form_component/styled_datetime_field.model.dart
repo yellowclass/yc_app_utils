@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
@@ -14,6 +15,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   String? placeholder;
   String? firstDate;
   String? lastDate;
+  InputDecoration? inputDecoration;
+  TextStyle? textStyle;
 
   StyledDateTimeFieldModel({
     this.label,
@@ -26,6 +29,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     this.placeholder,
     this.firstDate,
     this.lastDate,
+    this.inputDecoration,
+    this.textStyle,
   });
 
   StyledDateTimeFieldModel copyWith({
@@ -39,6 +44,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     String? placeholder,
     String? firstDate,
     String? lastDate,
+    InputDecoration? inputDecoration,
+    TextStyle? textStyle,
   }) {
     return StyledDateTimeFieldModel(
       label: label ?? this.label,
@@ -51,6 +58,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       placeholder: placeholder ?? this.placeholder,
       firstDate: firstDate ?? this.firstDate,
       lastDate: lastDate ?? this.lastDate,
+      inputDecoration: inputDecoration ?? this.inputDecoration,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 
@@ -66,6 +75,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       'placeholder': placeholder,
       'firstDate': firstDate,
       'lastDate': lastDate,
+      'inputDecoration': inputDecoration?.toString(),
+      'textStyle': textStyle?.toString(),
     };
   }
 
@@ -88,6 +99,14 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       placeholder: map['placeholder'],
       firstDate: map['firstDate'],
       lastDate: map['lastDate'],
+      inputDecoration: map['inputDecoration'] != null
+          ? CommonHelpers.getInputDecorationFromMap(map['inputDecoration'])
+          : null,
+      textStyle: map['textStyle'] != null
+          ? CommonHelpers.getTextStyleFromV2TextStyle(
+              V2StyledTextModel.fromMap((map['textStyle'])),
+            )
+          : null,
     );
   }
 }
