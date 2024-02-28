@@ -1,3 +1,4 @@
+import 'package:yc_app_utils/models/form_component/styled_autocomplete_field.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentModel with BootstrapChildUnion {
@@ -32,6 +33,9 @@ class FormComponentModel with BootstrapChildUnion {
         break;
       case StyledSelectFieldModel:
         fcDataMap = (fcData as StyledSelectFieldModel).toMap();
+        break;
+      case StyledAutoCompleteFieldModel:
+        fcDataMap = (fcData as StyledAutoCompleteFieldModel).toMap();
         break;
       default:
     }
@@ -69,6 +73,11 @@ class FormComponentModel with BootstrapChildUnion {
         break;
       case 'StyledSelectField':
         fcData = StyledSelectFieldModel.fromMap(
+          map['fcData'],
+        );
+        break;
+      case 'StyledAutoCompleteField':
+        fcData = StyledAutoCompleteFieldModel.fromMap(
           map['fcData'],
         );
         break;

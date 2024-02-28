@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_input.model.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggestions.model.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -9,6 +11,7 @@ class BootstrapSectionWidget extends StatefulWidget {
     required this.onPressed,
     this.showRippleEffect = false,
     this.innerClickAction,
+    this.getAutoCompleteSuggestions,
     Key? key,
   }) : super(key: key);
 
@@ -21,6 +24,10 @@ class BootstrapSectionWidget extends StatefulWidget {
     ClickWidgetState? clickedWidgetState, {
     required String? key,
   })? innerClickAction;
+
+  final Future<AutocompleteSuggestions?> Function(
+    AutocompleteInputModel inputData,
+  )? getAutoCompleteSuggestions;
 
   @override
   State<BootstrapSectionWidget> createState() => _BootstrapSectionWidgetState();
@@ -43,11 +50,13 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     super.initState();
   }
 
-  void collectDataFromForm() {
+  bool collectDataFromForm() {
     if (_formKey?.currentState?.validate() ?? false) {
       _formKey?.currentState?.save();
+      return true;
     } else {
       // _formData?.clear();
+      return false;
     }
   }
 
@@ -58,7 +67,10 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     required String? key,
   }) {
     if (shouldSubmitForm) {
-      collectDataFromForm();
+      bool isValid = collectDataFromForm();
+      if (!isValid) {
+        return;
+      }
       widget.innerClickAction?.call(
         cta,
         FormResponse(
@@ -104,6 +116,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
         formData: _formData,
+        getAutoCompleteSuggestions: widget.getAutoCompleteSuggestions,
       );
     } else if (widget.bootstrapSectionData.bsData
         is BootstrapSectionChildModel) {
@@ -116,6 +129,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
         containsForm: widget.bootstrapSectionData.containsForm,
         innerClickAction: innerClickActionHandler,
         formData: _formData,
+        getAutoCompleteSuggestions: widget.getAutoCompleteSuggestions,
       );
     } else if (widget.bootstrapSectionData.bsData is StyledComponentModel) {
       StyledComponentModel bsWidget =
@@ -177,23 +191,32 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
                         child: ValueListenableBuilder<bool>(
                           valueListenable: formValidationNotifier,
                           builder: (ctx, isValid, _) {
-                            final buttonKey = widget
-                                .bootstrapSectionData.bottomActionButton!.key;
+                            final bottomActionButton =
+                                widget.bootstrapSectionData.bottomActionButton!;
                             return Container(
                               foregroundDecoration: !isValid &&
-                                      buttonKey == 'form_submit_button'
-                                  ? BoxDecoration(
+                                      bottomActionButton.key ==
+                                          'form_submit_button'
+                                  ? const BoxDecoration(
                                       backgroundBlendMode: BlendMode.saturation,
-                                      color: AppColors.cBLACK_05,
+                                      color: AppColors.cGREY_25,
                                     )
                                   : null,
                               child: GenericButtonV3Widget(
                                 buttonDetails: widget
                                     .bootstrapSectionData.bottomActionButton!,
-                                onPressed: !isValid &&
-                                        buttonKey == 'form_submit_button'
-                                    ? null
-                                    : () {},
+                                onPressed:
+                                    bottomActionButton.v2ClickAction == null
+                                        ? null
+                                        : () {
+                                            innerClickActionHandler(
+                                              bottomActionButton.v2ClickAction!,
+                                              bottomActionButton.key ==
+                                                  'form_submit_button',
+                                              null,
+                                              key: bottomActionButton.key,
+                                            );
+                                          },
                               ),
                             );
                           },
