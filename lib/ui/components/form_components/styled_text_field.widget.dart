@@ -28,7 +28,6 @@ class StyledTextFieldWidget extends StatefulWidget {
 }
 
 class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
-  TextEditingController controller = TextEditingController();
   Country _selectedCountry = Country.allCountries.firstWhere(
     (element) => element.code == 'IN',
   );
@@ -54,12 +53,6 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
   @override
   void initState() {
     super.initState();
-    if (widget.prefilledText != null) {
-      if (widget.textValueNotifier != null) {
-        widget.textValueNotifier!.value = widget.prefilledText!;
-      }
-      controller.text = widget.prefilledText!;
-    }
   }
 
   @override
@@ -115,7 +108,8 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                       widget.textValueNotifier!.value = value;
                     }
                   },
-                  initialValue: widget.textFieldData.inputDefaultValue,
+                  initialValue: widget.prefilledText ??
+                      widget.textFieldData.inputDefaultValue,
                   enabled: !widget.textFieldData.isDisabled,
                   textAlignVertical: TextAlignVertical.bottom,
                   inputFormatters: [
@@ -172,7 +166,6 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                     );
                   },
                   autofocus: widget.autofocus ?? false,
-                  controller: controller,
                 ),
               ),
             ],
