@@ -30,21 +30,22 @@ class OptionModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'label': label,
       'value': value,
       'disabled': disabled,
-      'inputField': inputField,
+      'inputField': inputField?.toMap(),
     };
   }
 
   factory OptionModel.fromMap(Map<String, dynamic> map) {
     return OptionModel(
-      label: map['label'] ?? '',
-      value: map['value'] ?? '',
-      disabled: map['disabled'] ?? false,
+      label: map['label'] as String,
+      value: map['value'] as String,
+      disabled: map['disabled'] != null ? map['disabled'] as bool : null,
       inputField: map['inputField'] != null
-          ? StyledInputFieldModel.fromMap(map['inputField'])
+          ? StyledInputFieldModel.fromMap(
+              map['inputField'] as Map<String, dynamic>)
           : null,
     );
   }
