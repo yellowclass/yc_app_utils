@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:yc_app_utils/models/form_component/form_component_model.import.dart';
@@ -30,7 +31,7 @@ class OptionModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'label': label,
       'value': value,
       'disabled': disabled,
@@ -40,13 +41,11 @@ class OptionModel {
 
   factory OptionModel.fromMap(Map<String, dynamic> map) {
     return OptionModel(
-      label: map['label'],
-      value: map['value'],
-      disabled: map['disabled'] != null ? map['disabled'] as bool : null,
+      label: map['label'] ?? '',
+      value: map['value'] ?? '',
+      disabled: map['disabled'] ?? false,
       inputField: map['inputField'] != null
-          ? StyledInputFieldModel.fromMap(
-              map['inputField'],
-            )
+          ? StyledInputFieldModel.fromMap(map['inputField'])
           : null,
     );
   }
