@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap/flutter_bootstrap.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_input.model.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggestions.model.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -9,6 +11,7 @@ class BootstrapSectionLayerWidget extends StatelessWidget {
     required this.containsForm,
     this.innerClickAction,
     this.formData,
+    this.getAutoCompleteSuggestions,
     Key? key,
   }) : super(key: key);
 
@@ -16,6 +19,8 @@ class BootstrapSectionLayerWidget extends StatelessWidget {
   final bool containsForm;
   final InnerClickAction? innerClickAction;
   final Map<String, dynamic>? formData;
+  final Future<AutocompleteSuggestions?> Function(
+      AutocompleteInputModel inputData)? getAutoCompleteSuggestions;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +39,7 @@ class BootstrapSectionLayerWidget extends StatelessWidget {
                 containsForm: containsForm,
                 formData: formData,
                 innerClickAction: innerClickAction,
+                getAutoCompleteSuggestions: getAutoCompleteSuggestions,
               ),
             ),
           )
