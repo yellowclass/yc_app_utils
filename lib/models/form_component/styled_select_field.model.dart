@@ -13,6 +13,7 @@ class StyledSelectFieldModel with FormComponentUnion {
   String? placeholder;
   InputDecoration? inputDecoration;
   TextStyle? textStyle;
+  List<ImageModel>? dropdownIcon;
 
   StyledSelectFieldModel({
     this.label,
@@ -26,6 +27,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     this.placeholder,
     this.inputDecoration,
     this.textStyle,
+    this.dropdownIcon,
   });
 
   StyledSelectFieldModel copyWith({
@@ -40,6 +42,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     String? placeholder,
     InputDecoration? inputDecoration,
     TextStyle? textStyle,
+    List<ImageModel>? dropdownIcon,
   }) {
     return StyledSelectFieldModel(
       label: label ?? this.label,
@@ -53,6 +56,7 @@ class StyledSelectFieldModel with FormComponentUnion {
       placeholder: placeholder ?? this.placeholder,
       inputDecoration: inputDecoration ?? this.inputDecoration,
       textStyle: textStyle ?? this.textStyle,
+      dropdownIcon: dropdownIcon ?? this.dropdownIcon,
     );
   }
 
@@ -69,6 +73,7 @@ class StyledSelectFieldModel with FormComponentUnion {
       'placeholder': placeholder,
       'inputDecoration': inputDecoration,
       'textStyle': textStyle,
+      'dropdownIcon': dropdownIcon,
     };
   }
 
@@ -101,6 +106,10 @@ class StyledSelectFieldModel with FormComponentUnion {
           ? CommonHelpers.getTextStyleFromV2TextStyle(
               V2StyledTextModel.fromMap((map['textStyle'])),
             )
+          : null,
+      dropdownIcon: map['dropdownIcon'] != null
+          ? List<ImageModel>.from(
+              map['dropdownIcon']?.map((x) => ImageModel.fromMap(x)))
           : null,
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:yc_app_utils/models/form_component/form_component_model.import.dart';
 
 class OptionModel {
@@ -45,5 +47,33 @@ class OptionModel {
           ? StyledInputFieldModel.fromMap(map['inputField'])
           : null,
     );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory OptionModel.fromJson(String source) =>
+      OptionModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'OptionModel(label: $label, value: $value, disabled: $disabled, inputField: $inputField)';
+  }
+
+  @override
+  bool operator ==(covariant OptionModel other) {
+    if (identical(this, other)) return true;
+
+    return other.label == label &&
+        other.value == value &&
+        other.disabled == disabled &&
+        other.inputField == inputField;
+  }
+
+  @override
+  int get hashCode {
+    return label.hashCode ^
+        value.hashCode ^
+        disabled.hashCode ^
+        inputField.hashCode;
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledSelectFieldWidget extends StatelessWidget {
-  const StyledSelectFieldWidget({
+  StyledSelectFieldWidget({
     required this.selectFieldData,
     this.onSaved,
     Key? key,
@@ -16,8 +16,19 @@ class StyledSelectFieldWidget extends StatelessWidget {
   List<OptionModel> get selectedValues =>
       selectFieldData.selectDefaultValue ?? [];
 
+  final ValueNotifier<bool> suffixIconVisibilty = ValueNotifier(false);
+
   @override
   Widget build(BuildContext context) {
+    suffixIconVisibilty.value = selectFieldData?.selectDefaultValue != null &&
+        CommonHelpers.validateSelectCheckField(
+              values: selectFieldData.selectDefaultValue != null
+                  ? selectFieldData.selectDefaultValue!
+                  : [],
+              validations: selectFieldData.validation,
+            ) ==
+            null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,7 +47,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
                 ),
             ],
           ),
-          SizedBox(height: AppSpacing.xxs),
+          const SizedBox(height: AppSpacing.xxs),
         },
         if (selectFieldData.selectType == SelectType.SINGLE)
           if (selectFieldData.isSearchable)
@@ -47,6 +58,49 @@ class StyledSelectFieldWidget extends StatelessWidget {
               dropDownButton: const SizedBox.shrink(),
               items: selectFieldData.options,
               enabled: !selectFieldData.isDisabled,
+              onChanged: (value) {
+                suffixIconVisibilty.value =
+                    CommonHelpers.validateSelectCheckField(
+                          values: value != null ? [value] : [],
+                          validations: selectFieldData.validation,
+                        ) ==
+                        null;
+              },
+              dropdownButtonBuilder: (context) => Row(
+                children: List.generate(
+                  selectFieldData.dropdownIcon?.length ?? 0,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: AppSpacing.xs),
+                      child: (selectFieldData.dropdownIcon?[index].id ==
+                              "validate_icon")
+                          ? ValueListenableBuilder(
+                              valueListenable: suffixIconVisibilty,
+                              builder: (context, value, _) {
+                                return (value == true &&
+                                        selectFieldData
+                                                .dropdownIcon?[index].url !=
+                                            null)
+                                    ? GenericNetworkImage(
+                                        selectFieldData
+                                            .dropdownIcon![index].url!,
+                                        width: selectFieldData
+                                            .dropdownIcon?[index].width,
+                                      )
+                                    : const SizedBox();
+                              },
+                            )
+                          : selectFieldData.dropdownIcon?[index].url != null
+                              ? GenericNetworkImage(
+                                  selectFieldData.dropdownIcon![index].url!,
+                                  width: selectFieldData
+                                      .dropdownIcon?[index].width,
+                                )
+                              : const SizedBox(),
+                    );
+                  },
+                ),
+              ),
               dropdownSearchDecoration: selectFieldData.inputDecoration ??
                   InputDecoration(
                     hintText: selectFieldData.placeholder,
@@ -82,6 +136,7 @@ class StyledSelectFieldWidget extends StatelessWidget {
             FormBuilderDropdown<OptionModel>(
               name: selectFieldData.name,
               style: selectFieldData.textStyle,
+              initialValue: selectFieldData.selectDefaultValue?[0],
               items: List<DropdownMenuItem<OptionModel>>.from(
                 selectFieldData.options.map(
                   (option) => DropdownMenuItem<OptionModel>(
@@ -90,7 +145,49 @@ class StyledSelectFieldWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              icon: const SizedBox.shrink(),
+              icon: Row(
+                children: List.generate(
+                  selectFieldData.dropdownIcon?.length ?? 0,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: AppSpacing.xs),
+                      child: (selectFieldData.dropdownIcon?[index].id ==
+                              "validate_icon")
+                          ? ValueListenableBuilder(
+                              valueListenable: suffixIconVisibilty,
+                              builder: (context, value, _) {
+                                return (value == true &&
+                                        selectFieldData
+                                                .dropdownIcon?[index].url !=
+                                            null)
+                                    ? GenericNetworkImage(
+                                        selectFieldData
+                                            .dropdownIcon![index].url!,
+                                        width: selectFieldData
+                                            .dropdownIcon?[index].width,
+                                      )
+                                    : const SizedBox();
+                              },
+                            )
+                          : selectFieldData.dropdownIcon?[index].url != null
+                              ? GenericNetworkImage(
+                                  selectFieldData.dropdownIcon![index].url!,
+                                  width: selectFieldData
+                                      .dropdownIcon?[index].width,
+                                )
+                              : const SizedBox(),
+                    );
+                  },
+                ),
+              ),
+              onChanged: (value) {
+                suffixIconVisibilty.value =
+                    CommonHelpers.validateSelectCheckField(
+                          values: value != null ? [value] : [],
+                          validations: selectFieldData.validation,
+                        ) ==
+                        null;
+              },
               decoration:
                   selectFieldData.inputDecoration ?? const InputDecoration(),
               validator: (value) => CommonHelpers.validateSelectCheckField(
