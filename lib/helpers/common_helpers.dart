@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_field_data.model.dart';
 import 'package:yc_app_utils/models/click_action/event_data.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 import 'package:collection/collection.dart';
@@ -729,6 +730,34 @@ class CommonHelpers {
     return null;
   }
 
+  static String? validateAutocompleteField({
+    required String value,
+    required Validation? validations,
+    required List<AutocompleteFieldData>? lastSuggestions,
+    required String? label,
+  }) {
+    if (validations == null) {
+      return null;
+    }
+    String? initialValidation = validateTextField(
+      value: value,
+      validations: validations,
+    );
+
+    if (initialValidation != null) {
+      return initialValidation;
+    }
+
+    if (lastSuggestions != null &&
+        lastSuggestions
+            .map((suggestion) => suggestion.inputText)
+            .contains(value)) {
+      return null;
+    } else {
+      return 'Please select a valid ${label?.toLowerCase() ?? 'option'} ';
+    }
+  }
+
   static String? validateDateTimeField({
     required DateTime? value,
     required Validation? validations,
@@ -943,6 +972,8 @@ class CommonHelpers {
           ? null
           : const SizedBox.shrink(),
       isDense: inputDecoration['isDense'] ?? true,
+      fillColor: CommonHelpers.v2ColorFromHex(inputDecoration['fillColor']),
+      filled: inputDecoration['filled'],
     );
   }
 }

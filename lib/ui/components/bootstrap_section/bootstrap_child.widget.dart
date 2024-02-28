@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_input.model.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggestions.model.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -9,6 +11,7 @@ class BootstrapChildWidget extends StatefulWidget {
     this.innerClickAction,
     this.formData,
     this.buttonLoaderColor = AppColors.cGREEN_100,
+    this.getAutoCompleteSuggestions,
     Key? key,
   }) : super(key: key);
 
@@ -17,6 +20,8 @@ class BootstrapChildWidget extends StatefulWidget {
   final InnerClickAction? innerClickAction;
   final Map<String, dynamic>? formData;
   final Color buttonLoaderColor;
+  final Future<AutocompleteSuggestions?> Function(
+      AutocompleteInputModel inputData)? getAutoCompleteSuggestions;
 
   @override
   State<BootstrapChildWidget> createState() => BootstrapChildWidgetState();
@@ -135,6 +140,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
         onSaved: (key, value) {
           widget.formData?[key] = value;
         },
+        getAutoCompleteSuggestions: widget.getAutoCompleteSuggestions,
       );
     } else {
       return const SizedBox.shrink();

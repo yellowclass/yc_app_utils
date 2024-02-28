@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_input.model.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggestions.model.dart';
+import 'package:yc_app_utils/models/form_component/styled_autocomplete_field.model.dart';
+import 'package:yc_app_utils/ui/components/form_components/styled_autocomplete_field.widget.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentWidget extends StatelessWidget {
   const FormComponentWidget({
     required this.formComponentDetails,
+    this.getAutoCompleteSuggestions,
     this.onSaved,
     Key? key,
   }) : super(key: key);
 
   final FormComponentModel formComponentDetails;
   final void Function(String, dynamic)? onSaved;
+  final Future<AutocompleteSuggestions?> Function(
+      AutocompleteInputModel inputData)? getAutoCompleteSuggestions;
 
   Widget buildComponent() {
     if (formComponentDetails.fcData is StyledInputFieldModel) {
@@ -47,6 +54,14 @@ class FormComponentWidget extends StatelessWidget {
       return StyledSelectFieldWidget(
         selectFieldData: selectFieldDetails,
         onSaved: onSaved,
+      );
+    } else if (formComponentDetails.fcData is StyledAutoCompleteFieldModel) {
+      StyledAutoCompleteFieldModel autocompleteFieldData =
+          formComponentDetails.fcData as StyledAutoCompleteFieldModel;
+      return StyledAutocompleteFieldWidget(
+        autocompleteFieldData: autocompleteFieldData,
+        onSaved: onSaved,
+        getAutoCompleteSuggestions: getAutoCompleteSuggestions,
       );
     } else {
       return const SizedBox.shrink();
