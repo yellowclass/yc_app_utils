@@ -138,7 +138,18 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
       return FormComponentWidget(
         formComponentDetails: widgetData,
         onSaved: (key, value) {
-          widget.formData?[key] = value;
+          if (widgetData.fcData is StyledSelectFieldModel &&
+              (widgetData.fcData as StyledSelectFieldModel).selectType ==
+                  SelectType.SINGLE) {
+            // For dropdown field of type single
+            // assign first element of the list if not empty
+            // otherwise null
+            widget.formData?[key] =
+                (value is List && (value).isNotEmpty) ? value[0] : null;
+          } else {
+            // Assign value directly
+            widget.formData?[key] = value;
+          }
         },
         getAutoCompleteSuggestions: widget.getAutoCompleteSuggestions,
       );
