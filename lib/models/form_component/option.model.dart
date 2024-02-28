@@ -31,7 +31,7 @@ class OptionModel {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'label': label,
       'value': value,
       'disabled': disabled,
