@@ -44,12 +44,14 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     if (widget.bootstrapSectionData.containsForm) {
       _formData = {};
       _formKey = GlobalKey<FormBuilderState>();
-      if (widget.bootstrapSectionData.isFormFullyPrefilled ?? false) {
-        formValidationNotifier.value = true;
-      }
     } else {
       formValidationNotifier.value = true;
     }
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (widget.bootstrapSectionData.containsForm) {
+        formValidationNotifier.value = _formKey?.currentState?.isValid ?? false;
+      }
+    });
     super.initState();
   }
 
@@ -196,6 +198,19 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
                         onPressed: (clickWidgetState) {
                           final bottomActionButton =
                               widget.bootstrapSectionData.bottomActionButton!;
+
+                          // if form is not valid, then validate the form and activate the button
+                          // this is done as once error text is shown, the isValid flag is not updated
+                          // because of a bug in flutter_form_builder which is fixed in the latest version
+                          // but we can't upgrade the version because of incompatibility of our dart version
+                          // [https://github.com/flutter-form-builder-ecosystem/flutter_form_builder/issues/1348]
+                          if (bottomActionButton.key == 'form_submit_button' &&
+                              !(_formKey?.currentState?.isValid ?? false)) {
+                            formValidationNotifier.value =
+                                _formKey?.currentState?.validate() ?? false;
+                            return;
+                          }
+
                           innerClickActionHandler(
                             bottomActionButton.v2ClickAction!,
                             bottomActionButton.key == 'form_submit_button',
