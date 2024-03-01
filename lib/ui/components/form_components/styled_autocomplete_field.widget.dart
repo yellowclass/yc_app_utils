@@ -150,7 +150,7 @@ class _StyledAutocompleteFieldWidgetState
                     );
                   },
                   validator: (value) => CommonHelpers.validateAutocompleteField(
-                    value: value!,
+                    value: value ?? '',
                     validations: widget.autocompleteFieldData.validation,
                     label: widget.autocompleteFieldData.label?.text,
                     lastSuggestions: _lastSuggestions,

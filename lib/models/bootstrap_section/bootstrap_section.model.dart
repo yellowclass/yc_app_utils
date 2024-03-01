@@ -6,6 +6,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
   String? miscParams;
   V2ClickAction? clickAction;
   bool containsForm;
+  bool? isFormFullyPrefilled;
   SectionBackground? background;
   String? borderColor;
   List<int>? borderRadius;
@@ -19,6 +20,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
     required this.bsData,
     this.clickAction,
     required this.containsForm,
+    this.isFormFullyPrefilled,
     this.background,
     this.miscParams,
     this.borderColor,
@@ -51,6 +53,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
       'bsData': bsDataMap,
       'clickAction': clickAction?.toMap(),
       'containsForm': containsForm,
+      'isFormFullyPrefilled': isFormFullyPrefilled,
       'background': background?.toMap(),
       'borderColor': borderColor,
       'miscParams': miscParams,
@@ -95,6 +98,7 @@ class BootstrapSectionModel with BootstrapChildUnion {
           ? V2ClickAction.fromMap(map['clickAction'])
           : null,
       containsForm: map['containsForm'] ?? false,
+      isFormFullyPrefilled: map['isFormFullyPrefilled'],
       background: map['background'] != null
           ? SectionBackground.fromMap(map['background'])
           : null,
