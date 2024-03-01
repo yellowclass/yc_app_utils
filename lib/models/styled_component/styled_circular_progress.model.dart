@@ -6,7 +6,7 @@ class StyledCircularProgress with StyledComponentUnion {
   int? width;
   Color? activeColor;
   Color? inactiveColor;
-  List<V2StyledTextModel>? innerText;
+  List<V2StyledTextModel>? innerTexts;
   StyledImageModel? bottomIcon;
   int? percentage;
 
@@ -15,7 +15,7 @@ class StyledCircularProgress with StyledComponentUnion {
     this.width,
     this.activeColor,
     this.inactiveColor,
-    this.innerText,
+    this.innerTexts,
     this.bottomIcon,
     this.percentage,
   });
@@ -29,7 +29,7 @@ class StyledCircularProgress with StyledComponentUnion {
           width == other.width &&
           activeColor == other.activeColor &&
           inactiveColor == other.inactiveColor &&
-          innerText == other.innerText &&
+          innerTexts == other.innerTexts &&
           bottomIcon == other.bottomIcon &&
           percentage == other.percentage);
 
@@ -39,7 +39,7 @@ class StyledCircularProgress with StyledComponentUnion {
       width.hashCode ^
       activeColor.hashCode ^
       inactiveColor.hashCode ^
-      innerText.hashCode ^
+      innerTexts.hashCode ^
       bottomIcon.hashCode ^
       percentage.hashCode;
 
@@ -50,7 +50,7 @@ class StyledCircularProgress with StyledComponentUnion {
         ' width: $width,' +
         ' activeColor: $activeColor,' +
         ' inactiveColor: $inactiveColor,' +
-        ' innerText: $innerText,' +
+        ' innerTexts: $innerTexts,' +
         ' bottomIcon: $bottomIcon,' +
         ' percentage: $percentage' +
         '}';
@@ -61,7 +61,7 @@ class StyledCircularProgress with StyledComponentUnion {
     int? width,
     Color? activeColor,
     Color? inactiveColor,
-    List<V2StyledTextModel>? innerText,
+    List<V2StyledTextModel>? innerTexts,
     StyledImageModel? bottomIcon,
     int? percentage,
   }) {
@@ -70,7 +70,7 @@ class StyledCircularProgress with StyledComponentUnion {
       width: width ?? this.width,
       activeColor: activeColor ?? this.activeColor,
       inactiveColor: inactiveColor ?? this.inactiveColor,
-      innerText: innerText ?? this.innerText,
+      innerTexts: innerTexts ?? this.innerTexts,
       bottomIcon: bottomIcon ?? this.bottomIcon,
       percentage: percentage ?? this.percentage,
     );
@@ -82,7 +82,7 @@ class StyledCircularProgress with StyledComponentUnion {
       'width': this.width,
       'activeColor': this.activeColor?.toString(),
       'inactiveColor': this.inactiveColor?.toString(),
-      'innerText': this.innerText?.toString(),
+      'innerText': this.innerTexts?.toString(),
       'bottomIcon': this.bottomIcon?.toString(),
       'percentage': this.percentage,
     };
@@ -98,9 +98,9 @@ class StyledCircularProgress with StyledComponentUnion {
       inactiveColor: map['inactiveColor'] != null
           ? CommonHelpers.v2ColorFromHex(map['inactiveColor'])
           : null,
-      innerText: map['innerText'] != null
+      innerTexts: map['innerTexts'] != null
           ? List<V2StyledTextModel>.from(
-              map['innerText'].map((e) => V2StyledTextModel.fromMap(e)))
+              map['innerTexts'].map((e) => V2StyledTextModel.fromMap(e)))
           : null,
       bottomIcon: map['bottomIcon'] != null
           ? StyledImageModel.fromMap(map['bottomIcon'])
