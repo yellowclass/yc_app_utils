@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/media_manager_info.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_circular_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
+import 'package:yc_app_utils/ui/components/styled_components/styled_circular_progress.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_lottie.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_timer.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -145,6 +147,11 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
         final styledTimerData = _scData as StyledTimerModel;
         return StyledTimerWidget(
           styledTimerData: styledTimerData,
+        );
+      case StyledCircularProgress:
+        final styledCircularProgressData = _scData as StyledCircularProgress;
+        return StyledCircularProgressWidget(
+          styledCircularProgressData: styledCircularProgressData,
         );
       default:
         return const SizedBox.shrink();
