@@ -8,6 +8,7 @@ class StyledCircularProgress with StyledComponentUnion {
   Color? inactiveColor;
   List<V2StyledTextModel>? innerText;
   StyledImageModel? bottomIcon;
+  int? percentage;
 
   StyledCircularProgress({
     this.radius,
@@ -16,6 +17,7 @@ class StyledCircularProgress with StyledComponentUnion {
     this.inactiveColor,
     this.innerText,
     this.bottomIcon,
+    this.percentage,
   });
 
   @override
@@ -28,7 +30,8 @@ class StyledCircularProgress with StyledComponentUnion {
           activeColor == other.activeColor &&
           inactiveColor == other.inactiveColor &&
           innerText == other.innerText &&
-          bottomIcon == other.bottomIcon);
+          bottomIcon == other.bottomIcon &&
+          percentage == other.percentage);
 
   @override
   int get hashCode =>
@@ -37,7 +40,8 @@ class StyledCircularProgress with StyledComponentUnion {
       activeColor.hashCode ^
       inactiveColor.hashCode ^
       innerText.hashCode ^
-      bottomIcon.hashCode;
+      bottomIcon.hashCode ^
+      percentage.hashCode;
 
   @override
   String toString() {
@@ -48,6 +52,7 @@ class StyledCircularProgress with StyledComponentUnion {
         ' inactiveColor: $inactiveColor,' +
         ' innerText: $innerText,' +
         ' bottomIcon: $bottomIcon,' +
+        ' percentage: $percentage' +
         '}';
   }
 
@@ -58,6 +63,7 @@ class StyledCircularProgress with StyledComponentUnion {
     Color? inactiveColor,
     List<V2StyledTextModel>? innerText,
     StyledImageModel? bottomIcon,
+    int? percentage,
   }) {
     return StyledCircularProgress(
       radius: radius ?? this.radius,
@@ -66,6 +72,7 @@ class StyledCircularProgress with StyledComponentUnion {
       inactiveColor: inactiveColor ?? this.inactiveColor,
       innerText: innerText ?? this.innerText,
       bottomIcon: bottomIcon ?? this.bottomIcon,
+      percentage: percentage ?? this.percentage,
     );
   }
 
@@ -77,6 +84,7 @@ class StyledCircularProgress with StyledComponentUnion {
       'inactiveColor': this.inactiveColor?.toString(),
       'innerText': this.innerText?.toString(),
       'bottomIcon': this.bottomIcon?.toString(),
+      'percentage': this.percentage,
     };
   }
 
@@ -97,6 +105,7 @@ class StyledCircularProgress with StyledComponentUnion {
       bottomIcon: map['bottomIcon'] != null
           ? StyledImageModel.fromMap(map['bottomIcon'])
           : null,
+      percentage: map['percentage'],
     );
   }
 }
