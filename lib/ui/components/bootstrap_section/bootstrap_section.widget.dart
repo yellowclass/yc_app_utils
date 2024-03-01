@@ -44,6 +44,9 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     if (widget.bootstrapSectionData.containsForm) {
       _formData = {};
       _formKey = GlobalKey<FormBuilderState>();
+      if (widget.bootstrapSectionData.isFormFullyPrefilled ?? false) {
+        formValidationNotifier.value = true;
+      }
     } else {
       formValidationNotifier.value = true;
     }

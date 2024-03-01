@@ -152,7 +152,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                         fontSize: 16,
                       ),
                   validator: (value) => CommonHelpers.validateTextField(
-                    value: value!,
+                    value: value ?? '',
                     validations: widget.textFieldData.validation,
                   ),
                   onSaved: (value) {
