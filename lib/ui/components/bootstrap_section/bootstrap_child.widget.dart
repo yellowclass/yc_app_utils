@@ -165,6 +165,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
                 color: CommonHelpers.v2ColorFromHex(
                   widget.bootstrapChild.borderColor,
                 ),
+                width: widget.bootstrapChild.borderWidth ?? 1,
               )
             : null,
         borderRadius: CommonHelpers.getBorderRadiusFromList(

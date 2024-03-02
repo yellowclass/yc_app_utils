@@ -170,6 +170,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
                   color: CommonHelpers.v2ColorFromHex(
                     widget.bootstrapSectionData.borderColor,
                   ),
+                  width: widget.bootstrapSectionData.borderWidth ?? 1,
                 )
               : null,
         ),

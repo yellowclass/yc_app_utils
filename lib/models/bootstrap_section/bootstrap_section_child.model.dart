@@ -11,6 +11,7 @@ class BootstrapSectionChildModel with BootstrapSectionUnion {
   List<int>? padding;
   double? height;
   Alignment? boxAlignment;
+  double? borderWidth;
 
   BootstrapSectionChildModel({
     required this.classes,
@@ -21,6 +22,7 @@ class BootstrapSectionChildModel with BootstrapSectionUnion {
     this.padding,
     this.height,
     this.boxAlignment,
+    this.borderWidth,
   });
 
   Map<String, dynamic> toMap() {
@@ -45,6 +47,7 @@ class BootstrapSectionChildModel with BootstrapSectionUnion {
       'borderRadius': borderRadius,
       'padding': padding,
       'height': height,
+      'borderWidth': borderWidth,
       // 'boxAlignment': boxAlignment?.name,
     };
   }
@@ -87,6 +90,7 @@ class BootstrapSectionChildModel with BootstrapSectionUnion {
               map['boxAlignment'],
             )
           : null,
+      borderWidth: map['borderWidth']?.toDouble(),
     );
   }
 }

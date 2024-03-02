@@ -103,6 +103,10 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
               showSelectedItems: true,
               showSearchBox: widget.selectFieldData.isSearchable,
               dropDownButton: const SizedBox.shrink(),
+              dropdownBuilder: (context, selectedItem) => Text(
+                selectedItem?.label ?? "",
+                style: widget.selectFieldData.textStyle,
+              ),
               items: widget.selectFieldData.options,
               enabled: !widget.selectFieldData.isDisabled,
               onChanged: (value) {
@@ -151,6 +155,7 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
               name: widget.selectFieldData.name,
               style: widget.selectFieldData.textStyle,
               initialValue: widget.selectFieldData.selectDefaultValue?[0],
+              enabled: !widget.selectFieldData.isDisabled,
               items: List<DropdownMenuItem<OptionModel>>.from(
                 widget.selectFieldData.options.map(
                   (option) => DropdownMenuItem<OptionModel>(
