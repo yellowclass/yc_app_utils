@@ -66,10 +66,13 @@ class _StyledAutocompleteFieldWidgetState
     }
   }
 
+  ValueNotifier<bool> isFetchingSuggestions = ValueNotifier(false);
+
   void fetchSuggestions(String input) async {
     if (debouncer?.isActive ?? false) {
       debouncer?.cancel();
     }
+    isFetchingSuggestions.value = true;
     debouncer = Timer(const Duration(milliseconds: 800), () async {
       lastSearchedValue = input;
       _lastSuggestions = (await widget.getAutoCompleteSuggestions?.call(
@@ -81,6 +84,7 @@ class _StyledAutocompleteFieldWidgetState
           ))
               ?.suggestions ??
           [];
+      isFetchingSuggestions.value = false;
       _suggestions = _lastSuggestions;
       controller.notifyListeners();
       lastSearchedValue = null;
@@ -162,8 +166,26 @@ class _StyledAutocompleteFieldWidgetState
                   enabled: !widget.autocompleteFieldData.isDisabled,
                   textAlignVertical: TextAlignVertical.bottom,
                   minLines: widget.autocompleteFieldData.isExpanded ? null : 1,
-                  decoration: widget.autocompleteFieldData.inputDecoration ??
-                      const InputDecoration(),
+                  decoration: (widget.autocompleteFieldData.inputDecoration ??
+                          const InputDecoration())
+                      .copyWith(
+                    suffixIcon: ValueListenableBuilder(
+                      valueListenable: isFetchingSuggestions,
+                      builder: (context, value, _) {
+                        return value == true
+                            ? Container(
+                                padding: const EdgeInsets.all(AppSpacing.s),
+                                width: AppSpacing.xxs,
+                                height: AppSpacing.xxs,
+                                child: const CircularProgressIndicator(
+                                  color: Color(0xFFFF8D33),
+                                  strokeWidth: 3,
+                                ),
+                              )
+                            : const SizedBox();
+                      },
+                    ),
+                  ),
                   style: widget.autocompleteFieldData.textStyle ??
                       const TextStyle(
                         color: AppColors.cBODY_TEXT,
