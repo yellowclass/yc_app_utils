@@ -151,11 +151,9 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
               },
             )
           else
-            FormBuilderDropdown<OptionModel>(
-              name: widget.selectFieldData.name,
+            DropdownButtonFormField<OptionModel>(
               style: widget.selectFieldData.textStyle,
-              initialValue: widget.selectFieldData.selectDefaultValue?[0],
-              enabled: !widget.selectFieldData.isDisabled,
+              value: widget.selectFieldData.selectDefaultValue?[0],
               items: List<DropdownMenuItem<OptionModel>>.from(
                 widget.selectFieldData.options.map(
                   (option) => DropdownMenuItem<OptionModel>(
@@ -164,15 +162,20 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                   ),
                 ),
               ),
+              // isExpanded: true,
+              // isDense: true,
               icon: _getDropDownIcon(),
-              onChanged: (value) {
-                suffixIconVisibilty.value =
-                    CommonHelpers.validateSelectCheckField(
-                          values: value != null ? [value] : [],
-                          validations: widget.selectFieldData.validation,
-                        ) ==
-                        null;
-              },
+              borderRadius: BorderRadius.circular(10),
+              onChanged: widget.selectFieldData.isDisabled
+                  ? null
+                  : (value) {
+                      suffixIconVisibilty.value =
+                          CommonHelpers.validateSelectCheckField(
+                                values: value != null ? [value] : [],
+                                validations: widget.selectFieldData.validation,
+                              ) ==
+                              null;
+                    },
               decoration: widget.selectFieldData.inputDecoration ??
                   const InputDecoration(),
               validator: (value) => CommonHelpers.validateSelectCheckField(
