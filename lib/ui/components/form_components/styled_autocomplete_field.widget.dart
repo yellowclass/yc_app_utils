@@ -72,24 +72,26 @@ class _StyledAutocompleteFieldWidgetState
     if (debouncer?.isActive ?? false) {
       debouncer?.cancel();
     }
-    isFetchingSuggestions.value = true;
-    debouncer = Timer(const Duration(milliseconds: 800), () async {
-      lastSearchedValue = input;
-      _lastSuggestions = (await widget.getAutoCompleteSuggestions?.call(
-            AutocompleteInputModel(
-              input: input,
-              autocompleteType: widget.autocompleteFieldData.autocompleteType,
-              miscParams: widget.autocompleteFieldData.miscParams,
-            ),
-          ))
-              ?.suggestions ??
-          [];
-      isFetchingSuggestions.value = false;
-      _suggestions = _lastSuggestions;
-      controller.notifyListeners();
-      lastSearchedValue = null;
-      setState(() {});
-    });
+    debouncer = Timer(
+      const Duration(milliseconds: 800),
+      () async {
+        lastSearchedValue = input;
+        _lastSuggestions = (await widget.getAutoCompleteSuggestions?.call(
+              AutocompleteInputModel(
+                input: input,
+                autocompleteType: widget.autocompleteFieldData.autocompleteType,
+                miscParams: widget.autocompleteFieldData.miscParams,
+              ),
+            ))
+                ?.suggestions ??
+            [];
+        isFetchingSuggestions.value = false;
+        _suggestions = _lastSuggestions;
+        controller.notifyListeners();
+        lastSearchedValue = null;
+        setState(() {});
+      },
+    );
   }
 
   @override
@@ -136,6 +138,13 @@ class _StyledAutocompleteFieldWidgetState
                 if (input.length < 3) {
                   return _suggestions;
                 }
+
+                try {
+                  if (!(textEditingValue.composing.start == -1 &&
+                      textEditingValue.composing.end == -1)) {
+                    isFetchingSuggestions.value = true;
+                  }
+                } catch (e) {}
 
                 fetchSuggestions(input);
                 return _suggestions;
