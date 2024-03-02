@@ -138,13 +138,10 @@ class _StyledAutocompleteFieldWidgetState
                 if (input.length < 3) {
                   return _suggestions;
                 }
-
-                try {
-                  if (!(textEditingValue.composing.start == -1 &&
-                      textEditingValue.composing.end == -1)) {
-                    isFetchingSuggestions.value = true;
-                  }
-                } catch (e) {}
+                if (_lastSelectedSuggestions?.inputText == null ||
+                    _lastSelectedSuggestions?.inputText != input) {
+                  isFetchingSuggestions.value = true;
+                }
 
                 fetchSuggestions(input);
                 return _suggestions;
