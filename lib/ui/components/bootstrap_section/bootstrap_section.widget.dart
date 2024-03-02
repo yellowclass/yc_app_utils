@@ -47,6 +47,11 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
     } else {
       formValidationNotifier.value = true;
     }
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (widget.bootstrapSectionData.containsForm) {
+        formValidationNotifier.value = _formKey?.currentState?.isValid ?? false;
+      }
+    });
     super.initState();
   }
 
@@ -187,46 +192,97 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
                   children: [
                     buildChild(),
                     if (widget.bootstrapSectionData.bottomActionButton != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: AppSpacing.m),
-                        child: ValueListenableBuilder<bool>(
-                          valueListenable: formValidationNotifier,
-                          builder: (ctx, isValid, _) {
-                            final bottomActionButton =
-                                widget.bootstrapSectionData.bottomActionButton!;
-                            return Container(
-                              foregroundDecoration: !isValid &&
-                                      bottomActionButton.key ==
-                                          'form_submit_button'
-                                  ? const BoxDecoration(
-                                      backgroundBlendMode: BlendMode.saturation,
-                                      color: AppColors.cGREY_25,
-                                    )
-                                  : null,
-                              child: GenericButtonV3Widget(
-                                buttonDetails: widget
-                                    .bootstrapSectionData.bottomActionButton!,
-                                onPressed:
-                                    bottomActionButton.v2ClickAction == null
-                                        ? null
-                                        : () {
-                                            innerClickActionHandler(
-                                              bottomActionButton.v2ClickAction!,
-                                              bottomActionButton.key ==
-                                                  'form_submit_button',
-                                              null,
-                                              key: bottomActionButton.key,
-                                            );
-                                          },
-                              ),
-                            );
-                          },
-                        ),
+                      BootstrapBottomActionButton(
+                        formValidationNotifier: formValidationNotifier,
+                        bottomActionButton:
+                            widget.bootstrapSectionData.bottomActionButton!,
+                        onPressed: (clickWidgetState) {
+                          final bottomActionButton =
+                              widget.bootstrapSectionData.bottomActionButton!;
+
+                          // if form is not valid, then validate the form and activate the button
+                          // this is done as once error text is shown, the isValid flag is not updated
+                          // because of a bug in flutter_form_builder which is fixed in the latest version
+                          // but we can't upgrade the version because of incompatibility of our dart version
+                          // [https://github.com/flutter-form-builder-ecosystem/flutter_form_builder/issues/1348]
+                          if (bottomActionButton.key == 'form_submit_button' &&
+                              !(_formKey?.currentState?.isValid ?? false)) {
+                            formValidationNotifier.value =
+                                _formKey?.currentState?.validate() ?? false;
+                            return;
+                          }
+
+                          innerClickActionHandler(
+                            bottomActionButton.v2ClickAction!,
+                            bottomActionButton.key == 'form_submit_button',
+                            clickWidgetState,
+                            key: bottomActionButton.key,
+                          );
+                        },
                       ),
                   ],
                 ),
               )
             : buildChild(),
+      ),
+    );
+  }
+}
+
+class BootstrapBottomActionButton extends StatefulWidget {
+  final ValueNotifier<bool> formValidationNotifier;
+  final GenericButtonV3Model bottomActionButton;
+  final Function(ClickWidgetState clickWidgetState) onPressed;
+
+  const BootstrapBottomActionButton({
+    required this.formValidationNotifier,
+    required this.bottomActionButton,
+    required this.onPressed,
+    super.key,
+  });
+
+  @override
+  State<BootstrapBottomActionButton> createState() =>
+      _BootstrapBottomActionButtonState();
+}
+
+class _BootstrapBottomActionButtonState
+    extends State<BootstrapBottomActionButton> with ClickWidgetState {
+  bool _isLoading = false;
+  @override
+  void setLoading(bool value) {
+    if (mounted) {
+      setState(() {
+        _isLoading = value;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.m),
+      child: ValueListenableBuilder<bool>(
+        valueListenable: widget.formValidationNotifier,
+        builder: (ctx, isValid, _) {
+          final bottomActionButton = widget.bottomActionButton;
+          return Container(
+            foregroundDecoration:
+                !isValid && bottomActionButton.key == 'form_submit_button'
+                    ? const BoxDecoration(
+                        backgroundBlendMode: BlendMode.saturation,
+                        color: AppColors.cGREY_25,
+                      )
+                    : null,
+            child: GenericButtonV3Widget(
+              buttonDetails: widget.bottomActionButton,
+              isLoading: _isLoading,
+              onPressed: bottomActionButton.v2ClickAction == null
+                  ? null
+                  : () => widget.onPressed(this),
+            ),
+          );
+        },
       ),
     );
   }

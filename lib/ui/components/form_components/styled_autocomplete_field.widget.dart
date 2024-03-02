@@ -35,6 +35,19 @@ class _StyledAutocompleteFieldWidgetState
   String? lastSearchedValue;
   List<AutocompleteFieldData> _suggestions = [];
   List<AutocompleteFieldData> _lastSuggestions = [];
+  AutocompleteFieldData? _lastSelectedSuggestions;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    if (widget.autocompleteFieldData.autocompleteDefaultValue != null) {
+      _lastSelectedSuggestions =
+          widget.autocompleteFieldData.autocompleteDefaultValue;
+      controller.text = _lastSelectedSuggestions!.inputText;
+      _lastSuggestions.add(_lastSelectedSuggestions!);
+    }
+    super.initState();
+  }
 
   Timer? debouncer;
 
@@ -51,12 +64,6 @@ class _StyledAutocompleteFieldWidgetState
       default:
         return null;
     }
-  }
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    super.initState();
   }
 
   void fetchSuggestions(String input) async {
@@ -140,24 +147,18 @@ class _StyledAutocompleteFieldWidgetState
                   focusNode: focusNode,
                   name: widget.autocompleteFieldData.name,
                   onSaved: (value) {
-                    final selectedSuggestion =
-                        _lastSuggestions.firstWhereOrNull(
-                            (suggestion) => suggestion.inputText == value);
-
                     widget.onSaved?.call(
                       widget.autocompleteFieldData.name,
-                      selectedSuggestion?.toMap(),
+                      _lastSelectedSuggestions?.toMap(),
                     );
                   },
                   validator: (value) => CommonHelpers.validateAutocompleteField(
-                    value: value!,
+                    value: value ?? '',
                     validations: widget.autocompleteFieldData.validation,
                     label: widget.autocompleteFieldData.label?.text,
                     lastSuggestions: _lastSuggestions,
                   ),
                   cursorColor: AppColors.cTANGERINE_100,
-                  initialValue:
-                      widget.autocompleteFieldData.autoCompleteDefaultValue,
                   enabled: !widget.autocompleteFieldData.isDisabled,
                   textAlignVertical: TextAlignVertical.bottom,
                   minLines: widget.autocompleteFieldData.isExpanded ? null : 1,
@@ -171,6 +172,9 @@ class _StyledAutocompleteFieldWidgetState
                 );
               },
               displayStringForOption: (option) => option.inputText,
+              onSelected: (option) {
+                _lastSelectedSuggestions = option;
+              },
               optionsViewBuilder: (context, onSelected, options) {
                 return Align(
                   alignment: Alignment.topLeft,
@@ -207,12 +211,13 @@ class _StyledAutocompleteFieldWidgetState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: option.texts
-                                    .map(
-                                      (styledText) => V2StyledTextWidget(
-                                        styledText: styledText,
-                                      ),
-                                    )
-                                    .toList(),
+                                        ?.map(
+                                          (styledText) => V2StyledTextWidget(
+                                            styledText: styledText,
+                                          ),
+                                        )
+                                        .toList() ??
+                                    [],
                               ),
                             );
                           },

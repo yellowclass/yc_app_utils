@@ -7,7 +7,7 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class AutocompleteFieldData {
   final String value;
   final String inputText;
-  final List<V2StyledTextModel> texts;
+  final List<V2StyledTextModel>? texts;
 
   AutocompleteFieldData({
     required this.value,
@@ -38,11 +38,13 @@ class AutocompleteFieldData {
     return AutocompleteFieldData(
       value: map['value'] as String,
       inputText: map['inputText'] as String,
-      texts: List<V2StyledTextModel>.from(
-        (map['texts'] as List<dynamic>).map<V2StyledTextModel>(
-          (x) => V2StyledTextModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      texts: map['texts'] != null
+          ? List<V2StyledTextModel>.from(
+              (map['texts'] as List<dynamic>).map<V2StyledTextModel>(
+                (x) => V2StyledTextModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
     );
   }
 

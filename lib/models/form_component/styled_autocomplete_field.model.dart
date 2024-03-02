@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
+import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_field_data.model.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
@@ -11,7 +12,7 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
   String autocompleteType;
   V2StyledTextModel? label;
   Validation? validation;
-  String? autoCompleteDefaultValue;
+  AutocompleteFieldData? autocompleteDefaultValue;
   bool isDisabled;
   int maxLines;
   bool isExpanded;
@@ -26,7 +27,7 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
     required this.autocompleteType,
     this.label,
     this.validation,
-    this.autoCompleteDefaultValue,
+    this.autocompleteDefaultValue,
     this.isDisabled = false,
     this.maxLines = 0,
     this.isExpanded = false,
@@ -41,7 +42,7 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
     String? name,
     V2StyledTextModel? label,
     Validation? validation,
-    String? autoCompleteDefaultValue,
+    AutocompleteFieldData? autocompleteDefaultValue,
     bool? isDisabled,
     int? maxLines,
     bool? isExpanded,
@@ -56,8 +57,8 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
       autocompleteType: autocompleteType,
       label: label ?? this.label,
       validation: validation ?? this.validation,
-      autoCompleteDefaultValue:
-          autoCompleteDefaultValue ?? this.autoCompleteDefaultValue,
+      autocompleteDefaultValue:
+          autocompleteDefaultValue ?? this.autocompleteDefaultValue,
       isDisabled: isDisabled ?? this.isDisabled,
       maxLines: maxLines ?? this.maxLines,
       isExpanded: isExpanded ?? this.isExpanded,
@@ -75,7 +76,7 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
       'autocompleteType': autocompleteType,
       'label': label?.toMap(),
       'validation': validation?.toMap(),
-      'autoCompleteDefaultValue': autoCompleteDefaultValue,
+      'autocompleteDefaultValue': autocompleteDefaultValue?.toMap(),
       'isDisabled': isDisabled,
       'maxLines': maxLines,
       'isExpanded': isExpanded,
@@ -97,7 +98,10 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
       validation: map['validation'] != null
           ? Validation.fromMap(map['validation'] as Map<String, dynamic>)
           : null,
-      autoCompleteDefaultValue: map['autoCompleteDefaultValue'],
+      autocompleteDefaultValue: map['autocompleteDefaultValue'] != null
+          ? AutocompleteFieldData.fromMap(
+              map['autocompleteDefaultValue'] as Map<String, dynamic>)
+          : null,
       isDisabled: map['isDisabled'] ?? false,
       maxLines: map['maxLines'],
       isExpanded: map['isExpanded'] ?? false,
@@ -133,7 +137,7 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
         other.autocompleteType == autocompleteType &&
         other.label == label &&
         other.validation == validation &&
-        other.autoCompleteDefaultValue == autoCompleteDefaultValue &&
+        other.autocompleteDefaultValue == autocompleteDefaultValue &&
         other.isDisabled == isDisabled &&
         other.maxLines == maxLines &&
         other.isExpanded == isExpanded &&
@@ -149,7 +153,7 @@ class StyledAutoCompleteFieldModel with FormComponentUnion {
         autocompleteType.hashCode ^
         label.hashCode ^
         validation.hashCode ^
-        autoCompleteDefaultValue.hashCode ^
+        autocompleteDefaultValue.hashCode ^
         isDisabled.hashCode ^
         maxLines.hashCode ^
         isExpanded.hashCode ^

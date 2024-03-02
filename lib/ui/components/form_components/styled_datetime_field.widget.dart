@@ -79,7 +79,7 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
                 ),
             ],
           ),
-          SizedBox(height: AppSpacing.xxs),
+          const SizedBox(height: AppSpacing.xxs),
         },
         FormBuilderDateTimePicker(
           name: widget.dateTimeFieldData.name,
@@ -94,6 +94,8 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
                 color: AppColors.cBODY_TEXT,
                 fontSize: 16,
               ),
+          initialValue:
+              getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue),
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           format: dateFormat,
           decoration: widget.dateTimeFieldData.inputDecoration ??
