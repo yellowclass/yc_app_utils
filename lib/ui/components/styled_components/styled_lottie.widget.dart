@@ -17,6 +17,7 @@ class StyledLottieWidget extends StatefulWidget {
 
 class _StyledLottieWidgetState extends State<StyledLottieWidget> {
   late final ValueNotifier<bool> showLottie;
+  final GlobalKey key = GlobalKey();
 
   @override
   void initState() {
@@ -33,8 +34,8 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
           showLottie.value = info.visibleFraction >
               (widget.styledLottieModel.animateOnPercentage! / 100);
         },
-        key: UniqueKey(),
         child: child,
+        key: key,
       );
     }
     return child;
@@ -46,24 +47,14 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
       child: ValueListenableBuilder<bool>(
         valueListenable: showLottie,
         builder: (context, val, _) {
-          return val
-              ? Lottie.network(
-                  key: UniqueKey(),
-                  width: widget.styledLottieModel.width?.toDouble(),
-                  height: widget.styledLottieModel.height?.toDouble(),
-                  widget.styledLottieModel.url,
-                  fit: widget.styledLottieModel.lottieFit,
-                  animate: true,
-                  repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
-                )
-              : Lottie.network(
-                  key: UniqueKey(),
-                  width: widget.styledLottieModel.width?.toDouble(),
-                  height: widget.styledLottieModel.height?.toDouble(),
-                  widget.styledLottieModel.url,
-                  fit: widget.styledLottieModel.lottieFit,
-                  animate: false,
-                );
+          return Lottie.network(
+            width: widget.styledLottieModel.width?.toDouble(),
+            height: widget.styledLottieModel.height?.toDouble(),
+            widget.styledLottieModel.url,
+            fit: widget.styledLottieModel.lottieFit,
+            animate: val,
+            repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
+          );
         },
       ),
     );
