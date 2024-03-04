@@ -53,7 +53,7 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
             widget.styledLottieModel.url,
             fit: widget.styledLottieModel.lottieFit,
             animate: val,
-            repeat: false,
+            repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
           );
         },
       ),
