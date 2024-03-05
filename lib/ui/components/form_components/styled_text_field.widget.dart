@@ -28,9 +28,7 @@ class StyledTextFieldWidget extends StatefulWidget {
 }
 
 class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
-  Country _selectedCountry = Country.allCountries.firstWhere(
-    (element) => element.code == 'IN',
-  );
+  late Country _selectedCountry;
 
   bool get isMobileField =>
       widget.textFieldData.inputFieldType == InputFieldEnum.MOBILE;
@@ -53,6 +51,13 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
   @override
   void initState() {
     super.initState();
+    _selectedCountry = widget.textFieldData.countryCode != null
+        ? Country.allCountries.firstWhere(
+            (element) => element.value == widget.textFieldData.countryCode!,
+          )
+        : Country.allCountries.firstWhere(
+            (element) => element.code == 'IN',
+          );
   }
 
   @override
