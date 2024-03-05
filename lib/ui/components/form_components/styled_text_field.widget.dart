@@ -158,7 +158,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                   onSaved: (value) {
                     String updatedVal = value ?? '';
                     if (isMobileField) {
-                      updatedVal = _selectedCountry.value + updatedVal;
+                      updatedVal = _selectedCountry.value + '-' + updatedVal;
                     }
                     widget.onSaved?.call(
                       widget.textFieldData.name,
