@@ -103,6 +103,10 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
               showSelectedItems: true,
               showSearchBox: widget.selectFieldData.isSearchable,
               dropDownButton: const SizedBox.shrink(),
+              dropdownBuilder: (context, selectedItem) => Text(
+                selectedItem?.label ?? "",
+                style: widget.selectFieldData.textStyle,
+              ),
               items: widget.selectFieldData.options,
               enabled: !widget.selectFieldData.isDisabled,
               onChanged: (value) {
@@ -147,10 +151,9 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
               },
             )
           else
-            FormBuilderDropdown<OptionModel>(
-              name: widget.selectFieldData.name,
+            DropdownButtonFormField<OptionModel>(
               style: widget.selectFieldData.textStyle,
-              initialValue: widget.selectFieldData.selectDefaultValue?[0],
+              value: widget.selectFieldData.selectDefaultValue?[0],
               items: List<DropdownMenuItem<OptionModel>>.from(
                 widget.selectFieldData.options.map(
                   (option) => DropdownMenuItem<OptionModel>(
@@ -159,15 +162,20 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                   ),
                 ),
               ),
+              // isExpanded: true,
+              // isDense: true,
               icon: _getDropDownIcon(),
-              onChanged: (value) {
-                suffixIconVisibilty.value =
-                    CommonHelpers.validateSelectCheckField(
-                          values: value != null ? [value] : [],
-                          validations: widget.selectFieldData.validation,
-                        ) ==
-                        null;
-              },
+              borderRadius: BorderRadius.circular(10),
+              onChanged: widget.selectFieldData.isDisabled
+                  ? null
+                  : (value) {
+                      suffixIconVisibilty.value =
+                          CommonHelpers.validateSelectCheckField(
+                                values: value != null ? [value] : [],
+                                validations: widget.selectFieldData.validation,
+                              ) ==
+                              null;
+                    },
               decoration: widget.selectFieldData.inputDecoration ??
                   const InputDecoration(),
               validator: (value) => CommonHelpers.validateSelectCheckField(
