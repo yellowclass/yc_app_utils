@@ -84,13 +84,20 @@ class GenericButtonV3Widget extends StatelessWidget {
                                   children: buttonRow.buttonColumnData!
                                       .map(
                                         (buttonCell) => Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: AppSpacing.xxs2,
-                                            horizontal: AppSpacing.xxs,
-                                          ),
+                                          padding: buttonCell.padding != null
+                                              ? CommonHelpers
+                                                  .getPaddingFromList(
+                                                  buttonCell.padding,
+                                                )
+                                              : const EdgeInsets.symmetric(
+                                                  vertical: AppSpacing.xxs2,
+                                                  horizontal: AppSpacing.xxs,
+                                                ),
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(
-                                              AppRadius.xxs,
+                                              buttonCell.borderRadius
+                                                      ?.toDouble() ??
+                                                  AppRadius.xxs,
                                             ),
                                             color: CommonHelpers.v2ColorFromHex(
                                               buttonCell.backgroundColor,
