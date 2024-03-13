@@ -116,4 +116,36 @@ class BootstrapSectionModel with BootstrapChildUnion {
       borderWidth: map['borderWidth']?.toDouble(),
     );
   }
+
+  BootstrapSectionModel copyWith({
+    String? key,
+    BootstrapSectionUnion? bsData,
+    String? miscParams,
+    V2ClickAction? clickAction,
+    bool? containsForm,
+    SectionBackground? background,
+    String? borderColor,
+    List<int>? borderRadius,
+    List<int>? padding,
+    double? height,
+    double? width,
+    GenericButtonV3Model? bottomActionButton,
+    double? borderWidth,
+  }) {
+    return BootstrapSectionModel(
+      key: key ?? this.key,
+      bsData: bsData ?? this.bsData,
+      miscParams: miscParams ?? this.miscParams,
+      clickAction: clickAction ?? this.clickAction,
+      containsForm: containsForm ?? this.containsForm,
+      background: background ?? this.background,
+      borderColor: borderColor ?? this.borderColor,
+      borderRadius: borderRadius ?? this.borderRadius,
+      padding: padding ?? this.padding,
+      height: height ?? this.height,
+      width: width ?? this.width,
+      bottomActionButton: bottomActionButton ?? this.bottomActionButton,
+      borderWidth: borderWidth ?? this.borderWidth,
+    );
+  }
 }
