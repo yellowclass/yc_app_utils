@@ -14,6 +14,8 @@ class StyledSelectFieldModel with FormComponentUnion {
   InputDecoration? inputDecoration;
   TextStyle? textStyle;
   List<ImageModel>? dropdownIcon;
+  String? hintText;
+  String? leadingIcon;
 
   StyledSelectFieldModel({
     this.label,
@@ -28,6 +30,8 @@ class StyledSelectFieldModel with FormComponentUnion {
     this.inputDecoration,
     this.textStyle,
     this.dropdownIcon,
+    this.hintText,
+    this.leadingIcon,
   });
 
   StyledSelectFieldModel copyWith({
@@ -43,6 +47,8 @@ class StyledSelectFieldModel with FormComponentUnion {
     InputDecoration? inputDecoration,
     TextStyle? textStyle,
     List<ImageModel>? dropdownIcon,
+    String? hintText,
+    String? leadingIcon,
   }) {
     return StyledSelectFieldModel(
       label: label ?? this.label,
@@ -57,6 +63,8 @@ class StyledSelectFieldModel with FormComponentUnion {
       inputDecoration: inputDecoration ?? this.inputDecoration,
       textStyle: textStyle ?? this.textStyle,
       dropdownIcon: dropdownIcon ?? this.dropdownIcon,
+      hintText: hintText ?? this.hintText,
+      leadingIcon: leadingIcon ?? this.leadingIcon,
     );
   }
 
@@ -74,6 +82,8 @@ class StyledSelectFieldModel with FormComponentUnion {
       'inputDecoration': inputDecoration,
       'textStyle': textStyle,
       'dropdownIcon': dropdownIcon,
+      'hintText': hintText,
+      'leadingIcon': leadingIcon,
     };
   }
 
@@ -111,6 +121,8 @@ class StyledSelectFieldModel with FormComponentUnion {
           ? List<ImageModel>.from(
               map['dropdownIcon']?.map((x) => ImageModel.fromMap(x)))
           : null,
+      hintText: map['hintText'],
+      leadingIcon: map['leadingIcon'],
     );
   }
 }

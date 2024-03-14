@@ -117,6 +117,22 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                         ) ==
                         null;
               },
+              searchFieldProps: TextFieldProps(
+                decoration: InputDecoration(
+                  hintText: widget.selectFieldData.hintText,
+                  prefixIcon: widget.selectFieldData.leadingIcon != null
+                      ? Padding(
+                          padding: EdgeInsets.all(8),
+                          child: GenericNetworkImage(
+                            widget.selectFieldData.leadingIcon!,
+                            width: 2,
+                            height: 2,
+                          ),
+                        )
+                      : null,
+                  border: OutlineInputBorder(),
+                ),
+              ),
               dropdownButtonBuilder: (context) => _getDropDownIcon(),
               dropdownSearchDecoration:
                   widget.selectFieldData.inputDecoration ??
