@@ -22,6 +22,7 @@ class SectionBackground {
     this.borderColor,
     this.borderWidth = const [1],
     this.opacity = 1,
+    this.shadow,
   });
 
   final SectionBgType backgroundType;
@@ -38,6 +39,7 @@ class SectionBackground {
   final String? borderColor;
   final List<double> borderWidth;
   final double opacity;
+  final List<BoxShadow>? shadow;
 
   SectionBackground copyWith({
     SectionBgType? backgroundType,
@@ -54,6 +56,7 @@ class SectionBackground {
     String? borderColor,
     List<double>? borderWidth,
     double? opacity,
+    List<BoxShadow>? shadow,
   }) =>
       SectionBackground(
         backgroundType: backgroundType ?? this.backgroundType,
@@ -70,6 +73,7 @@ class SectionBackground {
         borderColor: borderColor ?? this.borderColor,
         borderWidth: borderWidth ?? this.borderWidth,
         opacity: opacity ?? this.opacity,
+        shadow: shadow ?? this.shadow,
       );
 
   factory SectionBackground.fromMap(Map<String, dynamic> json) =>
@@ -107,6 +111,11 @@ class SectionBackground {
                 json["borderWidth"].map((x) => double.tryParse(x.toString())),
               ),
         opacity: json["opacity"] != null ? json["opacity"] / 100 : 1,
+        shadow: json['shadow'] != null
+            ? CommonHelpers.getBoxShadowFromList(
+                json['shadow'],
+              )
+            : null,
       );
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -124,6 +133,7 @@ class SectionBackground {
         'borderColor': borderColor,
         'borderWidth': borderWidth,
         'opacity': opacity,
+        'shadow': shadow,
       };
 
   String toJson() => json.encode(toMap());
