@@ -494,6 +494,7 @@ class CommonHelpers {
       case SectionBgType.FLAT_COLOR:
         return BoxDecoration(
           border: _border,
+          boxShadow: sectionBackground.shadow,
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder()
               : borderRadiusGeometry,
@@ -503,6 +504,7 @@ class CommonHelpers {
       case SectionBgType.GRADIENT:
         return BoxDecoration(
           border: _border,
+          boxShadow: sectionBackground.shadow,
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder(
                   shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
@@ -532,6 +534,7 @@ class CommonHelpers {
         return BoxDecoration(
           border: _border,
           borderRadius: borderRadiusGeometry,
+          boxShadow: sectionBackground.shadow,
           image: sectionBackground.backgroundImgUrl != null
               ? DecorationImage(
                   // Only supports Non-vector image formats
@@ -546,6 +549,7 @@ class CommonHelpers {
       case SectionBgType.RADIAL_GRADIENT:
         return BoxDecoration(
           border: _border,
+          boxShadow: sectionBackground.shadow,
           borderRadius: (sectionBackground.borderRadius?.isEmpty ?? true)
               ? showSectionBorder(
                   shouldLeaveBorder: sectionBackground.shouldLeaveBorder,
