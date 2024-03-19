@@ -47,13 +47,16 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
       child: ValueListenableBuilder<bool>(
         valueListenable: showLottie,
         builder: (context, val, _) {
-          return Lottie.network(
-            width: widget.styledLottieModel.width?.toDouble(),
-            height: widget.styledLottieModel.height?.toDouble(),
-            widget.styledLottieModel.url,
-            fit: widget.styledLottieModel.lottieFit,
-            animate: val,
-            repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
+          return ClipRRect(
+            borderRadius: widget.styledLottieModel.borderRadius,
+            child: Lottie.network(
+              width: widget.styledLottieModel.width?.toDouble(),
+              height: widget.styledLottieModel.height?.toDouble(),
+              widget.styledLottieModel.url,
+              fit: widget.styledLottieModel.lottieFit,
+              animate: val,
+              repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
+            ),
           );
         },
       ),
