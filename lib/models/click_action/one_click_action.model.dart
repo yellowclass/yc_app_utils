@@ -3,6 +3,7 @@ import 'package:yc_app_utils/models/click_action/click_action_redirection_type.e
 import 'package:yc_app_utils/models/click_action/event_data.model.dart';
 import 'package:yc_app_utils/models/click_action/fb_event_data.model.dart';
 import 'package:yc_app_utils/models/click_action/share_data.model.dart';
+import 'package:yc_app_utils/models/click_action/toast_data.model.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 
 class OneClickAction {
@@ -15,6 +16,7 @@ class OneClickAction {
   V2ClickAction? toastClickAction;
   FBEventData? fbEventData;
   RedirectionTypeEnum? redirectionType;
+  ToastData? toastData;
 
   OneClickAction({
     required this.type,
@@ -26,6 +28,7 @@ class OneClickAction {
     this.toastClickAction,
     this.fbEventData,
     this.redirectionType,
+    this.toastData,
   });
 
   OneClickAction copyWith({
@@ -38,6 +41,7 @@ class OneClickAction {
     V2ClickAction? toastClickAction,
     FBEventData? fbEventData,
     RedirectionTypeEnum? redirectionType,
+    ToastData? toastData,
   }) {
     return OneClickAction(
       type: type ?? this.type,
@@ -49,6 +53,7 @@ class OneClickAction {
       toastClickAction: toastClickAction ?? this.toastClickAction,
       fbEventData: fbEventData ?? this.fbEventData,
       redirectionType: redirectionType ?? this.redirectionType,
+      toastData: toastData ?? this.toastData,
     );
   }
 
@@ -63,6 +68,7 @@ class OneClickAction {
       'toastClickAction': toastClickAction?.toMap(),
       'fbEventData': fbEventData?.toMap(),
       'redirectionType': redirectionType?.name,
+      'toastData': toastData,
     };
   }
 
@@ -92,6 +98,8 @@ class OneClickAction {
           ? CommonHelpers.enumFromString(
               RedirectionTypeEnum.values, map['redirectionType'])
           : null,
+      toastData:
+          map['toastData'] != null ? ToastData.fromMap(map['toastData']) : null,
     );
   }
 }
