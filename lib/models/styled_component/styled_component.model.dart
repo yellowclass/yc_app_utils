@@ -1,4 +1,5 @@
 import 'package:yc_app_utils/models/styled_component/styled_circular_progress.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_linear_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -66,6 +67,9 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
         break;
       case 'StyledCircularProgress':
         scData = StyledCircularProgress.fromMap(map['scData']);
+        break;
+      case 'StyledLinearProgress':
+        scData = StyledLinearProgress.fromMap(map['scData']);
         break;
       default:
     }
