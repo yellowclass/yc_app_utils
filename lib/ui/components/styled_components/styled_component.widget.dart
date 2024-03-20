@@ -92,30 +92,25 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
           : null,
       showRippleEffect:
           widget.styledComponent.clickAction?.showRippleEffect ?? false,
-      child: ClipRRect(
-        borderRadius: CommonHelpers.getBorderRadiusFromList(
-          widget.styledComponent.borderRadius,
+      child: Container(
+        padding: CommonHelpers.getPaddingFromList(
+          widget.styledComponent.padding,
         ),
-        child: Container(
-          padding: CommonHelpers.getPaddingFromList(
-            widget.styledComponent.padding,
+        decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
+          sectionBackground: widget.styledComponent.background,
+        ).copyWith(
+          borderRadius: CommonHelpers.getBorderRadiusFromList(
+            widget.styledComponent.borderRadius,
           ),
-          decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
-            sectionBackground: widget.styledComponent.background,
-          ).copyWith(
-            borderRadius: CommonHelpers.getBorderRadiusFromList(
-              widget.styledComponent.borderRadius,
-            ),
-            border: widget.styledComponent.borderColor != null
-                ? Border.all(
-                    color: CommonHelpers.v2ColorFromHex(
-                      widget.styledComponent.borderColor,
-                    ),
-                  )
-                : null,
-          ),
-          child: buildComponent(),
+          border: widget.styledComponent.borderColor != null
+              ? Border.all(
+                  color: CommonHelpers.v2ColorFromHex(
+                    widget.styledComponent.borderColor,
+                  ),
+                )
+              : null,
         ),
+        child: buildComponent(),
       ),
     );
   }

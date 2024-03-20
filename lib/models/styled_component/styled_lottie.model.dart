@@ -11,6 +11,7 @@ class StyledLottieModel with StyledComponentUnion {
   BoxFit? lottieFit;
   int? animateOnPercentage;
   int? animateAfter;
+  BorderRadius? borderRadius;
 
   StyledLottieModel({
     required this.url,
@@ -19,6 +20,7 @@ class StyledLottieModel with StyledComponentUnion {
     this.lottieFit,
     this.animateOnPercentage,
     this.animateAfter,
+    this.borderRadius,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,7 @@ class StyledLottieModel with StyledComponentUnion {
       'width': width,
       'height': height,
       'lottieFit': lottieFit?.toString(),
+      'borderRadius': borderRadius,
     };
   }
 
@@ -45,6 +48,12 @@ class StyledLottieModel with StyledComponentUnion {
           : null,
       animateOnPercentage: map['animateOnPercentage'],
       animateAfter: map['animateAfter'],
+      borderRadius: map['borderRadius'] != null
+          ? CommonHelpers.getBorderRadiusFromList(
+              List<int>.from(map['borderRadius']))
+          : const BorderRadius.all(
+              Radius.zero,
+            ),
     );
   }
 }
