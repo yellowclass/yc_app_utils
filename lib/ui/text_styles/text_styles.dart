@@ -5,6 +5,66 @@ import 'package:yc_app_utils/ui/text_styles/yc_fonts.dart';
 
 class TextStyles {
   static const Map<TStyle, TextStyle> mobTextStyle = {
+    TStyle.XXH1_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 52,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH1_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 52,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH1_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 52,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH1_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 52,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH2_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 48,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH2_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 48,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH2_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 48,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH2_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 48,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH3_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 44,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH3_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 44,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH3_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 44,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XXH3_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 44,
+      color: AppColors.cBODY_TEXT,
+    ),
     TStyle.XH1_800: TextStyle(
       fontFamily: YCFonts.nunitoExtraBold,
       fontSize: 40,
