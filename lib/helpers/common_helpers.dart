@@ -463,9 +463,20 @@ class CommonHelpers {
           if (v2TextStyle.strikeThrough) TextDecoration.lineThrough,
           if (v2TextStyle.underline) TextDecoration.underline,
         ]),
-        fontFamily: v2TextStyle.fontFamily == 'LUCKY_GUY' ? "LuckyGuy" : null,
+        fontFamily: CommonHelpers.getFontFamily(v2TextStyle.fontFamily),
       ),
     );
+  }
+
+  static String? getFontFamily(String? fontFamily) {
+    switch (fontFamily) {
+      case 'LUCKY_GUY':
+        return 'LuckyGuy';
+      case 'LONDRINA_SOLID':
+        return 'LondrinaSolid';
+      default:
+        return null;
+    }
   }
 
   static BoxDecoration getBoxDecorationWithSectionBackground({
