@@ -5,6 +5,26 @@ import 'package:yc_app_utils/ui/text_styles/yc_fonts.dart';
 
 class TextStyles {
   static const Map<TStyle, TextStyle> mobTextStyle = {
+    TStyle.XL120_800: TextStyle(
+      fontFamily: YCFonts.nunitoExtraBold,
+      fontSize: 120,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XL120_700: TextStyle(
+      fontFamily: YCFonts.nunitoBold,
+      fontSize: 120,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XL120_600: TextStyle(
+      fontFamily: YCFonts.nunitoSemiBold,
+      fontSize: 120,
+      color: AppColors.cBODY_TEXT,
+    ),
+    TStyle.XL120_400: TextStyle(
+      fontFamily: YCFonts.nunitoRegular,
+      fontSize: 120,
+      color: AppColors.cBODY_TEXT,
+    ),
     TStyle.XXH1_800: TextStyle(
       fontFamily: YCFonts.nunitoExtraBold,
       fontSize: 52,
