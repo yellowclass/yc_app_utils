@@ -23,6 +23,8 @@ class V2StyledTextModel with StyledComponentUnion {
   List<int>? padding;
   bool underline;
   String? fontFamily;
+  double? strokeWidth;
+  String? strokeColor;
 
   V2StyledTextModel({
     required this.text,
@@ -40,6 +42,8 @@ class V2StyledTextModel with StyledComponentUnion {
     this.padding,
     this.underline = false,
     this.fontFamily,
+    this.strokeWidth,
+    this.strokeColor,
   });
 
   V2StyledTextModel copyWith({
@@ -58,6 +62,8 @@ class V2StyledTextModel with StyledComponentUnion {
     List<int>? padding,
     bool? underline,
     String? fontFamily,
+    double? strokeWidth,
+    String? strokeColor,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -75,6 +81,8 @@ class V2StyledTextModel with StyledComponentUnion {
       padding: padding ?? this.padding,
       underline: underline ?? this.underline,
       fontFamily: fontFamily ?? this.fontFamily,
+      strokeWidth: strokeWidth ?? this.strokeWidth,
+      strokeColor: strokeColor ?? this.strokeColor,
     );
   }
 
@@ -95,6 +103,8 @@ class V2StyledTextModel with StyledComponentUnion {
       'padding': padding,
       'underline': underline,
       'fontFamily': fontFamily,
+      'strokeWidth': strokeWidth,
+      'strokeColor': strokeColor,
     };
   }
 
@@ -133,6 +143,12 @@ class V2StyledTextModel with StyledComponentUnion {
           map['padding'] == null ? <int>[] : List<int>.from(map['padding']),
       underline: map['underline'] ?? false,
       fontFamily: map['fontFamily'],
+      strokeWidth: map['strokeWidth'] == null
+          ? null
+          : double.tryParse(
+              map['strokeWidth'].toString(),
+            ),
+      strokeColor: map['strokeColor'],
     );
   }
 

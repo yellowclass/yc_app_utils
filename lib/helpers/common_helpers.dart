@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -449,6 +450,41 @@ class CommonHelpers {
     return customStyle != null ? tStyle.merge(customStyle) : tStyle;
   }
 
+  static List<Shadow> getTextStroke({
+    required double strokeWidth,
+    Color strokeColor = Colors.black,
+    int precision = 2,
+  }) {
+    Set<Shadow> result = HashSet();
+    for (int x = 1; x < strokeWidth + precision; x++) {
+      for (int y = 1; y < strokeWidth + precision; y++) {
+        double offsetX = x.toDouble();
+        double offsetY = y.toDouble();
+        result.add(
+          Shadow(
+              offset: Offset(-strokeWidth / offsetX, -strokeWidth / offsetY),
+              color: strokeColor),
+        );
+        result.add(
+          Shadow(
+              offset: Offset(-strokeWidth / offsetX, strokeWidth / offsetY),
+              color: strokeColor),
+        );
+        result.add(
+          Shadow(
+              offset: Offset(strokeWidth / offsetX, -strokeWidth / offsetY),
+              color: strokeColor),
+        );
+        result.add(
+          Shadow(
+              offset: Offset(strokeWidth / offsetX, strokeWidth / offsetY),
+              color: strokeColor),
+        );
+      }
+    }
+    return result.toList();
+  }
+
   static TextStyle? getTextStyleFromV2TextStyle(V2StyledTextModel v2TextStyle) {
     return CommonHelpers.getTextStyle(
       v2TextStyle.tStyle,
@@ -464,6 +500,14 @@ class CommonHelpers {
           if (v2TextStyle.underline) TextDecoration.underline,
         ]),
         fontFamily: CommonHelpers.getFontFamily(v2TextStyle.fontFamily),
+        shadows: v2TextStyle.strokeWidth != null
+            ? CommonHelpers.getTextStroke(
+                strokeWidth: v2TextStyle.strokeWidth!,
+                strokeColor: CommonHelpers.v2ColorFromHex(
+                  v2TextStyle.strokeColor,
+                ),
+              )
+            : null,
       ),
     );
   }
