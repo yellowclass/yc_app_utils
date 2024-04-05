@@ -7,7 +7,7 @@ import 'package:yc_app_utils/models/styled_component/styled_component_union.dart
 import 'package:yc_app_utils/models/v2_text_style.model.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
-enum IconAlignmentEnum {
+enum TextIconAlignmentEnum {
   TOP,
   CENTER,
   BOTTOM,
@@ -35,8 +35,8 @@ class V2StyledTextModel with StyledComponentUnion {
   ImageModel? prefixIcon;
   ImageModel? suffixIcon;
   MainAxisAlignment? flexAlignment;
-  IconAlignmentEnum? prefixIconAlignment;
-  IconAlignmentEnum? suffixIconAlignment;
+  TextIconAlignmentEnum? prefixIconAlignment;
+  TextIconAlignmentEnum? suffixIconAlignment;
 
   V2StyledTextModel({
     required this.text,
@@ -84,8 +84,8 @@ class V2StyledTextModel with StyledComponentUnion {
     ImageModel? prefixIcon,
     ImageModel? suffixIcon,
     MainAxisAlignment? flexAlignment,
-    IconAlignmentEnum? prefixIconAlignment,
-    IconAlignmentEnum? suffixIconAlignment,
+    TextIconAlignmentEnum? prefixIconAlignment,
+    TextIconAlignmentEnum? suffixIconAlignment,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -187,11 +187,11 @@ class V2StyledTextModel with StyledComponentUnion {
           : null,
       prefixIconAlignment: map['prefixIconAlignment'] != null
           ? CommonHelpers.enumFromString(
-              IconAlignmentEnum.values, map['prefixIconAlignment'])
+              TextIconAlignmentEnum.values, map['prefixIconAlignment'])
           : null,
       suffixIconAlignment: map['suffixIconAlignment'] != null
           ? CommonHelpers.enumFromString(
-              IconAlignmentEnum.values, map['suffixIconAlignment'])
+              TextIconAlignmentEnum.values, map['suffixIconAlignment'])
           : null,
     );
   }

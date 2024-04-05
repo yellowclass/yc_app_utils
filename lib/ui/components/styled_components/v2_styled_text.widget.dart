@@ -22,14 +22,14 @@ class V2StyledTextWidget extends StatelessWidget {
     return prefix == null ? _getPlainText() : _getRichText();
   }
 
-  Alignment _iconAlignment(IconAlignmentEnum? iconAlignment) {
+  Alignment _iconAlignment(TextIconAlignmentEnum? iconAlignment) {
     if (iconAlignment == null) {
       return Alignment.center;
     }
-    if (iconAlignment == IconAlignmentEnum.TOP) {
+    if (iconAlignment == TextIconAlignmentEnum.TOP) {
       return Alignment.topCenter;
     }
-    if (iconAlignment == IconAlignmentEnum.BOTTOM) {
+    if (iconAlignment == TextIconAlignmentEnum.BOTTOM) {
       return Alignment.bottomCenter;
     }
     return Alignment.center;
