@@ -34,6 +34,12 @@ class GenericButtonV3Widget extends StatelessWidget {
       ),
       height: height ?? buttonDetails.height?.toDouble(),
       width: width ?? buttonDetails.width?.toDouble(),
+      decoration: BoxDecoration(
+        boxShadow: buttonDetails.shadow,
+        borderRadius: BorderRadius.circular(
+          buttonDetails.borderRadius,
+        ),
+      ),
       child: MaterialButton(
         padding: EdgeInsets.symmetric(
           horizontal: buttonDetails.padding.horizontal,

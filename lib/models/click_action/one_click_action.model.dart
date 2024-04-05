@@ -17,6 +17,8 @@ class OneClickAction {
   FBEventData? fbEventData;
   RedirectionTypeEnum? redirectionType;
   ToastData? toastData;
+  V2ClickAction? onSuccess;
+  V2ClickAction? onFailure;
 
   OneClickAction({
     required this.type,
@@ -29,6 +31,8 @@ class OneClickAction {
     this.fbEventData,
     this.redirectionType,
     this.toastData,
+    this.onFailure,
+    this.onSuccess,
   });
 
   OneClickAction copyWith({
@@ -42,6 +46,8 @@ class OneClickAction {
     FBEventData? fbEventData,
     RedirectionTypeEnum? redirectionType,
     ToastData? toastData,
+    V2ClickAction? onSuccess,
+    V2ClickAction? onFailure,
   }) {
     return OneClickAction(
       type: type ?? this.type,
@@ -54,6 +60,8 @@ class OneClickAction {
       fbEventData: fbEventData ?? this.fbEventData,
       redirectionType: redirectionType ?? this.redirectionType,
       toastData: toastData ?? this.toastData,
+      onFailure: onFailure ?? this.onFailure,
+      onSuccess: onSuccess ?? this.onSuccess,
     );
   }
 
@@ -69,6 +77,8 @@ class OneClickAction {
       'fbEventData': fbEventData?.toMap(),
       'redirectionType': redirectionType?.name,
       'toastData': toastData,
+      'onFailure': onFailure,
+      'onSuccess': onSuccess,
     };
   }
 
@@ -100,6 +110,12 @@ class OneClickAction {
           : null,
       toastData:
           map['toastData'] != null ? ToastData.fromMap(map['toastData']) : null,
+      onSuccess: map['onSuccess'] != null
+          ? V2ClickAction.fromMap(map['onSuccess'])
+          : null,
+      onFailure: map['onFailure'] != null
+          ? V2ClickAction.fromMap(map['onFailure'])
+          : null,
     );
   }
 }

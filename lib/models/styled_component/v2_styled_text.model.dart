@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/helpers/common_helpers.dart';
+import 'package:yc_app_utils/models/image.model.dart';
 import 'package:yc_app_utils/models/section_background/section_background.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 import 'package:yc_app_utils/models/v2_text_style.model.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
+
+enum TextIconAlignmentEnum {
+  TOP,
+  CENTER,
+  BOTTOM,
+}
 
 class V2StyledTextModel with StyledComponentUnion {
   static const String _defaultTextColor = '#212A39';
@@ -25,6 +32,11 @@ class V2StyledTextModel with StyledComponentUnion {
   String? fontFamily;
   double? strokeWidth;
   String? strokeColor;
+  ImageModel? prefixIcon;
+  ImageModel? suffixIcon;
+  MainAxisAlignment? flexAlignment;
+  TextIconAlignmentEnum? prefixIconAlignment;
+  TextIconAlignmentEnum? suffixIconAlignment;
 
   V2StyledTextModel({
     required this.text,
@@ -44,6 +56,11 @@ class V2StyledTextModel with StyledComponentUnion {
     this.fontFamily,
     this.strokeWidth,
     this.strokeColor,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.flexAlignment,
+    this.prefixIconAlignment,
+    this.suffixIconAlignment,
   });
 
   V2StyledTextModel copyWith({
@@ -64,6 +81,11 @@ class V2StyledTextModel with StyledComponentUnion {
     String? fontFamily,
     double? strokeWidth,
     String? strokeColor,
+    ImageModel? prefixIcon,
+    ImageModel? suffixIcon,
+    MainAxisAlignment? flexAlignment,
+    TextIconAlignmentEnum? prefixIconAlignment,
+    TextIconAlignmentEnum? suffixIconAlignment,
   }) {
     return V2StyledTextModel(
       text: text ?? this.text,
@@ -83,6 +105,11 @@ class V2StyledTextModel with StyledComponentUnion {
       fontFamily: fontFamily ?? this.fontFamily,
       strokeWidth: strokeWidth ?? this.strokeWidth,
       strokeColor: strokeColor ?? this.strokeColor,
+      prefixIcon: prefixIcon ?? this.prefixIcon,
+      suffixIcon: suffixIcon ?? this.suffixIcon,
+      flexAlignment: flexAlignment ?? this.flexAlignment,
+      prefixIconAlignment: prefixIconAlignment ?? this.prefixIconAlignment,
+      suffixIconAlignment: suffixIconAlignment ?? this.suffixIconAlignment,
     );
   }
 
@@ -149,6 +176,23 @@ class V2StyledTextModel with StyledComponentUnion {
               map['strokeWidth'].toString(),
             ),
       strokeColor: map['strokeColor'],
+      prefixIcon: map['prefixIcon'] != null
+          ? ImageModel.fromMap(map['prefixIcon'])
+          : null,
+      suffixIcon: map['suffixIcon'] != null
+          ? ImageModel.fromMap(map['suffixIcon'])
+          : null,
+      flexAlignment: map['flexAlignment'] != null
+          ? CommonHelpers.getFlexAlignmentFromString(map['flexAlignment'])
+          : null,
+      prefixIconAlignment: map['prefixIconAlignment'] != null
+          ? CommonHelpers.enumFromString(
+              TextIconAlignmentEnum.values, map['prefixIconAlignment'])
+          : null,
+      suffixIconAlignment: map['suffixIconAlignment'] != null
+          ? CommonHelpers.enumFromString(
+              TextIconAlignmentEnum.values, map['suffixIconAlignment'])
+          : null,
     );
   }
 

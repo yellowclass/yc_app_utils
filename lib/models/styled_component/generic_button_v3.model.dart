@@ -19,6 +19,7 @@ class GenericButtonV3Model {
   SymmetricPadding padding;
   int? height;
   int? width;
+  List<BoxShadow>? shadow;
   V2ClickAction? v2ClickAction;
 
   @Deprecated("Use v2ClickAction")
@@ -41,6 +42,7 @@ class GenericButtonV3Model {
     this.height,
     this.width,
     this.v2ClickAction,
+    this.shadow,
   });
 
   factory GenericButtonV3Model.fromMap(Map<String, dynamic> map) {
@@ -54,7 +56,9 @@ class GenericButtonV3Model {
             )
           : null,
       elevation: map['elevation'] == null ? 0 : map['elevation'].toDouble(),
-      highlightElevation: map['highlightElevation'] == null ? 0 : map['highlightElevation'].toDouble(),
+      highlightElevation: map['highlightElevation'] == null
+          ? 0
+          : map['highlightElevation'].toDouble(),
       clickAction: map['clickAction'] != null
           ? ClickAction.fromMap(map['clickAction'])
           : null,
@@ -74,6 +78,11 @@ class GenericButtonV3Model {
       width: map["width"],
       v2ClickAction: map["v2ClickAction"] != null
           ? V2ClickAction.fromMap(map["v2ClickAction"])
+          : null,
+      shadow: map['shadow'] != null
+          ? CommonHelpers.getBoxShadowFromList(
+              map['shadow'],
+            )
           : null,
     );
   }
@@ -111,6 +120,7 @@ class GenericButtonV3Model {
     int? width,
     V2ClickAction? v2ClickAction,
     ClickAction? clickAction,
+    List<BoxShadow>? shadow,
   }) {
     return GenericButtonV3Model(
       key: key ?? this.key,
@@ -126,6 +136,7 @@ class GenericButtonV3Model {
       width: width ?? this.width,
       v2ClickAction: v2ClickAction ?? this.v2ClickAction,
       clickAction: clickAction ?? this.clickAction,
+      shadow: shadow ?? this.shadow,
     );
   }
 }

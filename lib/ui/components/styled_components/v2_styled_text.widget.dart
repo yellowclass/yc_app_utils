@@ -18,6 +18,23 @@ class V2StyledTextWidget extends StatelessWidget {
   Widget? prefix;
   PlaceholderAlignment? prefixAlignment;
 
+  Widget _getTextWidget() {
+    return prefix == null ? _getPlainText() : _getRichText();
+  }
+
+  Alignment _iconAlignment(TextIconAlignmentEnum? iconAlignment) {
+    if (iconAlignment == null) {
+      return Alignment.center;
+    }
+    if (iconAlignment == TextIconAlignmentEnum.TOP) {
+      return Alignment.topCenter;
+    }
+    if (iconAlignment == TextIconAlignmentEnum.BOTTOM) {
+      return Alignment.bottomCenter;
+    }
+    return Alignment.center;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +55,35 @@ class V2StyledTextWidget extends StatelessWidget {
               )
             : null,
       ),
-      child: prefix == null ? _getPlainText() : _getRichText(),
+      child: styledText.prefixIcon?.url == null &&
+              styledText.suffixIcon?.url == null
+          ? _getTextWidget()
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment:
+                  styledText.flexAlignment ?? MainAxisAlignment.start,
+              children: [
+                if (styledText.prefixIcon?.url != null)
+                  Align(
+                    alignment: _iconAlignment(styledText.prefixIconAlignment),
+                    child: GenericNetworkImage(
+                      styledText.prefixIcon!.url!,
+                      width: styledText.suffixIcon?.width,
+                      height: styledText.suffixIcon?.height,
+                    ),
+                  ),
+                Flexible(child: _getTextWidget()),
+                if (styledText.suffixIcon?.url != null)
+                  Align(
+                    alignment: _iconAlignment(styledText.suffixIconAlignment),
+                    child: GenericNetworkImage(
+                      styledText.suffixIcon!.url!,
+                      width: styledText.suffixIcon?.width,
+                      height: styledText.suffixIcon?.height,
+                    ),
+                  )
+              ],
+            ),
     );
   }
 
