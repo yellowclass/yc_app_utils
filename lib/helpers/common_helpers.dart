@@ -380,6 +380,79 @@ class CommonHelpers {
     }
   }
 
+  static BorderSide getBorderSide({
+    required double width,
+    required Color color,
+  }) {
+    if (width == 0) {
+      return BorderSide.none;
+    } else {
+      return BorderSide(
+        color: color,
+        width: width,
+      );
+    }
+  }
+
+  static Border getBorderFromList(
+    List<double> borderWidthItems, {
+    required Color borderColor,
+  }) {
+    switch (borderWidthItems.length) {
+      case 0:
+      case 1:
+        return Border.all(color: borderColor);
+      case 2:
+        return Border.symmetric(
+            vertical: getBorderSide(
+              width: borderWidthItems.first,
+              color: borderColor,
+            ),
+            horizontal: getBorderSide(
+              width: borderWidthItems.last,
+              color: borderColor,
+            ));
+      case 3:
+        return Border(
+          top: getBorderSide(
+            width: borderWidthItems[0],
+            color: borderColor,
+          ),
+          right: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[1],
+          ),
+          bottom: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[2],
+          ),
+          left: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[1],
+          ),
+        );
+      default:
+        return Border(
+          top: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[0],
+          ),
+          right: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[1],
+          ),
+          bottom: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[2],
+          ),
+          left: getBorderSide(
+            color: borderColor,
+            width: borderWidthItems[3],
+          ),
+        );
+    }
+  }
+
   static List<BoxShadow>? getBoxShadowFromList(List<dynamic> shadow) {
     if (shadow.isEmpty) {
       return null;
@@ -532,9 +605,9 @@ class CommonHelpers {
     }
 
     final Border? _border = sectionBackground.borderColor != null
-        ? Border.all(
-            width: sectionBackground.borderWidth.firstOrNull ?? 1,
-            color: CommonHelpers.v2ColorFromHex(
+        ? getBorderFromList(
+            sectionBackground.borderWidth,
+            borderColor: CommonHelpers.v2ColorFromHex(
               sectionBackground.borderColor,
             ),
           )
