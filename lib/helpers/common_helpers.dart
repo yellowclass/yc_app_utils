@@ -381,7 +381,9 @@ class CommonHelpers {
   }
 
   static BlurStyle getBlurStyle(String? blurStyle) {
-    if (blurStyle == null) return BlurStyle.normal;
+    if (blurStyle == null) {
+      return BlurStyle.normal;
+    }
     switch (blurStyle) {
       case "OUTER":
         return BlurStyle.outer;
