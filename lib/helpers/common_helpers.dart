@@ -380,6 +380,21 @@ class CommonHelpers {
     }
   }
 
+  static BlurStyle getBlurStyle(String? blurStyle) {
+    if (blurStyle == null) return BlurStyle.normal;
+    switch (blurStyle) {
+      case "OUTER":
+        return BlurStyle.outer;
+      case "INNER":
+        return BlurStyle.inner;
+      case "SOLID":
+        return BlurStyle.solid;
+      case "NORMAL":
+      default:
+        return BlurStyle.normal;
+    }
+  }
+
   static List<BoxShadow>? getBoxShadowFromList(List<dynamic> shadow) {
     if (shadow.isEmpty) {
       return null;
@@ -392,8 +407,9 @@ class CommonHelpers {
               s['offset']['dx'].toDouble(),
               s['offset']['dy'].toDouble(),
             ),
-            blurRadius: s['blurRadius'].toDouble(),
-            spreadRadius: s['spreadRadius'].toDouble(),
+            blurRadius: s['blurRadius']?.toDouble(),
+            spreadRadius: s['spreadRadius']?.toDouble(),
+            blurStyle: getBlurStyle(s['blurStyle']),
           ),
         )
         .toList();
