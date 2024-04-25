@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_input.model.dart';
 import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggestions.model.dart';
 import 'package:yc_app_utils/models/form_component/styled_autocomplete_field.model.dart';
+import 'package:yc_app_utils/models/form_component/styled_rating_slider.model.dart';
 import 'package:yc_app_utils/ui/components/form_components/styled_autocomplete_field.widget.dart';
+import 'package:yc_app_utils/ui/components/form_components/styled_rating_slider.widget.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -62,6 +64,13 @@ class FormComponentWidget extends StatelessWidget {
         autocompleteFieldData: autocompleteFieldData,
         onSaved: onSaved,
         getAutoCompleteSuggestions: getAutoCompleteSuggestions,
+      );
+    } else if (formComponentDetails.fcData is StyledRatingSlider) {
+      StyledRatingSlider ratingSlider =
+          formComponentDetails.fcData as StyledRatingSlider;
+      return StyledRatingSliderWidget(
+        data: ratingSlider,
+        onSaved: onSaved,
       );
     } else {
       return const SizedBox.shrink();

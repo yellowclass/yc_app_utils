@@ -1,4 +1,5 @@
 import 'package:yc_app_utils/models/form_component/styled_autocomplete_field.model.dart';
+import 'package:yc_app_utils/models/form_component/styled_rating_slider.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class FormComponentModel with BootstrapChildUnion {
@@ -78,6 +79,11 @@ class FormComponentModel with BootstrapChildUnion {
         break;
       case 'StyledAutoCompleteField':
         fcData = StyledAutoCompleteFieldModel.fromMap(
+          map['fcData'],
+        );
+        break;
+      case 'StyledRatingSlider':
+        fcData = StyledRatingSlider.fromMap(
           map['fcData'],
         );
         break;
