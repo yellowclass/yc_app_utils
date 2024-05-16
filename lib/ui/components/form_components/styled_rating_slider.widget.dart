@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 import 'package:yc_app_utils/models/form_component/styled_rating_slider.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
@@ -96,6 +97,7 @@ class _StyledRatingSliderWidgetState extends State<StyledRatingSliderWidget> {
                           });
                         },
                         onChanged: (value) {
+                          Vibration.vibrate(pattern: [20, 30]);
                           setState(() {
                             this.value = value;
                           });

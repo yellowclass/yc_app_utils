@@ -6,12 +6,14 @@ class V2ClickAction {
   List<OneClickAction> actions;
   bool showRippleEffect;
   bool refreshOrigin;
+  List<int>? vibrationPattern;
 
   V2ClickAction({
     required this.sequenceType,
     required this.actions,
     required this.showRippleEffect,
     this.refreshOrigin = false,
+    this.vibrationPattern,
   });
 
   V2ClickAction copyWith({
@@ -19,12 +21,14 @@ class V2ClickAction {
     List<OneClickAction>? actions,
     bool? showRippleEffect,
     bool? refreshOrigin,
+    List<int>? vibrationPattern,
   }) {
     return V2ClickAction(
       sequenceType: sequenceType ?? this.sequenceType,
       actions: actions ?? this.actions,
       showRippleEffect: showRippleEffect ?? this.showRippleEffect,
       refreshOrigin: refreshOrigin ?? this.refreshOrigin,
+      vibrationPattern: vibrationPattern ?? this.vibrationPattern,
     );
   }
 
@@ -47,6 +51,9 @@ class V2ClickAction {
           map['actions']?.map((x) => OneClickAction.fromMap(x))),
       showRippleEffect: map['showRippleEffect'] ?? false,
       refreshOrigin: map['refreshOrigin'] ?? false,
+      vibrationPattern: map['vibrationPattern'] != null
+          ? List<int>.from(map['vibrationPattern'])
+          : null,
     );
   }
 }
