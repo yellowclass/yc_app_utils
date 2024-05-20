@@ -151,6 +151,7 @@ class AppColors {
   static const Color cTEAL_15 = Color(0xFFDFF3F5);
   static const Color cTEAL_06 = Color(0xFFF2FAFB);
 
+  static const Color cRED_06 = Color(0xFFFFE8E6);
   static const Color cRED_15 = Color(0xFFFFDCDC);
   static const Color cRed_25 = Color(0xFFFFBEBE);
   static const Color cRed_100 = Color(0xFFED695F);
