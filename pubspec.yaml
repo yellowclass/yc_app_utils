@@ -20,6 +20,7 @@ dependencies:
   shimmer: ^2.0.0
   lottie: 2.3.0
   visibility_detector: 0.4.0+2
+  vibration: 1.7.7
 
 dev_dependencies:
   flutter_test:
