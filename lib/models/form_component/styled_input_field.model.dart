@@ -22,6 +22,7 @@ class StyledInputFieldModel with FormComponentUnion {
   InputDecoration? inputDecoration;
   TextStyle? textStyle;
   String? countryCode;
+  TextAlign? textAlign;
 
   StyledInputFieldModel({
     this.label,
@@ -41,6 +42,7 @@ class StyledInputFieldModel with FormComponentUnion {
     this.inputDecoration,
     this.textStyle,
     this.countryCode,
+    this.textAlign,
   });
 
   StyledInputFieldModel copyWith({
@@ -60,6 +62,7 @@ class StyledInputFieldModel with FormComponentUnion {
     List<int>? padding,
     InputDecoration? inputDecoration,
     TextStyle? textStyle,
+    TextAlign? textAlign,
   }) {
     return StyledInputFieldModel(
       label: label ?? this.label,
@@ -79,6 +82,7 @@ class StyledInputFieldModel with FormComponentUnion {
       inputDecoration: inputDecoration ?? this.inputDecoration,
       textStyle: textStyle ?? this.textStyle,
       countryCode: countryCode ?? this.countryCode,
+      textAlign: textAlign ?? this.textAlign,
     );
   }
 
@@ -101,6 +105,7 @@ class StyledInputFieldModel with FormComponentUnion {
       'inputDecoration': inputDecoration?.toString(),
       'textStyle': textStyle?.toString(),
       'countryCode': countryCode,
+      'textAlign': textAlign?.toString(),
     };
   }
 
@@ -140,6 +145,9 @@ class StyledInputFieldModel with FormComponentUnion {
             )
           : null,
       countryCode: map['countryCode'],
+      textAlign: map['textAlign'] != null
+          ? CommonHelpers.getTextAlignmentFromString(map['textAlign'])
+          : null,
     );
   }
 }
