@@ -12,6 +12,7 @@ class StyledTextFieldWidget extends StatefulWidget {
     this.focusedBorder,
     this.autofocus,
     this.prefilledText,
+    this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -22,6 +23,7 @@ class StyledTextFieldWidget extends StatefulWidget {
   final OutlineInputBorder? focusedBorder;
   final bool? autofocus;
   final String? prefilledText;
+  final TextEditingController? controller;
 
   @override
   State<StyledTextFieldWidget> createState() => _StyledTextFieldWidgetState();
@@ -106,10 +108,15 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                 ),
               Flexible(
                 child: FormBuilderTextField(
+                  controller: widget.controller,
                   name: widget.textFieldData.name,
+                  textAlign: widget.textFieldData.textAlign ?? TextAlign.start,
                   cursorColor: AppColors.cTANGERINE_100,
                   onChanged: (value) {
                     if (widget.textValueNotifier != null && value != null) {
+                      if (isMobileField) {
+                        value = _selectedCountry.value + '-' + value;
+                      }
                       widget.textValueNotifier!.value = value;
                     }
                   },

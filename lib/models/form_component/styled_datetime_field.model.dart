@@ -17,6 +17,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   String? lastDate;
   InputDecoration? inputDecoration;
   TextStyle? textStyle;
+  TextAlign? textAlign;
 
   StyledDateTimeFieldModel({
     this.label,
@@ -31,6 +32,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     this.lastDate,
     this.inputDecoration,
     this.textStyle,
+    this.textAlign,
   });
 
   StyledDateTimeFieldModel copyWith({
@@ -46,6 +48,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     String? lastDate,
     InputDecoration? inputDecoration,
     TextStyle? textStyle,
+    TextAlign? textAlign,
   }) {
     return StyledDateTimeFieldModel(
       label: label ?? this.label,
@@ -60,6 +63,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       lastDate: lastDate ?? this.lastDate,
       inputDecoration: inputDecoration ?? this.inputDecoration,
       textStyle: textStyle ?? this.textStyle,
+      textAlign: textAlign ?? this.textAlign,
     );
   }
 
@@ -106,6 +110,9 @@ class StyledDateTimeFieldModel with FormComponentUnion {
           ? CommonHelpers.getTextStyleFromV2TextStyle(
               V2StyledTextModel.fromMap((map['textStyle'])),
             )
+          : null,
+      textAlign: map['textAlign'] != null
+          ? CommonHelpers.getTextAlignmentFromString(map['textAlign'])
           : null,
     );
   }

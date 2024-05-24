@@ -7,11 +7,13 @@ class StyledDateTimeFieldWidget extends StatefulWidget {
   const StyledDateTimeFieldWidget({
     required this.dateTimeFieldData,
     this.onSaved,
+    this.onChanged,
     Key? key,
   }) : super(key: key);
 
   final StyledDateTimeFieldModel dateTimeFieldData;
   final void Function(String, String?)? onSaved;
+  final void Function(String?)? onChanged;
 
   @override
   State<StyledDateTimeFieldWidget> createState() =>
@@ -82,6 +84,7 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
           const SizedBox(height: AppSpacing.xxs),
         },
         FormBuilderDateTimePicker(
+          textAlign: widget.dateTimeFieldData.textAlign ?? TextAlign.start,
           name: widget.dateTimeFieldData.name,
           initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
               ? getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue)
@@ -115,6 +118,9 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
             value: value,
             validations: widget.dateTimeFieldData.validation,
           ),
+          onChanged: (value) {
+            widget.onChanged?.call(value?.toString());
+          },
           onSaved: (value) {
             widget.onSaved?.call(
               widget.dateTimeFieldData.name,
