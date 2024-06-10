@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:yc_app_utils/constants/local_assets.dart';
 import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_field_data.model.dart';
 import 'package:yc_app_utils/models/click_action/event_data.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -681,15 +682,7 @@ class CommonHelpers {
           border: _border,
           borderRadius: borderRadiusGeometry,
           boxShadow: sectionBackground.shadow,
-          image: sectionBackground.backgroundImgUrl != null
-              ? DecorationImage(
-                  // Only supports Non-vector image formats
-                  image: CachedNetworkImageProvider(
-                    sectionBackground.backgroundImgUrl!,
-                  ),
-                  fit: sectionBackground.backgroundImgBoxFit ?? BoxFit.cover,
-                )
-              : null,
+          image: _getImageForSectionBackground(sectionBackground),
         );
 
       case SectionBgType.RADIAL_GRADIENT:
@@ -716,6 +709,30 @@ class CommonHelpers {
       default:
         return const BoxDecoration();
     }
+  }
+
+  static DecorationImage? _getImageForSectionBackground(
+      SectionBackground sectionBackground) {
+    if (sectionBackground.backgroundImgUrl == null) {
+      return null;
+    }
+    late final ImageProvider<Object> imageProvider;
+
+    if (LocalAssets.localNetworkAssets
+        .containsKey(sectionBackground.backgroundImgUrl!.split('/').last)) {
+      // This is done for faster loading of images that are already in the app
+      imageProvider = AssetImage(LocalAssets.localNetworkAssets[
+          sectionBackground.backgroundImgUrl!.split('/').last]!);
+    } else {
+      // Only supports Non-vector image formats
+      imageProvider = CachedNetworkImageProvider(
+        sectionBackground.backgroundImgUrl!,
+      );
+    }
+    return DecorationImage(
+      image: imageProvider,
+      fit: sectionBackground.backgroundImgBoxFit ?? BoxFit.cover,
+    );
   }
 
   static BoxDecoration getBoxDecorationWithCardBackground({
