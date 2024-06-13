@@ -66,20 +66,28 @@ class V2StyledTextWidget extends StatelessWidget {
                 if (styledText.prefixIcon?.url != null)
                   Align(
                     alignment: _iconAlignment(styledText.prefixIconAlignment),
-                    child: GenericNetworkImage(
-                      styledText.prefixIcon!.url!,
-                      width: styledText.suffixIcon?.width,
-                      height: styledText.suffixIcon?.height,
+                    child: SizedBox(
+                      width: styledText.prefixIcon?.width,
+                      height: styledText.prefixIcon?.height,
+                      child: GenericNetworkImage(
+                        styledText.prefixIcon!.url!,
+                        width: styledText.suffixIcon?.width,
+                        height: styledText.suffixIcon?.height,
+                      ),
                     ),
                   ),
                 Flexible(child: _getTextWidget()),
                 if (styledText.suffixIcon?.url != null)
                   Align(
                     alignment: _iconAlignment(styledText.suffixIconAlignment),
-                    child: GenericNetworkImage(
-                      styledText.suffixIcon!.url!,
+                    child: SizedBox(
                       width: styledText.suffixIcon?.width,
                       height: styledText.suffixIcon?.height,
+                      child: GenericNetworkImage(
+                        styledText.suffixIcon!.url!,
+                        width: styledText.suffixIcon?.width,
+                        height: styledText.suffixIcon?.height,
+                      ),
                     ),
                   )
               ],

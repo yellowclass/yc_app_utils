@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:yc_app_utils/constants/local_assets.dart';
 
 class GenericNetworkImage extends StatelessWidget {
   const GenericNetworkImage(
@@ -30,10 +31,45 @@ class GenericNetworkImage extends StatelessWidget {
   final Widget placeholder;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
 
+  Widget? _getLocalImageAssetIfAvailable() {
+    if (LocalAssets.localNetworkAssets.containsKey(url.split('/').last)) {
+      // This is done for faster loading of images that are already in the app
+      final bool isSvg = Uri.parse(url).path.split(".").last == 'svg';
+      if (isSvg) {
+        return SvgPicture.asset(
+          LocalAssets.localNetworkAssets[url.split('/').last]!,
+          width: width,
+          height: height,
+          fit: fit,
+          alignment: alignment,
+          color: color,
+          placeholderBuilder: (_) => placeholder,
+        );
+      }
+      return Image.asset(
+        LocalAssets.localNetworkAssets[url.split('/').last]!,
+        width: width,
+        height: height,
+        fit: fit,
+        alignment: alignment,
+        color: color,
+        errorBuilder: errorWidget != null ? (_, __, ___) => errorWidget! : null,
+      );
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (url.isEmpty) {
       return const SizedBox.shrink();
+    }
+
+    Widget? localImageAsset = _getLocalImageAssetIfAvailable();
+
+    if (localImageAsset != null) {
+      return localImageAsset;
     }
 
     final bool isSvg = Uri.parse(url).path.split(".").last == 'svg';

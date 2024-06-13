@@ -272,6 +272,9 @@ class _BootstrapBottomActionButtonState
                     ? const BoxDecoration(
                         backgroundBlendMode: BlendMode.saturation,
                         color: AppColors.cGREY_25,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(48),
+                        ),
                       )
                     : null,
             child: GenericButtonV3Widget(
