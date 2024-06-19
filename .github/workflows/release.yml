@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Get latest tag
         id: get_latest_tag
@@ -45,6 +47,13 @@ jobs:
           fi
           echo "::set-output name=NEW_TAG::$NEW_TAG"
 
+      - name: Get commit message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MESSAGE"
+          echo "::set-output name=COMMIT_MESSAGE::$COMMIT_MESSAGE"   
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -55,16 +64,6 @@ jobs:
           release_name: Release ${{ steps.calculate_version.outputs.NEW_TAG }}
           body: |
             ## Changes
-            - List your changes here.
+            ${{ steps.get_commit_message.outputs.COMMIT_MESSAGE }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: path/to/your/asset.zip
-          asset_name: asset.zip
-          asset_content_type: application/zip
