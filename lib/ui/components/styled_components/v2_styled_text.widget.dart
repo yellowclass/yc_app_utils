@@ -71,8 +71,8 @@ class V2StyledTextWidget extends StatelessWidget {
                       height: styledText.prefixIcon?.height,
                       child: GenericNetworkImage(
                         styledText.prefixIcon!.url!,
-                        width: styledText.suffixIcon?.width,
-                        height: styledText.suffixIcon?.height,
+                        width: styledText.prefixIcon?.width,
+                        height: styledText.prefixIcon?.height,
                       ),
                     ),
                   ),
