@@ -1150,6 +1150,4 @@ class CommonHelpers {
       '${color.green.toRadixString(16).padLeft(2, '0')}'
       '${color.blue.toRadixString(16).padLeft(2, '0')}';
 
-
-  // static String testingTags() => "";
 }
