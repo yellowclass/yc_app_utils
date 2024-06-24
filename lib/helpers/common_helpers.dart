@@ -607,7 +607,7 @@ class CommonHelpers {
 
   static TextStyle? getTextStyleFromV2TextStyle(V2TextStyle? v2TextStyle) {
     if (v2TextStyle == null) {
-      return const TextStyle();
+      return null;
     }
     return CommonHelpers.getTextStyle(
       v2TextStyle.tStyle,

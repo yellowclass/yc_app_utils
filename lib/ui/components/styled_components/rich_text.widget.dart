@@ -36,7 +36,7 @@ class _RichTextWidgetState extends State<RichTextWidget> {
                   widget.richText.primaryTextStyle,
                 ),
                 children: List.generate(
-                  widget.richText.texts?.length ?? 0,
+                  widget.richText.texts!.length,
                   (index) {
                     final currentText = widget.richText.texts![index];
                     return TextSpan(
