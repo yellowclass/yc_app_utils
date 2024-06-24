@@ -577,7 +577,38 @@ class CommonHelpers {
     return result.toList();
   }
 
-  static TextStyle? getTextStyleFromV2TextStyle(V2StyledTextModel v2TextStyle) {
+  static TextStyle? getTextStyleFromV2StyledText(
+      V2StyledTextModel v2StyledText) {
+    return CommonHelpers.getTextStyle(
+      v2StyledText.tStyle,
+      customStyle: TextStyle(
+        letterSpacing: v2StyledText.letterSpacing,
+        fontStyle:
+            v2StyledText.italic == true ? FontStyle.italic : FontStyle.normal,
+        color: CommonHelpers.v2ColorFromHex(
+          v2StyledText.textColor,
+        ),
+        decoration: TextDecoration.combine([
+          if (v2StyledText.strikeThrough) TextDecoration.lineThrough,
+          if (v2StyledText.underline) TextDecoration.underline,
+        ]),
+        fontFamily: CommonHelpers.getFontFamily(v2StyledText.fontFamily),
+        shadows: v2StyledText.strokeWidth != null
+            ? CommonHelpers.getTextStroke(
+                strokeWidth: v2StyledText.strokeWidth!,
+                strokeColor: CommonHelpers.v2ColorFromHex(
+                  v2StyledText.strokeColor,
+                ),
+              )
+            : null,
+      ),
+    );
+  }
+
+  static TextStyle? getTextStyleFromV2TextStyle(V2TextStyle? v2TextStyle) {
+    if (v2TextStyle == null) {
+      return const TextStyle();
+    }
     return CommonHelpers.getTextStyle(
       v2TextStyle.tStyle,
       customStyle: TextStyle(
@@ -592,14 +623,6 @@ class CommonHelpers {
           if (v2TextStyle.underline) TextDecoration.underline,
         ]),
         fontFamily: CommonHelpers.getFontFamily(v2TextStyle.fontFamily),
-        shadows: v2TextStyle.strokeWidth != null
-            ? CommonHelpers.getTextStroke(
-                strokeWidth: v2TextStyle.strokeWidth!,
-                strokeColor: CommonHelpers.v2ColorFromHex(
-                  v2TextStyle.strokeColor,
-                ),
-              )
-            : null,
       ),
     );
   }
@@ -1123,13 +1146,13 @@ class CommonHelpers {
         inputDecoration['disabledBorder'],
       ),
       errorStyle: inputDecoration['errorStyle'] != null
-          ? getTextStyleFromV2TextStyle(
+          ? getTextStyleFromV2StyledText(
               V2StyledTextModel.fromMap(inputDecoration['errorStyle']),
             )
           : null,
       hintText: inputDecoration['hintText'],
       hintStyle: inputDecoration['hintStyle'] != null
-          ? getTextStyleFromV2TextStyle(
+          ? getTextStyleFromV2StyledText(
               V2StyledTextModel.fromMap(inputDecoration['hintStyle']),
             )
           : null,

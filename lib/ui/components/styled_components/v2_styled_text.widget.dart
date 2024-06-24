@@ -126,6 +126,6 @@ class V2StyledTextWidget extends StatelessWidget {
   }
 
   TextStyle? _getStyle() {
-    return CommonHelpers.getTextStyleFromV2TextStyle(styledText);
+    return CommonHelpers.getTextStyleFromV2StyledText(styledText);
   }
 }

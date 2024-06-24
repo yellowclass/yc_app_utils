@@ -113,7 +113,7 @@ class StyledSelectFieldModel with FormComponentUnion {
           ? CommonHelpers.getInputDecorationFromMap(map['inputDecoration'])
           : null,
       textStyle: map['textStyle'] != null
-          ? CommonHelpers.getTextStyleFromV2TextStyle(
+          ? CommonHelpers.getTextStyleFromV2StyledText(
               V2StyledTextModel.fromMap((map['textStyle'])),
             )
           : null,

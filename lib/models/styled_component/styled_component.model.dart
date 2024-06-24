@@ -1,9 +1,9 @@
+import 'package:yc_app_utils/models/styled_component/rich_text.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_circular_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_linear_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
-import 'package:yc_app_utils/models/styled_component/v3_styled_text.model.dart';
 
 class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
   StyledComponentUnion scData;
@@ -72,8 +72,8 @@ class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
       case 'StyledLinearProgress':
         scData = StyledLinearProgress.fromMap(map['scData']);
         break;
-      case 'V3StyledText':
-        scData = V3StyledTextModel.fromMap(map['scData']);
+      case 'RichText':
+        scData = RichTextModel.fromMap(map['scData']);
         break;
       default:
     }

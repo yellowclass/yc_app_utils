@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/media_manager_info.model.dart';
+import 'package:yc_app_utils/models/styled_component/rich_text.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_circular_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_linear_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
@@ -8,8 +9,7 @@ import 'package:yc_app_utils/ui/components/styled_components/styled_circular_pro
 import 'package:yc_app_utils/ui/components/styled_components/styled_linear_progress.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_lottie.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_timer.widget.dart';
-import 'package:yc_app_utils/ui/components/styled_components/v3_styled_text.widget.dart';
-import 'package:yc_app_utils/models/styled_component/v3_styled_text.model.dart';
+import 'package:yc_app_utils/ui/components/styled_components/rich_text.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledComponentWidget extends StatefulWidget {
@@ -162,10 +162,10 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
         return StyledLinearProgressWidget(
           styledLinearProgressData: styledLinearProgressData,
         );
-      case V3StyledTextModel:
-        final v3StyledText = _scData as V3StyledTextModel;
-        return V3StyledText(
-          v3StyledText: v3StyledText,
+      case RichTextModel:
+        final richText = _scData as RichTextModel;
+        return RichTextWidget(
+          richText: richText,
         );
 
       default:
