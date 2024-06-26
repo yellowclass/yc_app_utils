@@ -1,0 +1,69 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
+
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "")
+          if [ -z "$latest_tag" ]; then
+            echo "No tags found, starting with v1.0.0"
+            echo "::set-output name=LATEST_TAG::v1.0.0"
+          else
+            echo "Latest tag: $latest_tag"
+            echo "::set-output name=LATEST_TAG::$latest_tag"
+          fi
+
+      - name: Calculate next version
+        id: calculate_version
+        run: |
+          LATEST_TAG=${{ steps.get_latest_tag.outputs.LATEST_TAG }}
+          if [[ $LATEST_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
+            echo "Latest tag: $LATEST_TAG"
+            version=$(echo $LATEST_TAG | sed 's/^v//')
+            IFS='.' read -r -a parts <<< "$version"
+            major=${parts[0]}
+            minor=${parts[1]}
+            patch=${parts[2]}
+            patch=$((patch + 1))
+            NEW_TAG="v$major.$minor.$patch"
+            echo "New tag: $NEW_TAG"
+          else
+            NEW_TAG="v0.1.0"
+            echo "No valid latest tag found, setting initial tag: $NEW_TAG"
+          fi
+          echo "::set-output name=NEW_TAG::$NEW_TAG"
+
+      - name: Get commit message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MESSAGE"
+          echo "::set-output name=COMMIT_MESSAGE::$COMMIT_MESSAGE"   
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.calculate_version.outputs.NEW_TAG }}
+          release_name: Release ${{ steps.calculate_version.outputs.NEW_TAG }}
+          body: |
+            ## Changes
+            ${{ steps.get_commit_message.outputs.COMMIT_MESSAGE }}
+          draft: false
+          prerelease: false
