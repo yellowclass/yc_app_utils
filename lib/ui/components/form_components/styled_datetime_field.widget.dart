@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_datetime_boxes.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_datetime_feild_bs.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class StyledDateTimeFieldWidget extends StatefulWidget {
@@ -11,15 +8,12 @@ class StyledDateTimeFieldWidget extends StatefulWidget {
     required this.dateTimeFieldData,
     this.onSaved,
     this.onChanged,
-    this.innerClickAction,
     Key? key,
   }) : super(key: key);
 
   final StyledDateTimeFieldModel dateTimeFieldData;
   final void Function(String, String?)? onSaved;
   final void Function(String?)? onChanged;
-
-  final InnerClickAction? innerClickAction;
 
   @override
   State<StyledDateTimeFieldWidget> createState() =>
@@ -64,93 +58,32 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
     }
   }
 
-  CupertinoDatePickerMode get dateFormatBS {
-    switch (widget.dateTimeFieldData.dateTimeFieldType) {
-      case DateTimeFieldTypeEnum.DATE:
-        return CupertinoDatePickerMode.date;
-      case DateTimeFieldTypeEnum.TIME:
-        return CupertinoDatePickerMode.time;
-      case DateTimeFieldTypeEnum.DATETIME:
-        return CupertinoDatePickerMode.dateAndTime;
-      default:
-        return CupertinoDatePickerMode.date;
-    }
-  }
-
-  Widget getDateTimeSection() {
-    switch (widget.dateTimeFieldData.designStyle) {
-      case DateTimeDesignStyle.BOTTOM_SHEET:
-        return StyledDateTimeFieldBS(
-          inputDecoration: widget.dateTimeFieldData.inputDecoration ??
-              InputDecoration(
-                hintStyle: const TextStyle(
-                  color: AppColors.cBODY_TEXT_75,
-                  fontSize: 16,
-                ),
-                hintText: widget.dateTimeFieldData.placeholder,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.s,
-                  vertical: AppSpacing.m,
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.dateTimeFieldData.label != null) ...{
+          Row(
+            children: [
+              Flexible(
+                child: V2StyledTextWidget(
+                  styledText: widget.dateTimeFieldData.label!,
                 ),
               ),
-          innerClickAction: widget.innerClickAction,
-          bottomSheetStyle: widget.dateTimeFieldData.bottomSheetStyle,
-          initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
-              ? getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue)
-              : null,
-          firstDate: getParsedDate(widget.dateTimeFieldData.firstDate),
-          lastDate: getParsedDate(widget.dateTimeFieldData.lastDate),
-          inputFormat: dateFormatBS,
-          isDisabled: widget.dateTimeFieldData.isDisabled,
-          onChanged: (value) {
-            widget.onChanged?.call(value.toString());
-          },
-          onSaved: (value) {
-            widget.onSaved?.call(
-              widget.dateTimeFieldData.name,
-              value.toIso8601String(),
-            );
-          },
-          style: widget.dateTimeFieldData.textStyle ??
-              const TextStyle(
-                color: AppColors.cBODY_TEXT,
-                fontSize: 16,
-                fontFamily: YCFonts.nunitoRegular,
-              ),
-        );
-      case DateTimeDesignStyle.BLOCKS:
-        return StyledDateTimeBoxes(
-            initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
-                ? getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue)
-                : null,
-            firstDate: getParsedDate(widget.dateTimeFieldData.firstDate),
-            lastDate: getParsedDate(widget.dateTimeFieldData.lastDate),
-            isDisabled: widget.dateTimeFieldData.isDisabled,
-            inputDecoration: widget.dateTimeFieldData.inputDecoration ??
-                InputDecoration(
-                  hintStyle: const TextStyle(
-                    color: AppColors.cBODY_TEXT_75,
-                    fontSize: 16,
-                  ),
-                  hintText: widget.dateTimeFieldData.placeholder,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.s,
-                    vertical: AppSpacing.m,
+              if (widget.dateTimeFieldData.validation?.isRequired?.value ==
+                  true)
+                const Text(
+                  ' *',
+                  style: TextStyle(
+                    color: AppColors.cRed_100,
                   ),
                 ),
-            onChanged: (value) {
-              widget.onChanged?.call(value.toString());
-            },
-            onSaved: (value) {
-              widget.onSaved?.call(
-                widget.dateTimeFieldData.name,
-                value.toIso8601String(),
-              );
-            });
-
-      case DateTimeDesignStyle.STANDARD:
-      default:
-        return FormBuilderDateTimePicker(
+            ],
+          ),
+          const SizedBox(height: AppSpacing.xxs),
+        },
+        FormBuilderDateTimePicker(
           textAlign: widget.dateTimeFieldData.textAlign ?? TextAlign.start,
           name: widget.dateTimeFieldData.name,
           initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
@@ -194,36 +127,7 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
               value?.toIso8601String(),
             );
           },
-        );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (widget.dateTimeFieldData.label != null) ...{
-          Row(
-            children: [
-              Flexible(
-                child: V2StyledTextWidget(
-                  styledText: widget.dateTimeFieldData.label!,
-                ),
-              ),
-              if (widget.dateTimeFieldData.validation?.isRequired?.value ==
-                  true)
-                const Text(
-                  ' *',
-                  style: TextStyle(
-                    color: AppColors.cRed_100,
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.xxs),
-        },
-        getDateTimeSection(),
+        ),
       ],
     );
   }

@@ -13,7 +13,6 @@ class FormComponentWidget extends StatelessWidget {
     required this.formComponentDetails,
     this.getAutoCompleteSuggestions,
     this.onSaved,
-    this.innerClickAction,
     Key? key,
   }) : super(key: key);
 
@@ -21,8 +20,6 @@ class FormComponentWidget extends StatelessWidget {
   final void Function(String, dynamic)? onSaved;
   final Future<AutocompleteSuggestions?> Function(
       AutocompleteInputModel inputData)? getAutoCompleteSuggestions;
-
-  final InnerClickAction? innerClickAction;
 
   Widget buildComponent() {
     if (formComponentDetails.fcData is StyledInputFieldModel) {
@@ -38,7 +35,6 @@ class FormComponentWidget extends StatelessWidget {
       return StyledDateTimeFieldWidget(
         dateTimeFieldData: dateTimeFieldDetails,
         onSaved: onSaved,
-        innerClickAction: innerClickAction,
       );
     } else if (formComponentDetails.fcData is StyledRadioFieldModel) {
       StyledRadioFieldModel radioFieldDetails =
