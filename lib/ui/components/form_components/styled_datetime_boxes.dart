@@ -6,7 +6,7 @@ import 'package:yc_app_utils/models/v2_text_style.model.dart';
 import 'package:yc_app_utils/ui/styleguide/colors.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
-class StyledDateTimeBoxes extends StatefulWidget {
+class StyledDateTimeBlocks extends StatefulWidget {
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -15,7 +15,7 @@ class StyledDateTimeBoxes extends StatefulWidget {
   final Function(DateTime) onSaved;
   final InputDecoration inputDecoration;
 
-  const StyledDateTimeBoxes({
+  const StyledDateTimeBlocks({
     required this.onChanged,
     required this.onSaved,
     required this.isDisabled,
@@ -27,10 +27,10 @@ class StyledDateTimeBoxes extends StatefulWidget {
   });
 
   @override
-  State<StyledDateTimeBoxes> createState() => _StyledDateTimeBoxesState();
+  State<StyledDateTimeBlocks> createState() => _StyledDateTimeBlocksState();
 }
 
-class _StyledDateTimeBoxesState extends State<StyledDateTimeBoxes> {
+class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
   FocusNode dayFocusNode = FocusNode();
   FocusNode monthFocusNode = FocusNode();
   FocusNode yearFocusNode = FocusNode();

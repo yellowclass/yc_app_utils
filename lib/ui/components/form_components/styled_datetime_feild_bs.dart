@@ -16,6 +16,7 @@ class StyledDateTimeFieldBS extends StatefulWidget {
     this.lastDate,
     this.bottomSheetStyle,
     this.innerClickAction,
+    this.validator,
     super.key,
   });
   final CupertinoDatePickerMode inputFormat;
@@ -29,6 +30,7 @@ class StyledDateTimeFieldBS extends StatefulWidget {
   final bool isDisabled;
   final InputDecoration inputDecoration;
   final TextStyle style;
+  final String? Function(DateTime?)? validator;
 
   @override
   State<StyledDateTimeFieldBS> createState() => _StyledDateTimeFieldBSState();
@@ -43,7 +45,17 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
   @override
   void initState() {
     super.initState();
-    date = ValueNotifier(widget.initialDate ?? DateTime.now());
+
+    // setting initial date in case which it is not coming to avoid assertion of DatePicker
+    if (widget.initialDate == null && widget.lastDate != null) {
+      // Set the time to start of the day to avoid the assertion
+      DateTime startOfDay = DateTime(widget.lastDate!.year,
+          widget.lastDate!.month, widget.lastDate!.day, 0, 0, 0, 0);
+      date = ValueNotifier(startOfDay);
+    } else {
+      date = ValueNotifier(widget.initialDate);
+      _controller.value = TextEditingValue(text: getDate(date.value!));
+    }
     _tempDate = date.value;
     date.addListener(() {
       if (date.value != null) {
@@ -66,6 +78,13 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
       },
       style: widget.style,
       readOnly: true,
+      validator: (val) {
+        // check whether the text is dummy value or not
+        if (_controller.value.text == '') {
+          return widget.validator?.call(null);
+        }
+        return widget.validator?.call(date.value);
+      },
       onTap: () => widget.isDisabled
           ? null
           : showCupertinoModalPopup<void>(
@@ -84,7 +103,7 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
                       ),
                     Expanded(
                       child: CupertinoDatePicker(
-                        initialDateTime: widget.initialDate,
+                        initialDateTime: date.value,
                         mode: widget.inputFormat,
                         minimumDate: widget.firstDate,
                         maximumDate: widget.lastDate,
