@@ -93,6 +93,10 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
                   vertical: AppSpacing.m,
                 ),
               ),
+          validator: (value) => CommonHelpers.validateDateTimeField(
+            value: value,
+            validations: widget.dateTimeFieldData.validation,
+          ),
           innerClickAction: widget.innerClickAction,
           bottomSheetStyle: widget.dateTimeFieldData.bottomSheetStyle,
           initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
@@ -119,7 +123,7 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
               ),
         );
       case DateTimeDesignStyle.BLOCKS:
-        return StyledDateTimeBoxes(
+        return StyledDateTimeBlocks(
             initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
                 ? getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue)
                 : null,
