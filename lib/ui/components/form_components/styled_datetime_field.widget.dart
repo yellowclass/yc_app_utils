@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:yc_app_utils/ui/components/form_components/styled_datetime_boxes.dart';
+import 'package:yc_app_utils/ui/components/form_components/styled_datetime_blocks.dart';
 import 'package:yc_app_utils/ui/components/form_components/styled_datetime_feild_bs.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
