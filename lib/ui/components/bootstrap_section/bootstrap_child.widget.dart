@@ -137,6 +137,7 @@ class BootstrapChildWidgetState extends State<BootstrapChildWidget>
           widget.bootstrapChild.bcData as FormComponentModel;
       return FormComponentWidget(
         formComponentDetails: widgetData,
+        innerClickAction: widget.innerClickAction,
         onSaved: (key, value) {
           if (widgetData.fcData is StyledSelectFieldModel &&
               (widgetData.fcData as StyledSelectFieldModel).selectType ==

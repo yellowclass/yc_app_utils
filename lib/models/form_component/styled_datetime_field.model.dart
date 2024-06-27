@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
+import 'package:yc_app_utils/models/form_component/datetime_bs_style.model.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
+
+enum DateTimeDesignStyle {
+  STANDARD,
+  BOTTOM_SHEET,
+  BLOCKS,
+}
 
 class StyledDateTimeFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
@@ -18,6 +25,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   InputDecoration? inputDecoration;
   TextStyle? textStyle;
   TextAlign? textAlign;
+  DateTimeDesignStyle designStyle;
+  DateTimeBottomSheetStyle? bottomSheetStyle;
 
   StyledDateTimeFieldModel({
     this.label,
@@ -33,6 +42,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     this.inputDecoration,
     this.textStyle,
     this.textAlign,
+    this.designStyle = DateTimeDesignStyle.STANDARD,
+    this.bottomSheetStyle,
   });
 
   StyledDateTimeFieldModel copyWith({
@@ -49,6 +60,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     InputDecoration? inputDecoration,
     TextStyle? textStyle,
     TextAlign? textAlign,
+    DateTimeDesignStyle? designStyle,
+    DateTimeBottomSheetStyle? bottomSheetStyle,
   }) {
     return StyledDateTimeFieldModel(
       label: label ?? this.label,
@@ -64,6 +77,8 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       inputDecoration: inputDecoration ?? this.inputDecoration,
       textStyle: textStyle ?? this.textStyle,
       textAlign: textAlign ?? this.textAlign,
+      designStyle: designStyle ?? this.designStyle,
+      bottomSheetStyle: bottomSheetStyle ?? this.bottomSheetStyle,
     );
   }
 
@@ -81,6 +96,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       'lastDate': lastDate,
       'inputDecoration': inputDecoration?.toString(),
       'textStyle': textStyle?.toString(),
+      'bottomSheetStyle': bottomSheetStyle?.toString(),
     };
   }
 
@@ -113,6 +129,12 @@ class StyledDateTimeFieldModel with FormComponentUnion {
           : null,
       textAlign: map['textAlign'] != null
           ? CommonHelpers.getTextAlignmentFromString(map['textAlign'])
+          : null,
+      designStyle: CommonHelpers.enumFromString(
+              DateTimeDesignStyle.values, map['designStyle']) ??
+          DateTimeDesignStyle.STANDARD,
+      bottomSheetStyle: map['bottomSheetStyle'] != null
+          ? DateTimeBottomSheetStyle.fromMap(map['bottomSheetStyle'])
           : null,
     );
   }
