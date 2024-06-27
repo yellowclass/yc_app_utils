@@ -14,12 +14,16 @@ class StyledDateTimeBlocks extends StatefulWidget {
   final Function(String?) onChanged;
   final Function(DateTime) onSaved;
   final InputDecoration inputDecoration;
+  final TextStyle style;
+  final TextAlign? textAlign;
 
   const StyledDateTimeBlocks({
     required this.onChanged,
     required this.onSaved,
     required this.isDisabled,
     required this.inputDecoration,
+    required this.style,
+    this.textAlign,
     this.initialDate,
     this.firstDate,
     this.lastDate,
@@ -124,6 +128,8 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,
                 maxLength: 2,
+                textAlign: widget.textAlign ?? TextAlign.center,
+                style: widget.style,
                 buildCounter: _buildCounter,
               ),
             ),
@@ -152,6 +158,8 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
                 validator: validateDob,
                 keyboardType: TextInputType.number,
                 maxLength: 2,
+                style: widget.style,
+                textAlign: widget.textAlign ?? TextAlign.center,
                 buildCounter: _buildCounter,
               ),
             ),
@@ -166,6 +174,8 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
                 validator: validateDob,
                 buildCounter: _buildCounter,
                 enabled: !widget.isDisabled,
+                style: widget.style,
+                textAlign: widget.textAlign ?? TextAlign.center,
                 onChanged: (value) {
                   _handleOnChange();
                   if (value.isEmpty) {
