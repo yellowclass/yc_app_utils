@@ -142,6 +142,13 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
                     vertical: AppSpacing.m,
                   ),
                 ),
+            textAlign: widget.dateTimeFieldData.textAlign,
+            style: widget.dateTimeFieldData.textStyle ??
+                const TextStyle(
+                  color: AppColors.cBODY_TEXT,
+                  fontSize: 16,
+                  fontFamily: YCFonts.nunitoRegular,
+                ),
             onChanged: (value) {
               widget.onChanged?.call(value.toString());
             },
