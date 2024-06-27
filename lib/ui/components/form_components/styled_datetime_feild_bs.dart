@@ -37,7 +37,7 @@ class StyledDateTimeFieldBS extends StatefulWidget {
 }
 
 class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
-  late final ValueNotifier<DateTime?> date;
+  late final ValueNotifier<DateTime?> dateNotifier;
 
   final TextEditingController _controller = TextEditingController();
   DateTime? _tempDate;
@@ -51,15 +51,16 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
       // Set the time to start of the day to avoid the assertion
       DateTime startOfDay = DateTime(widget.lastDate!.year,
           widget.lastDate!.month, widget.lastDate!.day, 0, 0, 0, 0);
-      date = ValueNotifier(startOfDay);
+      dateNotifier = ValueNotifier(startOfDay);
     } else {
-      date = ValueNotifier(widget.initialDate);
-      _controller.value = TextEditingValue(text: getDate(date.value!));
+      dateNotifier = ValueNotifier(widget.initialDate);
+      _controller.value = TextEditingValue(text: getDate(dateNotifier.value!));
     }
-    _tempDate = date.value;
-    date.addListener(() {
-      if (date.value != null) {
-        _controller.value = TextEditingValue(text: getDate(date.value!));
+    _tempDate = dateNotifier.value;
+    dateNotifier.addListener(() {
+      if (dateNotifier.value != null) {
+        _controller.value =
+            TextEditingValue(text: getDate(dateNotifier.value!));
       }
     });
   }
@@ -74,7 +75,7 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
       controller: _controller,
       decoration: widget.inputDecoration,
       onSaved: (newValue) {
-        widget.onSaved.call(date.value!);
+        widget.onSaved.call(dateNotifier.value!);
       },
       style: widget.style,
       readOnly: true,
@@ -83,7 +84,7 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
         if (_controller.value.text == '') {
           return widget.validator?.call(null);
         }
-        return widget.validator?.call(date.value);
+        return widget.validator?.call(dateNotifier.value);
       },
       onTap: () => widget.isDisabled
           ? null
@@ -103,7 +104,7 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
                       ),
                     Expanded(
                       child: CupertinoDatePicker(
-                        initialDateTime: date.value,
+                        initialDateTime: dateNotifier.value,
                         mode: widget.inputFormat,
                         minimumDate: widget.firstDate,
                         maximumDate: widget.lastDate,
@@ -125,8 +126,8 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
                                     'save_date' &&
                                 _tempDate != null) {
                               widget.onChanged.call(_tempDate!);
-                              date.value = _tempDate;
-                              date.notifyListeners();
+                              dateNotifier.value = _tempDate;
+                              dateNotifier.notifyListeners();
                             }
                             if (widget.bottomSheetStyle?.bottomStickyBar
                                     ?.v2ClickAction !=
@@ -152,7 +153,7 @@ class _StyledDateTimeFieldBSState extends State<StyledDateTimeFieldBS> {
 
   @override
   void dispose() {
-    date.dispose();
+    dateNotifier.dispose();
     _controller.dispose();
     super.dispose();
   }
