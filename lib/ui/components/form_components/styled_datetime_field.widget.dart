@@ -124,6 +124,7 @@ class _StyledDateTimeFieldWidgetState extends State<StyledDateTimeFieldWidget> {
         );
       case DateTimeDesignStyle.BLOCKS:
         return StyledDateTimeBlocks(
+            is3BlockStyle: widget.dateTimeFieldData.is3BlockStyle ?? true,
             initialDate: widget.dateTimeFieldData.defaultDateTimeValue != null
                 ? getParsedDate(widget.dateTimeFieldData.defaultDateTimeValue)
                 : null,

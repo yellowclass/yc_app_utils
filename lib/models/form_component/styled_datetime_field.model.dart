@@ -27,6 +27,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   TextAlign? textAlign;
   DateTimeDesignStyle designStyle;
   DateTimeBottomSheetStyle? bottomSheetStyle;
+  bool? is3BlockStyle;
 
   StyledDateTimeFieldModel({
     this.label,
@@ -44,6 +45,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     this.textAlign,
     this.designStyle = DateTimeDesignStyle.STANDARD,
     this.bottomSheetStyle,
+    this.is3BlockStyle,
   });
 
   StyledDateTimeFieldModel copyWith({
@@ -62,6 +64,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     TextAlign? textAlign,
     DateTimeDesignStyle? designStyle,
     DateTimeBottomSheetStyle? bottomSheetStyle,
+    bool? is3BlockStyle,
   }) {
     return StyledDateTimeFieldModel(
       label: label ?? this.label,
@@ -79,6 +82,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       textAlign: textAlign ?? this.textAlign,
       designStyle: designStyle ?? this.designStyle,
       bottomSheetStyle: bottomSheetStyle ?? this.bottomSheetStyle,
+      is3BlockStyle: is3BlockStyle ?? this.is3BlockStyle,
     );
   }
 
@@ -97,6 +101,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       'inputDecoration': inputDecoration?.toString(),
       'textStyle': textStyle?.toString(),
       'bottomSheetStyle': bottomSheetStyle?.toString(),
+      "is3BlockStyle": is3BlockStyle,
     };
   }
 
@@ -136,6 +141,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       bottomSheetStyle: map['bottomSheetStyle'] != null
           ? DateTimeBottomSheetStyle.fromMap(map['bottomSheetStyle'])
           : null,
+      is3BlockStyle: map['is3BlockStyle'] ?? false,
     );
   }
 }
