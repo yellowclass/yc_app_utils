@@ -21,6 +21,7 @@ dependencies:
   lottie: 2.3.0
   visibility_detector: 0.4.0+2
   vibration: 1.7.7
+  mask_text_input_formatter: ^2.9.0
 
 dev_dependencies:
   flutter_test:

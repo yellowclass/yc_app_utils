@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:yc_app_utils/helpers/helpers.dart';
-import 'package:yc_app_utils/models/v2_text_style.model.dart';
-import 'package:yc_app_utils/ui/styleguide/colors.dart';
-import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
+import 'package:yc_app_utils/yc_app_utils.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class StyledDateTimeBlocks extends StatefulWidget {
   final DateTime? initialDate;
@@ -16,6 +14,7 @@ class StyledDateTimeBlocks extends StatefulWidget {
   final InputDecoration inputDecoration;
   final TextStyle style;
   final TextAlign? textAlign;
+  final DobBlockStyleEnum dobBlockStyle;
 
   const StyledDateTimeBlocks({
     required this.onChanged,
@@ -23,6 +22,7 @@ class StyledDateTimeBlocks extends StatefulWidget {
     required this.isDisabled,
     required this.inputDecoration,
     required this.style,
+    required this.dobBlockStyle,
     this.textAlign,
     this.initialDate,
     this.firstDate,
@@ -50,36 +50,65 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
     _handleInitialDate();
   }
 
-  String? validateDob(val) {
-    //errorText is handled manually because there exist 3 textFormField and  form validation will start showing 3 different texts.
-    errorText.value = null;
-    try {
-      // will throw error if the date is not valid
-      final date = DateFormat('dd-MM-yyyy').parseStrict(
-          '${dayController.value.text}-${monthController.value.text}-${yearController.value.text}');
+  String? validateDob(String? val) {
+    if (widget.dobBlockStyle == DobBlockStyleEnum.DAY_MONTH_YEAR_BLOCKS) {
+      //errorText is handled manually because there exist 3 textFormField and  form validation will start showing 3 different texts.
+      errorText.value = null;
+      try {
+        // will throw error if the date is not valid
+        final date = DateFormat('dd-MM-yyyy').parseStrict(
+            '${dayController.value.text}-${monthController.value.text}-${yearController.value.text}');
 
-      // check if date exist in valid range or not
-      if ((widget.firstDate == null ||
-              date.compareTo(widget.firstDate!) >= 0) &&
-          (widget.lastDate == null || date.compareTo(widget.lastDate!) <= 0)) {
-        return null;
-      } else {
-        throw Exception("not a valid date");
+        // check if date exist in valid range or not
+        if ((widget.firstDate == null ||
+                date.compareTo(widget.firstDate!) >= 0) &&
+            (widget.lastDate == null ||
+                date.compareTo(widget.lastDate!) <= 0)) {
+          return null;
+        } else {
+          throw Exception("not a valid date");
+        }
+      } catch (e) {
+        errorText.value = "Enter a valid Date";
+        return '';
       }
-    } catch (e) {
-      errorText.value = "Enter a valid Date";
-      return '';
+    } else {
+      try {
+        final dateArray = val?.split(' / ');
+        // will throw error if the date is not valid
+        final finalDate = DateFormat('dd-MM-yyyy')
+            .parseStrict('${dateArray?[0]}-${dateArray?[1]}-${dateArray?[2]}');
+
+        // check if date exist in valid range or not
+        if ((widget.firstDate == null ||
+                finalDate.compareTo(widget.firstDate!) >= 0) &&
+            (widget.lastDate == null ||
+                finalDate.compareTo(widget.lastDate!) <= 0)) {
+          return null;
+        } else {
+          throw Exception("not a valid date");
+        }
+      } catch (e) {
+        return 'Enter a valid date';
+      }
     }
   }
 
+  String? singleBlockInitialValue;
+
   void _handleInitialDate() {
     if (widget.initialDate != null) {
-      dayController.value =
-          TextEditingValue(text: widget.initialDate!.day.toString());
-      monthController.value =
-          TextEditingValue(text: widget.initialDate!.month.toString());
-      yearController.value =
-          TextEditingValue(text: widget.initialDate!.year.toString());
+      if (widget.dobBlockStyle == DobBlockStyleEnum.DAY_MONTH_YEAR_BLOCKS) {
+        dayController.value =
+            TextEditingValue(text: widget.initialDate!.day.toString());
+        monthController.value =
+            TextEditingValue(text: widget.initialDate!.month.toString());
+        yearController.value =
+            TextEditingValue(text: widget.initialDate!.year.toString());
+      } else {
+        singleBlockInitialValue =
+            '${widget.initialDate?.day} / ${widget.initialDate?.month} / ${widget.initialDate?.year}';
+      }
     }
   }
 
@@ -100,94 +129,129 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              flex: 2,
-              child: TextFormField(
-                focusNode: dayFocusNode,
-                controller: dayController,
+        !(widget.dobBlockStyle == DobBlockStyleEnum.FULL_DATE_BLOCK)
+            ? TextFormField(
                 enabled: !widget.isDisabled,
-                onChanged: (value) {
-                  _handleOnChange();
-
-                  //change focus to month is length is 2
-                  if (value.length == 2) {
-                    FocusScope.of(context).requestFocus(monthFocusNode);
-                  }
-                },
+                initialValue: singleBlockInitialValue,
                 onSaved: (val) {
-                  final date = DateFormat('dd-MM-yyyy').parseStrict(
-                      '${dayController.value.text}-${monthController.value.text}-${yearController.value.text}');
-                  widget.onSaved.call(date);
+                  final dateArray = val?.split(' / ');
+                  // will throw error if the date is not valid
+                  final finalDate = DateFormat('dd-MM-yyyy').parseStrict(
+                      '${dateArray?[0]}-${dateArray?[1]}-${dateArray?[2]}');
+                  widget.onSaved.call(finalDate);
                 },
-                validator: validateDob,
-                decoration: widget.inputDecoration.copyWith(hintText: 'DD'),
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                keyboardType: TextInputType.number,
-                maxLength: 2,
-                textAlign: widget.textAlign ?? TextAlign.center,
-                style: widget.style,
-                buildCounter: _buildCounter,
-              ),
-            ),
-            const Spacer(flex: 1),
-            Flexible(
-              flex: 2,
-              child: TextFormField(
-                focusNode: monthFocusNode,
-                enabled: !widget.isDisabled,
-                controller: monthController,
                 onChanged: (value) {
-                  _handleOnChange();
-
-                  //change focus to year field
-                  if (value.length == 2) {
-                    FocusScope.of(context).requestFocus(yearFocusNode);
-                  }
-
-                  //change focus to month field
-                  if (value.isEmpty) {
-                    FocusScope.of(context).requestFocus(dayFocusNode);
-                  }
+                  widget.onChanged.call(value);
                 },
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: widget.inputDecoration.copyWith(hintText: 'MM'),
                 validator: validateDob,
+                decoration:
+                    widget.inputDecoration.copyWith(hintText: 'DD / MM / YYYY'),
                 keyboardType: TextInputType.number,
-                maxLength: 2,
-                style: widget.style,
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: "## / ## / ####",
+                    filter: {
+                      "#": RegExp(r'\d+|-|/'),
+                    },
+                  )
+                ],
                 textAlign: widget.textAlign ?? TextAlign.center,
-                buildCounter: _buildCounter,
-              ),
-            ),
-            const Spacer(flex: 1),
-            Flexible(
-              flex: 3,
-              child: TextFormField(
-                focusNode: yearFocusNode,
-                controller: yearController,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: widget.inputDecoration.copyWith(hintText: 'YYYY'),
-                validator: validateDob,
-                buildCounter: _buildCounter,
-                enabled: !widget.isDisabled,
                 style: widget.style,
-                textAlign: widget.textAlign ?? TextAlign.center,
-                onChanged: (value) {
-                  _handleOnChange();
-                  if (value.isEmpty) {
-                    FocusScope.of(context).requestFocus(monthFocusNode);
-                  }
-                },
-                keyboardType: TextInputType.number,
-                maxLength: 4,
+                buildCounter: _buildCounter,
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: TextFormField(
+                      focusNode: dayFocusNode,
+                      controller: dayController,
+                      enabled: !widget.isDisabled,
+                      onChanged: (value) {
+                        _handleOnChange();
+
+                        //change focus to month is length is 2
+                        if (value.length == 2) {
+                          FocusScope.of(context).requestFocus(monthFocusNode);
+                        }
+                      },
+                      onSaved: (val) {
+                        final date = DateFormat('dd-MM-yyyy').parseStrict(
+                            '${dayController.value.text}-${monthController.value.text}-${yearController.value.text}');
+                        widget.onSaved.call(date);
+                      },
+                      validator: validateDob,
+                      decoration:
+                          widget.inputDecoration.copyWith(hintText: 'DD'),
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.number,
+                      maxLength: 2,
+                      textAlign: widget.textAlign ?? TextAlign.center,
+                      style: widget.style,
+                      buildCounter: _buildCounter,
+                    ),
+                  ),
+                  const Spacer(flex: 1),
+                  Flexible(
+                    flex: 2,
+                    child: TextFormField(
+                      focusNode: monthFocusNode,
+                      enabled: !widget.isDisabled,
+                      controller: monthController,
+                      onChanged: (value) {
+                        _handleOnChange();
+
+                        //change focus to year field
+                        if (value.length == 2) {
+                          FocusScope.of(context).requestFocus(yearFocusNode);
+                        }
+
+                        //change focus to month field
+                        if (value.isEmpty) {
+                          FocusScope.of(context).requestFocus(dayFocusNode);
+                        }
+                      },
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration:
+                          widget.inputDecoration.copyWith(hintText: 'MM'),
+                      validator: validateDob,
+                      keyboardType: TextInputType.number,
+                      maxLength: 2,
+                      style: widget.style,
+                      textAlign: widget.textAlign ?? TextAlign.center,
+                      buildCounter: _buildCounter,
+                    ),
+                  ),
+                  const Spacer(flex: 1),
+                  Flexible(
+                    flex: 3,
+                    child: TextFormField(
+                      focusNode: yearFocusNode,
+                      controller: yearController,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration:
+                          widget.inputDecoration.copyWith(hintText: 'YYYY'),
+                      validator: validateDob,
+                      buildCounter: _buildCounter,
+                      enabled: !widget.isDisabled,
+                      style: widget.style,
+                      textAlign: widget.textAlign ?? TextAlign.center,
+                      onChanged: (value) {
+                        _handleOnChange();
+                        if (value.isEmpty) {
+                          FocusScope.of(context).requestFocus(monthFocusNode);
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      maxLength: 4,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
         ValueListenableBuilder<String?>(
           valueListenable: errorText,
           builder: (context, value, _) => value != null

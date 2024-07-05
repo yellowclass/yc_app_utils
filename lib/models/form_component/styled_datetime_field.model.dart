@@ -11,6 +11,11 @@ enum DateTimeDesignStyle {
   BLOCKS,
 }
 
+enum DobBlockStyleEnum {
+  DAY_MONTH_YEAR_BLOCKS,
+  FULL_DATE_BLOCK,
+}
+
 class StyledDateTimeFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
@@ -27,6 +32,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   TextAlign? textAlign;
   DateTimeDesignStyle designStyle;
   DateTimeBottomSheetStyle? bottomSheetStyle;
+  DobBlockStyleEnum? dobBlockStyle;
 
   StyledDateTimeFieldModel({
     this.label,
@@ -44,6 +50,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     this.textAlign,
     this.designStyle = DateTimeDesignStyle.STANDARD,
     this.bottomSheetStyle,
+    this.dobBlockStyle,
   });
 
   StyledDateTimeFieldModel copyWith({
@@ -62,6 +69,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     TextAlign? textAlign,
     DateTimeDesignStyle? designStyle,
     DateTimeBottomSheetStyle? bottomSheetStyle,
+    DobBlockStyleEnum? dobBlockStyle,
   }) {
     return StyledDateTimeFieldModel(
       label: label ?? this.label,
@@ -79,6 +87,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       textAlign: textAlign ?? this.textAlign,
       designStyle: designStyle ?? this.designStyle,
       bottomSheetStyle: bottomSheetStyle ?? this.bottomSheetStyle,
+      dobBlockStyle: dobBlockStyle ?? this.dobBlockStyle,
     );
   }
 
@@ -97,6 +106,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       'inputDecoration': inputDecoration?.toString(),
       'textStyle': textStyle?.toString(),
       'bottomSheetStyle': bottomSheetStyle?.toString(),
+      "dobBlockStyle": dobBlockStyle,
     };
   }
 
@@ -135,6 +145,10 @@ class StyledDateTimeFieldModel with FormComponentUnion {
           DateTimeDesignStyle.STANDARD,
       bottomSheetStyle: map['bottomSheetStyle'] != null
           ? DateTimeBottomSheetStyle.fromMap(map['bottomSheetStyle'])
+          : null,
+      dobBlockStyle: map['dobBlockStyle']
+          ? CommonHelpers.enumFromString(
+              DobBlockStyleEnum.values, map['dobBlockStyle'])
           : null,
     );
   }
