@@ -14,7 +14,7 @@ class StyledDateTimeBlocks extends StatefulWidget {
   final InputDecoration inputDecoration;
   final TextStyle style;
   final TextAlign? textAlign;
-  final bool is3BlockStyle;
+  final DobBlockStyleEnum dobBlockStyle;
 
   const StyledDateTimeBlocks({
     required this.onChanged,
@@ -22,7 +22,7 @@ class StyledDateTimeBlocks extends StatefulWidget {
     required this.isDisabled,
     required this.inputDecoration,
     required this.style,
-    required this.is3BlockStyle,
+    required this.dobBlockStyle,
     this.textAlign,
     this.initialDate,
     this.firstDate,
@@ -51,7 +51,7 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
   }
 
   String? validateDob(String? val) {
-    if (widget.is3BlockStyle) {
+    if (widget.dobBlockStyle == DobBlockStyleEnum.DAY_MONTH_YEAR_BLOCKS) {
       //errorText is handled manually because there exist 3 textFormField and  form validation will start showing 3 different texts.
       errorText.value = null;
       try {
@@ -98,7 +98,7 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
 
   void _handleInitialDate() {
     if (widget.initialDate != null) {
-      if (widget.is3BlockStyle) {
+      if (widget.dobBlockStyle == DobBlockStyleEnum.DAY_MONTH_YEAR_BLOCKS) {
         dayController.value =
             TextEditingValue(text: widget.initialDate!.day.toString());
         monthController.value =
@@ -131,7 +131,7 @@ class _StyledDateTimeBlocksState extends State<StyledDateTimeBlocks> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        !widget.is3BlockStyle
+        !(widget.dobBlockStyle == DobBlockStyleEnum.FULL_DATE_BLOCK)
             ? TextFormField(
                 enabled: !widget.isDisabled,
                 initialValue: singleBlockInitialValue,

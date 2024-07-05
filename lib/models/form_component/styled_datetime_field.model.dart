@@ -11,6 +11,11 @@ enum DateTimeDesignStyle {
   BLOCKS,
 }
 
+enum DobBlockStyleEnum {
+  DAY_MONTH_YEAR_BLOCKS,
+  FULL_DATE_BLOCK,
+}
+
 class StyledDateTimeFieldModel with FormComponentUnion {
   V2StyledTextModel? label;
   String name;
@@ -27,7 +32,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
   TextAlign? textAlign;
   DateTimeDesignStyle designStyle;
   DateTimeBottomSheetStyle? bottomSheetStyle;
-  bool? is3BlockStyle;
+  DobBlockStyleEnum? dobBlockStyle;
 
   StyledDateTimeFieldModel({
     this.label,
@@ -45,7 +50,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     this.textAlign,
     this.designStyle = DateTimeDesignStyle.STANDARD,
     this.bottomSheetStyle,
-    this.is3BlockStyle,
+    this.dobBlockStyle,
   });
 
   StyledDateTimeFieldModel copyWith({
@@ -64,7 +69,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
     TextAlign? textAlign,
     DateTimeDesignStyle? designStyle,
     DateTimeBottomSheetStyle? bottomSheetStyle,
-    bool? is3BlockStyle,
+    DobBlockStyleEnum? dobBlockStyle,
   }) {
     return StyledDateTimeFieldModel(
       label: label ?? this.label,
@@ -82,7 +87,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       textAlign: textAlign ?? this.textAlign,
       designStyle: designStyle ?? this.designStyle,
       bottomSheetStyle: bottomSheetStyle ?? this.bottomSheetStyle,
-      is3BlockStyle: is3BlockStyle ?? this.is3BlockStyle,
+      dobBlockStyle: dobBlockStyle ?? this.dobBlockStyle,
     );
   }
 
@@ -101,7 +106,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       'inputDecoration': inputDecoration?.toString(),
       'textStyle': textStyle?.toString(),
       'bottomSheetStyle': bottomSheetStyle?.toString(),
-      "is3BlockStyle": is3BlockStyle,
+      "dobBlockStyle": dobBlockStyle,
     };
   }
 
@@ -141,7 +146,10 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       bottomSheetStyle: map['bottomSheetStyle'] != null
           ? DateTimeBottomSheetStyle.fromMap(map['bottomSheetStyle'])
           : null,
-      is3BlockStyle: map['is3BlockStyle'] ?? false,
+      dobBlockStyle: map['dobBlockStyle']
+          ? CommonHelpers.enumFromString(
+              DobBlockStyleEnum.values, map['dobBlockStyle'])
+          : null,
     );
   }
 }
