@@ -12,6 +12,8 @@ class MediaManagerInfo {
   double playbackSpeed = 0;
   double volume = 1;
   AudioOverlayConfig? audioOverlayConfig;
+  Duration? startTime;
+  Duration? endTime;
 
   MediaManagerInfo({
     required this.url,
@@ -24,6 +26,8 @@ class MediaManagerInfo {
     this.volume = 1,
     this.source = MediaDataSource.network,
     this.audioOverlayConfig,
+    this.startTime,
+    this.endTime,
   });
 
   MediaManagerInfo.asset({
@@ -36,6 +40,8 @@ class MediaManagerInfo {
     this.volume = 1.0,
     this.source = MediaDataSource.asset,
     this.audioOverlayConfig,
+    this.startTime,
+    this.endTime,
   });
 }
 
