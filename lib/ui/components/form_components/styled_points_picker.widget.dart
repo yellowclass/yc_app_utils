@@ -2,6 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/form_component/styled_points_picker.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
+Widget getPickerOptions({
+  required CircularButton pickerOption,
+  required int index,
+  required bool isSelected,
+  required ValueChanged<int> onItemSelected,
+}) {
+  return GestureDetector(
+    onTap: () => onItemSelected(index),
+    child: Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isSelected
+            ? AppColors.parseStringToColor(pickerOption.borderColor)
+            : Colors.transparent,
+        border: Border.all(
+          color: isSelected
+              ? Colors.white
+              : AppColors.parseStringToColor(pickerOption.borderColor),
+        ),
+      ),
+      child: V2StyledTextWidget(
+        styledText: isSelected
+            ? pickerOption.selectedComponent!
+            : pickerOption.unselectedComponent!,
+      ),
+    ),
+  );
+}
+
 class StyledPointsPickerWidget extends StatefulWidget {
   final StyledPointsPickerModel? pointsPickerdata;
   final ValueChanged<int?> onItemSelected;
@@ -71,7 +100,10 @@ class _StyledPointsPickerWidgetState extends State<StyledPointsPickerWidget>
                       final pickerOption = options[index];
                       bool isSelected = selectedIndex == index;
                       return getPickerOptions(
-                          pickerOption, index, isSelected, _selectItem);
+                          pickerOption: pickerOption,
+                          index: index,
+                          isSelected: isSelected,
+                          onItemSelected: _selectItem);
                     }),
                   );
                 },
@@ -92,33 +124,4 @@ class _StyledPointsPickerWidgetState extends State<StyledPointsPickerWidget>
       ],
     );
   }
-}
-
-Widget getPickerOptions(
-  CircularButton pickerOption,
-  int index,
-  bool isSelected,
-  ValueChanged<int> onItemSelected,
-) {
-  return GestureDetector(
-    onTap: () => onItemSelected(index),
-    child: Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isSelected
-            ? AppColors.parseStringToColor(pickerOption.borderColor)
-            : Colors.transparent,
-        border: Border.all(
-          color: isSelected
-              ? Colors.white
-              : AppColors.parseStringToColor(pickerOption.borderColor),
-        ),
-      ),
-      child: V2StyledTextWidget(
-        styledText: isSelected
-            ? pickerOption.selectedComponent!
-            : pickerOption.unselectedComponent!,
-      ),
-    ),
-  );
 }
