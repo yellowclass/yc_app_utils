@@ -14,43 +14,36 @@ class PointsPickerWidget extends StatefulWidget {
 
 class _PointsPickerWidgetState extends State<PointsPickerWidget>
     with SingleTickerProviderStateMixin {
-  int? _selectedIndex;
+  late ValueNotifier<int?> _selectedIndexNotifier;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = null;
+    _selectedIndexNotifier = ValueNotifier<int?>(null);
   }
 
   @override
   void dispose() {
+    _selectedIndexNotifier.dispose();
     super.dispose();
   }
 
   void _selectItem(int index) {
-    setState(() {
-      _selectedIndex = index;
-      widget.onItemSelected(index);
-    });
+    _selectedIndexNotifier.value = index;
+    widget.onItemSelected(index);
   }
 
   @override
   Widget build(BuildContext context) {
-    final pointsPickerText = widget.pointsPickerdata != null
-        ? widget.pointsPickerdata
-            .toString() 
-        : 'No data available';
-    print(pointsPickerText.toString());
-
     final options = widget.pointsPickerdata?.pickerOptions ?? [];
-
     return Column(
       children: [
         if (widget.pointsPickerdata?.topLabel != null)
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Align(
-              alignment: Alignment.centerLeft,
+              alignment: widget.pointsPickerdata!.topLabelAlignment ??
+                  Alignment.centerLeft,
               child: V2StyledTextWidget(
                   styledText: widget.pointsPickerdata!.topLabel!),
             ),
@@ -60,37 +53,41 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Wrap(
-                spacing: 12.0,
-                runSpacing: 16.0,
-                alignment: WrapAlignment.center,
-                children: [
-                  ...options.asMap().entries.map(
-                        (entry) => GestureDetector(
-                          onTap: () => _selectItem(entry.key),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _selectedIndex == entry.key
-                                  ? AppColors.parseStringToColor(
-                                      entry.value.borderColor)
-                                  : Colors.transparent,
-                              border: Border.all(
-                                color: _selectedIndex == entry.key
-                                    ? Colors.white
-                                    : AppColors.parseStringToColor(
-                                        entry.value.borderColor),
-                              ),
-                            ),
-                            child: V2StyledTextWidget(
-                              styledText: _selectedIndex == entry.key
-                                  ? entry.value.selectComponent!
-                                  : entry.value.unselectComponent!,
+              ValueListenableBuilder<int?>(
+                valueListenable: _selectedIndexNotifier,
+                builder: (context, selectedIndex, child) {
+                  return Wrap(
+                    spacing: 12.0,
+                    runSpacing: 16.0,
+                    alignment: WrapAlignment.center,
+                    children: List.generate(options.length, (index) {
+                      final entry = options[index];
+                      return GestureDetector(
+                        onTap: () => _selectItem(index),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: selectedIndex == index
+                                ? AppColors.parseStringToColor(
+                                    entry.borderColor)
+                                : Colors.transparent,
+                            border: Border.all(
+                              color: selectedIndex == index
+                                  ? Colors.white
+                                  : AppColors.parseStringToColor(
+                                      entry.borderColor),
                             ),
                           ),
+                          child: V2StyledTextWidget(
+                            styledText: selectedIndex == index
+                                ? entry.selectedComponent!
+                                : entry.unSelectedComponent!,
+                          ),
                         ),
-                      ),
-                ],
+                      );
+                    }),
+                  );
+                },
               ),
             ],
           ),
@@ -99,7 +96,8 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: Align(
-              alignment: Alignment.centerRight,
+              alignment: widget.pointsPickerdata!.bottomLabelAlignment ??
+                  Alignment.center,
               child: V2StyledTextWidget(
                   styledText: widget.pointsPickerdata!.bottomLabel!),
             ),

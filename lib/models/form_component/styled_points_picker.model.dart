@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:yc_app_utils/helpers/helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
@@ -7,17 +9,21 @@ class StyledPointsPickerModel with FormComponentUnion {
   V2StyledTextModel? topLabel;
   V2StyledTextModel? bottomLabel;
   List<CircularButton>? pickerOptions;
+  Alignment? topLabelAlignment;
+  Alignment? bottomLabelAlignment;
 
   StyledPointsPickerModel({
     required this.id,
     this.topLabel,
     this.bottomLabel,
+    this.topLabelAlignment,
     this.pickerOptions,
+    this.bottomLabelAlignment,
   });
 
   factory StyledPointsPickerModel.fromMap(Map<String, dynamic> map) {
     return StyledPointsPickerModel(
-      id: map['id'] != null ? map['id'] : null,
+      id: map['id'],
       topLabel: map['topLabel'] != null
           ? V2StyledTextModel.fromMap(map['topLabel'])
           : null,
@@ -28,6 +34,16 @@ class StyledPointsPickerModel with FormComponentUnion {
           ? List<CircularButton>.from(
               map['pickerOptions'].map((item) => CircularButton.fromJson(item)))
           : null,
+      topLabelAlignment: map['topLabelAlignment'] != null
+          ? CommonHelpers.getAlignmentFromString(
+              map['topLabelAlignment'],
+            )
+          : null,
+      bottomLabelAlignment: map['bottomLabelAlignment'] != null
+          ? CommonHelpers.getAlignmentFromString(
+              map['bottomLabelAlignment'],
+            )
+          : null,
     );
   }
 
@@ -37,30 +53,32 @@ class StyledPointsPickerModel with FormComponentUnion {
       'topLabel': topLabel?.toMap(),
       'bottomLabel': bottomLabel?.toMap(),
       'pickerOptions': pickerOptions?.map((option) => option.toJson()).toList(),
+      'topLabelAlignment': topLabelAlignment,
+      'bottomLabelAlignment': bottomLabelAlignment,
     };
   }
 }
 
 class CircularButton {
   String? borderColor;
-  V2StyledTextModel? selectComponent;
-  V2StyledTextModel? unselectComponent;
+  V2StyledTextModel? selectedComponent;
+  V2StyledTextModel? unSelectedComponent;
   V2ClickAction? onOptionClick;
 
   CircularButton({
-    this.selectComponent,
-    this.unselectComponent,
+    this.selectedComponent,
+    this.unSelectedComponent,
     this.onOptionClick,
     this.borderColor,
   });
 
   factory CircularButton.fromJson(Map<String, dynamic> json) {
     return CircularButton(
-      selectComponent: json['selectComponent'] != null
-          ? V2StyledTextModel.fromMap(json['selectComponent'])
+      selectedComponent: json['selectedComponent'] != null
+          ? V2StyledTextModel.fromMap(json['selectedComponent'])
           : null,
-      unselectComponent: json['unselectComponent'] != null
-          ? V2StyledTextModel.fromMap(json['unselectComponent'])
+      unSelectedComponent: json['unSelectedComponent'] != null
+          ? V2StyledTextModel.fromMap(json['unSelectedComponent'])
           : null,
       onOptionClick: json['onOptionClick'] != null
           ? V2ClickAction.fromMap(json['onOptionClick'])
@@ -71,8 +89,8 @@ class CircularButton {
 
   Map<String, dynamic> toJson() {
     return {
-      'selectComponent': selectComponent?.toMap(),
-      'unselectComponent': unselectComponent?.toMap(),
+      'selectedComponent': selectedComponent?.toMap(),
+      'unSelectedComponent': unSelectedComponent?.toMap(),
       'onOptionClick': onOptionClick?.toMap(),
       'borderColor': borderColor,
     };
