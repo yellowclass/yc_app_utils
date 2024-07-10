@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_input.model.dart';
 import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggestions.model.dart';
 import 'package:yc_app_utils/models/form_component/styled_autocomplete_field.model.dart';
+import 'package:yc_app_utils/models/form_component/styled_points_picker.model.dart';
 import 'package:yc_app_utils/models/form_component/styled_rating_slider.model.dart';
 import 'package:yc_app_utils/ui/components/form_components/styled_autocomplete_field.widget.dart';
+import 'package:yc_app_utils/ui/components/form_components/styled_points_picker.widget.dart';
 import 'package:yc_app_utils/ui/components/form_components/styled_rating_slider.widget.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -75,6 +77,15 @@ class FormComponentWidget extends StatelessWidget {
       return StyledRatingSliderWidget(
         data: ratingSlider,
         onSaved: onSaved,
+      );
+    } else if (formComponentDetails.fcData is StyledPointsPickerModel) {
+      StyledPointsPickerModel pointsPickerModel =
+          formComponentDetails.fcData as StyledPointsPickerModel;
+      return StyledPointsPickerWidget(
+        pointsPickerdata: pointsPickerModel,
+        onItemSelected: (index) {
+          onSaved?.call(pointsPickerModel.id, index);
+        },
       );
     } else {
       return const SizedBox.shrink();
