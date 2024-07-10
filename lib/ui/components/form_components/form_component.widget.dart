@@ -81,7 +81,7 @@ class FormComponentWidget extends StatelessWidget {
     } else if (formComponentDetails.fcData is StyledPointsPickerModel) {
       StyledPointsPickerModel pointsPickerModel =
           formComponentDetails.fcData as StyledPointsPickerModel;
-      return PointsPickerWidget(
+      return StyledPointsPickerWidget(
         pointsPickerdata: pointsPickerModel,
         onItemSelected: (index) {
           onSaved?.call(pointsPickerModel.id, index);

@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/models/form_component/styled_points_picker.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class PointsPickerWidget extends StatefulWidget {
+class StyledPointsPickerWidget extends StatefulWidget {
   final StyledPointsPickerModel? pointsPickerdata;
   final ValueChanged<int?> onItemSelected;
-  const PointsPickerWidget({
+  const StyledPointsPickerWidget({
+    required this.onItemSelected,
     super.key,
     this.pointsPickerdata,
-    required this.onItemSelected,
   });
 
   @override
-  State<PointsPickerWidget> createState() => _PointsPickerWidgetState();
+  State<StyledPointsPickerWidget> createState() =>
+      _StyledPointsPickerWidgetState();
 }
 
-class _PointsPickerWidgetState extends State<PointsPickerWidget>
+class _StyledPointsPickerWidgetState extends State<StyledPointsPickerWidget>
     with SingleTickerProviderStateMixin {
   late ValueNotifier<int?> _selectedIndexNotifier;
 
