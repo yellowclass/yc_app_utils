@@ -62,12 +62,12 @@ class StyledPointsPickerModel with FormComponentUnion {
 class CircularButton {
   String? borderColor;
   V2StyledTextModel? selectedComponent;
-  V2StyledTextModel? unSelectedComponent;
+  V2StyledTextModel? unselectedComponent;
   V2ClickAction? onOptionClick;
 
   CircularButton({
     this.selectedComponent,
-    this.unSelectedComponent,
+    this.unselectedComponent,
     this.onOptionClick,
     this.borderColor,
   });
@@ -77,8 +77,8 @@ class CircularButton {
       selectedComponent: json['selectedComponent'] != null
           ? V2StyledTextModel.fromMap(json['selectedComponent'])
           : null,
-      unSelectedComponent: json['unSelectedComponent'] != null
-          ? V2StyledTextModel.fromMap(json['unSelectedComponent'])
+      unselectedComponent: json['unselectedComponent'] != null
+          ? V2StyledTextModel.fromMap(json['unselectedComponent'])
           : null,
       onOptionClick: json['onOptionClick'] != null
           ? V2ClickAction.fromMap(json['onOptionClick'])
@@ -90,7 +90,7 @@ class CircularButton {
   Map<String, dynamic> toJson() {
     return {
       'selectedComponent': selectedComponent?.toMap(),
-      'unSelectedComponent': unSelectedComponent?.toMap(),
+      'unselectedComponent': unselectedComponent?.toMap(),
       'onOptionClick': onOptionClick?.toMap(),
       'borderColor': borderColor,
     };

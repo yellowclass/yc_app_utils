@@ -5,8 +5,11 @@ import 'package:yc_app_utils/yc_app_utils.dart';
 class PointsPickerWidget extends StatefulWidget {
   final StyledPointsPickerModel? pointsPickerdata;
   final ValueChanged<int?> onItemSelected;
-  const PointsPickerWidget(
-      {super.key, this.pointsPickerdata, required this.onItemSelected});
+  const PointsPickerWidget({
+    super.key,
+    this.pointsPickerdata,
+    required this.onItemSelected,
+  });
 
   @override
   State<PointsPickerWidget> createState() => _PointsPickerWidgetState();
@@ -33,9 +36,11 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
     widget.onItemSelected(index);
   }
 
+  List<CircularButton> get options =>
+      widget.pointsPickerdata?.pickerOptions ?? [];
+
   @override
   Widget build(BuildContext context) {
-    final options = widget.pointsPickerdata?.pickerOptions ?? [];
     return Column(
       children: [
         if (widget.pointsPickerdata?.topLabel != null)
@@ -49,7 +54,7 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
             ),
           ),
         Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(AppRadius.m),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,30 +66,9 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
                     runSpacing: 16.0,
                     alignment: WrapAlignment.center,
                     children: List.generate(options.length, (index) {
-                      final entry = options[index];
-                      return GestureDetector(
-                        onTap: () => _selectItem(index),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: selectedIndex == index
-                                ? AppColors.parseStringToColor(
-                                    entry.borderColor)
-                                : Colors.transparent,
-                            border: Border.all(
-                              color: selectedIndex == index
-                                  ? Colors.white
-                                  : AppColors.parseStringToColor(
-                                      entry.borderColor),
-                            ),
-                          ),
-                          child: V2StyledTextWidget(
-                            styledText: selectedIndex == index
-                                ? entry.selectedComponent!
-                                : entry.unSelectedComponent!,
-                          ),
-                        ),
-                      );
+                      final pickerOption = options[index];
+                      return getPickerOptions(
+                          pickerOption, index, selectedIndex, _selectItem);
                     }),
                   );
                 },
@@ -94,7 +78,7 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
         ),
         if (widget.pointsPickerdata?.bottomLabel != null)
           Padding(
-            padding: const EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: AppSpacing.m),
             child: Align(
               alignment: widget.pointsPickerdata!.bottomLabelAlignment ??
                   Alignment.center,
@@ -105,4 +89,29 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
       ],
     );
   }
+}
+
+Widget getPickerOptions(CircularButton pickerOption, int index,
+    int? selectedIndex, ValueChanged<int> onItemSelected) {
+  return GestureDetector(
+    onTap: () => onItemSelected(index),
+    child: Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: selectedIndex == index
+            ? AppColors.parseStringToColor(pickerOption.borderColor)
+            : Colors.transparent,
+        border: Border.all(
+          color: selectedIndex == index
+              ? Colors.white
+              : AppColors.parseStringToColor(pickerOption.borderColor),
+        ),
+      ),
+      child: V2StyledTextWidget(
+        styledText: selectedIndex == index
+            ? pickerOption.selectedComponent!
+            : pickerOption.unselectedComponent!,
+      ),
+    ),
+  );
 }
