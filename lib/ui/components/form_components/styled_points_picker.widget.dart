@@ -45,12 +45,13 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
       children: [
         if (widget.pointsPickerdata?.topLabel != null)
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.only(left: AppSpacing.m),
             child: Align(
               alignment: widget.pointsPickerdata!.topLabelAlignment ??
                   Alignment.centerLeft,
               child: V2StyledTextWidget(
-                  styledText: widget.pointsPickerdata!.topLabel!),
+                styledText: widget.pointsPickerdata!.topLabel!,
+              ),
             ),
           ),
         Padding(
@@ -67,8 +68,9 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
                     alignment: WrapAlignment.center,
                     children: List.generate(options.length, (index) {
                       final pickerOption = options[index];
+                      bool isSelected = selectedIndex == index;
                       return getPickerOptions(
-                          pickerOption, index, selectedIndex, _selectItem);
+                          pickerOption, index, isSelected, _selectItem);
                     }),
                   );
                 },
@@ -91,24 +93,28 @@ class _PointsPickerWidgetState extends State<PointsPickerWidget>
   }
 }
 
-Widget getPickerOptions(CircularButton pickerOption, int index,
-    int? selectedIndex, ValueChanged<int> onItemSelected) {
+Widget getPickerOptions(
+  CircularButton pickerOption,
+  int index,
+  bool isSelected,
+  ValueChanged<int> onItemSelected,
+) {
   return GestureDetector(
     onTap: () => onItemSelected(index),
     child: Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: selectedIndex == index
+        color: isSelected
             ? AppColors.parseStringToColor(pickerOption.borderColor)
             : Colors.transparent,
         border: Border.all(
-          color: selectedIndex == index
+          color: isSelected
               ? Colors.white
               : AppColors.parseStringToColor(pickerOption.borderColor),
         ),
       ),
       child: V2StyledTextWidget(
-        styledText: selectedIndex == index
+        styledText: isSelected
             ? pickerOption.selectedComponent!
             : pickerOption.unselectedComponent!,
       ),
