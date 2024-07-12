@@ -146,7 +146,7 @@ class StyledDateTimeFieldModel with FormComponentUnion {
       bottomSheetStyle: map['bottomSheetStyle'] != null
           ? DateTimeBottomSheetStyle.fromMap(map['bottomSheetStyle'])
           : null,
-      dobBlockStyle: map['dobBlockStyle']
+      dobBlockStyle: map['dobBlockStyle'] != null
           ? CommonHelpers.enumFromString(
               DobBlockStyleEnum.values, map['dobBlockStyle'])
           : null,
