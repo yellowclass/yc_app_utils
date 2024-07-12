@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:yc_app_utils/ui/components/generic_button/generic_button_v3_rows.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class GenericButtonV3Widget extends StatelessWidget {
@@ -80,87 +80,8 @@ class GenericButtonV3Widget extends StatelessWidget {
                   ),
                 )
             : buttonDetails.buttonRows != null
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: buttonDetails.buttonRows!
-                        .map(
-                          (buttonRow) => buttonRow.buttonColumnData != null
-                              ? Row(
-                                  mainAxisAlignment: buttonRow.flexAlignment,
-                                  children: buttonRow.buttonColumnData!
-                                      .map(
-                                        (buttonCell) => Container(
-                                          padding: buttonCell.padding != null
-                                              ? CommonHelpers
-                                                  .getPaddingFromList(
-                                                  buttonCell.padding,
-                                                )
-                                              : const EdgeInsets.symmetric(
-                                                  vertical: AppSpacing.xxs2,
-                                                  horizontal: AppSpacing.xxs,
-                                                ),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                              buttonCell.borderRadius
-                                                      ?.toDouble() ??
-                                                  AppRadius.xxs,
-                                            ),
-                                            color: CommonHelpers.v2ColorFromHex(
-                                              buttonCell.backgroundColor,
-                                            ),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              if (buttonCell.prefixIcon?.url !=
-                                                  null)
-                                                GenericNetworkImage(
-                                                  buttonCell.prefixIcon!.url!,
-                                                ),
-                                              Container(
-                                                margin:
-                                                    buttonCell.text.isNotEmpty
-                                                        ? const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal:
-                                                                AppSpacing.xxs,
-                                                          )
-                                                        : EdgeInsets.zero,
-                                                child: Text(
-                                                  buttonCell.text,
-                                                  textAlign:
-                                                      buttonCell.textAlign,
-                                                  style: CommonHelpers
-                                                      .getTextStyle(
-                                                    buttonCell.tStyle,
-                                                    customStyle: TextStyle(
-                                                      color: CommonHelpers
-                                                          .v2ColorFromHex(
-                                                        buttonCell.textColor,
-                                                      ),
-                                                      decoration: buttonCell
-                                                              .strikeThrough
-                                                          ? TextDecoration
-                                                              .lineThrough
-                                                          : null,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              if (buttonCell.suffixIcon?.url !=
-                                                  null)
-                                                GenericNetworkImage(
-                                                  buttonCell.suffixIcon!.url!,
-                                                ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                )
-                              : const SizedBox.shrink(),
-                        )
-                        .toList(),
+                ? GenericButtonV3RowsWidget(
+                    buttonDetails: buttonDetails,
                   )
                 : const SizedBox.shrink(),
         onPressed: isLoading ? null : onPressed,
