@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class GetGenericButtonV3Rows extends StatelessWidget {
+class GetGenericButtonV3RowsWidget extends StatelessWidget {
   final GenericButtonV3Model buttonDetails;
 
-  const GetGenericButtonV3Rows({
+  const GetGenericButtonV3RowsWidget({
     required this.buttonDetails,
     Key? key,
   }) : super(key: key);

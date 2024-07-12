@@ -80,7 +80,7 @@ class GenericButtonV3Widget extends StatelessWidget {
                   ),
                 )
             : buttonDetails.buttonRows != null
-                ? GetGenericButtonV3Rows(
+                ? GetGenericButtonV3RowsWidget(
                     buttonDetails: buttonDetails,
                   )
                 : const SizedBox.shrink(),
