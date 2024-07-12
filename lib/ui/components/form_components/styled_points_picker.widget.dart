@@ -48,9 +48,9 @@ class StyledPointsPickerWidget extends StatefulWidget {
 
   const StyledPointsPickerWidget({
     required this.onItemSelected,
+    required this.innerClickAction,
     super.key,
     this.pointsPickerdata,
-    required this.innerClickAction,
   });
 
   @override
