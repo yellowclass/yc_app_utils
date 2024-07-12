@@ -82,7 +82,7 @@ class FormComponentWidget extends StatelessWidget {
       StyledPointsPickerModel pointsPickerModel =
           formComponentDetails.fcData as StyledPointsPickerModel;
       return StyledPointsPickerWidget(
-        innerClickAction: innerClickAction!,
+        innerClickAction: innerClickAction,
         pointsPickerdata: pointsPickerModel,
         onItemSelected: (index) {
           onSaved?.call(pointsPickerModel.id, index);
