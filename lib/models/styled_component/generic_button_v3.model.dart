@@ -3,6 +3,7 @@ import 'package:yc_app_utils/helpers/common_helpers.dart';
 
 import 'package:yc_app_utils/models/click_action/click_action.model.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_component_model.import.dart';
 import 'package:yc_app_utils/models/styled_component/styled_text.model.dart';
 import 'package:yc_app_utils/models/symmetric_padding.model.dart';
 import 'package:yc_app_utils/ui/styleguide/app_radius.dart';
@@ -144,9 +145,10 @@ class GenericButtonV3Model {
 class GenericButtonV3Row {
   List<StyledText>? buttonColumnData;
   MainAxisAlignment flexAlignment;
-
+  List<StyledComponentModel>? buttonColumns;
   GenericButtonV3Row({
     this.buttonColumnData,
+    this.buttonColumns,
     this.flexAlignment = MainAxisAlignment.center,
   });
 
@@ -162,6 +164,13 @@ class GenericButtonV3Row {
       flexAlignment: CommonHelpers.getFlexAlignmentFromString(
         map['flexAlignment'],
       ),
+      buttonColumns: map['buttonColumns'] != null
+          ? List<StyledComponentModel>.from(
+              map['buttonColumns']?.map(
+                (dynamic x) => StyledComponentModel.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 
@@ -171,6 +180,10 @@ class GenericButtonV3Row {
           ? null
           : List<dynamic>.from(
               buttonColumnData?.map((StyledText x) => x.toMap()) ?? {}),
+      'buttonColumns': buttonColumns == null
+          ? null
+          : List<dynamic>.from(
+              buttonColumns?.map((StyledComponentModel x) => x.toMap()) ?? {}),
       'flexAlignment': flexAlignment.name,
     };
   }
