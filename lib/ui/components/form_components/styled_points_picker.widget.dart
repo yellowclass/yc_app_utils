@@ -9,15 +9,15 @@ Widget getPickerOptions({
   required bool isSelected,
   required ValueChanged<int> onItemSelected,
 }) {
-  ClickWidgetState? clickWidgetState;
   return GestureDetector(
     onTap: () {
       onItemSelected(index);
       handleInnerClickAction.call(
         pickerOption.onOptionClick!,
         false,
-        null, 
-        key: null, //  in this component we dont have any key just using this Clickaction for haptic feedback
+        null,
+        key:
+            null, //  in this component we dont have any key just using this Clickaction for haptic feedback
       );
     },
     child: Container(
