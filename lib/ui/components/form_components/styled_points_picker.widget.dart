@@ -44,13 +44,13 @@ Widget getPickerOptions({
 class StyledPointsPickerWidget extends StatefulWidget {
   final StyledPointsPickerModel? pointsPickerdata;
   final ValueChanged<int?> onItemSelected;
-  final InnerClickAction? innerClickAction;
+  final InnerClickAction innerClickAction;
 
   const StyledPointsPickerWidget({
     required this.onItemSelected,
     super.key,
     this.pointsPickerdata,
-    this.innerClickAction,
+    required this.innerClickAction,
   });
 
   @override
