@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yc_app_utils/ui/components/generic_button/get_generic_button_v3_rows.dart';
+import 'package:yc_app_utils/ui/components/generic_button/generic_button_v3_rows.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
 class GenericButtonV3Widget extends StatelessWidget {
@@ -80,7 +80,7 @@ class GenericButtonV3Widget extends StatelessWidget {
                   ),
                 )
             : buttonDetails.buttonRows != null
-                ? GetGenericButtonV3RowsWidget(
+                ? GenericButtonV3RowsWidget(
                     buttonDetails: buttonDetails,
                   )
                 : const SizedBox.shrink(),
