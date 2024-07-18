@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yc_app_utils/constants/local_assets.dart';
+import 'package:yc_app_utils/ui/components/custom_svg_picture.dart';
 
 class GenericNetworkImage extends StatelessWidget {
   const GenericNetworkImage(
@@ -75,15 +76,29 @@ class GenericNetworkImage extends StatelessWidget {
     final bool isSvg = Uri.parse(url).path.split(".").last == 'svg';
 
     Widget image = isSvg
-        ? SvgPicture.network(
-            url,
-            width: width,
-            height: height,
-            fit: fit,
-            alignment: alignment,
-            color: color,
-            placeholderBuilder: (_) => placeholder,
-          )
+        ? errorWidget == null
+            ? SvgPicture.network(
+                url,
+                width: width,
+                height: height,
+                fit: fit,
+                alignment: alignment,
+                color: color,
+                placeholderBuilder: (_) => placeholder,
+              )
+            : CustomSvgPicture(
+                url,
+                width: width,
+                height: height,
+                fit: fit,
+                alignment: alignment,
+                color: color,
+                placeholder: placeholder,
+                errorWidget: errorWidget,
+                loadingWidget: loadingBuilder != null
+                    ? loadingBuilder!(context, placeholder, null)
+                    : null,
+              )
         : getShouldCache
             ? CachedNetworkImage(
                 imageUrl: url,
