@@ -60,6 +60,7 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
           formKey: _formKey!,
         ),
         bootstrapFormKey: widget.bootstrapSectionData.key,
+        bootstrapMiscParams: widget.bootstrapSectionData.miscParams,
       );
     }
     return null;

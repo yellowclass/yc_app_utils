@@ -14,9 +14,11 @@ class FormResponse {
 class BootstrapSubmitFormResponse {
   final FormResponse formResponse;
   final String bootstrapFormKey;
+  final String? bootstrapMiscParams;
 
   BootstrapSubmitFormResponse({
     required this.formResponse,
     required this.bootstrapFormKey,
+    required this.bootstrapMiscParams,
   });
 }
