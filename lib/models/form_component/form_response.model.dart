@@ -10,3 +10,13 @@ class FormResponse {
     required this.formKey,
   });
 }
+
+class BootstrapSubmitFormResponse {
+  final FormResponse formResponse;
+  final String bootstrapFormKey;
+
+  BootstrapSubmitFormResponse({
+    required this.formResponse,
+    required this.bootstrapFormKey,
+  });
+}

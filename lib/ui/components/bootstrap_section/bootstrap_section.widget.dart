@@ -5,6 +5,14 @@ import 'package:yc_app_utils/models/autocomplete_suggestion/autocomplete_suggest
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
+class BootstrapFormSubmissionController {
+  BootstrapSubmitFormResponse? Function()? submit;
+
+  void dispose() {
+    submit = null;
+  }
+}
+
 class BootstrapSectionWidget extends StatefulWidget {
   const BootstrapSectionWidget({
     required this.bootstrapSectionData,
@@ -12,12 +20,14 @@ class BootstrapSectionWidget extends StatefulWidget {
     this.showRippleEffect = false,
     this.innerClickAction,
     this.getAutoCompleteSuggestions,
+    this.submitFormController,
     Key? key,
   }) : super(key: key);
 
   final BootstrapSectionModel bootstrapSectionData;
   final VoidCallback? onPressed;
   final bool showRippleEffect;
+
   final void Function(
     V2ClickAction clickAction,
     FormResponse? formResponse,
@@ -29,6 +39,8 @@ class BootstrapSectionWidget extends StatefulWidget {
     AutocompleteInputModel inputData,
   )? getAutoCompleteSuggestions;
 
+  final BootstrapFormSubmissionController? submitFormController;
+
   @override
   State<BootstrapSectionWidget> createState() => _BootstrapSectionWidgetState();
 }
@@ -39,11 +51,26 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
 
   final ValueNotifier<bool> formValidationNotifier = ValueNotifier(false);
 
+  BootstrapSubmitFormResponse? submitFormCallback() {
+    if (_formKey?.currentState?.validate() ?? false) {
+      _formKey?.currentState?.save();
+      return BootstrapSubmitFormResponse(
+        formResponse: FormResponse(
+          formData: _formData!,
+          formKey: _formKey!,
+        ),
+        bootstrapFormKey: widget.bootstrapSectionData.key,
+      );
+    }
+    return null;
+  }
+
   @override
   void initState() {
     if (widget.bootstrapSectionData.containsForm) {
       _formData = {};
       _formKey = GlobalKey<FormBuilderState>();
+      widget.submitFormController?.submit = submitFormCallback;
     } else {
       formValidationNotifier.value = true;
     }
@@ -226,6 +253,12 @@ class _BootstrapSectionWidgetState extends State<BootstrapSectionWidget> {
             : buildChild(),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    widget.submitFormController?.dispose();
+    super.dispose();
   }
 }
 
