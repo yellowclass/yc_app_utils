@@ -16,6 +16,9 @@ class StyledSelectFieldModel with FormComponentUnion {
   List<ImageModel>? dropdownIcon;
   String? hintText;
   String? leadingIcon;
+  bool? useSearchableWidget;
+  double? maxHeight;
+  V2TextStyle? optionStyle;
 
   StyledSelectFieldModel({
     this.label,
@@ -32,6 +35,9 @@ class StyledSelectFieldModel with FormComponentUnion {
     this.dropdownIcon,
     this.hintText,
     this.leadingIcon,
+    this.useSearchableWidget,
+    this.maxHeight,
+    this.optionStyle,
   });
 
   StyledSelectFieldModel copyWith({
@@ -49,6 +55,9 @@ class StyledSelectFieldModel with FormComponentUnion {
     List<ImageModel>? dropdownIcon,
     String? hintText,
     String? leadingIcon,
+    bool? useSearchableWidget,
+    double? maxHeight,
+    V2TextStyle? optionStyle,
   }) {
     return StyledSelectFieldModel(
       label: label ?? this.label,
@@ -65,6 +74,9 @@ class StyledSelectFieldModel with FormComponentUnion {
       dropdownIcon: dropdownIcon ?? this.dropdownIcon,
       hintText: hintText ?? this.hintText,
       leadingIcon: leadingIcon ?? this.leadingIcon,
+      useSearchableWidget: useSearchableWidget ?? this.useSearchableWidget,
+      maxHeight: maxHeight ?? this.maxHeight,
+      optionStyle: optionStyle ?? this.optionStyle,
     );
   }
 
@@ -84,6 +96,9 @@ class StyledSelectFieldModel with FormComponentUnion {
       'dropdownIcon': dropdownIcon,
       'hintText': hintText,
       'leadingIcon': leadingIcon,
+      'useSearchableWidget': useSearchableWidget,
+      'maxHeight': maxHeight,
+      'optionStyle': optionStyle,
     };
   }
 
@@ -123,6 +138,11 @@ class StyledSelectFieldModel with FormComponentUnion {
           : null,
       hintText: map['hintText'],
       leadingIcon: map['leadingIcon'],
+      useSearchableWidget: map['useSearchableWidget'],
+      maxHeight: double.tryParse(map['maxHeight'] ?? ' '),
+      optionStyle: map['optionStyle'] != null
+          ? V2TextStyle.fromMap(map['optionStyle'])
+          : null,
     );
   }
 }

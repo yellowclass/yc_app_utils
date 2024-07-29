@@ -15,12 +15,14 @@ class FormComponentWidget extends StatelessWidget {
     required this.formComponentDetails,
     this.getAutoCompleteSuggestions,
     this.onSaved,
+    this.onChanged,
     this.innerClickAction,
     Key? key,
   }) : super(key: key);
 
   final FormComponentModel formComponentDetails;
   final void Function(String, dynamic)? onSaved;
+  final void Function(String, dynamic)? onChanged;
   final Future<AutocompleteSuggestions?> Function(
       AutocompleteInputModel inputData)? getAutoCompleteSuggestions;
 
@@ -62,6 +64,7 @@ class FormComponentWidget extends StatelessWidget {
       return StyledSelectFieldWidget(
         selectFieldData: selectFieldDetails,
         onSaved: onSaved,
+        onChanged: onChanged,
       );
     } else if (formComponentDetails.fcData is StyledAutoCompleteFieldModel) {
       StyledAutoCompleteFieldModel autocompleteFieldData =
