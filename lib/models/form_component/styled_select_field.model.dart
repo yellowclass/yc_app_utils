@@ -16,7 +16,7 @@ class StyledSelectFieldModel with FormComponentUnion {
   List<ImageModel>? dropdownIcon;
   String? hintText;
   String? leadingIcon;
-  bool? useSearchableWidget;
+  bool useSearchableWidget;
   double? maxHeight;
   V2TextStyle? optionStyle;
 
@@ -35,7 +35,7 @@ class StyledSelectFieldModel with FormComponentUnion {
     this.dropdownIcon,
     this.hintText,
     this.leadingIcon,
-    this.useSearchableWidget,
+    required this.useSearchableWidget,
     this.maxHeight,
     this.optionStyle,
   });
@@ -138,7 +138,7 @@ class StyledSelectFieldModel with FormComponentUnion {
           : null,
       hintText: map['hintText'],
       leadingIcon: map['leadingIcon'],
-      useSearchableWidget: map['useSearchableWidget'],
+      useSearchableWidget: map['useSearchableWidget'] ?? false,
       maxHeight: double.tryParse(map['maxHeight'] ?? ' '),
       optionStyle: map['optionStyle'] != null
           ? V2TextStyle.fromMap(map['optionStyle'])

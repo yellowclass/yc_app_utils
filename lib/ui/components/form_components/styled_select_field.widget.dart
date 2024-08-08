@@ -98,7 +98,7 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
           const SizedBox(height: AppSpacing.xxs),
         },
         if (widget.selectFieldData.selectType == SelectType.SINGLE)
-          if (widget.selectFieldData.useSearchableWidget ??
+          if (widget.selectFieldData.useSearchableWidget ||
               widget.selectFieldData.isSearchable)
             DropdownSearch<OptionModel>(
               mode: Mode.MENU,
