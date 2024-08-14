@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledLinearProgress with StyledComponentUnion {
+class StyledLinearProgress extends StyledComponentUnion {
   int percentage;
   double? height;
   SectionBackground? activeBackground;

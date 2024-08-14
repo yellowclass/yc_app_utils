@@ -281,7 +281,7 @@ class BootstrapBottomActionButton extends StatefulWidget {
 }
 
 class _BootstrapBottomActionButtonState
-    extends State<BootstrapBottomActionButton> with ClickWidgetState {
+    extends State<BootstrapBottomActionButton> implements ClickWidgetState {
   bool _isLoading = false;
   @override
   void setLoading(bool value) {

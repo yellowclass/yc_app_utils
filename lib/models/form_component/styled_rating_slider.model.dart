@@ -1,6 +1,6 @@
 import 'package:yc_app_utils/models/models.import.dart';
 
-class StyledRatingSlider with FormComponentUnion {
+class StyledRatingSlider extends FormComponentUnion {
   String id;
   Validation? validation;
   int? defaultValue;

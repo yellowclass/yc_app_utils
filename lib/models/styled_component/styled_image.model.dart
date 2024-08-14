@@ -3,7 +3,7 @@ import 'package:yc_app_utils/helpers/helpers.dart';
 
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 
-class StyledImageModel with StyledComponentUnion {
+class StyledImageModel extends StyledComponentUnion {
   String url;
   String? fillColor;
   ImageCropTypes? cropType;

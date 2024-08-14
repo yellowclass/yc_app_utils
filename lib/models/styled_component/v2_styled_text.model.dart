@@ -13,7 +13,7 @@ enum TextIconAlignmentEnum {
   BOTTOM,
 }
 
-class V2StyledTextModel with StyledComponentUnion {
+class V2StyledTextModel extends StyledComponentUnion {
   static const String _defaultTextColor = '#212A39';
   String text;
   String? textColor;

@@ -3,7 +3,7 @@ import 'package:yc_app_utils/models/form_component/styled_points_picker.model.da
 import 'package:yc_app_utils/models/form_component/styled_rating_slider.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class FormComponentModel with BootstrapChildUnion {
+class FormComponentModel extends BootstrapChildUnion {
   FormComponentUnion? fcData;
   SectionBackground? background;
   String? borderColor;

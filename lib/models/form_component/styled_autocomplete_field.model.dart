@@ -7,7 +7,7 @@ import 'package:yc_app_utils/models/form_component/form_component_union.model.da
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 import 'package:yc_app_utils/models/validation/validation.model.dart';
 
-class StyledAutoCompleteFieldModel with FormComponentUnion {
+class StyledAutoCompleteFieldModel extends FormComponentUnion {
   String name;
   String autocompleteType;
   V2StyledTextModel? label;

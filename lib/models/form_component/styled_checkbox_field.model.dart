@@ -1,6 +1,6 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledCheckboxFieldModel with FormComponentUnion {
+class StyledCheckboxFieldModel extends FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;
