@@ -61,6 +61,8 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
     );
   }
 
+  List<String> selectedValue = [];
+
   @override
   void initState() {
     super.initState();
@@ -73,6 +75,10 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                   validations: widget.selectFieldData.validation,
                 ) ==
                 null;
+    selectedValue = widget.selectFieldData.selectDefaultValue
+            ?.map((e) => e.value)
+            .toList() ??
+        [];
   }
 
   @override
@@ -138,8 +144,13 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                           validations: widget.selectFieldData.validation,
                         ) ==
                         null;
+
                 List<String> data = value?.value != null ? [value!.value] : [];
-                widget.onChanged?.call(widget.selectFieldData.name, data);
+                if (!(data
+                    .every((element) => selectedValue.contains(element)))) {
+                  widget.onChanged?.call(widget.selectFieldData.name, data);
+                  selectedValue = data;
+                }
               },
               maxHeight: widget.selectFieldData.maxHeight,
               searchFieldProps: TextFieldProps(
