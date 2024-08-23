@@ -116,12 +116,14 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
               ),
               showSearchBox: widget.selectFieldData.isSearchable,
               dropDownButton: const SizedBox.shrink(),
-              popupItemBuilder: (context, item, isSelected) =>
-                  CommonHelpers.getV2StyledTextWidgetFromTextStyle(
-                text: item.label,
-                textStyle: widget.selectFieldData.optionStyle
-                    ?.copyWith(textColor: isSelected ? 'FFFF7100' : null),
-              ),
+              popupItemBuilder: widget.selectFieldData.optionStyle != null
+                  ? (context, item, isSelected) =>
+                      CommonHelpers.getV2StyledTextWidgetFromTextStyle(
+                        text: item.label,
+                        textStyle: widget.selectFieldData.optionStyle?.copyWith(
+                            textColor: isSelected ? 'FFFF7100' : null),
+                      )
+                  : null,
               scrollbarProps: ScrollbarProps(
                 isAlwaysShown: true,
                 thickness: 6,
