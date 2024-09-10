@@ -130,7 +130,7 @@ class CommonHelpers {
     return convertCamelToSnake(res);
   }
 
-  static String capitalizeFirstLetter(String? name) {
+  static String capitalize(String? name) {
     if (name == null || name.isEmpty) {
       return '';
     }
