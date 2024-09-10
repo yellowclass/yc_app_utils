@@ -130,6 +130,16 @@ class CommonHelpers {
     return convertCamelToSnake(res);
   }
 
+  static String capitalize(String? name) {
+    if (name == null || name.isEmpty) {
+      return '';
+    }
+    return name
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
+        .join(' ');
+  }
+
   static String convertCamelToSnake(String text) {
     RegExp exp = RegExp(r'(?<=[a-z])[A-Z]');
     return text
@@ -1172,5 +1182,4 @@ class CommonHelpers {
       '${color.red.toRadixString(16).padLeft(2, '0')}'
       '${color.green.toRadixString(16).padLeft(2, '0')}'
       '${color.blue.toRadixString(16).padLeft(2, '0')}';
-
 }
