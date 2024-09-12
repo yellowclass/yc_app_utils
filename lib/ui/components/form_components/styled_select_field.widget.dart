@@ -64,6 +64,8 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
     );
   }
 
+  List<String> selectedValue = [];
+
   @override
   void initState() {
     super.initState();
@@ -76,6 +78,10 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                   validations: widget.selectFieldData.validation,
                 ) ==
                 null;
+    selectedValue = widget.selectFieldData.selectDefaultValue
+            ?.map((e) => e.value)
+            .toList() ??
+        [];
   }
 
   @override
@@ -108,20 +114,18 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                 showSelectedItems: true,
                 showSearchBox: widget.selectFieldData.isSearchable,
                 scrollbarProps: const ScrollbarProps(
+                  trackVisibility: true,
                   thickness: 6,
                   radius: Radius.circular(12),
                 ),
-                itemBuilder: (context, item, isSelected) =>
+                itemBuilder: widget.selectFieldData.optionStyle != null
+                    ? (context, item, isSelected) =>
                     CommonHelpers.getV2StyledTextWidgetFromTextStyle(
-                  text: item.label,
-                  textStyle: widget.selectFieldData.optionStyle != null
-                      ? widget.selectFieldData.optionStyle
-                          ?.copyWith(textColor: isSelected ? 'FFFF7100' : null)
-                      : V2TextStyle(
-                          textColor: isSelected ? 'FFFF7100' : "#212a39",
-                          padding: [16, 8],
-                        ),
-                ),
+                      text: item.label,
+                      textStyle: widget.selectFieldData.optionStyle?.copyWith(
+                          textColor: isSelected ? 'FFFF7100' : null),
+                    )
+                    : null,
                 menuProps: const MenuProps(
                   borderRadius: BorderRadius.all(
                     Radius.circular(12),
@@ -161,8 +165,13 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                           validations: widget.selectFieldData.validation,
                         ) ==
                         null;
+
                 List<String> data = value?.value != null ? [value!.value] : [];
-                widget.onChanged?.call(widget.selectFieldData.name, data);
+                if (!(data
+                    .every((element) => selectedValue.contains(element)))) {
+                  widget.onChanged?.call(widget.selectFieldData.name, data);
+                  selectedValue = data;
+                }
               },
               dropdownButtonProps: DropdownButtonProps(
                 icon: _getDropDownIcon(),

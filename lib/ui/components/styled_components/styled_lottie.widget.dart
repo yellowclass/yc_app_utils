@@ -43,6 +43,7 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLocalLottie = !widget.styledLottieModel.url.contains('http');
     return getVisibilityDetectorIfRequired(
       child: ValueListenableBuilder<bool>(
         valueListenable: showLottie,
@@ -50,14 +51,23 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
           return ClipRRect(
             borderRadius:
                 widget.styledLottieModel.borderRadius ?? BorderRadius.zero,
-            child: Lottie.network(
-              width: widget.styledLottieModel.width?.toDouble(),
-              height: widget.styledLottieModel.height?.toDouble(),
-              widget.styledLottieModel.url,
-              fit: widget.styledLottieModel.lottieFit,
-              animate: val,
-              repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
-            ),
+            child: isLocalLottie
+                ? Lottie.asset(
+                    widget.styledLottieModel.url,
+                    width: widget.styledLottieModel.width?.toDouble(),
+                    height: widget.styledLottieModel.height?.toDouble(),
+                    fit: widget.styledLottieModel.lottieFit,
+                    animate: val,
+                    repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
+                  )
+                : Lottie.network(
+                    widget.styledLottieModel.url,
+                    width: widget.styledLottieModel.width?.toDouble(),
+                    height: widget.styledLottieModel.height?.toDouble(),
+                    fit: widget.styledLottieModel.lottieFit,
+                    animate: val,
+                    repeat: (widget.styledLottieModel.animateAfter ?? 0) >= 0,
+                  ),
           );
         },
       ),

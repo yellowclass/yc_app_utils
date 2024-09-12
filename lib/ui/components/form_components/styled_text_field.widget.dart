@@ -177,7 +177,9 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                       updatedVal,
                     );
                   },
-                  autofocus: widget.autofocus ?? false,
+                  autofocus: widget.textFieldData.autoFocus ??
+                      widget.autofocus ??
+                      false,
                 ),
               ),
             ],
