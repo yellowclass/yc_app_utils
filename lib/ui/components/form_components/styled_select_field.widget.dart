@@ -114,17 +114,18 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                 showSelectedItems: true,
                 showSearchBox: widget.selectFieldData.isSearchable,
                 scrollbarProps: const ScrollbarProps(
-                  trackVisibility: true,
+                  thumbVisibility: true,
                   thickness: 6,
                   radius: Radius.circular(12),
                 ),
                 itemBuilder: widget.selectFieldData.optionStyle != null
                     ? (context, item, isSelected) =>
-                    CommonHelpers.getV2StyledTextWidgetFromTextStyle(
-                      text: item.label,
-                      textStyle: widget.selectFieldData.optionStyle?.copyWith(
-                          textColor: isSelected ? 'FFFF7100' : null),
-                    )
+                        CommonHelpers.getV2StyledTextWidgetFromTextStyle(
+                          text: item.label,
+                          textStyle: widget.selectFieldData.optionStyle
+                              ?.copyWith(
+                                  textColor: isSelected ? 'FFFF7100' : null),
+                        )
                     : null,
                 menuProps: const MenuProps(
                   borderRadius: BorderRadius.all(
@@ -149,7 +150,7 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                 ),
               ),
               dropdownBuilder: (context, selectedItem) => Text(
-                selectedItem?.label ??
+                    selectedItem?.label ??
                     widget.selectFieldData.inputDecoration?.hintText ??
                     '',
                 style: (selectedItem?.label != null
@@ -173,13 +174,13 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                   selectedValue = data;
                 }
               },
-              dropdownButtonProps: DropdownButtonProps(
-                icon: _getDropDownIcon(),
-                padding: EdgeInsets.only(right: 24)
+              dropdownButtonProps:const  DropdownButtonProps(
+                isVisible: false,
+                padding: EdgeInsets.zero,
               ),
               dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration:
-                    widget.selectFieldData.inputDecoration ??
+                    widget.selectFieldData.inputDecoration?.copyWith(suffix:Padding(padding: const EdgeInsets.only(right: 24),child: _getDropDownIcon()),suffixIconConstraints:const BoxConstraints(maxWidth: 30) ) ??
                         InputDecoration(
                           hintText: widget.selectFieldData.placeholder,
                           contentPadding: const EdgeInsets.symmetric(
