@@ -127,6 +127,9 @@ class AppColors {
   static const Color cBODY_TEXT_25 = Color(0xFFC7CACD);
 
   static const Color cBLACK = Color(0xFF000000);
+
+  static const Color cBLACK_100 = Color(0xFF2A2A2A);
+  static const Color cBLACK_50 = Color(0xFF525252);
   static const Color cBLACK_40 = Color(0xFF979797);
   static const Color cBLACK_20 = Color(0xFFCECECE);
   static const Color cBLACK_10 = Color(0xFFE8E8E8);
