@@ -1,6 +1,6 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class BootstrapSectionLayerModel with BootstrapSectionUnion {
+class BootstrapSectionLayerModel extends BootstrapSectionUnion {
   List<BootstrapSectionChildModel> children;
 
   BootstrapSectionLayerModel({

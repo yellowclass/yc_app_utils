@@ -49,7 +49,8 @@ class _StyledLottieWidgetState extends State<StyledLottieWidget> {
         valueListenable: showLottie,
         builder: (context, val, _) {
           return ClipRRect(
-            borderRadius: widget.styledLottieModel.borderRadius,
+            borderRadius:
+                widget.styledLottieModel.borderRadius ?? BorderRadius.zero,
             child: isLocalLottie
                 ? Lottie.asset(
                     widget.styledLottieModel.url,

@@ -3,7 +3,7 @@ import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 
-class StyledVideoModel with StyledComponentUnion {
+class StyledVideoModel extends StyledComponentUnion {
   final String? key;
   final String url;
   final String thumbnail;

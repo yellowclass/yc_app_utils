@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledCircularProgress with StyledComponentUnion {
+class StyledCircularProgress extends StyledComponentUnion {
   int? radius;
   int? width;
   Color? activeColor;

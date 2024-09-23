@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledSelectFieldModel with FormComponentUnion {
+class StyledSelectFieldModel extends FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;

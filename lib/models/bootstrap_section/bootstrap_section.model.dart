@@ -1,6 +1,6 @@
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class BootstrapSectionModel with BootstrapChildUnion {
+class BootstrapSectionModel extends BootstrapChildUnion {
   String key;
   BootstrapSectionUnion? bsData;
   String? miscParams;

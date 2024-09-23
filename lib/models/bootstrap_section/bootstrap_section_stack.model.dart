@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class BootstrapSectionStackModel with BootstrapSectionUnion {
+class BootstrapSectionStackModel extends BootstrapSectionUnion {
   List<BootstrapSectionLayerModel> layers;
   Alignment stackAlignment;
 

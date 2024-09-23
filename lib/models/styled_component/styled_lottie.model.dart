@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yc_app_utils/helpers/common_helpers.dart';
 import 'package:yc_app_utils/models/styled_component/styled_component_union.dart';
 
-class StyledLottieModel with StyledComponentUnion {
+class StyledLottieModel extends StyledComponentUnion {
   String url;
   int? width;
   int? height;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class BootstrapSectionChildModel with BootstrapSectionUnion {
+class BootstrapSectionChildModel extends BootstrapSectionUnion {
   String classes;
   BootstrapChildUnion? bcData;
   SectionBackground? background;

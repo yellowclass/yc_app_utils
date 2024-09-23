@@ -27,8 +27,7 @@ class BootstrapChildWidget extends StatefulWidget {
   State<BootstrapChildWidget> createState() => BootstrapChildWidgetState();
 }
 
-class BootstrapChildWidgetState extends State<BootstrapChildWidget>
-    with ClickWidgetState {
+class BootstrapChildWidgetState extends State<BootstrapChildWidget> implements ClickWidgetState {
   bool _isLoading = false;
 
   @override

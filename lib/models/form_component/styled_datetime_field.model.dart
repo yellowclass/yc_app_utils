@@ -16,7 +16,7 @@ enum DobBlockStyleEnum {
   FULL_DATE_BLOCK,
 }
 
-class StyledDateTimeFieldModel with FormComponentUnion {
+class StyledDateTimeFieldModel extends FormComponentUnion {
   V2StyledTextModel? label;
   String name;
   Validation? validation;

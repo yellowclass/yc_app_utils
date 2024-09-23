@@ -7,7 +7,7 @@ import 'package:yc_app_utils/models/styled_component/styled_component_union.dart
 import 'package:yc_app_utils/ui/components/styled_text/styled_text_widget.dart';
 import 'package:yc_app_utils/ui/text_styles/tstyle.enum.dart';
 
-class StyledText with StyledComponentUnion {
+class StyledText extends StyledComponentUnion {
   String text;
   String textColor;
   TStyle tStyle;

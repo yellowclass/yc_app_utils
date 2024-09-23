@@ -40,7 +40,7 @@ class StyledComponentWidget extends StatefulWidget {
 }
 
 class StyledComponentWidgetState extends State<StyledComponentWidget>
-    with ClickWidgetState {
+    implements ClickWidgetState {
   bool _isLoading = false;
 
   StyledComponentUnion get _scData {

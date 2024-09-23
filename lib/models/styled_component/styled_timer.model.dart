@@ -5,7 +5,7 @@ enum StickyPositionEnum {
   BOTTOM,
 }
 
-class StyledTimerModel with StyledComponentUnion {
+class StyledTimerModel extends StyledComponentUnion {
   Duration duration;
   StickyPositionEnum? labelPosition;
   V2TextStyle? labelStyle;

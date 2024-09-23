@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/shivamkumar/Documents/SDK/flutter
-FLUTTER_APPLICATION_PATH=/Users/shivamkumar/Documents/Mobile-app/yc_app_utils/example
+FLUTTER_ROOT=/Users/namansoni/fvm/versions/3.24.0
+FLUTTER_APPLICATION_PATH=/Users/namansoni/FlutterProjects/YC_APP/yc_app_utils/example
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib/main.dart
 FLUTTER_BUILD_DIR=build

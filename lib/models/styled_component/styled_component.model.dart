@@ -5,7 +5,7 @@ import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledComponentModel with BootstrapSectionUnion, BootstrapChildUnion {
+class StyledComponentModel implements BootstrapSectionUnion, BootstrapChildUnion {
   StyledComponentUnion scData;
   String? uniqueKey;
   V2ClickAction? clickAction;

@@ -4,7 +4,7 @@ import 'package:yc_app_utils/models/click_action/v2_click_action.model.dart';
 import 'package:yc_app_utils/models/form_component/form_component_union.model.dart';
 import 'package:yc_app_utils/models/styled_component/v2_styled_text.model.dart';
 
-class StyledPointsPickerModel with FormComponentUnion {
+class StyledPointsPickerModel extends FormComponentUnion {
   String id;
   V2StyledTextModel? topLabel;
   V2StyledTextModel? bottomLabel;

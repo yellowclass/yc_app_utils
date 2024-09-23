@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -27,6 +29,7 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
 
   Widget _getDropDownIcon() {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: List.generate(
         widget.selectFieldData.dropdownIcon?.length ?? 0,
         (index) {
@@ -107,30 +110,47 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
           if (widget.selectFieldData.useSearchableWidget ||
               widget.selectFieldData.isSearchable)
             DropdownSearch<OptionModel>(
-              mode: Mode.MENU,
-              showSelectedItems: true,
-              popupShape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
+              popupProps: PopupProps.menu(
+                showSelectedItems: true,
+                showSearchBox: widget.selectFieldData.isSearchable,
+                scrollbarProps: const ScrollbarProps(
+                  thumbVisibility: true,
+                  thickness: 6,
+                  radius: Radius.circular(12),
+                ),
+                itemBuilder: widget.selectFieldData.optionStyle != null
+                    ? (context, item, isSelected) =>
+                        CommonHelpers.getV2StyledTextWidgetFromTextStyle(
+                          text: item.label,
+                          textStyle: widget.selectFieldData.optionStyle
+                              ?.copyWith(
+                                  textColor: isSelected ? 'FFFF7100' : null),
+                        )
+                    : null,
+                menuProps: const MenuProps(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+                searchFieldProps: TextFieldProps(
+                  decoration: InputDecoration(
+                    hintText: widget.selectFieldData.hintText,
+                    prefixIcon: widget.selectFieldData.leadingIcon != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: GenericNetworkImage(
+                              widget.selectFieldData.leadingIcon!,
+                              width: 2,
+                              height: 2,
+                            ),
+                          )
+                        : null,
+                    border: const OutlineInputBorder(),
+                  ),
                 ),
               ),
-              showSearchBox: widget.selectFieldData.isSearchable,
-              dropDownButton: const SizedBox.shrink(),
-              popupItemBuilder: widget.selectFieldData.optionStyle != null
-                  ? (context, item, isSelected) =>
-                      CommonHelpers.getV2StyledTextWidgetFromTextStyle(
-                        text: item.label,
-                        textStyle: widget.selectFieldData.optionStyle?.copyWith(
-                            textColor: isSelected ? 'FFFF7100' : null),
-                      )
-                  : null,
-              scrollbarProps: ScrollbarProps(
-                isAlwaysShown: true,
-                thickness: 6,
-                radius: Radius.circular(12),
-              ),
               dropdownBuilder: (context, selectedItem) => Text(
-                selectedItem?.label ??
+                    selectedItem?.label ??
                     widget.selectFieldData.inputDecoration?.hintText ??
                     '',
                 style: (selectedItem?.label != null
@@ -154,42 +174,30 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
                   selectedValue = data;
                 }
               },
-              maxHeight: widget.selectFieldData.maxHeight,
-              searchFieldProps: TextFieldProps(
-                decoration: InputDecoration(
-                  hintText: widget.selectFieldData.hintText,
-                  prefixIcon: widget.selectFieldData.leadingIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: GenericNetworkImage(
-                            widget.selectFieldData.leadingIcon!,
-                            width: 2,
-                            height: 2,
-                          ),
-                        )
-                      : null,
-                  border: const OutlineInputBorder(),
-                ),
+              dropdownButtonProps:const  DropdownButtonProps(
+                isVisible: false,
+                padding: EdgeInsets.zero,
               ),
-              dropdownButtonBuilder: (context) => _getDropDownIcon(),
-              dropdownSearchDecoration:
-                  widget.selectFieldData.inputDecoration ??
-                      InputDecoration(
-                        hintText: widget.selectFieldData.placeholder,
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 0,
-                          horizontal: AppSpacing.s,
-                        ),
-                        suffixIcon: Container(
-                          padding: const EdgeInsets.all(
-                            AppSpacing.s,
+              dropdownDecoratorProps: DropDownDecoratorProps(
+                dropdownSearchDecoration:
+                    widget.selectFieldData.inputDecoration?.copyWith(suffix:Padding(padding: const EdgeInsets.only(right: 24),child: _getDropDownIcon()),suffixIconConstraints:const BoxConstraints(maxWidth: 30) ) ??
+                        InputDecoration(
+                          hintText: widget.selectFieldData.placeholder,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0,
+                            horizontal: AppSpacing.s,
                           ),
-                          child: const Icon(
-                            Icons.arrow_drop_down,
-                            color: AppColors.cBODY_TEXT,
+                          suffixIcon: Container(
+                            padding: const EdgeInsets.all(
+                              AppSpacing.s,
+                            ),
+                            child: const Icon(
+                              Icons.arrow_drop_down,
+                              color: AppColors.cBODY_TEXT,
+                            ),
                           ),
                         ),
-                      ),
+              ),
               selectedItem:
                   selectedValues.isNotEmpty ? selectedValues[0] : null,
               itemAsString: (item) => item!.label,
@@ -247,28 +255,31 @@ class _StyledSelectFieldWidgetState extends State<StyledSelectFieldWidget> {
             )
         else
           DropdownSearch<OptionModel>.multiSelection(
-            mode: Mode.MENU,
-            showSelectedItems: true,
-            showSearchBox: widget.selectFieldData.isSearchable,
-            dropDownButton: const SizedBox.shrink(),
+            popupProps: PopupPropsMultiSelection.menu(
+              showSelectedItems: true,
+              showSearchBox: widget.selectFieldData.isSearchable,
+            ),
             items: widget.selectFieldData.options,
             enabled: !widget.selectFieldData.isDisabled,
-            dropdownSearchDecoration: widget.selectFieldData.inputDecoration ??
-                InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 0,
-                    horizontal: AppSpacing.s,
-                  ),
-                  suffixIcon: Container(
-                    padding: const EdgeInsets.all(
-                      AppSpacing.s,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_drop_down,
-                      color: AppColors.cBODY_TEXT,
-                    ),
-                  ),
-                ),
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration:
+                  widget.selectFieldData.inputDecoration ??
+                      InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0,
+                          horizontal: AppSpacing.s,
+                        ),
+                        suffixIcon: Container(
+                          padding: const EdgeInsets.all(
+                            AppSpacing.s,
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: AppColors.cBODY_TEXT,
+                          ),
+                        ),
+                      ),
+            ),
             selectedItems: selectedValues,
             itemAsString: (item) => item!.label,
             compareFn: (item, selectedItem) =>
