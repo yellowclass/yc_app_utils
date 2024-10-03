@@ -23,6 +23,7 @@ class LocalAssets {
     'soft_notification_bg_new.webp':
         'assets/localNetworkImages/soft_notification_bg_new.webp',
     'loginscreen.webp': 'assets/localNetworkImages/loginscreen.webp',
+    'login_bg_new.webp': 'assets/localNetworkImages/login_bg_new.webp',
     'chat_background.webp': 'assets/localNetworkImages/chat_background.webp',
     'icon_line_search': 'assets/localNetworkImages/icon_line_search.png',
     'onboardingBackIcon5.svg':
