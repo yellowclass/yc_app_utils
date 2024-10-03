@@ -3,6 +3,8 @@ class LocalAssets {
   static const Map<String, String> localNetworkAssets = {
     'first_info_screen_bg.webp':
         'assets/localNetworkImages/first_info_screen_bg.webp',
+    'first_info_screen_ai_bg.webp':
+        'assets/localNetworkImages/first_info_screen_ai_bg.webp',
     'whatsapp.svg': 'assets/localNetworkImages/whatsapp.svg',
     'pL_profession.webp': 'assets/localNetworkImages/pL_profession.webp',
     'white_back_icon.webp': 'assets/localNetworkImages/white_back_icon.webp',
@@ -18,6 +20,8 @@ class LocalAssets {
     'advanceLevelBG.png': 'assets/localNetworkImages/advanceLevelBG.png',
     'softNotificationBG5.png':
         'assets/localNetworkImages/softNotificationBG5.png',
+    'soft_notification_bg.webp':
+        'assets/localNetworkImages/soft_notification_bg.webp',
     'loginscreen.webp': 'assets/localNetworkImages/loginscreen.webp',
     'chat_background.webp': 'assets/localNetworkImages/chat_background.webp',
     'icon_line_search': 'assets/localNetworkImages/icon_line_search.png',
