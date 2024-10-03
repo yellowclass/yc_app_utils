@@ -20,8 +20,8 @@ class LocalAssets {
     'advanceLevelBG.png': 'assets/localNetworkImages/advanceLevelBG.png',
     'softNotificationBG5.png':
         'assets/localNetworkImages/softNotificationBG5.png',
-    'soft_notification_bg.png':
-        'assets/localNetworkImages/soft_notification_bg.png',
+    'soft_notification_bg.webp':
+        'assets/localNetworkImages/soft_notification_bg.webp',
     'loginscreen.webp': 'assets/localNetworkImages/loginscreen.webp',
     'chat_background.webp': 'assets/localNetworkImages/chat_background.webp',
     'icon_line_search': 'assets/localNetworkImages/icon_line_search.png',
