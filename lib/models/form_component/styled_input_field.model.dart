@@ -24,6 +24,7 @@ class StyledInputFieldModel extends FormComponentUnion {
   String? countryCode;
   TextAlign? textAlign;
   bool? autoFocus;
+  AutovalidateMode? autoValidateMode;
 
   StyledInputFieldModel({
     this.label,
@@ -45,6 +46,7 @@ class StyledInputFieldModel extends FormComponentUnion {
     this.countryCode,
     this.textAlign,
     this.autoFocus,
+    this.autoValidateMode,
   });
 
   StyledInputFieldModel copyWith({
@@ -66,6 +68,7 @@ class StyledInputFieldModel extends FormComponentUnion {
     TextStyle? textStyle,
     TextAlign? textAlign,
     bool? autoFocus,
+    AutovalidateMode? autoValidateMode,
   }) {
     return StyledInputFieldModel(
       autoFocus: autoFocus ?? this.autoFocus,
@@ -87,6 +90,7 @@ class StyledInputFieldModel extends FormComponentUnion {
       textStyle: textStyle ?? this.textStyle,
       countryCode: countryCode ?? this.countryCode,
       textAlign: textAlign ?? this.textAlign,
+      autoValidateMode: autoValidateMode ?? this.autoValidateMode,
     );
   }
 
@@ -111,6 +115,7 @@ class StyledInputFieldModel extends FormComponentUnion {
       'countryCode': countryCode,
       'textAlign': textAlign?.toString(),
       'autoFocus': autoFocus,
+      'autoValidateMode': autoValidateMode?.toString(),
     };
   }
 
@@ -154,6 +159,10 @@ class StyledInputFieldModel extends FormComponentUnion {
           ? CommonHelpers.getTextAlignmentFromString(map['textAlign'])
           : null,
       autoFocus: map['autoFocus'],
+      autoValidateMode: map['autoValidateMode'] != null
+          ? CommonHelpers.enumFromString(
+              AutovalidateMode.values, map['autoValidateMode'])
+          : null,
     );
   }
 }

@@ -110,6 +110,7 @@ class _StyledTextFieldWidgetState extends State<StyledTextFieldWidget> {
                 child: FormBuilderTextField(
                   controller: widget.controller,
                   name: widget.textFieldData.name,
+                  autovalidateMode: widget.textFieldData.autoValidateMode,
                   textAlign: widget.textFieldData.textAlign ?? TextAlign.start,
                   cursorColor: AppColors.cTANGERINE_100,
                   onChanged: (value) {
