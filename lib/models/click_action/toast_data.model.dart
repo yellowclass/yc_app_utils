@@ -15,6 +15,7 @@ class ToastData {
   V2StyledTextModel? toastActionText;
   V2ClickAction? toastClickAction;
   Alignment? alignmentPosition;
+  double? height;
   ToastData({
     required this.message,
     this.toastType,
@@ -22,6 +23,7 @@ class ToastData {
     this.toastActionText,
     this.toastClickAction,
     this.alignmentPosition,
+    this.height,
   });
 
   ToastData copyWith({
@@ -31,6 +33,7 @@ class ToastData {
     V2StyledTextModel? toastActionText,
     V2ClickAction? toastClickAction,
     Alignment? alignmentPosition,
+    double? height,
   }) {
     return ToastData(
       message: message ?? this.message,
@@ -39,6 +42,7 @@ class ToastData {
       toastActionText: toastActionText ?? this.toastActionText,
       toastClickAction: toastClickAction ?? this.toastClickAction,
       alignmentPosition: alignmentPosition ?? this.alignmentPosition,
+      height: height ?? this.height,
     );
   }
 
@@ -50,6 +54,7 @@ class ToastData {
       'toastActionText': toastActionText,
       'toastClickAction': toastClickAction?.toMap(),
       'alignmentPosition': alignmentPosition,
+      'height': height,
     };
   }
 
@@ -76,6 +81,7 @@ class ToastData {
               ),
             )
           : Alignment.bottomCenter,
+      height: double.tryParse(map['height']?.toString() ?? ''),
     );
   }
 
