@@ -81,7 +81,7 @@ class ToastData {
               ),
             )
           : Alignment.bottomCenter,
-      height: double.tryParse(map['height']?.toString() ?? ''),
+      height: map['height'] != null ? double.tryParse(map['height']) : null,
     );
   }
 
