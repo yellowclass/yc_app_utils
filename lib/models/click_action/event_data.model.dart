@@ -64,7 +64,7 @@ class EventData {
       others: map['others'],
       additionalData: jsonDecode(map['additionalData'] ?? "{}"),
       description: map["description"],
-      isRevenueEvent: map['isRevenueEvent'],
+      isRevenueEvent: map['isRevenueEvent'] ?? false,
     );
   }
 }
