@@ -9,6 +9,7 @@ class EventData {
   Map<String, dynamic>? additionalData;
   String? description;
   bool isRevenueEvent;
+  String? mergedAction;
 
   EventData({
     required this.action,
@@ -19,6 +20,7 @@ class EventData {
     this.additionalData,
     this.description,
     this.isRevenueEvent = false,
+    this.mergedAction,
   });
 
   EventData copyWith({
@@ -29,6 +31,7 @@ class EventData {
     String? others,
     String? description,
     bool? isRevenueEvent,
+    String? mergedAction,
   }) {
     return EventData(
       action: action ?? this.action,
@@ -38,6 +41,7 @@ class EventData {
       others: others ?? this.others,
       description: description ?? this.description,
       isRevenueEvent: isRevenueEvent ?? this.isRevenueEvent,
+      mergedAction: mergedAction ?? this.mergedAction,
     );
   }
 
@@ -52,6 +56,7 @@ class EventData {
           additionalData == null ? null : jsonEncode(additionalData),
       'description': description,
       'isRevenueEvent': isRevenueEvent,
+      'mergedAction': mergedAction,
     };
   }
 
@@ -65,6 +70,7 @@ class EventData {
       additionalData: jsonDecode(map['additionalData'] ?? "{}"),
       description: map["description"],
       isRevenueEvent: map['isRevenueEvent'] ?? false,
+      mergedAction: map['mergedAction'],
     );
   }
 }
