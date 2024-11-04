@@ -59,13 +59,6 @@ class _StyledShimmerWidgetState extends State<StyledShimmerWidget>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: CommonHelpers.getBoxDecorationWithSectionBackground(
@@ -108,5 +101,12 @@ class _StyledShimmerWidgetState extends State<StyledShimmerWidget>
             : SizedBox.shrink(),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _timer?.cancel();
+    super.dispose();
   }
 }
