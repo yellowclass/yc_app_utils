@@ -2,10 +2,12 @@ import 'package:yc_app_utils/models/styled_component/rich_text.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_circular_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_linear_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_shimmer.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
 
-class StyledComponentModel implements BootstrapSectionUnion, BootstrapChildUnion {
+class StyledComponentModel
+    implements BootstrapSectionUnion, BootstrapChildUnion {
   StyledComponentUnion scData;
   String? uniqueKey;
   V2ClickAction? clickAction;
@@ -75,6 +77,8 @@ class StyledComponentModel implements BootstrapSectionUnion, BootstrapChildUnion
       case 'RichText':
         scData = RichTextModel.fromMap(map['scData']);
         break;
+      case 'StyledShimmer':
+        scData = StyledShimmerModel.fromMap(map['scData']);
       default:
     }
     return StyledComponentModel(

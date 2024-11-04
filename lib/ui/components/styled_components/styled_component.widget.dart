@@ -4,10 +4,12 @@ import 'package:yc_app_utils/models/styled_component/rich_text.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_circular_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_linear_progress.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_lottie.model.dart';
+import 'package:yc_app_utils/models/styled_component/styled_shimmer.model.dart';
 import 'package:yc_app_utils/models/styled_component/styled_timer.model.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_circular_progress.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_linear_progress.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_lottie.widget.dart';
+import 'package:yc_app_utils/ui/components/styled_components/styled_shimmer_widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/styled_timer.widget.dart';
 import 'package:yc_app_utils/ui/components/styled_components/rich_text.widget.dart';
 import 'package:yc_app_utils/yc_app_utils.dart';
@@ -167,7 +169,11 @@ class StyledComponentWidgetState extends State<StyledComponentWidget>
         return RichTextWidget(
           richText: richText,
         );
-
+      case StyledShimmerModel:
+        final styledShimmerData = _scData as StyledShimmerModel;
+        return StyledShimmerWidget(
+          styledShimmerModel: styledShimmerData,
+        );
       default:
         return const SizedBox.shrink();
     }
