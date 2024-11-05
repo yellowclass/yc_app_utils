@@ -23,6 +23,7 @@ class SectionBackground {
     this.borderWidth = const [1],
     this.opacity = 1,
     this.shadow,
+    this.bgImgAlignment,
   });
 
   final SectionBgType backgroundType;
@@ -40,6 +41,7 @@ class SectionBackground {
   final List<double> borderWidth;
   final double opacity;
   final List<BoxShadow>? shadow;
+  final Alignment? bgImgAlignment;
 
   SectionBackground copyWith({
     SectionBgType? backgroundType,
@@ -57,6 +59,7 @@ class SectionBackground {
     List<double>? borderWidth,
     double? opacity,
     List<BoxShadow>? shadow,
+    Alignment? bgImgAlignment,
   }) =>
       SectionBackground(
         backgroundType: backgroundType ?? this.backgroundType,
@@ -74,6 +77,7 @@ class SectionBackground {
         borderWidth: borderWidth ?? this.borderWidth,
         opacity: opacity ?? this.opacity,
         shadow: shadow ?? this.shadow,
+        bgImgAlignment: bgImgAlignment ?? this.bgImgAlignment,
       );
 
   factory SectionBackground.fromMap(Map<String, dynamic> json) =>
@@ -115,6 +119,9 @@ class SectionBackground {
             ? CommonHelpers.getBoxShadowFromList(
                 json['shadow'],
               )
+            : null,
+        bgImgAlignment: json['bgImgAlignment'] != null
+            ? CommonHelpers.getAlignmentFromString(json['bgImgAlignment'])
             : null,
       );
 

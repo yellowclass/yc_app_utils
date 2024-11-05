@@ -765,6 +765,7 @@ class CommonHelpers {
     return DecorationImage(
       image: imageProvider,
       fit: sectionBackground.backgroundImgBoxFit ?? BoxFit.cover,
+      alignment: sectionBackground.bgImgAlignment ?? Alignment.center,
     );
   }
 
