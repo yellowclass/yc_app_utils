@@ -23,6 +23,16 @@ class RichTextModel extends StyledComponentUnion {
           : null,
     );
   }
+
+  RichTextModel copyWith({
+    List<RichTextChildModel>? texts,
+    V2TextStyle? primaryTextStyle,
+  }) {
+    return RichTextModel(
+      texts: texts ?? this.texts,
+      primaryTextStyle: primaryTextStyle ?? this.primaryTextStyle,
+    );
+  }
 }
 
 class RichTextChildModel {
@@ -40,6 +50,16 @@ class RichTextChildModel {
       textStyle: map['textStyle'] != null
           ? V2TextStyle.fromMap(map['textStyle'])
           : null,
+    );
+  }
+
+  RichTextChildModel copyWith({
+    String? text,
+    V2TextStyle? textStyle,
+  }) {
+    return RichTextChildModel(
+      text: text ?? this.text,
+      textStyle: textStyle ?? this.textStyle,
     );
   }
 }
