@@ -30,7 +30,6 @@ class ShimmerButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return ClipRRect(
       borderRadius: CommonHelpers.getBorderRadiusFromList(
         styledShimmerModel.borderRadius,
@@ -96,7 +95,7 @@ class ButtonShimmerPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final smallShimmer = smallShimmerWidth;
     const padding = 10.0;
-    final width = size.width + padding + (2 * shimmerWidth) + 10;
+    final width = size.width + padding + (2 * shimmerWidth) + 15;
     final y = size.height;
 
     // Animate the x position from left to right
@@ -130,7 +129,7 @@ class ButtonShimmerPainter extends CustomPainter {
     );
 
     path.reset();
-    paint.color = plunkColor;
+    paint.color = color;
     canvas.drawPath(
       path
         ..addPolygon(
@@ -165,7 +164,7 @@ class ButtonShimmerPainter extends CustomPainter {
     );
 
     path.reset();
-    paint.color = plunkColor;
+    paint.color = color;
     canvas.drawPath(
       path
         ..addPolygon(
