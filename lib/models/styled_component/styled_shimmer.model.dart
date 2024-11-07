@@ -71,17 +71,17 @@ class StyledShimmerConfigModel {
   factory StyledShimmerConfigModel.fromMap(Map<String, dynamic> map) {
     return StyledShimmerConfigModel(
       initialDelay: map['initialDelay'] != null
-          ? int.tryParse(map['initialDelay'].toString())!
+          ? int.tryParse(map['initialDelay'].toString()) ?? 0
           : 0,
       repeatDelay: map['repeatDelay'] != null
-          ? int.tryParse(map['repeatDelay'].toString())!
+          ? int.tryParse(map['repeatDelay'].toString()) ?? 0
           : 0,
       duration: map['duration'] != null
-          ? int.tryParse(map['duration'].toString())!
+          ? int.tryParse(map['duration'].toString()) ?? 1000
           : 1000,
       color: map['color'] != null ? map['color'] : null,
       tiltAngle: map['tiltAngle'] != null
-          ? double.tryParse(map['tiltAngle'].toString())!
+          ? double.tryParse(map['tiltAngle'].toString()) ?? 3 * pi / 5
           : 3 * pi / 5,
     );
   }
