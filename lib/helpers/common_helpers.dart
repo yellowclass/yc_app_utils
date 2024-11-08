@@ -643,6 +643,10 @@ class CommonHelpers {
         return 'LuckyGuy';
       case 'LONDRINA_SOLID':
         return 'LondrinaSolid';
+      case 'GILROY_EXTRABOLD':
+        return 'Gilroy-ExtraBold';
+      case 'GILROY_BOLD':
+        return 'Gilroy-Bold';
       default:
         return null;
     }
